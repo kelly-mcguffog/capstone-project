@@ -1,0 +1,2 @@
+class RestaurantItineraryTimesController < ApplicationController
+end

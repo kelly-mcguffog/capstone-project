@@ -1,0 +1,2 @@
+class ActivityItineraryTimesController < ApplicationController
+end

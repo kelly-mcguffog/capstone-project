@@ -1,0 +1,2 @@
+class HotelItineraryTimesController < ApplicationController
+end
