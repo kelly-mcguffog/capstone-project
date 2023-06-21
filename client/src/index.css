@@ -27,11 +27,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(255, 255, 255, 0.1);
+  background-color: rgb(255, 255, 255, 0.5);
 }
 .header{
-  background-image: url("https://img.fixthephoto.com/blog/images/gallery/news_preview_mob_image__preview_1372.jpg");
-  height: 60%;
+  /* background-image: url("https://img.fixthephoto.com/blog/images/gallery/news_preview_mob_image__preview_1372.jpg"); */
+  /* background-image: url("https://www.intrepidtravel.com/adventures/wp-content/uploads/2019/09/Intrepid-Travel-PHSQ_New-Zealand_queenstown_ss_374944522.jpg"); */
+  background-image: url("https://cdn.shopify.com/s/files/1/2717/4174/products/Wanderlust_Hiking_on_Legendary_Trails_book_gestalten_05_2000x.jpg?v=1583927941");
+  height: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .navbar{
   /* width: 100%; */
@@ -65,12 +70,27 @@ main{
   height: 100%;
 }
 .container{
-  background-image: url("https://img.fixthephoto.com/blog/images/gallery/news_preview_mob_image__preview_1372.jpg");
+  background-image: url("https://cdn.shopify.com/s/files/1/2717/4174/products/Wanderlust_Hiking_on_Legendary_Trails_book_gestalten_05_2000x.jpg?v=1583927941");
   background-position: 'center';
   background-size: cover;
   background-repeat: 'no-repeat';
   height: 100%;
+  padding: 0px;
+  align-items: center;
+  display: grid;
 }
+
+/* .login{
+  height: 60%;
+  padding: 150px;
+}
+
+.signup{
+  height: 100%;
+  padding: 0px;
+  align-items: center;
+  display: grid;
+} */
 
 /* form {
   background-color: white;
@@ -134,9 +154,10 @@ input{
   border-top: none;
   border-right: none;
   border-left: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #0c0132;
   height: 30px;
   margin-bottom: 20px;
+  padding: 0;
 }
 
 h1{
@@ -182,6 +203,7 @@ button{
   color: white;
   text-align: center;
   margin-bottom: 10px;
+  margin-top: 0px;
   font-weight: 700;
 }
 
@@ -217,4 +239,45 @@ button{
 hr{
   border: 1px solid #f0f0f0;
   margin: 0;
+}
+
+.search{
+  width: 100%;
+  margin-top:30px;
+  /* margin: 0 auto; */
+}
+
+.input-search{
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: 50px;
+  /* border-radius: 0px 5px 5px 0px; */
+  background-color: rgb(255, 255, 255, 0.5);
+  border: none;
+  color: #0c0132;
+}
+
+/* input[type="search"]{
+  margin-left: 20px;
+} */
+
+::-webkit-input-placeholder { /* Edge */
+  padding-left: 10px;
+  color: #0c0132;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  padding-left: 10px;
+  color: #0c0132;
+}
+
+::placeholder, input[type="text"] {
+  padding-left: 10px;
+  color: #0c0132;
+}
+
+.header-text{
+  padding: 150px;
 }

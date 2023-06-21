@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { Link, NavLink } from "react-router-dom";
 import Header from "./Header";
 
-function NavBar() {
+function NavBar({search, setSearch}) {
     const {user, setUser} = useContext(UserContext)
     const [isDropdown, setDropdown] = useState(false)
     
@@ -45,7 +45,7 @@ function NavBar() {
                 )}
             </div>
         </header>
-        <Header />
+        <Header search={search} setSearch={setSearch} />
         </div>
     );
 }
