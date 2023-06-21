@@ -7,6 +7,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import NavBar from "./NavBar";
 import Home from "./Home";
+import DestinationsContainer from "./DestinationsContainer";
 
 
 function App() {
@@ -14,17 +15,24 @@ function App() {
   const {user} = useContext(UserContext)
 
     return (
-      <>
-          <NavBar/>
           <main>
             {user ? (
+              <>
+              <NavBar/>
               <Switch>
+                <Route path="/destinations">
+                  <DestinationsContainer />
+                </Route>
                 <Route exact path="/">
                   <Home/>
                 </Route>
               </Switch>
+              </>
             ) : (
               <Switch>
+                <Route path="/destinations">
+                  <DestinationsContainer />
+                </Route>
                 <Route path="/signup">
                   <SignUp />
                 </Route>
@@ -34,7 +42,6 @@ function App() {
               </Switch>
             )}
           </main>
-      </>
     );
 }
 

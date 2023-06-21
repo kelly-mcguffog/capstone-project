@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-// import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Login() {
 //   const history = useHistory();
@@ -41,9 +40,9 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
-        <h1 className="form-text head">Login</h1>
+        <h1 className="form-text head">Wanderlust</h1>
         <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
         <p className="error-message error">{errors}</p>
         <input

@@ -18,8 +18,8 @@ function NavBar() {
             <div className="navbar">
                 {user ? (
                     <>
-                        {/* <NavLink to="/destinations">Destinations</NavLink>
-                        <NavLink to="/profile">Profile</NavLink> */}
+                        <NavLink to="/destinations">Destinations</NavLink>
+                        <NavLink to="/profile">Profile</NavLink>
                         <button className="logout" onClick={handleLogoutClick}>Logout</button>
                     </>
                 ) : (

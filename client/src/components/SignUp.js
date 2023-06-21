@@ -45,7 +45,7 @@ function SignUp() {
     });
   }
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
       <h1 className="form-text head">Sign Up</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
