@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { DestinationsContext } from "../context/DestinationsContext";
 import DestinationCard from "./DestinationCard";
 import Header from "./Header";
+// import { connect } from 'react-redux';
+
 
 function DestinationsContainer({search, setSearch}) {
-  const [destinations, setDestinations] = useState([]);
+    const {destinations} = useContext(DestinationsContext)
 
-  useEffect(() => {
-    let isMounted = true;
-
-    fetch('/destinations')
-      .then(res => res.json())
-      .then(data => {
-        if (isMounted) {
-          setDestinations(data);
-        }
-      });
-
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+    if (destinations === null) {
+        return <div>Loading...</div>;
+      }
 
   return (
     <div className="header">

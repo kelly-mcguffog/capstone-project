@@ -132,6 +132,11 @@ form {
   height: 100%;
 }
 
+/* .img:hover{
+  height: 200%;
+  width: auto;
+} */
+
 .cards{
   display: grid;
   grid-template-columns: repeat(3, 1fr);

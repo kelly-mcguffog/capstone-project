@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -20,39 +20,30 @@ function App() {
             {user ? (
               <>
               <NavBar />
-              <Switch>
-              <Route exact path="/destinations/:id/restaurants">
-                  <RestaurantsContainer />
-              </Route>
-              <Route exact path="/destinations/:id">
-                  <DestinationDetails />
+              <Routes>
+                <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
                 </Route>
-                <Route exact path="/destinations">
-                  <DestinationsContainer search={search} setSearch={setSearch}/>
+                <Route  path="/destinations/:id" element={<DestinationDetails />}>
                 </Route>
-                <Route exact path="/">
-                  <Home/>
+                <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
                 </Route>
-              </Switch>
+                <Route exact path="/" element={<Home/>}>
+                </Route>
+              </Routes>
               </>
-            ) : (
-              <Switch>
-                <Route path="/destinations/:id/restaurants">
-                  <RestaurantsContainer />
-                </Route>
-                <Route exact path="/destinations/:id">
-                  <DestinationDetails />
-                </Route>
-                <Route exact path="/destinations">
-                  <DestinationsContainer />
-                </Route>
-                <Route path="/signup">
-                  <SignUp />
-                </Route>
-                <Route path="/login">
-                  <Login />
-                </Route>
-              </Switch>
+             ) : (
+               <Routes>
+                 <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
+                 </Route>
+                 <Route  path="/destinations/:id" element={<DestinationDetails />}>
+                 </Route>
+                 <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
+                 </Route>
+                 <Route path="/signup" element={<SignUp />}>
+                 </Route>
+                 <Route path="/login" element={<Login />}>
+                 </Route>
+               </Routes>
             )}
           </main>
     );
