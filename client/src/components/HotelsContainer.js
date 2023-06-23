@@ -1,10 +1,10 @@
 import React, { useContext} from "react";
 import { useParams } from "react-router-dom";
 import { DestinationsContext } from "../context/DestinationsContext";
-import RestaurantCard from "./RestaurantCard";
+import HotelCard from "./HotelCard";
 import PageHeader from "./PageHeader";
 
-function RestaurantsContainer() {
+function HotelsContainer() {
     const { id } = useParams();
     const { destinations } = useContext(DestinationsContext);
 
@@ -21,7 +21,7 @@ function RestaurantsContainer() {
         return <div>Destination not found</div>;
       }
 
-      const restaurants = destination.restaurants
+      const hotels = destination.hotels
 
   return (
     <>
@@ -32,12 +32,12 @@ function RestaurantsContainer() {
         <PageHeader destination={destination} />
       </div>
     <div className="cards">
-      {restaurants.map(restaurant => (
-        <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+      {hotels.map(hotel => (
+        <HotelCard key={hotel.id} hotel={hotel} />
       ))}
     </div>
     </>
   );
 }
 
-export default RestaurantsContainer;
+export default HotelsContainer;

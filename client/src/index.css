@@ -130,20 +130,26 @@ form {
 .img{
   /* width: 100%; */
   height: 100%;
+  transition: transform .5s;
 }
 
-/* .img:hover{
-  height: 200%;
-  width: auto;
-} */
+.img:hover{
+  transform: scale(1.2);
+  /* height: 110%;
+  width: auto; */
+}
 
-.cards{
+.cards, .card-info{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 10px;
   row-gap: 1em;
   justify-items: center;
   margin-top: 50px;
+}
+
+.info{
+  margin-bottom: 50px;
 }
 .card-details{
   text-align: center;
@@ -306,8 +312,9 @@ hr{
 }
 
 .map-container{
-  width: 100%;
-  height: 100vh;
+  width: 500px;
+  height: 300px;
+  top: 40%;
 }
 
 /* .info{

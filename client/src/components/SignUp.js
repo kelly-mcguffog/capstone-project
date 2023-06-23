@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
-// import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
-//   const history = useHistory();
+  const navigate = useNavigate();
   const {setUser} = useContext(UserContext)
   const [errors, setErrors] = useState([]);
 
@@ -38,7 +37,7 @@ function SignUp() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-        // history.push("/");
+        navigate("/");
       }else{
         r.json().then((err) => setErrors(err.errors));
       }

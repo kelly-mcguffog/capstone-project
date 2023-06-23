@@ -5,9 +5,11 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import NavBar from "./NavBar";
 import Home from "./Home";
+import HotelsContainer from "./HotelsContainer";
 import DestinationsContainer from "./DestinationsContainer";
 import RestaurantsContainer from "./RestaurantsContainer";
 import DestinationDetails from "./DestinationDetails";
+import ActivitiesContainer from "./ActivitiesContainer";
 
 
 function App() {
@@ -21,14 +23,18 @@ function App() {
               <>
               <NavBar />
               <Routes>
+              <Route exact path="/destinations/:id/activities" element={<ActivitiesContainer />}>
+                </Route>
+                <Route exact path="/destinations/:id/hotels" element={<HotelsContainer />}>
+                </Route>
                 <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
                 </Route>
                 <Route  path="/destinations/:id" element={<DestinationDetails />}>
                 </Route>
-                <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
+                <Route  path="/" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
                 </Route>
-                <Route exact path="/" element={<Home/>}>
-                </Route>
+                {/* <Route exact path="/" element={<Home/>}>
+                </Route> */}
               </Routes>
               </>
              ) : (
@@ -37,7 +43,7 @@ function App() {
                  </Route>
                  <Route  path="/destinations/:id" element={<DestinationDetails />}>
                  </Route>
-                 <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
+                 <Route  path="/" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
                  </Route>
                  <Route path="/signup" element={<SignUp />}>
                  </Route>

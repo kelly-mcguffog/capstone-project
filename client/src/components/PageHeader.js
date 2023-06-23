@@ -6,9 +6,9 @@ function PageHeader({destination}){
         <div className="header-text">
             <h1 className="title">Welcome to {destination.city}</h1>
             <div className="buttons">
-                <Link className="btn" to="/destinations/161/hotels">Hotels</Link>
-                <Link className="btn" to="/destinations/161/restaurants">Restaurants</Link>
-                <Link className="btn" to="/destinations/161/activities">Things to do</Link>
+                <Link className="btn" to={`/destinations/${destination.id}/hotels`}>Hotels</Link>
+                <Link className="btn" to={`/destinations/${destination.id}/restaurants`}>Restaurants</Link>
+                <Link className="btn" to={`/destinations/${destination.id}/activities`}>Things to do</Link>
             </div>
         </div>
     )
