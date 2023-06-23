@@ -1,16 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function DestinationCard({destination}){
 
-    const {city, country, photo} = destination
+    const {id, city, country, photo} = destination
     return(
         <div className="card-details">
-            <div className="img-container">
-                <img className="img" src={photo}/>
-            </div>
-            <div>
-                <h3>{city}, {country}</h3>
-            </div>
+            <Link className="link" to={`/destinations/${id}`}>
+                <div className="img-container">
+                    <img className="img" src={photo}/>
+                </div>
+                <div>
+                    <h3>{city}, {country}</h3>
+                </div>
+            </Link>
         </div>
     )
 }

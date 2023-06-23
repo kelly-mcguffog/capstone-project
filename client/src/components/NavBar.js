@@ -1,9 +1,8 @@
 import React, {useState, useContext} from "react";
 import { UserContext } from "../context/UserContext";
 import { Link, NavLink } from "react-router-dom";
-import Header from "./Header";
 
-function NavBar({search, setSearch}) {
+function NavBar() {
     const {user, setUser} = useContext(UserContext)
     const [isDropdown, setDropdown] = useState(false)
     
@@ -20,14 +19,12 @@ function NavBar({search, setSearch}) {
     }
 
     return (
-        <div className="header">
         <header>
             <Link to="/"><h3 className="navbar logo">Wanderlust</h3></Link>
             <div className="navbar">
                 {user ? (
                     <>
-                        <NavLink to="/destinations">Destinations</NavLink>
-                        {/* <NavLink to="/profile">Profile</NavLink> */}
+                        <NavLink to="/destinations">Destinations</NavLink>  
                         <div className="dropdown">
                             <h3 onClick={handleDropdown} className="dropbtn">{user.first_name} {user.last_name} <i className="fa-solid fa-caret-down"></i></h3>
                             <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>
@@ -45,8 +42,6 @@ function NavBar({search, setSearch}) {
                 )}
             </div>
         </header>
-        <Header search={search} setSearch={setSearch} />
-        </div>
     );
 }
 

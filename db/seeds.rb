@@ -32,7 +32,7 @@ paris = Destination.create({
     language: "French",
     time_zone: "Central European Time (CET)",
     dial_code: "+33",
-    photo: "https://images.ctfassets.net/qr8kennq1pom/77Pd54E3jufwEzXFWvK4XC/88bc77718a8339e945a6749be2c9b344/Untitled_design_-_2022-06-14T124536.639.png"
+    photo: "https://assets.cntraveller.in/photos/62752c1974266e7300892c46/4:3/w_5120,h_3840,c_limit/Seine%20paris%20bike-GettyImages-1161606501.jpeg"
 })
 
 florence = Destination.create({

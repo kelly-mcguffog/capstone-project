@@ -24,16 +24,16 @@ code {
 }
 
 header {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgb(255, 255, 255, 0.5);
 }
 .header{
-  /* background-image: url("https://img.fixthephoto.com/blog/images/gallery/news_preview_mob_image__preview_1372.jpg"); */
-  /* background-image: url("https://www.intrepidtravel.com/adventures/wp-content/uploads/2019/09/Intrepid-Travel-PHSQ_New-Zealand_queenstown_ss_374944522.jpg"); */
   background-image: url("https://cdn.shopify.com/s/files/1/2717/4174/products/Wanderlust_Hiking_on_Legendary_Trails_book_gestalten_05_2000x.jpg?v=1583927941");
-  height: 80%;
+  height: 550px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -273,11 +273,38 @@ hr{
   color: #0c0132;
 }
 
-::placeholder, input[type="text"] {
+::placeholder, input[type="text"], input[type="search"] {
   padding-left: 10px;
   color: #0c0132;
 }
 
 .header-text{
-  padding: 150px;
+  padding: 200px;
 }
+
+.link{
+  text-decoration: none;
+  color: #0c0132;
+}
+
+.buttons{
+  margin: 50px;
+}
+
+.btn{
+  color: white;
+  text-decoration: none;
+  padding: 10px 50px;
+  background: #0c0132;
+  border-radius: 70px;
+  margin: 20px;
+}
+
+.map-container{
+  width: 100%;
+  height: 100vh;
+}
+
+/* .info{
+
+} */

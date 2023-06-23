@@ -1,5 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
 import React, { useState, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -8,6 +6,8 @@ import SignUp from "./SignUp";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import DestinationsContainer from "./DestinationsContainer";
+import RestaurantsContainer from "./RestaurantsContainer";
+import DestinationDetails from "./DestinationDetails";
 
 
 function App() {
@@ -19,10 +19,16 @@ function App() {
           <main>
             {user ? (
               <>
-              <NavBar search={search} setSearch={setSearch}/>
+              <NavBar />
               <Switch>
-                <Route path="/destinations">
-                  <DestinationsContainer />
+              <Route exact path="/destinations/:id/restaurants">
+                  <RestaurantsContainer />
+              </Route>
+              <Route exact path="/destinations/:id">
+                  <DestinationDetails />
+                </Route>
+                <Route exact path="/destinations">
+                  <DestinationsContainer search={search} setSearch={setSearch}/>
                 </Route>
                 <Route exact path="/">
                   <Home/>
@@ -31,7 +37,13 @@ function App() {
               </>
             ) : (
               <Switch>
-                <Route path="/destinations">
+                <Route path="/destinations/:id/restaurants">
+                  <RestaurantsContainer />
+                </Route>
+                <Route exact path="/destinations/:id">
+                  <DestinationDetails />
+                </Route>
+                <Route exact path="/destinations">
                   <DestinationsContainer />
                 </Route>
                 <Route path="/signup">
