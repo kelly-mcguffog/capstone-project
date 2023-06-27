@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import PageHeader from "./PageHeader";
 import { useParams } from "react-router-dom";
+import HotelsContainer from "./HotelsContainer";
 // import { useLoadScript } from '@react-google-maps/api';
 // import Map from "./Map";
 
@@ -28,37 +29,28 @@ function DestinationDetails() {
     return <div>Destination not found</div>;
   }
 
-  const { photo, city, country, language, currency, time_zone, dial_code } = destination;
-
+  const { photo, city, country, language, currency, time_zone, dial_code, hotels, restaurants, activities } = destination;
 
 
   return (
     <>
       <div
-        className="header"
+        className="header-img"
         style={{ backgroundImage: `url(${photo})` }}
       >
         <PageHeader destination={destination} />
       </div>
-      <div className="destination-card-info">
-        <div className="info">
-          <i className="fa-solid fa-globe"></i>
-          <h3>Country: {country}</h3>
-          <h3>Language: {language}</h3>
-          <h3>Currency: {currency}</h3>
-        </div>
-        <div className="info">
-          <i className="fa-solid fa-cloud"></i>
-          <h3>Country: {country}</h3>
-          <h3>Language: {language}</h3>
-          <h3>Currency: {currency}</h3>
-        </div>
-        <div className="info">
-            <i className="fa-solid fa-clock"></i>
-          <h3>Country: {country}</h3>
-          <h3>Language: {language}</h3>
-          <h3>Currency: {currency}</h3>
-        </div>
+      <div className="details-row">
+      <div className="destination-info">
+        <h3>Country: {country}</h3>
+        <h3>Language: {language}</h3>
+        <h3>Currency: {currency}</h3>
+        <h3>Time Zone: {time_zone}</h3>
+        <h3>Dial Code: {dial_code}</h3>
+      </div>
+      <div>
+        <HotelsContainer hotels={hotels}/>
+      </div>
       </div>
       {/* <Map /> */}
     </>

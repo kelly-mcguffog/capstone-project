@@ -3,6 +3,7 @@ import Header from "./Header";
 import TopDestinations from "./TopDestinations"
 import TopHotels from "./TopHotels";
 import TopRestaurants from "./TopRestaurants";
+import TopActivities from "./TopActivities";
 
 
 function Home() {
@@ -57,6 +58,7 @@ const handleButtonClick = (component) => {
 
       {currentComponent === 'top-hotels' && <TopHotels/> }
       {currentComponent === 'top-restaurants' && <TopRestaurants/> }
+      {currentComponent === 'top-activities' && <TopActivities/> }
     </div>
   );
 }

@@ -1,0 +1,41 @@
+import React, { useState, useEffect } from "react";
+import ActivityCard from "./ActivityCard";
+
+function TopActivities() {
+  const [topActivities, setTopActivities] = useState([]);
+  const [isMounted, setIsMounted] = useState(true);
+
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    const fetchTopActivities = async () => {
+      const response = await fetch('/top-activities');
+      const data = await response.json();
+
+      if (isMounted) {
+        setTopActivities(data);
+      }
+    };
+
+    fetchTopActivities();
+
+    return () => {
+      setIsMounted(false);
+    };
+  }, []);
+
+  const renderTopActivities = topActivities.map(activity => <ActivityCard key={activity.id} activity={activity} />)
+
+
+
+  return (
+    <div className="body-copy">
+    <div className="row">
+      {renderTopActivities}
+    </div>
+    </div>
+  );
+}
+
+export default TopActivities;

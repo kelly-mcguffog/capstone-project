@@ -6,7 +6,7 @@ function Header({search, setSearch}){
         <div className="header-text">
             <h1 className="title">Wanderlust</h1>
             <h5 className="subtitle">Travel the world with ease</h5>
-            <h3 className="main-btn">Plan a trip</h3>
+            <button className="main-btn">Plan a trip</button>
             {/* <Search search={search} setSearch={setSearch}/> */}
         </div>
     )

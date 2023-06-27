@@ -24,7 +24,7 @@ code {
 }
 
 header {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -34,6 +34,12 @@ header {
 .header{
   background-image: url("https://cdn.shopify.com/s/files/1/2717/4174/products/Wanderlust_Hiking_on_Legendary_Trails_book_gestalten_05_2000x.jpg?v=1583927941");
   height: 550px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.header-img{
+  height: 350px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -134,15 +140,67 @@ form {
   position: relative;
   overflow: hidden;
   border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .rectangle-img-container{
-  width: 220px;
+  /* width: 220px; */
   height: 180px;
   position: relative;
   overflow: hidden;
   border-radius: 10px 10px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* border-radius: 100%; */
+}
+
+.details-img-container{
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  /* height: 180px; */
+  /* position: relative;
+  overflow: hidden; */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-info{
+  width: 65%;
+}
+
+.details{
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  grid-column-gap: 20px;
+  column-gap: 20px;
+  flex-wrap: wrap;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 10px;
+  padding: 20px;
+  justify-content: space-around;
+  margin: 20px auto;
+}
+/* .destination-info{
+  width: 100%;
+} */
+.details-row{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  margin: 30px;
+  /* grid-column-gap: 40px;
+  column-gap: 40px; */
+}
+
+.star, .price{
+  margin-top: 0;
 }
 
 .info-details{
@@ -158,6 +216,14 @@ form {
   /* width: 100%; */
   height: 100%;
   transition: transform .5s;
+}
+
+.details-img{
+  height: 100%;
+  /* width: 100%; */
+  /* height: auto; */
+  object-fit: cover;
+  /* border-radius: 10px; */
 }
 
 .img:hover{
@@ -176,8 +242,8 @@ form {
 }
 
 .rectangle-card-details{
-  /* width: 300px; */
-  height: 300px;
+  width: 235px;
+  /* height: 300px; */
   border: 1px solid rgb(210, 210, 210);
   border-radius: 10px;
 }
@@ -189,12 +255,15 @@ form {
   column-gap: 40px;
   row-gap: 1em;
   justify-items: center;
+  flex-wrap: wrap;
   /* margin-top: 50px; */
 }
 .grid{
   display: flex;
   justify-content: space-between;
-  margin: 80px 30px 0px 30px;
+  padding: 80px 30px 0px 30px; 
+  /* background-color: #f0f0f0; */
+  /* margin: 80px 30px 0px 30px; */
 }
 .spotlight-header{
   margin-top: 60px;
@@ -217,10 +286,18 @@ form {
   color: white;
   text-align: center;
   background-color: #0c0132;
-  padding: 10px 30px;
-  width: 100px;
+  padding: 10px 20px;
+  border: none;
+  display: block;
+  /* margin: 0 auto; */
+  /* width: 100px; */
   margin: 20px auto;
   border-radius: 70px;
+  font-size: 12px;
+}
+
+.page-btn{
+  margin: 0;
 }
 /* .container{
   display: flex;
@@ -245,6 +322,12 @@ h1{
   text-align: center;
 }
 
+h2{
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
 h3{
   font-size: 15px;
   font-weight: 700;
@@ -254,6 +337,11 @@ h5{
   font-size: 12px;
   font-weight: 300;
   margin-top: 10px;
+}
+
+p{
+  font-size: 12px;
+  font-weight: 300;
 }
 
 /* button{
@@ -363,6 +451,9 @@ hr{
 .header-text{
   padding: 200px;
 }
+.header-copy{
+  padding: 150px;
+}
 
 .link{
   text-decoration: none;
@@ -380,11 +471,13 @@ hr{
   align-items: center;
   justify-content: center;
   column-gap: 40px;
+  flex-wrap: wrap;
 }
 
 .fa-circle-chevron-left, .fa-circle-chevron-right{
   font-size: 40px;
   color: rgb(210, 210, 210);
+  cursor: pointer;
   /* filter: drop-shadow(rgba(20, 0, 0, 0.2)); */
 }
 
@@ -405,4 +498,5 @@ hr{
   margin: 10px;
   height: auto;
   background-color: white;
+  cursor: pointer;
 }
