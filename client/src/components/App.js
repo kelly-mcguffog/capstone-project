@@ -31,10 +31,10 @@ function App() {
                 </Route>
                 <Route  path="/destinations/:id" element={<DestinationDetails />}>
                 </Route>
-                <Route  path="/" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
+                <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
                 </Route>
-                {/* <Route exact path="/" element={<Home/>}>
-                </Route> */}
+                <Route exact path="/" element={<Home/>}>
+                </Route>
               </Routes>
               </>
              ) : (
@@ -43,12 +43,14 @@ function App() {
                  </Route>
                  <Route  path="/destinations/:id" element={<DestinationDetails />}>
                  </Route>
-                 <Route  path="/" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
+                 <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
                  </Route>
                  <Route path="/signup" element={<SignUp />}>
                  </Route>
                  <Route path="/login" element={<Login />}>
                  </Route>
+                 <Route exact path="/" element={<Home/>}>
+                </Route>
                </Routes>
             )}
           </main>

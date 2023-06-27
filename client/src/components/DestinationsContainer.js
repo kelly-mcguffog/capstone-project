@@ -15,7 +15,7 @@ function DestinationsContainer({search, setSearch}) {
   return (
     <div className="header">
         <Header search={search} setSearch={setSearch}/>
-    <div className="cards">
+    <div className="destination-cards">
       {destinations.map(destination => (
         <DestinationCard key={destination.id} destination={destination} />
       ))}

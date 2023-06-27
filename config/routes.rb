@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   resources :destinations, only: [:index, :show] do
     resources :restaurants, only: [:index, :show]
   end
+
+  get '/top-destinations', to: 'destinations#spotlight'
+  get '/top-hotels', to: 'hotels#spotlight'
+  get '/top-restaurants', to: 'restaurants#spotlight'
+  get '/top-activities', to: 'activities#spotlight'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

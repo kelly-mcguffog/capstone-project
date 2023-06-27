@@ -40,7 +40,7 @@ function DestinationDetails() {
       >
         <PageHeader destination={destination} />
       </div>
-      <div className="card-info">
+      <div className="destination-card-info">
         <div className="info">
           <i className="fa-solid fa-globe"></i>
           <h3>Country: {country}</h3>

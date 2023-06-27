@@ -11,7 +11,7 @@ function DestinationCard({destination}){
                     <img className="img" src={photo}/>
                 </div>
                 <div>
-                    <h3>{city}, {country}</h3>
+                    <h3>{city}</h3>
                 </div>
             </Link>
         </div>

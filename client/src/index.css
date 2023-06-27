@@ -120,13 +120,40 @@ form {
   overflow: hidden;
 } */
 
-.img-container{
+/* .img-container{
   width: 250px;
   height: 250px;
   position: relative;
   overflow: hidden;
   border-radius: 100%;
+} */
+
+.img-container{
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100%;
 }
+
+.rectangle-img-container{
+  width: 220px;
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px 10px 0px 0px;
+  /* border-radius: 100%; */
+}
+
+.info-details{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rectangle-card-info{
+  margin: 10px;
+}
+
 .img{
   /* width: 100%; */
   height: 100%;
@@ -139,7 +166,7 @@ form {
   width: auto; */
 }
 
-.cards, .card-info{
+.destination-cards, .destination-card-info{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 10px;
@@ -148,11 +175,52 @@ form {
   margin-top: 50px;
 }
 
+.rectangle-card-details{
+  /* width: 300px; */
+  height: 300px;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 10px;
+}
+
+
+.spotlight{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 40px;
+  row-gap: 1em;
+  justify-items: center;
+  /* margin-top: 50px; */
+}
+.grid{
+  display: flex;
+  justify-content: space-between;
+  margin: 80px 30px 0px 30px;
+}
+.spotlight-header{
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+.deals{
+  text-align: left;
+}
+.filter-deals{
+  display: flex;
+  align-items: center;
+}
 .info{
   margin-bottom: 50px;
 }
 .card-details{
   text-align: center;
+}
+.main-btn{
+  color: white;
+  text-align: center;
+  background-color: #0c0132;
+  padding: 10px 30px;
+  width: 100px;
+  margin: 20px auto;
+  border-radius: 70px;
 }
 /* .container{
   display: flex;
@@ -173,20 +241,22 @@ input{
 
 h1{
   font-size: 25px;
-  font-weight: 300;
+  font-weight: 700;
+  text-align: center;
 }
 
 h3{
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 700;
 }
 
 h5{
   font-size: 12px;
   font-weight: 300;
+  margin-top: 10px;
 }
 
-button{
+/* button{
   width: 100%;
   padding: 10px;
   border-radius: 50px;
@@ -197,7 +267,7 @@ button{
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 800;
-}
+} */
 
 .logout{
   color: #0c0132;
@@ -207,6 +277,7 @@ button{
   width: auto;
   text-transform: capitalize;
   letter-spacing: 0;
+  border: none;
 }
 
 .title{
@@ -220,10 +291,10 @@ button{
 
 .subtitle{
   font-size: 20px;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   color: white;
   text-align: center;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin: 0px;
 }
 
@@ -298,25 +369,40 @@ hr{
   color: #0c0132;
 }
 
-.buttons{
-  margin: 50px;
-}
-
-.btn{
-  color: white;
-  text-decoration: none;
-  padding: 10px 50px;
-  background: #0c0132;
-  border-radius: 70px;
-  margin: 20px;
-}
-
 .map-container{
   width: 500px;
   height: 300px;
   top: 40%;
 }
 
-/* .info{
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 40px;
+}
 
+.fa-circle-chevron-left, .fa-circle-chevron-right{
+  font-size: 40px;
+  color: rgb(210, 210, 210);
+  /* filter: drop-shadow(rgba(20, 0, 0, 0.2)); */
+}
+
+/* .body-copy{
+  margin-top: 60px;
 } */
+
+.buttons{
+  margin: 50px;
+}
+
+.btn{
+  border: 1px solid rgb(210, 210, 210);
+  text-decoration: none;
+  padding: 10px 30px;
+  color: #0c0132;
+  border-radius: 70px;
+  margin: 10px;
+  height: auto;
+  background-color: white;
+}

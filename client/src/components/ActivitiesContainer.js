@@ -31,7 +31,7 @@ function ActivitiesContainer() {
       >
         <PageHeader destination={destination} />
       </div>
-    <div className="cards">
+    <div className="destination-cards">
       {activities.map(activity => (
         <ActivityCard key={activity.id} activity={activity} />
       ))}

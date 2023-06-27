@@ -7,6 +7,10 @@ class DestinationsController < ApplicationController
         render json: find_destination, status: :ok
     end
 
+    def spotlight
+        render json: Destination.all.limit(10), status: :ok
+    end
+
     private
 
     def destination_params
