@@ -1,6 +1,6 @@
 import React from "react";
 
-function RestaurantCard({restaurant}){
+function TopRestaurantsCard({restaurant}){
 
     const {name, rating, average_price, destination, photo} = restaurant
     return(
@@ -20,4 +20,4 @@ function RestaurantCard({restaurant}){
     )
 }
 
-export default RestaurantCard;
+export default TopRestaurantsCard;

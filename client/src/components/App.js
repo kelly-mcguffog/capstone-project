@@ -25,8 +25,8 @@ function App() {
               <Routes>
               <Route exact path="/destinations/:id/activities" element={<ActivitiesContainer />}>
                 </Route>
-                {/* <Route exact path="/destinations/:id/hotels" element={<HotelsContainer />}>
-                </Route> */}
+                <Route exact path="/destinations/:id/hotels" element={<HotelsContainer />}>
+                </Route>
                 <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
                 </Route>
                 <Route  path="/destinations/:id" element={<DestinationDetails />}>

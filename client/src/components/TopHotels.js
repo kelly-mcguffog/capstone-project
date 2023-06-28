@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import HotelCard from "./HotelCard";
+import TopHotelsCard from "./TopHotelsCard";
 
 function TopHotels() {
   const [topHotels, setTopHotels] = useState([]);
@@ -25,7 +25,7 @@ function TopHotels() {
     };
   }, []);
 
-  const renderTopHotels = topHotels.map(hotel => <HotelCard key={hotel.id} hotel={hotel} />)
+  const renderTopHotels = topHotels.map(hotel => <TopHotelsCard key={hotel.id} hotel={hotel} />)
 
 
 

@@ -1,20 +1,11 @@
 import React, { useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
-import PageHeader from "./PageHeader";
-import { useParams } from "react-router-dom";
-import HotelsContainer from "./HotelsContainer";
-// import { useLoadScript } from '@react-google-maps/api';
-// import Map from "./Map";
+import { useParams, NavLink } from "react-router-dom";
+import Search from "./Search";
 
-
-function DestinationDetails() {
-  const { id } = useParams();
+function DestinationDetails(){
+    const { id } = useParams();
   const { destinations } = useContext(DestinationsContext);
-//   const { isLoaded } = useLoadScript({
-//     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
-//   })
-
-//   if(!isLoaded) return <div>Loading...</div>
 
   if (destinations === null) {
     return <div>Loading...</div>;
@@ -29,32 +20,22 @@ function DestinationDetails() {
     return <div>Destination not found</div>;
   }
 
-  const { photo, city, country, language, currency, time_zone, dial_code, hotels, restaurants, activities } = destination;
-
-
-  return (
-    <>
-      <div
-        className="header-img"
-        style={{ backgroundImage: `url(${photo})` }}
-      >
-        <PageHeader destination={destination} />
-      </div>
-      <div className="details-row">
-      <div className="destination-info">
-        <h3>Country: {country}</h3>
-        <h3>Language: {language}</h3>
-        <h3>Currency: {currency}</h3>
-        <h3>Time Zone: {time_zone}</h3>
-        <h3>Dial Code: {dial_code}</h3>
-      </div>
-      <div>
-        <HotelsContainer hotels={hotels}/>
-      </div>
-      </div>
-      {/* <Map /> */}
-    </>
-  );
+  const { photo } = destination;
+    return(
+        <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
+            <div className="header-copy">
+                <h1 className="title">Welcome to {destination.city}</h1>
+                <div className="results">
+                    <div className="nav">
+                        <NavLink className="link" to={`/destinations/${id}/hotels`}>Hotels</NavLink>
+                        <NavLink className="link" to={`/destinations/${id}/restaurants`}>Restaurants</NavLink>
+                        <NavLink className="link" to={`/destinations/${id}/activities`}>Activities</NavLink>
+                    </div>
+                    <Search />
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default DestinationDetails;

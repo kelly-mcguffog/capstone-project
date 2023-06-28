@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ActivityCard from "./ActivityCard";
+import TopActivitiesCard from "./TopActivitiesCard";
 
 function TopActivities() {
   const [topActivities, setTopActivities] = useState([]);
@@ -25,7 +25,7 @@ function TopActivities() {
     };
   }, []);
 
-  const renderTopActivities = topActivities.map(activity => <ActivityCard key={activity.id} activity={activity} />)
+  const renderTopActivities = topActivities.map(activity => <TopActivitiesCard key={activity.id} activity={activity} />)
 
 
 

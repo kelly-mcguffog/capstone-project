@@ -4,6 +4,6 @@ class HotelSerializer < ActiveModel::Serializer
   has_many :hotel_itinerary_times
 
   def short_description
-    "#{self.object.description[0..100]}..."
+    "#{self.object.description[0..200]}..."
   end
 end

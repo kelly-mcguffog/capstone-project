@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import TopRestaurantsCard from "./TopRestaurantsCard";
 
 function TopRestaurants() {
   const [topRestaurants, setTopRestaurants] = useState([]);
@@ -25,7 +25,7 @@ function TopRestaurants() {
     };
   }, []);
 
-  const renderTopRestaurants = topRestaurants.map(restaurant => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)
+  const renderTopRestaurants = topRestaurants.map(restaurant => <TopRestaurantsCard key={restaurant.id} restaurant={restaurant} />)
 
 
 

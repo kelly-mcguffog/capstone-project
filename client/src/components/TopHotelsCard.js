@@ -1,6 +1,6 @@
 import React from "react";
 
-function HotelCard({hotel}){
+function TopHotelsCard({hotel}){
 
     const {name, photo, rating, average_price, destination} = hotel
 
@@ -21,4 +21,4 @@ function HotelCard({hotel}){
     )
 }
 
-export default HotelCard;
+export default TopHotelsCard;

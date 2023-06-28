@@ -1,6 +1,6 @@
 import React from "react";
 
-function ActivityCard({activity}){
+function TopActivitiesCard({activity}){
 
     const {name, price, destination, photo} = activity
 
@@ -23,4 +23,4 @@ function ActivityCard({activity}){
     )
 }
 
-export default ActivityCard;
+export default TopActivitiesCard;

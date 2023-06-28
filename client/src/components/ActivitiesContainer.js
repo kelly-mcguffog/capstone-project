@@ -1,8 +1,9 @@
-import React, { useContext} from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
-import ActivityCard from "./ActivityCard";
-import PageHeader from "./PageHeader";
+import { useParams, Link } from "react-router-dom";
+import ActivitiesCard from "./ActivitiesCard";
+import DestinationDetails from "./DestinationDetails";
+import FilterActivities from "./FilterActivities";
 
 function ActivitiesContainer() {
     const { id } = useParams();
@@ -21,20 +22,15 @@ function ActivitiesContainer() {
         return <div>Destination not found</div>;
       }
 
-      const activities = destination.activities
-
+      const {activities} = destination
   return (
     <>
-    <div
-        className="header"
-        style={{ backgroundImage: `url(${destination.photo})` }}
-      >
-        <PageHeader destination={destination} />
-      </div>
-    <div className="destination-cards">
-      {activities.map(activity => (
-        <ActivityCard key={activity.id} activity={activity} />
-      ))}
+    <DestinationDetails/>
+    <div className="details-row">
+        <FilterActivities />
+        <div className="cards">
+        {activities.map(activity => <ActivitiesCard key={activity.id} activity={activity}/>)}
+        </div>
     </div>
     </>
   );

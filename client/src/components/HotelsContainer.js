@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DestinationsContext } from "../context/DestinationsContext";
+import { useParams, Link } from "react-router-dom";
+import HotelsCard from "./HotelsCard";
+import DestinationDetails from "./DestinationDetails";
+import FilterHotels from "./FilterHotels";
 
-function HotelsContainer({hotels}) {
-  
+function HotelsContainer() {
+    const { id } = useParams();
+    const { destinations } = useContext(DestinationsContext);
+
+    if (destinations === null) {
+        return <div>Loading...</div>;
+      }
+    
+    
+      const destination = destinations.find(
+        (destination) => destination.id == id
+      );
+    
+      if (!destination) {
+        return <div>Destination not found</div>;
+      }
+
+      const {hotels, country, language, currency, time_zone, dial_code} = destination
 
   return (
-    <div className="cards">
-      {hotels.map(hotel => (
-        <div className="details" key={hotel.id}>
-            <div className="details-img-wrapper">
-            <div className="details-img-container">
-                <img className="details-img" src={hotel.photo}></img>
-            </div>
-            </div>
-            <div className="details-info">
-            <div className="info-details">
-                    <h5 className="star">{"★ ".repeat(hotel.rating)}</h5>
-                    <h5 className="price">{"$".repeat(hotel.average_price)}</h5>
-                </div>
-            <div className="details-copy">
-                <h2>{hotel.name}</h2>
-                <p>{hotel.short_description}</p>
-                <button className="page-btn main-btn">Book Now</button>
-            </div>
-            </div>
+    <>
+    <DestinationDetails/>
+    <div className="details-row">
+        <FilterHotels />
+        <div className="cards">
+        {hotels.map(hotel => <HotelsCard key={hotel.id} hotel={hotel}/>)}
         </div>
-      ))}
     </div>
+    </>
   );
 }
 
