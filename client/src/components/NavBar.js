@@ -26,7 +26,7 @@ function NavBar() {
             <div className="navbar">
                 {user ? (
                     <>
-                        <NavLink to="/">Destinations</NavLink>  
+                        {/* <NavLink to="/">Destinations</NavLink>   */}
                         <div className="dropdown">
                             <h3 onClick={handleDropdown} className="dropbtn">{user.first_name} {user.last_name} <i className="fa-solid fa-caret-down"></i></h3>
                             <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>

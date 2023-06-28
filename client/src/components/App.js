@@ -15,7 +15,7 @@ import ActivitiesContainer from "./ActivitiesContainer";
 function App() {
 
   const {user} = useContext(UserContext)
-  const [search, setSearch] = useState("")
+  // const [search, setSearch] = useState("")
 
     return (
           <main>
@@ -31,26 +31,26 @@ function App() {
                 </Route>
                 <Route  path="/destinations/:id" element={<DestinationDetails />}>
                 </Route>
-                <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
-                </Route>
+                {/* <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
+                </Route> */}
                 <Route exact path="/" element={<Home/>}>
                 </Route>
               </Routes>
               </>
              ) : (
                <Routes>
-                 <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
+                 {/* <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
                  </Route>
                  <Route  path="/destinations/:id" element={<DestinationDetails />}>
                  </Route>
                  <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
-                 </Route>
+                 </Route> */}
                  <Route path="/signup" element={<SignUp />}>
                  </Route>
                  <Route path="/login" element={<Login />}>
                  </Route>
-                 <Route exact path="/" element={<Home/>}>
-                </Route>
+                 {/* <Route exact path="/" element={<Home/>}>
+                </Route> */}
                </Routes>
             )}
           </main>

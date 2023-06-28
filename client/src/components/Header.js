@@ -1,13 +1,13 @@
 import React from "react";
-import Search from "./Search";
+import NewTrip from "./NewTrip";
 
-function Header({search, setSearch}){
+function Header(){
     return(
         <div className="header-text">
             <h1 className="title">Wanderlust</h1>
             <h5 className="subtitle">Travel the world with ease</h5>
             <button className="main-btn">Plan a trip</button>
-            {/* <Search search={search} setSearch={setSearch}/> */}
+            <NewTrip />
         </div>
     )
 }
