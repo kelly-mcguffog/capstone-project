@@ -11,7 +11,8 @@ function RestaurantsContainer() {
     const { destinations } = useContext(DestinationsContext);
     const [filterCuisine, setFilterCuisine] = useState("");
     const [filterRating, setFilterRating] = useState("");
-    const [filterPrice, setFilterPrice] = useState(3)
+    const [filterPrice, setFilterPrice] = useState("")
+    const [search, setSearch] = useState("")
     
 
     if (destinations === null) {
@@ -29,42 +30,19 @@ function RestaurantsContainer() {
 
       const {restaurants} = destination
 
-
-    //   const filterRestaurants = restaurants.filter(restaurant => {
-    //     if (filter === "All") return true;
-    //     return (
-    //         restaurant.average_price <= filterPrice ||
-    //         restaurant.rating.toString() === filter ||
-    //         restaurant.cuisine.toString() === filter
-    //     );
-    // });
-
-    const filterRestaurants = restaurants.filter(restaurant => {
-        if (filterPrice && filterRating && filterCuisine) {
-            return restaurant.average_price <= filterPrice && restaurant.rating.toString() === filterRating && restaurant.cuisine.toString() === filterCuisine;
-          } else if (filterPrice && filterRating) {
-            return restaurant.average_price <= filterPrice && restaurant.rating.toString() === filterRating;
-          } else if (filterRating && filterCuisine) {
-            return restaurant.rating.toString() === filterRating && restaurant.cuisine.toString() === filterCuisine;
-          } else if (filterPrice && filterCuisine) {
-            return restaurant.average_price <= filterPrice && restaurant.cuisine.toString() === filterCuisine;
-          } else if (filterPrice) {
-            return restaurant.average_price <= filterPrice;
-          } else if (filterRating) {
-            return restaurant.rating.toString() === filterRating;
-          } else if (filterCuisine) {
-            return restaurant.cuisine.toString() === filterCuisine;
-          }
+        let filterRestaurants = restaurants.filter(restaurant => {
+            const nameMatch = restaurant.name.toLowerCase().includes(search.toLowerCase());
+            const priceMatch = filterPrice ? restaurant.average_price === filterPrice : true;
+            const ratingMatch = filterRating ? restaurant.rating.toString() === filterRating : true;
+            const cuisineMatch = filterCuisine ? restaurant.cuisine.toString() === filterCuisine : true;
           
-          return true;
-    
-    });
-
+            return nameMatch && priceMatch && ratingMatch && cuisineMatch;
+          });
 
   return (
 
     <>
-    <DestinationDetails/>
+    <DestinationDetails search={search} setSearch={setSearch} />
     <div className="details-row">
         <FilterRestaurants setFilterCuisine={setFilterCuisine} setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">

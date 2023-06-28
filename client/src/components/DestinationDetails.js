@@ -3,7 +3,7 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { useParams, NavLink } from "react-router-dom";
 import Search from "./Search";
 
-function DestinationDetails(){
+function DestinationDetails({search, setSearch}){
     const { id } = useParams();
   const { destinations } = useContext(DestinationsContext);
 
@@ -31,7 +31,7 @@ function DestinationDetails(){
                         <NavLink className="link" to={`/destinations/${id}/restaurants`}>Restaurants</NavLink>
                         <NavLink className="link" to={`/destinations/${id}/activities`}>Activities</NavLink>
                     </div>
-                    <Search />
+                    <Search search={search} setSearch={setSearch}/>
                 </div>
             </div>
         </div>
