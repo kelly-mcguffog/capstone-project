@@ -10,6 +10,20 @@ class UsersController < ApplicationController
         render json: user, status: :ok
     end
 
+    # def index
+    #     render json: User.all, include: [
+    #       'trips',
+    #       'trips.itinerary_days',
+    #       ['trips.itinerary_days.hotel_itinerary_times', 'trips.itinerary_days.hotel_itinerary_times.hotel'],
+    #       ['trips.itinerary_days.restaurant_itinerary_times', 'trips.itinerary_days.restaurant_itinerary_times.restaurant'],
+    #       ['trips.itinerary_days.activity_itinerary_times', 'trips.itinerary_days.activity_itinerary_times.activity']
+    #     ], status: :ok
+    #   end
+
+    def index
+        render json: User.all, status: :ok
+    end
+
     private
 
     def user_params

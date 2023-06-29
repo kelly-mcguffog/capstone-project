@@ -10,6 +10,7 @@ import DestinationsContainer from "./DestinationsContainer";
 import RestaurantsContainer from "./RestaurantsContainer";
 import DestinationDetails from "./DestinationDetails";
 import ActivitiesContainer from "./ActivitiesContainer";
+import Profile from "./Profile";
 
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
               <>
               <NavBar />
               <Routes>
-              <Route exact path="/destinations/:id/activities" element={<ActivitiesContainer />}>
+                <Route  path="/profile" element={<Profile />}>
+                </Route>
+                <Route exact path="/destinations/:id/activities" element={<ActivitiesContainer />}>
                 </Route>
                 <Route exact path="/destinations/:id/hotels" element={<HotelsContainer />}>
                 </Route>

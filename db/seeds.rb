@@ -962,7 +962,7 @@ restaurant_itinerary_time3 = RestaurantItineraryTime.create({
 })
 
 restaurant_itinerary_time4 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-21 06:00:00"),
+    time: DateTime.parse("2023-06-21 18:00:00"),
     restaurant_id: restaurant4.id,
     itinerary_day_id: itinerary2.id
 })
@@ -970,7 +970,7 @@ restaurant_itinerary_time4 = RestaurantItineraryTime.create({
 #activity itinerary time
 
 activity_itinerary_time1 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-20 02:00:00"),
+    time: DateTime.parse("2023-06-20 14:00:00"),
     activity_id: activity1.id,
     itinerary_day_id: itinerary1.id
 })
