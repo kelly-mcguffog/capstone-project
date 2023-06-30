@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     #   end
 
     def index
-        render json: User.all, status: :ok
+        render json: User.all, include: ["trips", "trips.destination"],status: :ok
     end
 
     private

@@ -25,6 +25,7 @@ function NewTrip(){
                     name="origin_airport"
                     autoComplete="off"
                     placeholder="Your Origin"
+                    className="trip-form-input"
                     />
                 </div>
                 <div className="label">
@@ -36,6 +37,7 @@ function NewTrip(){
                     name="destination_airport"
                     autoComplete="off"
                     placeholder="Your Destination"
+                    className="trip-form-input"
                     />
                 </div>
                 <div className="label">
@@ -45,7 +47,8 @@ function NewTrip(){
                     <input 
                     type="datetime-local" 
                     value={dateTime} 
-                    onChange={handleChange} 
+                    onChange={handleChange}
+                    className="trip-form-input" 
                     />
                 </div>
                 <div className="label">
@@ -56,6 +59,7 @@ function NewTrip(){
                     type="datetime-local" 
                     value={dateTime} 
                     onChange={handleChange} 
+                    className="trip-form-input"
                     />
                 </div>
                 <div className="label">
@@ -67,6 +71,7 @@ function NewTrip(){
                     name="flight_number"
                     autoComplete="off"
                     placeholder="i.e. AA353"
+                    className="trip-form-input"
                     />
                 </div>
                 <div className="label">
@@ -78,6 +83,7 @@ function NewTrip(){
                     name="confirmation_number"
                     autoComplete="off"
                     placeholder="9-Digit Code"
+                    className="trip-form-input"
                     />
                 </div>
                 </div>

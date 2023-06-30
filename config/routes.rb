@@ -24,6 +24,10 @@ Rails.application.routes.draw do
     resources :restaurants, only: [:index, :show]
   end
 
+  resources :users, only: [:index, :show] do
+    resources :trips, only: [:index, :show]
+  end
+
   get '/itinerary-times', to: 'itinerary_times#combined_itinerary_times'
   get '/top-destinations', to: 'destinations#spotlight'
   get '/top-hotels', to: 'hotels#spotlight'

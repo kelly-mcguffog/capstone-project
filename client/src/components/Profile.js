@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import TripsContainer from "./TripsContainer";
+import TripDetails from "./TripDetails";
 
 
 function Profile(){
@@ -22,15 +23,30 @@ function Profile(){
     
     // console.log(email)
     return(
-        <>
+        <div className="side-bar">
         <div className="my-trips">
-            <h3>{first_name} {last_name}</h3>
-            <h5>Email Address: {email}</h5>
-            <h5>Username: {username}</h5>
-            <h5>TSA Precheck: {tsa_precheck}</h5>
+            <div className="img-container">
+                <img className="img" src="https://spectrumservicesnyc.com/wp-content/uploads/2022/08/Screenshot-2022-08-15-at-12.28.04-PM.jpeg"/>
+            </div>
+            <div className="img-conatiner">
+            </div>
+            <div className="profile-info">
+                <h3>{first_name} {last_name}</h3>
+                <h5 className="user-title">Email Address</h5>
+                <h5 className="user-input">{email}</h5>
+                <h5 className="user-title">Username</h5>
+                <h5 className="user-input">{username}</h5>
+                <h5 className="user-title">TSA Precheck</h5>
+                <h5 className="user-input">{tsa_precheck}</h5>
+            </div>
+            <div className="listings">
+                <TripsContainer trips={trips}/>
+            </div>
         </div>
-        <TripsContainer trips={trips}/>
-        </>
+        <div className="itinerary">
+            <TripDetails trips={trips}/>
+        </div>
+        </div>
     )
 }
 
