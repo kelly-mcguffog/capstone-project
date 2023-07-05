@@ -1,6 +1,7 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-function HotelsCard({hotel}) {
+function HotelsCard({hotel, trip_id}) {
 
   return (
         <div className="details" key={hotel.id}>
@@ -18,6 +19,7 @@ function HotelsCard({hotel}) {
                 <h2>{hotel.name}</h2>
                 <p>{hotel.short_description}</p>
                 <button className="page-btn main-btn">Book Now</button>
+                <Link to={`/destinations/${hotel.destination_id}/trips/${trip_id}/hotels/${hotel.id}`}>Add to Itinerary</Link>
             </div>
             </div>
         </div>

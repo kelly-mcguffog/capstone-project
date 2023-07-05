@@ -1,19 +1,83 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { DestinationsContext } from "../context/DestinationsContext";
+import { UserContext } from "../context/UserContext";
+import { useParams, NavLink, Link , useNavigate} from "react-router-dom";
 
 function NewTrip(){
+    const { id } = useParams();
+    const {user} = useContext(UserContext)
+    const { destinations } = useContext(DestinationsContext);
+    const navigate = useNavigate();
 
-    const [dateTime, setDateTime] = useState("");
-    const handleChange = (e) => {
-        setDateTime(e.target.value);
-      };
+    const initialState = {
+        origin_airport: "",
+        destination_airport: "",
+        departure: "",
+        arrival: "",
+        flight_number: "",
+        confirmation_number: ""
+      }
 
-    const handleSubmit = (e) => {
+    const [formData, setFormData] = useState(initialState)
+    const [errors, setErrors] = useState([])
+
+
+    if (destinations === null) {
+        return <div>Loading...</div>;
+    }
+
+
+    const destination = destinations.find(
+        (destination) => destination.id == id
+    );
+
+    if (!destination) {
+        return <div>Destination not found</div>;
+    }
+
+  const { photo, city } = destination;
+    
+
+    function handleChange(event) {
+        setFormData({
+          ...formData,
+          [event.target.name]: event.target.value
+        });
+      }  
+      
+      function handleSubmit(e) {
         e.preventDefault();
-        console.log(dateTime);
-    };
+        fetch(`/destinations/${id}/trips`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            origin_airport: formData.origin_airport,
+            destination_airport: formData.destination_airport,
+            departure: formData.departure,
+            arrival: formData.arrival,
+            flight_number: formData.flight_number,
+            confirmation_number: formData.confirmation_number,
+            user_id: user.id,
+            destination_id: id
+          }),
+        }).then((r) => {
+          if (r.ok) {
+            r.json().then((newTrip) => console.log(newTrip));
+            // console.log(trip.id)
+            navigate(`/profile`);
+          } else {
+            r.json().then((err) => setErrors(err.errors));
+          }
+        });
+      }
 
     return(
-        <div className="trip-form-container">
+        <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
+            <div className="header-text">
+                <h1 className="title">Plan Your Trip to {city}</h1>
+        <div className="results trip-form">
             <form id="trip-form-wrapper" onSubmit={handleSubmit}>
                 <div id="trip-form" className="form-info">
                 <div className="label">
@@ -26,6 +90,8 @@ function NewTrip(){
                     autoComplete="off"
                     placeholder="Your Origin"
                     className="trip-form-input"
+                    onChange={handleChange}
+                    value={formData.origin_airport}
                     />
                 </div>
                 <div className="label">
@@ -38,6 +104,8 @@ function NewTrip(){
                     autoComplete="off"
                     placeholder="Your Destination"
                     className="trip-form-input"
+                    onChange={handleChange}
+                    value={formData.destination_airport}
                     />
                 </div>
                 <div className="label">
@@ -45,8 +113,9 @@ function NewTrip(){
                         <h3 className="input-title">Departure</h3>
                     </div>
                     <input 
-                    type="datetime-local" 
-                    value={dateTime} 
+                    type="datetime-local"
+                    name="departure"
+                    value={formData.departure} 
                     onChange={handleChange}
                     className="trip-form-input" 
                     />
@@ -57,7 +126,8 @@ function NewTrip(){
                     </div>
                     <input 
                     type="datetime-local" 
-                    value={dateTime} 
+                    name="arrival"
+                    value={formData.arrival} 
                     onChange={handleChange} 
                     className="trip-form-input"
                     />
@@ -72,6 +142,8 @@ function NewTrip(){
                     autoComplete="off"
                     placeholder="i.e. AA353"
                     className="trip-form-input"
+                    onChange={handleChange}
+                    value={formData.flight_number}
                     />
                 </div>
                 <div className="label">
@@ -84,13 +156,17 @@ function NewTrip(){
                     autoComplete="off"
                     placeholder="9-Digit Code"
                     className="trip-form-input"
+                    onChange={handleChange}
+                    value={formData.confirmation_number}
                     />
                 </div>
                 </div>
                 <div className="form-button">
-                    <i className="fa-solid fa-arrow-right"></i>
+                    <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
                 </div>
             </form>
+        </div>
+        </div>
         </div>
     )
 }

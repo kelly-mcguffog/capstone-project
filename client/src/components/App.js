@@ -6,18 +6,21 @@ import SignUp from "./SignUp";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import HotelsContainer from "./HotelsContainer";
-import DestinationsContainer from "./DestinationsContainer";
-import RestaurantsContainer from "./RestaurantsContainer";
-import DestinationDetails from "./DestinationDetails";
 import ActivitiesContainer from "./ActivitiesContainer";
 import Profile from "./Profile";
-import TripDetails from "./TripDetails";
+import NewTrip from "./NewTrip";
+import AddHotelToItinerary from "./AddHotelToItinerary";
+import AddRestaurantToItinerary from "./AddRestaurantToItinerary";
+import RestaurantsContainer from "./RestaurantsContainer";
+import AddActivityToItinerary from "./AddActivityToItinerary";
 
 
 function App() {
 
   const {user} = useContext(UserContext)
-  // const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("")
+
+  console.log(user)
 
     return (
           <main>
@@ -25,38 +28,32 @@ function App() {
               <>
               <NavBar />
               <Routes>
-                {/* <Route  path="/users/:id/trips/:id" element={<TripDetails />}>
-                </Route> */}
+                <Route  exact path="/destinations/:destination_id/trips/:trip_id/hotels/:id" element={<AddHotelToItinerary />}>
+                </Route>
+                <Route  exact path="/destinations/:destination_id/trips/:trip_id/activities/:id" element={<AddActivityToItinerary />}>
+                </Route>
+                <Route  exact path="/destinations/:destination_id/trips/:trip_id/restaurants/:id" element={<AddRestaurantToItinerary />}>
+                </Route>
+                <Route  exact path="/destinations/:destination_id/trips/:id/hotels" element={<HotelsContainer search={search} setSearch={setSearch}/>}>
+                </Route>
+                <Route  exact path="/destinations/:destination_id/trips/:id/activities" element={<ActivitiesContainer search={search} setSearch={setSearch}/>}>
+                </Route>
+                <Route  exact path="/destinations/:destination_id/trips/:id/restaurants" element={<RestaurantsContainer search={search} setSearch={setSearch}/>}>
+                </Route>
+                <Route  path="/destinations/:id/trips" element={<NewTrip />}>
+                </Route>
                 <Route  path="/profile" element={<Profile />}>
                 </Route>
-                <Route exact path="/destinations/:id/activities" element={<ActivitiesContainer />}>
-                </Route>
-                <Route exact path="/destinations/:id/hotels" element={<HotelsContainer />}>
-                </Route>
-                <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
-                </Route>
-                <Route  path="/destinations/:id" element={<DestinationDetails />}>
-                </Route>
-                {/* <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
-                </Route> */}
-                <Route exact path="/" element={<Home/>}>
+                <Route exact path="/" element={<Home search={search} setSearch={setSearch}/>}>
                 </Route>
               </Routes>
               </>
              ) : (
                <Routes>
-                 {/* <Route exact path="/destinations/:id/restaurants" element={<RestaurantsContainer />}>
-                 </Route>
-                 <Route  path="/destinations/:id" element={<DestinationDetails />}>
-                 </Route>
-                 <Route  path="/destinations" element={<DestinationsContainer search={search} setSearch={setSearch}/>}>
-                 </Route> */}
                  <Route path="/signup" element={<SignUp />}>
                  </Route>
                  <Route path="/login" element={<Login />}>
                  </Route>
-                 {/* <Route exact path="/" element={<Home/>}>
-                </Route> */}
                </Routes>
             )}
           </main>

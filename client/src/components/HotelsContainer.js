@@ -1,16 +1,15 @@
 import React, { useContext, useState } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HotelsCard from "./HotelsCard";
-import DestinationDetails from "./DestinationDetails";
+import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterHotels from "./FilterHotels";
 
-function HotelsContainer() {
-    const { id } = useParams();
+function HotelsContainer({search, setSearch}) {
+    const { destination_id, id } = useParams();
     const { destinations } = useContext(DestinationsContext);
     const [filterRating, setFilterRating] = useState("");
     const [filterPrice, setFilterPrice] = useState("")
-    const [search, setSearch] = useState("")
 
     if (destinations === null) {
         return <div>Loading...</div>;
@@ -18,7 +17,7 @@ function HotelsContainer() {
     
     
       const destination = destinations.find(
-        (destination) => destination.id == id
+        (destination) => destination.id == destination_id
       );
     
       if (!destination) {
@@ -34,14 +33,15 @@ function HotelsContainer() {
 
         return nameMatch && priceMatch && ratingMatch;
       });
+      
 
   return (
     <>
-    <DestinationDetails search={search} setSearch={setSearch} />
+    <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
     <div className="details-row">
         <FilterHotels setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice}/>
         <div className="cards">
-        {filterHotels.map(hotel => <HotelsCard key={hotel.id} hotel={hotel}/>)}
+        {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel}/>)}
         </div>
     </div>
     </>

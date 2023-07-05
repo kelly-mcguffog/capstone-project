@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function RestaurantsCard({restaurant}) {
+function RestaurantsCard({restaurant, trip_id}) {
 
   return (
 
@@ -20,6 +20,7 @@ function RestaurantsCard({restaurant}) {
                 <h2>{restaurant.name}</h2>
                 <p>{restaurant.description}</p>
                 <button className="page-btn main-btn">Book Now</button>
+                <Link to={`/destinations/${restaurant.destination_id}/trips/${trip_id}/restaurants/${restaurant.id}`}>Add to Itinerary</Link>
             </div>
             </div>
         </div>

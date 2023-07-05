@@ -6,8 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 function TripDetails({trip}){
+
+
     
-    const {origin_airport, destination_airport, departure, arrival, flight_number, confirmation_number, itinerary_days} = trip
+    const {id, origin_airport, destination_airport, departure, arrival, flight_number, confirmation_number, itinerary_days, destination_id} = trip
 
     const departureDate = new Date(departure);
     const arrivalDate = new Date(arrival);
@@ -76,6 +78,7 @@ function TripDetails({trip}){
                     <h3 className="trip-details-input">{confirmation_number}</h3>
                 </div>
             </div>
+            <Link to={`/destinations/${destination_id}/trips/${id}/hotels`}>Build Itinerary</Link>
             <ItineraryDaysContainer itinerary_days={itinerary_days}/>
         </div>
     )

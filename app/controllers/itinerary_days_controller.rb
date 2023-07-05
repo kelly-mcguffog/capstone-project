@@ -1,13 +1,37 @@
 class ItineraryDaysController < ApplicationController
-    # def index
-    #     itinerary_days = ItineraryDay.all
-    #     combined_times = itinerary_days.flat_map(&:combined_itinerary_times)
-    #     sorted_times = combined_times.sort_by(&:time)
-    
-    #     render json: {
-    #       itinerary_days: itinerary_days,
-    #       combined_times: sorted_times
-    #     }, status: :ok
-    #     # render json: combined_times, include: [["hotel_itinerary_times", "hotel_itinerary_times.hotel"], ["restaurant_itinerary_times", "restaurant_itinerary_times.restaurant"], ["activity_itinerary_times", "activity_itinerary_times.activity"]], status: :ok
-    # end
+
+    def index
+        render json: ItineraryDay.all, status: :ok
+    end
+
+    def create
+        itinerary = ItineraryDay.new(itinerary_day_params)
+        if itinerary.save
+          render json: itinerary, status: :created
+        else
+          render json: { errors: itinerary.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+      
+      private
+      
+      def itinerary_day_params
+        params.require(:itinerary_day).permit(
+          :date,
+          :trip_id,
+          hotel_itinerary_times_attributes: [
+            :time,
+            :hotel_id,
+          ],
+          restaurant_itinerary_times_attributes: [
+            :time,
+            :restaurant_id,
+          ],
+          activity_itinerary_times_attributes: [
+            :time,
+            :activity_id,
+          ]
+        )
+      end
+
 end

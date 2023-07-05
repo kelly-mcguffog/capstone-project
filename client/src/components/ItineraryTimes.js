@@ -15,6 +15,7 @@ function ItineraryTimes({itinerary}){
 
     const formattedTime = itineraryTime.toLocaleTimeString(undefined, options);
 
+    // console.log(itinerary)
 
     return(
         <>

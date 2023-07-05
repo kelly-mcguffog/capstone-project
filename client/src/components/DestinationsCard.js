@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function DestinationCard({destination}){
+function DestinationsCard({destination}){
 
-    const {id, city, country, photo} = destination
+    const {id, city, photo} = destination
     return(
         <div className="card-details">
-            <Link className="link" to={`/destinations/${id}`}>
+            <Link className="link" to={`/destinations/${id}/trips`}>
                 <div className="img-container">
                     <img className="img" src={photo}/>
                 </div>
@@ -18,4 +18,4 @@ function DestinationCard({destination}){
     )
 }
 
-export default DestinationCard;
+export default DestinationsCard;

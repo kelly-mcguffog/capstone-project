@@ -8,19 +8,19 @@ Rails.application.routes.draw do
   resources :items
   resources :packing_lists
   resources :users
-  # resources :hotels
+  resources :hotels
   resources :hotel_itinerary_times
   resources :activity_itinerary_times
   resources :restaurant_itinerary_times
   resources :itinerary_days
   resources :trips
-  # resources :restaurants
-  # resources :activities
-  # resources :destinations
-
-  get '/itinerary-days', to: 'itinerary_days#index'
+  resources :restaurants
+  resources :activities
+  resources :destinations
 
   resources :destinations, only: [:index, :show] do
+    resources :trips
+    resources :hotels
     resources :restaurants, only: [:index, :show]
   end
 
@@ -29,10 +29,8 @@ Rails.application.routes.draw do
   end
 
   get '/itinerary-times', to: 'itinerary_times#combined_itinerary_times'
-  get '/top-destinations', to: 'destinations#spotlight'
-  get '/top-hotels', to: 'hotels#spotlight'
-  get '/top-restaurants', to: 'restaurants#spotlight'
-  get '/top-activities', to: 'activities#spotlight'
+
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

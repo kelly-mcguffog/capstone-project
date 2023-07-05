@@ -25,7 +25,7 @@ function TripID({trip}){
     const formattedDate = departureDate.toLocaleDateString(undefined, options);
 
 
-    console.log(destination)
+    // console.log(destination)
     
     return(
         <div className="trip">

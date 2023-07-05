@@ -1,7 +1,4 @@
 import React from "react";
-import ItineraryHotel from "./ItineraryHotel";
-import ItineraryRestaurant from "./ItineraryRestaurant";
-import ItineraryActivity from "./ItineraryActivity";
 import ItineraryTimes from "./ItineraryTimes";
 
 function ItineraryDay({day}){

@@ -1,13 +1,17 @@
 import React from "react";
-import NewTrip from "./NewTrip";
+import Search from "./Search";
 
-function Header(){
+function Header({search, setSearch}){
     return(
         <div className="header-text">
             <h1 className="title">Wanderlust</h1>
-            <h5 className="subtitle">Travel the world with ease</h5>
-            <button className="main-btn">Plan a trip</button>
-            <NewTrip />
+            <h5 className="subtitle">Travel the world with ease and make the most of your adventures. Build itineraries, manage packing lists, and share your travel information with friends and family.</h5>
+            <div className="results">
+                <div className="nav home-nav">
+                    <h1 className="spotlight-header">Discover Popular Destinations</h1>
+                </div>
+                <Search search={search} setSearch={setSearch}/>
+            </div>
         </div>
     )
 }

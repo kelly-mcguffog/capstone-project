@@ -2,13 +2,19 @@
 # require 'dotenv/load'
 
 class HotelsController < ApplicationController
-    # def index
-    #     hotels = Hotel.all
-    #     render json: hotels, status: :ok
-    # end
+    def index
+        hotels = Hotel.all
+        render json: hotels, status: :ok
+    end
 
-    def spotlight
-        render json: Hotel.all.limit(10), status: :ok
+    def show
+        hotel = Hotel.find(params[:id])
+        render json: hotel, status: :ok
+    end
+
+    def create
+        hotel = Hotel.create!(hotel_params)
+        render json: hotel, status: :created
     end
 
     private

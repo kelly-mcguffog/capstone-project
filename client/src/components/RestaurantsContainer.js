@@ -2,17 +2,17 @@ import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { useParams, Link } from "react-router-dom";
 import RestaurantsCard from "./RestaurantsCard";
-import DestinationDetails from "./DestinationDetails";
+import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterRestaurants from "./FilterRestaurants";
 
-function RestaurantsContainer() {
+function RestaurantsContainer({search, setSearch}) {
 
-    const { id } = useParams();
+    const { destination_id, id } = useParams();
     const { destinations } = useContext(DestinationsContext);
     const [filterCuisine, setFilterCuisine] = useState("");
     const [filterRating, setFilterRating] = useState("");
     const [filterPrice, setFilterPrice] = useState("")
-    const [search, setSearch] = useState("")
+    // const [search, setSearch] = useState("")
     
 
     if (destinations === null) {
@@ -21,7 +21,7 @@ function RestaurantsContainer() {
     
     
       const destination = destinations.find(
-        (destination) => destination.id == id
+        (destination) => destination.id == destination_id
       );
     
       if (!destination) {
@@ -42,11 +42,11 @@ function RestaurantsContainer() {
   return (
 
     <>
-    <DestinationDetails search={search} setSearch={setSearch} />
+    <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
     <div className="details-row">
         <FilterRestaurants setFilterCuisine={setFilterCuisine} setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
-        {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} restaurant={restaurant}/>)}
+        {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} trip_id={id} restaurant={restaurant}/>)}
         </div>
     </div>
     </>
