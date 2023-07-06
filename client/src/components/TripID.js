@@ -2,11 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { DestinationsContext } from "../context/DestinationsContext";
 import ItineraryDaysContainer from "./ItineraryDaysContainer";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+
 
 
 function TripID({trip}){
     const {destinations} = useContext(DestinationsContext)
+    const {user} = useContext(UserContext)
+
     const {origin_airport, destination_airport, departure, arrival, flight_number, confirmation_number, itinerary_days, destination_id} = trip
     
     const destination = destinations ? destinations.find(destination => destination.id == destination_id) : null;
@@ -28,13 +31,12 @@ function TripID({trip}){
     // console.log(destination)
     
     return(
-        <div className="trip">
-        <h1 className="side-bar-header">My Trips</h1>
-        <h3 className="trip-destination-name">{city}, {country}</h3>
-        <h5 className="user-input">{formattedDate}</h5>
-        <button>View Details</button>
-        {/* <Link to={`/users/7/trips/${trip.id}`}>View Details</Link> */}
-        </div>
+        <NavLink className="trip-links" to={`/users/${user.id}/trips/${trip.id}`}>
+            <div className="trip">   
+            <h3 className="trip-destination-name">{city}, {country}</h3>
+            <h5 className="user-input">{formattedDate}</h5>
+            </div>
+        </NavLink>
     )
 }
 

@@ -3,8 +3,8 @@ class RestaurantsController < ApplicationController
         render json: Restaurant.all, status: :ok
     end
 
-    def spotlight
-        render json: Restaurant.all.limit(4), status: :ok
+    def show
+        render json: find_restaurant, status: :ok
     end
 
     private

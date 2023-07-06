@@ -12,11 +12,6 @@ class HotelsController < ApplicationController
         render json: hotel, status: :ok
     end
 
-    def create
-        hotel = Hotel.create!(hotel_params)
-        render json: hotel, status: :created
-    end
-
     private
 
     def hotel_params

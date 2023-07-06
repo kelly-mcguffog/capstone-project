@@ -13,6 +13,8 @@ import AddHotelToItinerary from "./AddHotelToItinerary";
 import AddRestaurantToItinerary from "./AddRestaurantToItinerary";
 import RestaurantsContainer from "./RestaurantsContainer";
 import AddActivityToItinerary from "./AddActivityToItinerary";
+import TripID from "./TripID";
+import TripDetails from "./TripDetails";
 
 
 function App() {
@@ -20,8 +22,7 @@ function App() {
   const {user} = useContext(UserContext)
   const [search, setSearch] = useState("")
 
-  console.log(user)
-
+  
     return (
           <main>
             {user ? (
@@ -42,7 +43,11 @@ function App() {
                 </Route>
                 <Route  path="/destinations/:id/trips" element={<NewTrip />}>
                 </Route>
-                <Route  path="/profile" element={<Profile />}>
+
+                <Route  path="/users/:user_id/trips/:id" element={<TripDetails />}>
+                </Route>
+
+                <Route exact path="/users/:user_id/trips" element={<Profile />}>
                 </Route>
                 <Route exact path="/" element={<Home search={search} setSearch={setSearch}/>}>
                 </Route>

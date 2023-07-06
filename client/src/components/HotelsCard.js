@@ -18,8 +18,8 @@ function HotelsCard({hotel, trip_id}) {
             <div className="details-copy">
                 <h2>{hotel.name}</h2>
                 <p>{hotel.short_description}</p>
-                <button className="page-btn main-btn">Book Now</button>
-                <Link to={`/destinations/${hotel.destination_id}/trips/${trip_id}/hotels/${hotel.id}`}>Add to Itinerary</Link>
+                {/* <button className="page-btn main-btn">Book Now</button> */}
+                <Link className="page-btn main-btn" to={`/destinations/${hotel.destination_id}/trips/${trip_id}/hotels/${hotel.id}`}>Add to Itinerary</Link>
             </div>
             </div>
         </div>

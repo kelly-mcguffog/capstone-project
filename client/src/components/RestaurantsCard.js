@@ -19,8 +19,8 @@ function RestaurantsCard({restaurant, trip_id}) {
             <div className="details-copy">
                 <h2>{restaurant.name}</h2>
                 <p>{restaurant.description}</p>
-                <button className="page-btn main-btn">Book Now</button>
-                <Link to={`/destinations/${restaurant.destination_id}/trips/${trip_id}/restaurants/${restaurant.id}`}>Add to Itinerary</Link>
+                {/* <button className="page-btn main-btn">Book Now</button> */}
+                <Link className="page-btn main-btn" to={`/destinations/${restaurant.destination_id}/trips/${trip_id}/restaurants/${restaurant.id}`}>Add to Itinerary</Link>
             </div>
             </div>
         </div>

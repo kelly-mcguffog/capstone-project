@@ -4,6 +4,12 @@ class ItineraryDaysController < ApplicationController
         render json: ItineraryDay.all, status: :ok
     end
 
+    def show
+      itinerary = ItineraryDay.find(params[:itinerary_day_id])
+      render json: itinerary
+
+    end
+
     def create
         itinerary = ItineraryDay.new(itinerary_day_params)
         if itinerary.save
@@ -12,6 +18,12 @@ class ItineraryDaysController < ApplicationController
           render json: { errors: itinerary.errors.full_messages }, status: :unprocessable_entity
         end
       end
+
+    def destroy
+        itinerary= ItineraryDay.find(params[:itinerary_day_id])
+        itinerary.destroy
+        head :no_content
+    end
       
       private
       

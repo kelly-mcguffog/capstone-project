@@ -5,7 +5,7 @@ import { useParams, NavLink, Link , useNavigate} from "react-router-dom";
 
 function NewTrip(){
     const { id } = useParams();
-    const {user} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
     const { destinations } = useContext(DestinationsContext);
     const navigate = useNavigate();
 
@@ -43,11 +43,21 @@ function NewTrip(){
           ...formData,
           [event.target.name]: event.target.value
         });
-      }  
+      }
+
+
+    function onAddTrip(newTrip) {
+      if(newTrip.user_id === user.id){
+        setUser({...user, trips: [...user.trips, newTrip]})
+      }else{
+        return user
+      }
+  }
+
       
       function handleSubmit(e) {
         e.preventDefault();
-        fetch(`/destinations/${id}/trips`, {
+        fetch(`/users/${user.id}/trips`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -64,9 +74,9 @@ function NewTrip(){
           }),
         }).then((r) => {
           if (r.ok) {
-            r.json().then((newTrip) => console.log(newTrip));
+            r.json().then((newTrip) => onAddTrip(newTrip));
             // console.log(trip.id)
-            navigate(`/profile`);
+            navigate(`/users/${user.id}/trips`);
           } else {
             r.json().then((err) => setErrors(err.errors));
           }

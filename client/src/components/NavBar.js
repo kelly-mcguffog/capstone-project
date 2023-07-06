@@ -30,7 +30,7 @@ function NavBar() {
                         <div className="dropdown">
                             <h3 onClick={handleDropdown} className="dropbtn">{user.first_name} {user.last_name} <i className="fa-solid fa-caret-down"></i></h3>
                             <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>
-                                <Link to="/profile">Profile</Link>
+                                <Link to={`users/${user.id}/trips`}>Profile</Link>
                                 <hr></hr>
                                 <button className="logout" onClick={handleLogoutClick}>Logout</button>
                             </div>

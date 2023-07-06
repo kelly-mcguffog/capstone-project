@@ -5,33 +5,69 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :items
-  resources :packing_lists
-  resources :users
-  resources :hotels
-  resources :hotel_itinerary_times
-  resources :activity_itinerary_times
-  resources :restaurant_itinerary_times
-  resources :itinerary_days
-  resources :trips
-  resources :restaurants
-  resources :activities
-  resources :destinations
+  get '/destinations', to: 'destinations#index'
+  get 'destinations/:id', to: 'destinations#show'
+  get '/users/:user_id/trips/:id', to: 'trips#show'
+  
+  get '/users/:user_id/trips/:trip_id/itinerary_days', to: 'itinerary_days#index'
 
-  resources :destinations, only: [:index, :show] do
-    resources :trips
-    resources :hotels
-    resources :restaurants, only: [:index, :show]
-  end
+  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#show'
 
-  resources :users, only: [:index, :show] do
-    resources :trips, only: [:index, :show]
-  end
+  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/hotel_itinerary_times', to: 'hotel_itinerary_times#index'
+  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#index'
+  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#index'
 
-  get '/itinerary-times', to: 'itinerary_times#combined_itinerary_times'
+  get '/restaurant_itinerary_times', to: 'restaurant_itinerary_times#index'
+  get '/restaurant_itinerary_times/:restaurant_itinerary_times_id', to: 'restaurant_itinerary_times#show'
 
 
-  # Routing logic: fallback requests for React Router.
-  # Leave this here to help deploy your app later!
-  # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+  delete '/trips/:trip_id/itinerary_days/:id/hotel_itinerary_times/:hotel_itinerary_time_id', to: 'hotel_itinerary_times#destroy'
+  delete '/trips/:trip_id/itinerary_days/:id/activity_itinerary_times/:activity_itinerary_time_id', to: 'activity_itinerary_times#destroy'
+  delete '/trips/:trip_id/itinerary_days/:id/restaurant_itinerary_times/:restaurant_itinerary_time_id', to: 'restaurant_itinerary_times#destroy'  
+
+  post '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/hotel_itinerary_times', to: 'hotel_itinerary_times#create'
+  post '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#create'
+  post '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#create'
+
+  get '/users/:id', to: 'users#show'
+  
+  post '/users/:user_id/trips/:trip_id/itinerary_days', to: 'itinerary_days#create'
+  delete '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#destroy'
+
+  get '/destinations/:id/hotels', to: 'hotels#index'
+  get '/destinations/:id/restaurants', to: 'restaurants#index'
+  get '/destinations/:id/activities', to: 'activities#index'
+  post '/users/:id/trips', to: 'trips#create'
+
+  # delete '/itinerary_days', to: 'itinerary_days#destroy'
+
+  # resources :items
+  # resources :packing_lists
+  # resources :users
+  # resources :hotels
+  # resources :hotel_itinerary_times
+  # resources :activity_itinerary_times
+  # resources :restaurant_itinerary_times
+  # resources :itinerary_days
+  # resources :trips
+  # resources :restaurants
+  # resources :activities
+  # resources :destinations
+
+  # delete '/restaurant_itinerary_times/:id'
+
+  # resources :destinations, only: [:index, :show] do
+  #   resources :trips
+  #   resources :hotels
+  #   resources :restaurants, only: [:index, :show]
+  # end
+
+  # resources :users, only: [:index, :show] do
+  #   resources :trips
+  # end
+
+  # get '/itinerary-times', to: 'itinerary_times#combined_itinerary_times'
+
+  # get '/users/:id/trips/:id/itinerary_day/:id/itinerary_times', to: 'itinerary_times#index'
+
 end

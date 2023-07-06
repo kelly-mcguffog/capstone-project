@@ -15,8 +15,8 @@ function ActivitiesCard({activity, trip_id}) {
               <h2>{activity.name}</h2>
               <p>{activity.description}</p>
               <h5>{activity.price}</h5>
-              <button className="page-btn main-btn">Book Now</button>
-              <Link to={`/destinations/${activity.destination_id}/trips/${trip_id}/activities/${activity.id}`}>Add to Itinerary</Link>
+              {/* <button className="page-btn main-btn">Book Now</button> */}
+              <Link className="page-btn main-btn" to={`/destinations/${activity.destination_id}/trips/${trip_id}/activities/${activity.id}`}>Add to Itinerary</Link>
           </div>
           </div>
       </div>

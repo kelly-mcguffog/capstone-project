@@ -1,7 +1,7 @@
 import React from "react";
 
 function ItineraryActivity({activity}){
-    console.log(activity)
+    // console.log(activity)
     const {address, description, name, price} = activity
     return(
         <div>

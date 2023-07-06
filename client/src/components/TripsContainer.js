@@ -8,7 +8,7 @@ function TripsContainer({trips}){
     return(
         <>
         <div className="trips-container">
-            {trips.map(trip => <TripID key={trip.id} trip={trip}/>)}
+            {trips.map(trip => <TripID key={trip.id} trip={trip} />)}
         </div>
         </>
     )

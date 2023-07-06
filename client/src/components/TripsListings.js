@@ -1,24 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import TripsContainer from "./TripsContainer";
-import TripsListings from "./TripsListings";
 
 
-function Profile(){
+function TripsListings(){
     const {user} = useContext(UserContext)
     const { trips } = user
 
-    console.log(user)
     return(
         <div className="side-bar">
             <div className="my-trips">
-            <TripsListings />
-            </div>
-                <div className="trips">
-                    <h1>welcome</h1>
+                <div className="listings">
+                    <h1 className="trips-header">My Trips</h1>
+                    <TripsContainer trips={trips}/>
                 </div>
+            </div>
         </div>
     )
 }
 
-export default Profile;
+export default TripsListings;

@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import ItineraryTimes from "./ItineraryTimes";
+import { UserContext } from "../context/UserContext";
 
-function ItineraryDay({day}){
+function ItineraryDay({itinerary_day, trip_id}){
 
-    const {date, combined_itinerary_times} = day
+    const {id, date, combined_itinerary_times} = itinerary_day
+    const { user } = useContext(UserContext);
 
     const departureDate = new Date(date);
     
@@ -16,12 +18,20 @@ function ItineraryDay({day}){
 
     const formattedDate = departureDate.toLocaleDateString(undefined, options);
 
-
+    
+    const handleDeleteReview = () => {
+        fetch(`/users/${user.id}/trips/${trip_id}/itinerary_days/${id}`, {
+          method: 'DELETE'
+        })
+      }
+    
     return(
         <>
-        <h1 className="time">{formattedDate}</h1>
+        <div onClick={handleDeleteReview}>
+            <h1 className="time">{formattedDate}</h1>
+        </div>
         <div>{combined_itinerary_times.map(i => {
-            return <ItineraryTimes key={i.id} itinerary={i}/>
+            return <ItineraryTimes key={i.id} trip_id={trip_id} itinerary_day={itinerary_day} itinerary_time={i}/>
         })}</div>
         </>
         
