@@ -1,42 +1,40 @@
-import React, {useContext} from "react";
+import React from "react";
 import ItineraryTimes from "./ItineraryTimes";
-import { UserContext } from "../context/UserContext";
 
-function ItineraryDay({itinerary_day, trip_id}){
+function ItineraryDay({ itinerary_day, trip }) {
+  if (!itinerary_day) {
+    return null; // or handle the case when itinerary_day is undefined
+  }
 
-    const {id, date, combined_itinerary_times} = itinerary_day
-    const { user } = useContext(UserContext);
+  const { date, combined_itinerary_times } = itinerary_day;
 
-    const departureDate = new Date(date);
+  const itineraryDate = new Date(date);
     
-    const options = { 
-        weekday: "long", 
-        year: "numeric", 
-        month: "long", 
-        day: "numeric" 
-      };
+  const options = { 
+      weekday: "long", 
+      year: "numeric", 
+      month: "long", 
+      day: "numeric" 
+    };
 
-    const formattedDate = departureDate.toLocaleDateString(undefined, options);
+  const formattedDate = itineraryDate.toLocaleDateString(undefined, options);
 
-    
-    const handleDeleteReview = () => {
-        fetch(`/users/${user.id}/trips/${trip_id}/itinerary_days/${id}`, {
-          method: 'DELETE'
-        })
-      }
-    
-    return(
-        <>
-        <div onClick={handleDeleteReview}>
-            <h1 className="time">{formattedDate}</h1>
-        </div>
-        <div>{combined_itinerary_times.map(i => {
-            return <ItineraryTimes key={i.id} trip_id={trip_id} itinerary_day={itinerary_day} itinerary_time={i}/>
-        })}</div>
-        </>
-        
-        
-    )
+  console.log(combined_itinerary_times);
+
+
+  return (
+    <div>
+      <h1 className="time">{formattedDate}</h1>
+      {combined_itinerary_times && combined_itinerary_times.map((itineraryTime, index) => (
+        <ItineraryTimes
+        key={`${itineraryTime}_${index}`}
+          trip={trip}
+          itinerary_day={itinerary_day}
+          itinerary_time={itineraryTime}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default ItineraryDay;

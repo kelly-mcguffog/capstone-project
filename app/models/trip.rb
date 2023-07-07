@@ -11,6 +11,6 @@ class Trip < ApplicationRecord
     # has_many :hotels, through: :destination
     # has_many :restaurants, through: :destination
 
-    accepts_nested_attributes_for :itinerary_days
+    accepts_nested_attributes_for :itinerary_days, allow_destroy: true
 
 end

@@ -3,12 +3,11 @@ class ActivityItineraryTimesController < ApplicationController
         render json: ActivityItineraryTime.all, status: :ok
     end
     def create
-        new_activity = ActivityItineraryTime.create!(book_params)
-        render json: new_activity, status: :created
+        activity_itinerary_time = ActivityItineraryTime.create!(activity_itinerary_time_params)
+        render json: activity_itinerary_time, status: :created
     end
     def destroy
-        itinerary_day = ItineraryDay.find(params[:id])
-        activity_itinerary_time = itinerary_day.activity_itinerary_times.find(params[:activity_itinerary_time_id])
+        activity_itinerary_time = ActivityItineraryTime.find(params[:activity_itinerary_time_id])
         activity_itinerary_time.destroy
         head :no_content
       end

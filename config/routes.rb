@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get '/restaurant_itinerary_times/:restaurant_itinerary_times_id', to: 'restaurant_itinerary_times#show'
 
 
+  get '/trips/:trip_id/itinerary_days/:id/restaurant_itinerary_times/:restaurant_itinerary_time_id', to: 'restaurant_itinerary_times#show'  
+
   delete '/trips/:trip_id/itinerary_days/:id/hotel_itinerary_times/:hotel_itinerary_time_id', to: 'hotel_itinerary_times#destroy'
   delete '/trips/:trip_id/itinerary_days/:id/activity_itinerary_times/:activity_itinerary_time_id', to: 'activity_itinerary_times#destroy'
   delete '/trips/:trip_id/itinerary_days/:id/restaurant_itinerary_times/:restaurant_itinerary_time_id', to: 'restaurant_itinerary_times#destroy'  

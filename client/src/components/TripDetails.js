@@ -11,10 +11,19 @@ function TripDetails(){
 
     const { id } = useParams();
     const {user} = useContext(UserContext)
+    // const [addedRestaurant, setAddedRestaurant] = useState(null);
+
 
     const trip = user.trips.find(trip => trip.id == id)
     
     const {itinerary_days, destination_id} = trip
+
+    // function handleAddRestaurant(newRestaurant) {
+    //     setAddedRestaurant(newRestaurant);
+    //   }
+
+
+
 
     return(
         <div className="side-bar">
@@ -22,7 +31,7 @@ function TripDetails(){
         <div className="trips">
             <TravelDetails trip={trip}/>
             <Link to={`/destinations/${destination_id}/trips/${id}/hotels`}>Build Itinerary</Link>
-            <ItineraryDaysContainer trip_id={id} itinerary_days={itinerary_days}/>
+            <ItineraryDaysContainer trip={trip} itinerary_days={itinerary_days} />
         </div>
         </div>
     )

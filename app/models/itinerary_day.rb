@@ -9,9 +9,9 @@ class ItineraryDay < ApplicationRecord
     has_many :activities, through: :activity_itinerary_times
     has_many :restaurants, through: :restaurant_itinerary_times
   
-    accepts_nested_attributes_for :hotel_itinerary_times
-    accepts_nested_attributes_for :activity_itinerary_times
-    accepts_nested_attributes_for :restaurant_itinerary_times
+    accepts_nested_attributes_for :hotel_itinerary_times, allow_destroy: true
+    accepts_nested_attributes_for :activity_itinerary_times, allow_destroy: true
+    accepts_nested_attributes_for :restaurant_itinerary_times, allow_destroy: true
 
   def combined_itinerary_times
     combined_times = []
