@@ -4,9 +4,8 @@ import ItineraryHotel from "./ItineraryHotel";
 import ItineraryRestaurant from "./ItineraryRestaurant";
 import ItineraryActivity from "./ItineraryActivity";
 
-function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
+function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItineraryDay }) {
   const { id, time, hotel, restaurant, activity } = itinerary_time;
-
 
   const { user, setUser } = useContext(UserContext);
   const itineraryTime = new Date(time);
@@ -21,15 +20,20 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
 
   function deleteItineraryTime(entityType) {
     let endpoint = "";
+    let updatedItineraryTime = null;
+
     switch (entityType) {
       case "restaurant":
         endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/restaurant_itinerary_times/${id}`;
+        updatedItineraryTime = { ...itinerary_time, restaurant: null };
         break;
       case "activity":
         endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/activity_itinerary_times/${id}`;
+        updatedItineraryTime = { ...itinerary_time, activity: null };
         break;
       case "hotel":
         endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/hotel_itinerary_times/${id}`;
+        updatedItineraryTime = { ...itinerary_time, hotel: null };
         break;
       default:
         return;
@@ -41,7 +45,19 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
       .then((response) => {
         if (response.ok) {
           console.log(`${entityType} deleted successfully`);
-          console.log(entityType);
+
+          const updatedItineraryTimes = itinerary_day.combined_itinerary_times.filter(
+            (time) => time.id !== id
+          );
+
+          if (updatedItineraryTimes.length === 0) {
+            // Delete the itinerary_day if there are no more itinerary_times
+            deleteItineraryDay();
+          } else {
+            // Update the itinerary_day with the updated itinerary_times
+            const updatedItineraryDay = { ...itinerary_day, combined_itinerary_times: updatedItineraryTimes };
+            updateItineraryDay(updatedItineraryDay);
+          }
         } else {
           console.log(`Failed to delete ${entityType}`);
         }
@@ -51,45 +67,109 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
       });
   }
 
+  function deleteItineraryDay() {
+    const endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}`;
+
+    fetch(endpoint, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("itinerary_day deleted successfully");
+
+          // Remove the deleted itinerary_day from the user's trips
+          const updatedTrips = user.trips.map((t) => {
+            if (t.id === trip.id) {
+              const updatedItineraryDays = t.itinerary_days.filter((day) => day.id !== itinerary_day.id);
+              return { ...t, itinerary_days: updatedItineraryDays };
+            }
+            return t;
+          });
+
+          setUser({ ...user, trips: updatedTrips });
+
+          // Call the onDeleteItineraryDay function from the parent component
+          onDeleteItineraryDay(itinerary_day);
+        } else {
+          console.log("Failed to delete itinerary_day");
+        }
+      })
+      .catch((error) => {
+        console.log("Error occurred while deleting itinerary_day", error);
+      });
+  }
+
+  function updateItineraryDay(updatedItineraryDay) {
+    const endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}`;
+
+    fetch(endpoint, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedItineraryDay),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("itinerary_day updated successfully");
+
+          // Update the user's trips with the updated itinerary_day
+          const updatedTrips = user.trips.map((t) => {
+            if (t.id === trip.id) {
+              const updatedItineraryDays = t.itinerary_days.map((day) => {
+                if (day.id === itinerary_day.id) {
+                  return updatedItineraryDay;
+                }
+                return day;
+              });
+              return { ...t, itinerary_days: updatedItineraryDays };
+            }
+            return t;
+          });
+
+          setUser({ ...user, trips: updatedTrips });
+        } else {
+          console.log("Failed to update itinerary_day");
+        }
+      })
+      .catch((error) => {
+        console.log("Error occurred while updating itinerary_day", error);
+      });
+  }
+
   return (
     <div className="itinerary-activity-listing">
-    <div className="icon">
-      {activity ? <i className="fa-solid fa-map"></i> : null}
-      {hotel ? <i className="fa-solid fa-hotel"></i> : null}
-      {restaurant ? <i className="fa-solid fa-utensils"></i> : null}
-    </div>
-    <div>
-      {hotel && (
-        <div>
-          <h3 className="time">{formattedTime}</h3>
+      <div className="icon">
+        {activity ? <i className="fa-solid fa-map"></i> : null}
+        {hotel ? <i className="fa-solid fa-hotel"></i> : null}
+        {restaurant ? <i className="fa-solid fa-utensils"></i> : null}
+      </div>
+      <div>
+        {hotel && (
+          <div>
+            <h3 className="time">{formattedTime}</h3>
             <ItineraryHotel hotel={hotel} />
-          <button onClick={() => deleteItineraryTime("hotel")}>
-            Delete Hotel
-          </button>
-        </div>
-      )}
+            <button onClick={() => deleteItineraryTime("hotel")}>Delete Hotel</button>
+          </div>
+        )}
       </div>
       <div>
-      {restaurant && (
-        <div>
-          <h3 className="time">{formattedTime}</h3>
-          <ItineraryRestaurant restaurant={restaurant} />
-          <button onClick={() => deleteItineraryTime("restaurant")}>
-            Delete Restaurant
-          </button>
-        </div>
-      )}
+        {restaurant && (
+          <div>
+            <h3 className="time">{formattedTime}</h3>
+            <ItineraryRestaurant restaurant={restaurant} />
+            <button onClick={() => deleteItineraryTime("restaurant")}>Delete Restaurant</button>
+          </div>
+        )}
       </div>
       <div>
-      {activity && (
-        <div>
-          <h3 className="time">{formattedTime}</h3>
-          <ItineraryActivity activity={activity} />
-          <button onClick={() => deleteItineraryTime("activity")}>
-            Delete Activity
-          </button>
-        </div>
-      )}
+        {activity && (
+          <div>
+            <h3 className="time">{formattedTime}</h3>
+            <ItineraryActivity activity={activity} />
+            <button onClick={() => deleteItineraryTime("activity")}>Delete Activity</button>
+          </div>
+        )}
       </div>
     </div>
   );

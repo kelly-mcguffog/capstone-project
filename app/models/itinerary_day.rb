@@ -1,7 +1,7 @@
 class ItineraryDay < ApplicationRecord
     belongs_to :trip
 
-    has_many :hotel_itinerary_times
+    has_many :hotel_itinerary_times, dependent: :destroy
     has_many :activity_itinerary_times
     has_many :restaurant_itinerary_times
   

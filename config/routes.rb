@@ -9,36 +9,40 @@ Rails.application.routes.draw do
   get 'destinations/:id', to: 'destinations#show'
   get '/users/:user_id/trips/:id', to: 'trips#show'
   
-  get '/users/:user_id/trips/:trip_id/itinerary_days', to: 'itinerary_days#index'
+  get '/trips/:trip_id/itinerary_days', to: 'itinerary_days#index'
 
-  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#show'
+  # get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#show'
 
-  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/hotel_itinerary_times', to: 'hotel_itinerary_times#index'
-  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#index'
-  get '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#index'
+  get '/trips/:trip_id/itinerary_days/:itinerary_day_id/hotel_itinerary_times', to: 'hotel_itinerary_times#index'
+  get '/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#index'
+  get '/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#index'
 
-  get '/restaurant_itinerary_times', to: 'restaurant_itinerary_times#index'
-  get '/restaurant_itinerary_times/:restaurant_itinerary_times_id', to: 'restaurant_itinerary_times#show'
+  # get '/restaurant_itinerary_times', to: 'restaurant_itinerary_times#index'
+  # get '/hotel_itinerary_times', to: 'hotel_itinerary_times#index'
+  # get '/activity_itinerary_times', to: 'activity_itinerary_times#index'
+
+  # get '/restaurant_itinerary_times/:restaurant_itinerary_times_id', to: 'restaurant_itinerary_times#show'
 
 
-  get '/trips/:trip_id/itinerary_days/:id/restaurant_itinerary_times/:restaurant_itinerary_time_id', to: 'restaurant_itinerary_times#show'  
 
   delete '/trips/:trip_id/itinerary_days/:id/hotel_itinerary_times/:hotel_itinerary_time_id', to: 'hotel_itinerary_times#destroy'
   delete '/trips/:trip_id/itinerary_days/:id/activity_itinerary_times/:activity_itinerary_time_id', to: 'activity_itinerary_times#destroy'
   delete '/trips/:trip_id/itinerary_days/:id/restaurant_itinerary_times/:restaurant_itinerary_time_id', to: 'restaurant_itinerary_times#destroy'  
 
-  post '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/hotel_itinerary_times', to: 'hotel_itinerary_times#create'
-  post '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#create'
-  post '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#create'
+  post '/trips/:trip_id/itinerary_days/:itinerary_day_id/hotel_itinerary_times', to: 'hotel_itinerary_times#create'
+  post '/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#create'
+  post '/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#create'
 
   get '/users/:id', to: 'users#show'
   
-  post '/users/:user_id/trips/:trip_id/itinerary_days', to: 'itinerary_days#create'
-  delete '/users/:user_id/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#destroy'
+  post '/trips/:trip_id/itinerary_days', to: 'itinerary_days#create'
+  delete '/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#destroy'
 
-  get '/destinations/:id/hotels', to: 'hotels#index'
-  get '/destinations/:id/restaurants', to: 'restaurants#index'
-  get '/destinations/:id/activities', to: 'activities#index'
+  patch '/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#update'
+
+  get '/hotels', to: 'hotels#index'
+  get '/restaurants', to: 'restaurants#index'
+  get '/activities', to: 'activities#index'
   post '/users/:id/trips', to: 'trips#create'
 
   # delete '/itinerary_days', to: 'itinerary_days#destroy'

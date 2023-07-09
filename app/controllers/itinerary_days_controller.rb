@@ -24,6 +24,14 @@ class ItineraryDaysController < ApplicationController
         itinerary.destroy
         head :no_content
     end
+
+
+    def update
+      itinerary = ItineraryDay.find(params[:itinerary_day_id])
+      itinerary.update!(itinerary_day_params)
+      render json: itinerary, status: :ok
+    end
+
       
       private
       

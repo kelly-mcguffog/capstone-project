@@ -3,7 +3,7 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
-function AddHotelToItinerary() {
+function AddHotelToItinerary({onAddHotel}) {
   const { trip_id, destination_id, id: hotel_id } = useParams();
   const { user, setUser } = useContext(UserContext);
   const { destinations } = useContext(DestinationsContext);
@@ -50,107 +50,24 @@ const destination = destinations.find((destination) => destination.id == destina
       }
     });
   }
-  
-  
-
-  function onAddHotel(newHotel) {
-    const updatedUser = {
-      ...user,
-      trips: user.trips.map((trip) => {
-        if (trip.id === newHotel.trip_id) {
-          const updatedItineraryDays = trip.itinerary_days.map((itineraryDay) => {
-            if (itineraryDay.id === newHotel.itinerary_day_id) {
-              const updatedCombinedItineraryTimes = itineraryDay.combined_itinerary_times.map((itineraryTime) => {
-                if (itineraryTime.hotel && itineraryTime.hotel.id === newHotel.hotel.id) {
-                  return {
-                    ...itineraryTime,
-                    hotel: newHotel.hotel
-                  };
-                }
-                return itineraryTime;
-              });
-  
-              return {
-                ...itineraryDay,
-                combined_itinerary_times: updatedCombinedItineraryTimes
-              };
-            }
-            return itineraryDay;
-          });
-  
-          return {
-            ...trip,
-            itinerary_days: updatedItineraryDays
-          };
-        }
-        return trip;
-      })
-    };
-  
-    setUser(updatedUser);
-  }
-  
-  
 
   function handleSubmit(e) {
     e.preventDefault();
-  
-    if (!user || !user.trips) {
-      return;
-    }
-  
-    const existingItineraryDay = user.trips
-      .find((trip) => trip.id === trip_id)
-      ?.itinerary_days?.find((itineraryDay) => itineraryDay.date === formData.date);
-  
-    if (existingItineraryDay) {
-      const updatedItineraryDay = {
-        ...existingItineraryDay,
-        combined_itinerary_times: [
-          ...existingItineraryDay.combined_itinerary_times,
-          {
-            time: formData.hotel_itinerary_times_attributes[0].time,
-            hotel: {
-              id: hotel_id
-            }
-          }
-        ]
-      };
-  
-      const updatedUser = {
-        ...user,
-        trips: user.trips.map((trip) => {
-          if (trip.id === trip_id) {
-            return {
-              ...trip,
-              itinerary_days: trip.itinerary_days.map((itineraryDay) =>
-                itineraryDay.date === formData.date ? updatedItineraryDay : itineraryDay
-              )
-            };
-          }
-          return trip;
-        })
-      };
-  
-      setUser(updatedUser);
-      navigate(`/users/${user.id}/trips/${trip_id}`);
-    } else {
-      fetch(`/users/${user.id}/trips/${trip_id}/itinerary_days`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      })
-        .then((r) => {
-          if (r.ok) {
-            r.json().then((data) => onAddHotel(data));
-            navigate(`/users/${user.id}/trips/${trip_id}`);
-          } else {
-            r.json().then((err) => setErrors(err.errors));
-          }
-        });
-    }
+
+    fetch(`/trips/${trip_id}/itinerary_days`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((newHotel) => onAddHotel(newHotel));
+        navigate(`/users/${user.id}/trips/${trip_id}`);
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
   }
 
   return (
@@ -196,6 +113,6 @@ const destination = destinations.find((destination) => destination.id == destina
     </div>
     </div>
   );
-}
+          }
 
 export default AddHotelToItinerary;

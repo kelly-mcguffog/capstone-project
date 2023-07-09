@@ -1,26 +1,25 @@
 import React from "react";
 import ItineraryTimes from "./ItineraryTimes";
 
-function ItineraryDay({ itinerary_day, trip }) {
+function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
   if (!itinerary_day) {
-    return null; // or handle the case when itinerary_day is undefined
+    return null;
   }
 
   const { date, combined_itinerary_times } = itinerary_day;
-
   const itineraryDate = new Date(date);
-    
-  const options = { 
-      weekday: "long", 
-      year: "numeric", 
-      month: "long", 
-      day: "numeric" 
-    };
 
-  const formattedDate = itineraryDate.toLocaleDateString(undefined, options);
+  const adjustedDate = new Date(
+    itineraryDate.getTime() +
+      itineraryDate.getTimezoneOffset() * 60 * 1000
+  );
 
-  console.log(combined_itinerary_times);
-
+  const formattedDate = adjustedDate.toLocaleDateString(undefined, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
 
   return (
     <div>
@@ -31,6 +30,7 @@ function ItineraryDay({ itinerary_day, trip }) {
           trip={trip}
           itinerary_day={itinerary_day}
           itinerary_time={itineraryTime}
+          onDeleteItineraryDate={onDeleteItineraryDate}
         />
       ))}
     </div>
