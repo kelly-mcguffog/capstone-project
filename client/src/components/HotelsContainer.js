@@ -5,45 +5,45 @@ import HotelsCard from "./HotelsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterHotels from "./FilterHotels";
 
-function HotelsContainer({search, setSearch}) {
-    const { destination_id, id } = useParams();
-    const { destinations } = useContext(DestinationsContext);
-    const [filterRating, setFilterRating] = useState("");
-    const [filterPrice, setFilterPrice] = useState("")
+function HotelsContainer({ search, setSearch }) {
+  const { destination_id, id } = useParams();
+  const { destinations } = useContext(DestinationsContext);
+  const [filterRating, setFilterRating] = useState("");
+  const [filterPrice, setFilterPrice] = useState("")
 
-    if (destinations === null) {
-        return <div>Loading...</div>;
-      }
-    
-    
-      const destination = destinations.find(
-        (destination) => destination.id == destination_id
-      );
-    
-      if (!destination) {
-        return <div>Destination not found</div>;
-      }
+  if (destinations === null) {
+    return <div>Loading...</div>;
+  }
 
-      const {hotels} = destination
 
-    let filterHotels = hotels.filter(hotel => {
-        const nameMatch = hotel.name.toLowerCase().includes(search.toLowerCase());
-        const priceMatch = filterPrice ? hotel.average_price === filterPrice : true;
-        const ratingMatch = filterRating ? hotel.rating.toString() === filterRating : true;
+  const destination = destinations.find(
+    (destination) => destination.id == destination_id
+  );
 
-        return nameMatch && priceMatch && ratingMatch;
-      });
-      
+  if (!destination) {
+    return <div>Destination not found</div>;
+  }
+
+  const { hotels } = destination
+
+  let filterHotels = hotels.filter(hotel => {
+    const nameMatch = hotel.name.toLowerCase().includes(search.toLowerCase());
+    const priceMatch = filterPrice ? hotel.average_price === filterPrice : true;
+    const ratingMatch = filterRating ? hotel.rating.toString() === filterRating : true;
+
+    return nameMatch && priceMatch && ratingMatch;
+  });
+
 
   return (
     <>
-    <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
-    <div className="details-row">
-        <FilterHotels setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice}/>
+      <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
+      <div className="details-row">
+        <FilterHotels setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
-        {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel}/>)}
+          {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel} />)}
         </div>
-    </div>
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
-function FilterActivities({setFilterPrice, setFilterRating, filterPrice}){
-    
+function FilterActivities({ setFilterPrice, setFilterRating, filterPrice }) {
+
     const handleFilterRatingChange = (event) => {
         setFilterRating(event.target.value);
     };
@@ -9,8 +9,8 @@ function FilterActivities({setFilterPrice, setFilterRating, filterPrice}){
     // const handleFilterPriceChange = (event) => {
     //     setFilterPrice(parseInt(event.target.value));
     // }
-    
-    return(
+
+    return (
         <div className="filter">
             {/* <div className="price">
                 <h2>Price</h2>
@@ -26,49 +26,49 @@ function FilterActivities({setFilterPrice, setFilterRating, filterPrice}){
                 <h2>Rating</h2>
                 <label>
                     <input
-                    type="radio"
-                    name="rating"
-                    value="5"
-                    onChange={handleFilterRatingChange}
+                        type="radio"
+                        name="rating"
+                        value="5"
+                        onChange={handleFilterRatingChange}
                     />
                     5 Stars
                 </label>
                 <label>
                     <input
-                    type="radio"
-                    name="rating"
-                    value="4"
-                    onChange={handleFilterRatingChange}
+                        type="radio"
+                        name="rating"
+                        value="4"
+                        onChange={handleFilterRatingChange}
                     />
                     4 Stars
                 </label>
 
                 <label>
                     <input
-                    type="radio"
-                    name="rating"
-                    value="3"
-                    onChange={handleFilterRatingChange}
+                        type="radio"
+                        name="rating"
+                        value="3"
+                        onChange={handleFilterRatingChange}
                     />
                     3 Stars
                 </label>
 
                 <label>
                     <input
-                    type="radio"
-                    name="rating"
-                    value="2"
-                    onChange={handleFilterRatingChange}
+                        type="radio"
+                        name="rating"
+                        value="2"
+                        onChange={handleFilterRatingChange}
                     />
                     2 Stars
                 </label>
 
                 <label>
                     <input
-                    type="radio"
-                    name="rating"
-                    value="1"
-                    onChange={handleFilterRatingChange}
+                        type="radio"
+                        name="rating"
+                        value="1"
+                        onChange={handleFilterRatingChange}
                     />
                     1 Stars
                 </label>

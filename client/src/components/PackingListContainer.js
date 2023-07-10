@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import TripsContainer from "./TripsContainer";
 import TripsListings from "./TripsListings";
+import PackingListForm from "./PackingListForm";
 
 
-function Profile() {
+function PackingListContainer() {
     const { user } = useContext(UserContext)
-    const { trips } = user
 
     console.log(user)
     return (
@@ -15,10 +15,11 @@ function Profile() {
                 <TripsListings />
             </div>
             <div className="trips">
-                <h1>welcome</h1>
+                <h1>Packing List</h1>
+                <PackingListForm />
             </div>
         </div>
     )
 }
 
-export default Profile;
+export default PackingListContainer;

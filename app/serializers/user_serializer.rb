@@ -8,9 +8,10 @@ class UserSerializer < ActiveModel::Serializer
         id: trip.id,
         origin_airport: trip.origin_airport,
         destination_airport: trip.destination_airport,
-        departure: trip.departure,
-        arrival: trip.arrival,
-        flight_number: trip.flight_number,
+        outbound_flight: trip.outbound_flight,
+        return_flight: trip.return_flight,
+        outbound_flight_number: trip.outbound_flight_number,
+        return_flight_number: trip.return_flight_number,
         confirmation_number: trip.confirmation_number,
         destination_id: trip.destination_id,
         itinerary_days: trip.itinerary_days.map do |itinerary_day|

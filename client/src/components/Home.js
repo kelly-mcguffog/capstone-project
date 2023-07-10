@@ -3,12 +3,12 @@ import Header from "./Header";
 import DestinationsContainer from "./DestinationsContainer";
 
 
-function Home({search, setSearch}) {
+function Home({ search, setSearch }) {
 
   return (
     <div className="header">
-        <Header search={search} setSearch={setSearch}/>
-        <DestinationsContainer />
+      <Header search={search} setSearch={setSearch} />
+      <DestinationsContainer />
     </div>
   );
 }

@@ -1,23 +1,23 @@
 import React from "react";
 
 
-function TravelDetails({trip}){
-    
-    const {origin_airport, destination_airport, departure, arrival, flight_number, confirmation_number} = trip
+function TravelDetails({ trip }) {
 
-    const departureDate = new Date(departure);
-    const arrivalDate = new Date(arrival);
+    const { origin_airport, destination_airport, outbound_flight, return_flight, outbound_flight_number, return_flight_number, confirmation_number } = trip
 
-    const dateFormatOptions = { 
-        weekday: "long", 
-        year: "numeric", 
-        month: "long", 
-        day: "numeric" 
+    const outBoundDate = new Date(outbound_flight);
+    const returnDate = new Date(return_flight);
+
+    const dateFormatOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
     };
 
-    const formattedDepartureDate = departureDate.toLocaleDateString(undefined, dateFormatOptions);
+    const formattedOutboundeDate = outBoundDate.toLocaleDateString(undefined, dateFormatOptions);
 
-    const formattedArrivalDate = arrivalDate.toLocaleDateString(undefined, dateFormatOptions);
+    const formattedReturnDate = returnDate.toLocaleDateString(undefined, dateFormatOptions);
 
     const timeFormatOptions = {
         hour: "numeric",
@@ -25,12 +25,12 @@ function TravelDetails({trip}){
         hour12: true
     };
 
-    const formattedDepartureTime = departureDate.toLocaleTimeString(undefined, timeFormatOptions);
-    const formattedArrivalTime = arrivalDate.toLocaleTimeString(undefined, timeFormatOptions);
+    const formattedOutboundTime = outBoundDate.toLocaleTimeString(undefined, timeFormatOptions);
+    const formattedReturnTime = returnDate.toLocaleTimeString(undefined, timeFormatOptions);
 
 
-    return(
-<>
+    return (
+        <>
             <div className="icons">
                 <div className="flight-info">
                     <i className="fa-solid fa-plane"></i>
@@ -42,33 +42,21 @@ function TravelDetails({trip}){
                     <h1 className="trip-details-flight">{destination_airport}</h1>
                 </div>
             </div>
-        <div className="trip-details">
             <div className="trip-info">
-                <div className="trip-text">
-                    <h3 className="trip-details-title">Arrival</h3>
+                <div className="details-info">
+                    <h2>Outbound</h2>
+                    <h3 className="trip-details-title">{formattedOutboundeDate} at {formattedOutboundTime}</h3>
+                    <h3 className="trip-details-title">Flight Number: {outbound_flight_number}</h3>
+                    <h3 className="trip-details-title">Confirmation Number: {confirmation_number}</h3>
                 </div>
-                <h3 className="trip-details-input">{formattedArrivalDate} at {formattedArrivalTime}</h3>
-            </div>
-            <div className="trip-info">
-                <div className="trip-text">
-                    <h3 className="trip-details-title">Departure</h3>
-                </div>
-                <h3 className="trip-details-input">{formattedDepartureDate} at {formattedDepartureTime}</h3>
-            </div>
-            <div className="trip-info">
-                <div className="trip-text">
-                    <h3 className="trip-details-title">Flight Number</h3>
-                    </div>
-                    <h3 className="trip-details-input">{flight_number}</h3>
-                </div>
-                <div className="trip-info">
-                    <div className="trip-text">
-                        <h3 className="trip-details-title">Confirmation Number</h3>
-                    </div>
-                    <h3 className="trip-details-input">{confirmation_number}</h3>
+                <div className="details-info">
+                    <h2>Return</h2>
+                    <h3 className="trip-details-title">{formattedReturnDate} at {formattedReturnTime}</h3>
+                    <h3 className="trip-details-title">Flight Number: {return_flight_number}</h3>
+                    <h3 className="trip-details-title">Confirmation Number: {confirmation_number}</h3>
                 </div>
             </div>
-            </>
+        </>
     )
 }
 

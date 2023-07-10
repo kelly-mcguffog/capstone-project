@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   post '/trips/:trip_id/itinerary_days/:itinerary_day_id/activity_itinerary_times', to: 'activity_itinerary_times#create'
   post '/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#create'
 
+
+  post '/trips/:trip_id/packing_list', to: 'packing_list#create'
+
   get '/users/:id', to: 'users#show'
   
   delete '/trips/:id', to: 'trips#destroy'

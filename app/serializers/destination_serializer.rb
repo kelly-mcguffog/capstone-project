@@ -1,5 +1,5 @@
 class DestinationSerializer < ActiveModel::Serializer
-  attributes :id, :country, :city, :currency, :language, :time_zone, :dial_code, :photo
+  attributes :id, :country, :city, :photo
   has_many :hotels
   has_many :restaurants
   has_many :activities

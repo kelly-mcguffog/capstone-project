@@ -28,200 +28,200 @@ user1 = User.create({
 paris = Destination.create({
     country: "France",
     city: "Paris",
-    currency: "Euro",
-    language: "French",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+33",
+    # currency: "Euro",
+    # language: "French",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+33",
     photo: "https://assets.cntraveller.in/photos/62752c1974266e7300892c46/4:3/w_5120,h_3840,c_limit/Seine%20paris%20bike-GettyImages-1161606501.jpeg"
 })
 
 florence = Destination.create({
     country: "Italy",
     city: "Florence",
-    currency: "Euro",
-    language: "Italian",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+39",
+    # currency: "Euro",
+    # language: "Italian",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+39",
     photo: "https://tourismmedia.italia.it/is/image/mitur/20210401173629-firenze-toscana-gettyimages-1145040590-2?wid=1600&hei=900&fit=constrain,1&fmt=webp"
 })
 
 london = Destination.create({
     country: "England",
     city: "London",
-    currency: "Pound Sterling (GBP)",
-    language: "English",
-    time_zone: "Greenwich Mean Time (GMT)",
-    dial_code: "+44",
+    # currency: "Pound Sterling (GBP)",
+    # language: "English",
+    # time_zone: "Greenwich Mean Time (GMT)",
+    # dial_code: "+44",
     photo: "https://assets.editorial.aetnd.com/uploads/2019/03/topic-london-gettyimages-760251843-feature.jpg"
 })
 
 tokyo = Destination.create({
     country: "Japan",
     city: "Tokyo",
-    currency: "Yen",
-    language: "Japanese",
-    time_zone: "Japan Standard Time (JST)",
-    dial_code: "+03",
+    # currency: "Yen",
+    # language: "Japanese",
+    # time_zone: "Japan Standard Time (JST)",
+    # dial_code: "+03",
     photo: "https://media.gq-magazine.co.uk/photos/5d13ad779a22c269d69496c8/master/w_1920,h_1280,c_limit/tokyo-hp-gq-19oct18_istock_b.jpg"
 })
 
 australia = Destination.create({
     country: "Australia",
     city: "Sydney",
-    currency: "Australian Dollar (AUD)",
-    language: "English",
-    time_zone:"Australian Eastern Standard Time (AEST)",
-    dial_code: "+61",
+    # currency: "Australian Dollar (AUD)",
+    # language: "English",
+    # time_zone:"Australian Eastern Standard Time (AEST)",
+    # dial_code: "+61",
     photo: "https://media.tatler.com/photos/6141d37b9ce9874a3e40107d/16:9/w_2560%2Cc_limit/social_crop_sydney_opera_house_gettyimages-869714270.jpg"
 })
 
 tel_aviv = Destination.create({
     country: "Israel",
     city: "Tel Aviv",
-    currency: "Israeli New Shekel (ILS)",
-    language: "Hebrew & Arabic",
-    time_zone: "Israel Standard Time (IST)",
-    dial_code: "+972",
+    # currency: "Israeli New Shekel (ILS)",
+    # language: "Hebrew & Arabic",
+    # time_zone: "Israel Standard Time (IST)",
+    # dial_code: "+972",
     photo: "https://www.frommers.com/system/media_items/attachments/000/869/611/s980/Tel_Aviv_Skyline__Israel.jpg?1665751239"
 })
 
 prague = Destination.create({
     country: "Czech Republic",
     city: "Prague",
-    currency: "Czech Crown (Kč)",
-    language: "Czech",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+420",
+    # currency: "Czech Crown (Kč)",
+    # language: "Czech",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+420",
     photo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Prague_%286365119737%29.jpg"
 })
 
 dublin = Destination.create({
     country: "Ireland",
     city: "Dublin",
-    currency: "Euro",
-    language: "English & Irish Gaelic",
-    time_zone: "Summer: Irish Standard Time (IST) | Winter: Greenwich Mean Time (GMT)",
-    dial_code: "+353",
+    # currency: "Euro",
+    # language: "English & Irish Gaelic",
+    # time_zone: "Summer: Irish Standard Time (IST) | Winter: Greenwich Mean Time (GMT)",
+    # dial_code: "+353",
     photo: "https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2600/v1555940916/production/city/hero_image_32_1555940916.jpg"
 })
 
 barcelona = Destination.create({
     country: "Spain",
     city: "Barcelona",
-    currency: "Euro",
-    language: "Catalan & Spanish",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+93",
+    # currency: "Euro",
+    # language: "Catalan & Spanish",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+93",
     photo: "https://media.cntraveller.com/photos/62d14e029bbb08746e6fd952/3:2/w_6000,h_4000,c_limit/barcelonaGettyImages-1386922276.jpeg"
 })
 
 cape_town = Destination.create({
     country: "South Africa",
     city: "Cape Town",
-    currency: "South African Rand",
-    language: "Afrikaans, Xhosa, & English",
-    time_zone: "South Africa Standard Time (SAST)",
-    dial_code: "+27",
+    # currency: "South African Rand",
+    # language: "Afrikaans, Xhosa, & English",
+    # time_zone: "South Africa Standard Time (SAST)",
+    # dial_code: "+27",
     photo: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/10/2e/1e/cape-town.jpg?w=700&h=-1&s=1"
 })
 
 amsterdam = Destination.create({
     country: "Netherlands",
     city: "Amsterdam",
-    currency: "Euro",
-    language: "Dutch",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+31",
+    # currency: "Euro",
+    # language: "Dutch",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+31",
     photo: "https://www.travelandleisure.com/thmb/_3nQ1ivxrnTKVphdp9ZYvukADKQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/amsterdam-nl-AMSTERDAMTG0521-6d2bfaac29704667a950bcf219680640.jpg"
 })
 
 copenhagen = Destination.create({
     country: "Denmark",
     city: "Copenhagen",
-    currency: "Danish Kroner (DKK)",
-    language: "Danish",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+45",
+    # currency: "Danish Kroner (DKK)",
+    # language: "Danish",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+45",
     photo: "https://cdn.britannica.com/47/83447-050-42342CB1/Nyhavn-Canal-Copenhagen.jpg"
 })
 
 rome = Destination.create({
     country: "Italy",
     city: "Rome",
-    currency: "Euro",
-    language: "Italian",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+39",
+    # currency: "Euro",
+    # language: "Italian",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+39",
     photo: "https://lp-cms-production.imgix.net/2021-07/GettyRF_582021521.jpg?auto=compress&fit=crop&format=auto&q=50&w=1200&h=800"
 })
 
 stockholm = Destination.create({
     country: "Sweden",
     city: "Stockholm",
-    currency: "Swedish Krona",
-    language: "Swedish",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+45",
+    # currency: "Swedish Krona",
+    # language: "Swedish",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+45",
     photo: "https://blog.zoom.us/wp-content/uploads/2023/01/GettyImages-1314099040-1820x1214.jpg"
 })
 
 nyc = Destination.create({
     country: "United States of America",
     city: "New York City",
-    currency: "United States Dollar (USD)",
-    language: "English",
-    time_zone: "Eastern Time (ET)",
-    dial_code: "+1",
+    # currency: "United States Dollar (USD)",
+    # language: "English",
+    # time_zone: "Eastern Time (ET)",
+    # dial_code: "+1",
     photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1200px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg"
 })
 
 santorini = Destination.create({
     country: "Greece",
     city: "Santorini",
-    currency: "Euro",
-    language: "Greek",
-    time_zone: "Eastern European Time (EET)",
-    dial_code: "+30",
+    # currency: "Euro",
+    # language: "Greek",
+    # time_zone: "Eastern European Time (EET)",
+    # dial_code: "+30",
     photo: "https://media.cntraveller.com/photos/611be9bb69410e829d87e0c2/16:9/w_2560%2Cc_limit/Blue-domed-church-along-caldera-edge-in-Oia-Santorini-greece-conde-nast-traveller-11aug17-iStock.jpg"
 })
 
 machu_picchu = Destination.create({
     country: "Peru",
     city: "Machu Picchu",
-    currency: "Nuevo Sol (S/)",
-    language: "Quechua",
-    time_zone: "Peru Standard Time",
-    dial_code: "+51",
+    # currency: "Nuevo Sol (S/)",
+    # language: "Quechua",
+    # time_zone: "Peru Standard Time",
+    # dial_code: "+51",
     photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/1200px-Machu_Picchu%2C_Peru.jpg"
 })
 
 berlin = Destination.create({
     country: "Germany",
     city: "Berlin",
-    currency: "Euros",
-    language: "German",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+49",
+    # currency: "Euros",
+    # language: "German",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+49",
     photo: "https://a.storyblok.com/f/58806/1164x784/20ee327044/berlin_city_01_skyline_unsplash.jpeg"
 })
 
 zurich = Destination.create({
     country: "Switzerland",
     city: "Zürich",
-    currency: "Swiss Franc",
-    language: "German",
-    time_zone: "Central European Time (CET)",
-    dial_code: "+41",
+    # currency: "Swiss Franc",
+    # language: "German",
+    # time_zone: "Central European Time (CET)",
+    # dial_code: "+41",
     photo: "https://static.euronews.com/articles/stories/07/19/89/40/1000x563_cmsv2_a235329b-754b-571a-ac10-b4cd624cc798-7198940.jpg"
 })
 
 marrakesh = Destination.create({
     country: "Morocco",
     city: "Marrakesh",
-    currency: "Moroccan Dirham",
-    language: "Arabic",
-    time_zone: "Western European Time (WET)",
-    dial_code: "+212",
+    # currency: "Moroccan Dirham",
+    # language: "Arabic",
+    # time_zone: "Western European Time (WET)",
+    # dial_code: "+212",
     photo: "https://loveincstatic.blob.core.windows.net/loveexploring/2020/Marrakech-full-guide/1Jemaa-el-Fna.jpg"
 })
 
@@ -913,9 +913,10 @@ hotel2 = Hotel.create({
 trip1 = Trip.create({
     origin_airport: "JFK",
     destination_airport: "CDG",
-    departure: DateTime.parse("2023-06-22 16:25:00"),
-    arrival: DateTime.parse("2023-06-20 07:30:00"),
-    flight_number: "AA7991",
+    outbound_flight: DateTime.parse("2023-06-22 16:25:00"),
+    return_flight: DateTime.parse("2023-06-20 07:30:00"),
+    outbound_flight_number: "AA7991",
+    return_flight_number: "AA34526",
     confirmation_number: "C5CEKV",
     user_id: user1.id,
     destination_id: paris.id
@@ -987,18 +988,11 @@ activity_itinerary_time3 = ActivityItineraryTime.create({
     itinerary_day_id: itinerary2.id
 })
 
-#packing list
-
-packing_list1 = PackingList.create({
-    name: "My Packing List for Paris",
-    trip_id: trip1.id
-})
-
 #packing item
 
-item1 = Item.create({
+item1 = PackingListItem.create({
     name: "underwear",
     quantity: 12,
     packed: true,
-    packing_list_id: packing_list1.id
+    trip_id: trip1.id
 })

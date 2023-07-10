@@ -1,11 +1,11 @@
 import React from "react";
-import {  NavLink, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Search from "./Search";
 
-function DestinationDetailsHeader({destination, trip_id, search, setSearch}){
+function DestinationDetailsHeader({ destination, trip_id, search, setSearch }) {
 
-  const { photo, city, id } = destination;
-    return(
+    const { photo, city, id } = destination;
+    return (
         <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
             <div className="header-copy">
                 <h1 className="title">Welcome to {city}</h1>
@@ -16,7 +16,7 @@ function DestinationDetailsHeader({destination, trip_id, search, setSearch}){
                         <NavLink className="link" to={`/destinations/${id}/trips/${trip_id}/restaurants`}>Restaurants</NavLink>
                         <NavLink className="link" to={`/destinations/${id}/trips/${trip_id}/activities`}>Activities</NavLink>
                     </div>
-                    <Search search={search} setSearch={setSearch}/>
+                    <Search search={search} setSearch={setSearch} />
                 </div>
             </div>
         </div>

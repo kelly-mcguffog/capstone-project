@@ -1,2 +1,0 @@
-class PackingListsController < ApplicationController
-end

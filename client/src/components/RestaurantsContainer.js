@@ -5,50 +5,50 @@ import RestaurantsCard from "./RestaurantsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterRestaurants from "./FilterRestaurants";
 
-function RestaurantsContainer({search, setSearch}) {
+function RestaurantsContainer({ search, setSearch }) {
 
-    const { destination_id, id } = useParams();
-    const { destinations } = useContext(DestinationsContext);
-    const [filterCuisine, setFilterCuisine] = useState("");
-    const [filterRating, setFilterRating] = useState("");
-    const [filterPrice, setFilterPrice] = useState("")
-    // const [search, setSearch] = useState("")
-    
+  const { destination_id, id } = useParams();
+  const { destinations } = useContext(DestinationsContext);
+  const [filterCuisine, setFilterCuisine] = useState("");
+  const [filterRating, setFilterRating] = useState("");
+  const [filterPrice, setFilterPrice] = useState("")
+  // const [search, setSearch] = useState("")
 
-    if (destinations === null) {
-        return <div>Loading...</div>;
-      }
-    
-    
-      const destination = destinations.find(
-        (destination) => destination.id == destination_id
-      );
-    
-      if (!destination) {
-        return <div>Destination not found</div>;
-      }
 
-      const {restaurants} = destination
+  if (destinations === null) {
+    return <div>Loading...</div>;
+  }
 
-        let filterRestaurants = restaurants.filter(restaurant => {
-            const nameMatch = restaurant.name.toLowerCase().includes(search.toLowerCase());
-            const priceMatch = filterPrice ? restaurant.average_price === filterPrice : true;
-            const ratingMatch = filterRating ? restaurant.rating.toString() === filterRating : true;
-            const cuisineMatch = filterCuisine ? restaurant.cuisine.toString() === filterCuisine : true;
-          
-            return nameMatch && priceMatch && ratingMatch && cuisineMatch;
-          });
+
+  const destination = destinations.find(
+    (destination) => destination.id == destination_id
+  );
+
+  if (!destination) {
+    return <div>Destination not found</div>;
+  }
+
+  const { restaurants } = destination
+
+  let filterRestaurants = restaurants.filter(restaurant => {
+    const nameMatch = restaurant.name.toLowerCase().includes(search.toLowerCase());
+    const priceMatch = filterPrice ? restaurant.average_price === filterPrice : true;
+    const ratingMatch = filterRating ? restaurant.rating.toString() === filterRating : true;
+    const cuisineMatch = filterCuisine ? restaurant.cuisine.toString() === filterCuisine : true;
+
+    return nameMatch && priceMatch && ratingMatch && cuisineMatch;
+  });
 
   return (
 
     <>
-    <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
-    <div className="details-row">
+      <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
+      <div className="details-row">
         <FilterRestaurants setFilterCuisine={setFilterCuisine} setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
-        {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} trip_id={id} restaurant={restaurant}/>)}
+          {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} trip_id={id} restaurant={restaurant} />)}
         </div>
-    </div>
+      </div>
     </>
   );
 }

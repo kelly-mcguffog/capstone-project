@@ -39,10 +39,6 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
   create_table "destinations", force: :cascade do |t|
     t.string "country"
     t.string "city"
-    t.string "currency"
-    t.string "language"
-    t.string "time_zone"
-    t.string "dial_code"
     t.string "photo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -71,15 +67,6 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.integer "quantity"
-    t.boolean "packed"
-    t.integer "packing_list_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "itinerary_days", force: :cascade do |t|
     t.date "date"
     t.integer "trip_id"
@@ -87,8 +74,10 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "packing_lists", force: :cascade do |t|
+  create_table "packing_list_items", force: :cascade do |t|
     t.string "name"
+    t.integer "quantity"
+    t.boolean "packed"
     t.integer "trip_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -121,9 +110,10 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
   create_table "trips", force: :cascade do |t|
     t.string "origin_airport"
     t.string "destination_airport"
-    t.datetime "departure"
-    t.datetime "arrival"
-    t.string "flight_number"
+    t.datetime "outbound_flight"
+    t.datetime "return_flight"
+    t.string "outbound_flight_number"
+    t.string "return_flight_number"
     t.string "confirmation_number"
     t.integer "user_id"
     t.integer "destination_id"

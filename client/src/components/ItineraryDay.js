@@ -11,7 +11,7 @@ function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
 
   const adjustedDate = new Date(
     itineraryDate.getTime() +
-      itineraryDate.getTimezoneOffset() * 60 * 1000
+    itineraryDate.getTimezoneOffset() * 60 * 1000
   );
 
   const formattedDate = adjustedDate.toLocaleDateString(undefined, {
@@ -26,7 +26,7 @@ function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
       <h1 className="time">{formattedDate}</h1>
       {combined_itinerary_times && combined_itinerary_times.map((itineraryTime, index) => (
         <ItineraryTimes
-        key={`${itineraryTime}_${index}`}
+          key={`${itineraryTime}_${index}`}
           trip={trip}
           itinerary_day={itinerary_day}
           itinerary_time={itineraryTime}

@@ -25,12 +25,13 @@ class TripsController < ApplicationController
         params.require(:trip).permit(
           :origin_airport,
           :destination_airport,
-          :departure,
-          :arrival,
-          :flight_number,
+          :outbound_flight,
+          :return_flight,
+          :outbound_flight_number,
+          :return_flight_number,
           :confirmation_number,
-          :destination_id,
           :user_id,
+          :destination_id,
           itinerary_days: [
             :date,
             :trip_id,
@@ -52,8 +53,4 @@ class TripsController < ApplicationController
           ]
         )
       end
-
-    # def trip_params
-    #     params.permit(:origin_airport, :destination_airport, :departure, :arrival, :flight_number, :confirmation_number, :destination_id, :user_id)
-    # end
 end

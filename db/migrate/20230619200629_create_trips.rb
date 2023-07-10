@@ -3,9 +3,10 @@ class CreateTrips < ActiveRecord::Migration[6.1]
     create_table :trips do |t|
       t.string :origin_airport
       t.string :destination_airport
-      t.datetime :departure
-      t.datetime :arrival
-      t.string :flight_number
+      t.datetime :outbound_flight
+      t.datetime :return_flight
+      t.string :outbound_flight_number
+      t.string :return_flight_number
       t.string :confirmation_number
       t.integer :user_id
       t.integer :destination_id

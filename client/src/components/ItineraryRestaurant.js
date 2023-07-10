@@ -1,10 +1,10 @@
 import React from "react";
 
-function ItineraryRestaurant({restaurant}){
+function ItineraryRestaurant({ restaurant }) {
     // console.log(restaurant)
-    const {address, average_price, cuisine, description, name, rating} = restaurant
-    
-    return(
+    const { address, average_price, cuisine, description, name, rating } = restaurant
+
+    return (
 
         <div>
             <h3 className="itinerary-activity">{name}</h3>

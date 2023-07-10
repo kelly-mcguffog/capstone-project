@@ -10,33 +10,38 @@ import TravelDetails from "./TravelDetails";
 function TripDetails({ onDeleteItineraryDate }) {
     const { id } = useParams();
     const { user } = useContext(UserContext);
-  
+
     const trip = user.trips.find((trip) => trip.id == id);
-  
+
     if (!trip) {
-      return <div>Loading...</div>;
+        return <div>Loading...</div>;
     }
-  
+
     const { itinerary_days, destination_id } = trip;
-  
+
     const itineraryDays = trip?.itinerary_days || [];
-  
+
     return (
-      <div className="side-bar">
-        <TripsListings />
-        <div className="trips">
-          <TravelDetails trip={trip} />
-          <Link to={`/destinations/${destination_id}/trips/${id}/hotels`}>
-            Build Itinerary
-          </Link>
-          <ItineraryDaysContainer
-            trip={trip}
-            itinerary_days={itineraryDays}
-            onDeleteItineraryDate={onDeleteItineraryDate}
-          />
+        <div className="side-bar">
+            <TripsListings />
+            <div className="trips">
+                <TravelDetails trip={trip} />
+                <div className="links">
+                    <Link to={`/destinations/${destination_id}/trips/${id}/hotels`}>
+                        Build Itinerary
+                    </Link>
+                    <Link to={`/trips/${id}/packing_list`}>
+                        Build Packing List
+                    </Link>
+                </div>
+                <ItineraryDaysContainer
+                    trip={trip}
+                    itinerary_days={itineraryDays}
+                    onDeleteItineraryDate={onDeleteItineraryDate}
+                />
+            </div>
         </div>
-      </div>
     );
-  }
-  
-  export default TripDetails;
+}
+
+export default TripDetails;

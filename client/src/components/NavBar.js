@@ -1,12 +1,12 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function NavBar() {
     const navigate = useNavigate();
-    const {user, setUser} = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
     const [isDropdown, setDropdown] = useState(false)
-    
+
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
@@ -16,7 +16,7 @@ function NavBar() {
         });
     }
 
-    function handleDropdown(){
+    function handleDropdown() {
         setDropdown(isDropdown => !isDropdown)
     }
 

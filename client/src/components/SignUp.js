@@ -4,21 +4,21 @@ import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const navigate = useNavigate();
-  const {setUser} = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
   const [errors, setErrors] = useState([]);
 
   const initialState = {
-    first_name:"",
-    last_name:"",
+    first_name: "",
+    last_name: "",
     tsa_precheck: "",
-    email:"",
+    email: "",
     username: "",
     password: "",
-    passwordConfirmation:""
+    passwordConfirmation: ""
   }
 
   const [formData, setFormData] = useState(initialState)
-  
+
   function handleChange(event) {
     setFormData({
       ...formData,
@@ -38,7 +38,7 @@ function SignUp() {
       if (r.ok) {
         r.json().then((user) => setUser(user));
         navigate("/");
-      }else{
+      } else {
         r.json().then((err) => setErrors(err.errors));
       }
     });
@@ -46,12 +46,12 @@ function SignUp() {
   return (
     <div className="container signup">
       <form onSubmit={handleSubmit}>
-      <h1 className="form-text head">Sign Up</h1>
+        <h1 className="form-text head">Sign Up</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
         <ul className="error-message">
-            {errors.map((err) => (
+          {errors.map((err) => (
             <li key={err}>{err}</li>
-            ))}
+          ))}
         </ul>
         <input
           type="text"
@@ -118,7 +118,7 @@ function SignUp() {
         />
         <button className="form-button" type="submit">Sign Up</button>
         <h5 className="form-text">Already a member?<br></br>
-        <Link className="link" to="/login">Login to your account.</Link></h5>
+          <Link className="link" to="/login">Login to your account.</Link></h5>
       </form>
     </div>
   );

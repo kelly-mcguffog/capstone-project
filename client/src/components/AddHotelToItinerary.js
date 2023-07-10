@@ -3,7 +3,7 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
-function AddHotelToItinerary({onAddHotel}) {
+function AddHotelToItinerary({ onAddHotel }) {
   const { trip_id, destination_id, id: hotel_id } = useParams();
   const { user, setUser } = useContext(UserContext);
   const { destinations } = useContext(DestinationsContext);
@@ -25,9 +25,9 @@ function AddHotelToItinerary({onAddHotel}) {
 
   if (destinations === null) {
     return <div>Loading...</div>;
-}
+  }
 
-const destination = destinations.find((destination) => destination.id == destination_id);
+  const destination = destinations.find((destination) => destination.id == destination_id);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -71,48 +71,48 @@ const destination = destinations.find((destination) => destination.id == destina
   }
 
   return (
-<div className="header-img"  style={{ backgroundImage: `url(${destination.photo})` }}>
-            <div className="header-text">
-                <h1 className="title">Plan Your Trip</h1>
+    <div className="header-img" style={{ backgroundImage: `url(${destination.photo})` }}>
+      <div className="header-text">
+        <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
-            <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-      {/* {errors.length > 0 && (
+          <form id="trip-form-wrapper" onSubmit={handleSubmit}>
+            {/* {errors.length > 0 && (
             <ul>
                 {errors.map((error, index) => (
                 <li key={index}>{error}</li>
                 ))}
             </ul>
             )} */}
-        <div className="label">
-            <div className="input-text">
-              <h3 className="input-title">Itinerary Day Date</h3>
-          <input
-            type="datetime-local"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-          </div>
-          </div>
-          <div className="label">
-            <div className="input-text">
-              <h3 className="input-title">Hotel Itinerary Time</h3>
-          <input
-            type="datetime-local"
-            name="time"
-            value={formData.hotel_itinerary_times_attributes[0]?.time || ""}
-            onChange={handleChange}
-          />
+            <div className="label">
+              <div className="input-text">
+                <h3 className="input-title">Itinerary Day Date</h3>
+                <input
+                  type="datetime-local"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="label">
+              <div className="input-text">
+                <h3 className="input-title">Hotel Itinerary Time</h3>
+                <input
+                  type="datetime-local"
+                  name="time"
+                  value={formData.hotel_itinerary_times_attributes[0]?.time || ""}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="form-button">
+              <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </form>
         </div>
-        </div>
-        <div className="form-button">
-            <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </form>
-    </div>
-    </div>
+      </div>
     </div>
   );
-          }
+}
 
 export default AddHotelToItinerary;

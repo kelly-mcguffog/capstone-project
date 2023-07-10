@@ -10,7 +10,7 @@ class DestinationsController < ApplicationController
     private
 
     def destination_params
-        params.permit(:country, :city, :currency, :language, :time_zone, :dial_code, :photo)
+        params.permit(:country, :city, :photo)
     end
 
     def find_destination

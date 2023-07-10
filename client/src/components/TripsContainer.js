@@ -3,18 +3,18 @@ import { UserContext } from "../context/UserContext";
 import TripID from "./TripID";
 
 
-function TripsContainer({trips}){
-    const {user, setUser} = useContext(UserContext)
+function TripsContainer({ trips }) {
+    const { user, setUser } = useContext(UserContext)
     function handleDeleteTrip(tripId) {
         const updatedTrips = trips.filter((trip) => trip.id !== tripId);
         setUser({ ...user, trips: updatedTrips });
-      }
+    }
 
-    return(
+    return (
         <>
-        <div className="trips-container">
-            {trips.map(trip => <TripID key={trip.id} trip={trip} onDeleteTrip={handleDeleteTrip}/>)}
-        </div>
+            <div className="trips-container">
+                {trips.map(trip => <TripID key={trip.id} trip={trip} onDeleteTrip={handleDeleteTrip} />)}
+            </div>
         </>
     )
 }

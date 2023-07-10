@@ -3,16 +3,16 @@ import { UserContext } from "../context/UserContext";
 import TripsContainer from "./TripsContainer";
 
 
-function TripsListings(){
-    const {user} = useContext(UserContext)
+function TripsListings() {
+    const { user } = useContext(UserContext)
     const { trips } = user
 
-    return(
+    return (
         <div className="side-bar">
             <div className="my-trips">
                 <div className="listings">
                     <h1 className="trips-header">My Trips</h1>
-                    <TripsContainer trips={trips}/>
+                    <TripsContainer trips={trips} />
                 </div>
             </div>
         </div>
