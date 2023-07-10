@@ -943,3 +943,33 @@ a.trip-links.active{
   border-radius: 50%;
   background: #000;
 }
+
+.welcome-header{
+  text-align: center;
+  margin-top: 30px;
+  /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+}
+.greeting{
+  margin: 5px;
+}
+
+.nav-arrow{
+color: #0c0132;
+  padding: 1px 6px;
+  font-size: 22px;
+}
+
+.packing-icons{
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.drop-text{
+  margin: 10px;
+  padding: 10px;
+  font-size: 15px;
+}

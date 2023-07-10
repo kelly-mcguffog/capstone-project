@@ -27,11 +27,15 @@ function TripDetails({ onDeleteItineraryDate }) {
             <div className="trips">
                 <TravelDetails trip={trip} />
                 <div className="links">
-                    <Link to={`/destinations/${destination_id}/trips/${id}/hotels`}>
+                    <Link className="link" to={`/destinations/${destination_id}/trips/${id}/hotels`}>
+                    <button type="submit">
+                        <i className="fa-solid fa-plus"></i>
+                    </button>
                         Build Itinerary
                     </Link>
-                    <Link to={`/trips/${id}/packing_list`}>
-                        Build Packing List
+                    <Link className="link" to={`/trips/${id}/packing_list`}>
+                        View Packing List
+                        <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
                     </Link>
                 </div>
                 <ItineraryDaysContainer

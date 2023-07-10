@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   post '/trips/:trip_id/packing_list_items', to: 'packing_list_items#create'
   patch '/trips/:trip_id/packing_list_items/:id', to: 'packing_list_items#update'
+  delete '/trips/:trip_id/packing_list_items/:id', to: 'packing_list_items#destroy'
+
 
   get '/users/:id', to: 'users#show'
   

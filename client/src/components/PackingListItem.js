@@ -2,35 +2,19 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 
-function PackingListItem({ item, onUpdatePackingItem }) {
+function PackingListItem({ item, onUpdatePackingItem, onDeletePackingItem }) {
   const { name, quantity, packed } = item;
   const { id } = useParams();
+  const [isDropdown, setDropdown] = useState(false)
+
+  const handleDropdown = () => {
+    setDropdown(dropdown => !dropdown)
+  }
 
   const handleCheckboxChange = () => {
     const newPackedStatus = !packed;
     updatePackedStatus(newPackedStatus);
   };
-
-//   const updatePackedStatus = async (newPackedStatus) => {
-//     try {
-//       const response = await fetch(
-//         `/trips/${id}/packing_list_items/${item.id}`,
-//         {
-//           method: "PATCH",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({ packed: newPackedStatus }),
-//         }
-//       );
-
-//       if (!response.ok) {
-//         throw new Error("Error updating packed status.");
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
 
 const updatePackedStatus = (newPackedStatus) => {
     fetch( `/trips/${id}/packing_list_items/${item.id}`, {
@@ -44,12 +28,21 @@ const updatePackedStatus = (newPackedStatus) => {
     .then(data => onUpdatePackingItem(data))
 }
 
+const deleteItem = () => {
+    fetch( `/trips/${id}/packing_list_items/${item.id}`, {
+        method: 'DELETE',
+    })
+    onDeletePackingItem(item)
+    // .then(data => onDeletePackingItem(data))
+}
+
   return (
     <div className="packing-list">
       <div className="list">
         <h3 className="packing-item">{name}</h3>
         <small>qty. {quantity}</small>
       </div>
+      <div className="packing-icons">
       <label className="round-checkbox">
       <input
         type="checkbox"
@@ -58,6 +51,15 @@ const updatePackedStatus = (newPackedStatus) => {
       />
       <span className="checkmark"></span>
       </label>
+      <div className="dropdown">
+        <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+        <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>
+            <p onClick={deleteItem} className="drop-text">Delete</p>
+            <hr></hr>
+            <p className="drop-text">Edit</p>
+        </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
-function PackingListForm() {
+function PackingListForm({onAddPackingListItem}) {
     const { id } = useParams()
     const { user } = useContext(UserContext)
     const [errors, setErrors] = useState([])
@@ -34,7 +34,7 @@ function PackingListForm() {
             body: JSON.stringify(formData),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((newItem) => console.log(newItem));
+                r.json().then((newItem) => onAddPackingListItem(newItem));
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -74,11 +74,9 @@ function PackingListForm() {
                         autoComplete="off"
                     />
                 </div>
-                {/* <div className="form-button"> */}
                 <button type="submit">
                     <i className="fa-solid fa-plus"></i>
                 </button>
-                {/* </div> */}
                 </div>
             </form>
         </div>

@@ -14,8 +14,9 @@ function Profile() {
             <div className="my-trips">
                 <TripsListings />
             </div>
-            <div className="trips">
-                <h1>Let's plan your vacation!</h1>
+            <div className="trips welcome-header">
+                <h3 className="greeting">Welcome back, {user.first_name}!</h3>
+                <h1 className="greeting">Let's plan your vacation</h1>
             </div>
         </div>
     )
