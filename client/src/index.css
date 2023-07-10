@@ -4,8 +4,6 @@ body, html {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: #f0f0f0; */
-  /* background-image: url("https://img.fixthephoto.com/blog/images/gallery/news_preview_mob_image__preview_1372.jpg"); */
 }
 
 #root{
@@ -16,15 +14,11 @@ body, html {
   background-color: #f0f0f0;
 
 }
-/* .logged-in{
-  background-image: none;
-} */
 code {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
-  /* position: fixed; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -724,12 +718,12 @@ input:focus {
 }
 
 .trip{
-  padding: 10px 50px;
+  /* padding: 10px 50px; */
   border-bottom: 0.5px solid rgb(210, 210, 210);
 }
 
 .trip-links:hover{
-  background-color: rgb(210, 210, 210);
+  /* background-color: rgb(210, 210, 210); */
   cursor: pointer;
 }
 
@@ -740,12 +734,18 @@ input:focus {
 
 .trip-listings{
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 20px 50px;
+  grid-column-gap: 30px;
+  column-gap: 30px;
+
 }
 
-.trips-header{
+/* .trips-header{
   text-align: left;
   padding: 0px 50px;
-}
+} */
 
 .side-bar-header{
   margin: 10px 0px;
@@ -841,12 +841,13 @@ input[type="text"], input[type="search"], input[type="datetime-local"]{
 }
 
 a.trip-links.active{
-  background-color: rgb(210, 210, 210);
+  /* background-color: rgb(210, 210, 210); */
+  color: #0c0132;
 }
 
-.trip-icon{
+/* .trip-icon{
   padding: 10px 20px;
-}
+} */
 
 .links{
   display: flex;
@@ -865,6 +866,7 @@ a.trip-links.active{
   width: 100%;
   border: 1px solid rgb(210, 210, 210);
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .form-header{
@@ -972,4 +974,31 @@ color: #0c0132;
   margin: 10px;
   padding: 10px;
   font-size: 15px;
+}
+
+.packing-list-header-text{
+  margin-bottom: 30px;
+}
+
+.trips-header-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px 0px 50px;
+  column-gap: 30px;
+}
+
+.search-results{
+display: flex;
+column-gap: 30px;
+/* margin: 30px; */
+align-items: center;
+width: 40%;
+margin: 30px auto;
+/* border-bottom: 1px solid black; */
+}
+
+.search-img-container{
+  width: 50px;
+  height: 50px;
 }

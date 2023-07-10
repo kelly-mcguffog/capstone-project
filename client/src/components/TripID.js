@@ -6,7 +6,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 
 
-function TripID({ trip, onDeleteTrip }) {
+function TripID({ trip, onDeleteTrip, isShowing }) {
     const { destinations } = useContext(DestinationsContext);
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
@@ -50,6 +50,7 @@ function TripID({ trip, onDeleteTrip }) {
             });
     }
 
+
     return (
         <div className="trip-listings">
             <NavLink className="trip-links" to={`/users/${user.id}/trips/${trip.id}`}>
@@ -60,9 +61,12 @@ function TripID({ trip, onDeleteTrip }) {
                     <h5 className="user-input">{formattedDate}</h5>
                 </div>
             </NavLink>
+            {isShowing ? 
             <div className="trip-icon">
                 <i onClick={handleDeleteTrip} className="fa-solid fa-trash"></i>
             </div>
+            : null
+            }
         </div>
     );
 }

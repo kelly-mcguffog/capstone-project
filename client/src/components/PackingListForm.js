@@ -35,6 +35,7 @@ function PackingListForm({onAddPackingListItem}) {
         }).then((r) => {
             if (r.ok) {
                 r.json().then((newItem) => onAddPackingListItem(newItem));
+                setFormData(initialState)
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -44,7 +45,7 @@ function PackingListForm({onAddPackingListItem}) {
     return (
         <div className="packing-form-wrapper">
             <form onSubmit={handleSubmit}>
-                <h1>Packing to-do list</h1>
+                <h1 className="packing-list-header-text">Packing to-do list</h1>
                 <div className="packing-form">
                 <div className="label">
                     <div className="input-text">

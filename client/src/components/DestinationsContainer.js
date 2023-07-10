@@ -1,17 +1,9 @@
-import React, { useContext, useState } from "react";
-import { DestinationsContext } from "../context/DestinationsContext";
-import DestinationsCard from "./DestinationsCard";
+import React, { useState } from "react";
 
 
-function DestinationsContainer() {
-  const { destinations } = useContext(DestinationsContext)
+function DestinationsContainer({renderDestinations, destinations}) {
+
   const [position, setPosition] = useState(0)
-
-  if (destinations === null) {
-    return <div>Loading...</div>;
-  }
-
-  const renderDestinations = destinations.map(destination => <DestinationsCard key={destination.id} destination={destination} />)
 
 
   const advancePosition = () => {

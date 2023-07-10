@@ -55,8 +55,8 @@ const deleteItem = () => {
         <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
         <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>
             <p onClick={deleteItem} className="drop-text">Delete</p>
-            <hr></hr>
-            <p className="drop-text">Edit</p>
+            {/* <hr></hr>
+            <p className="drop-text">Edit</p> */}
         </div>
         </div>
       </div>

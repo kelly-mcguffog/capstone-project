@@ -25,6 +25,7 @@ function App() {
   const [activities, setActivities] = useState([])
   const [restaurants, setRestaurants] = useState([])
   const [hotels, setHotels] = useState([])
+   
 
   useEffect(() => {
     fetch("/activities")
