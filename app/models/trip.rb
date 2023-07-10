@@ -2,7 +2,7 @@ class Trip < ApplicationRecord
     belongs_to :user
     belongs_to :destination
     has_one :packing_list
-    has_many :itinerary_days
+    has_many :itinerary_days, dependent: :destroy
     has_many :hotel_itinerary_times, through: :itinerary_days
     has_many :activity_itinerary_times, through: :itinerary_days
     has_many :restaurant_itinerary_times, through: :itinerary_days

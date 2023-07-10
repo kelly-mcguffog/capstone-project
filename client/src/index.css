@@ -716,7 +716,7 @@ input:focus {
   border-bottom: 0.5px solid rgb(210, 210, 210);
 }
 
-.trip:hover{
+.trip-links:hover{
   background-color: rgb(210, 210, 210);
   cursor: pointer;
 }
@@ -724,6 +724,10 @@ input:focus {
 .trip-links{
   color: #1a0566;
   text-decoration: none;
+}
+
+.trip-listings{
+  display: flex;
 }
 
 .trips-header{
@@ -826,4 +830,8 @@ input[type="text"], input[type="search"], input[type="datetime-local"]{
 
 a.trip-links.active{
   background-color: rgb(210, 210, 210);
+}
+
+.trip-icon{
+  padding: 10px 20px;
 }

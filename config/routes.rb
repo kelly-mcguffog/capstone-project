@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get '/users/:id', to: 'users#show'
   
+  delete '/trips/:id', to: 'trips#destroy'
   post '/trips/:trip_id/itinerary_days', to: 'itinerary_days#create'
   delete '/trips/:trip_id/itinerary_days/:itinerary_day_id', to: 'itinerary_days#destroy'
 

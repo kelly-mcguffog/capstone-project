@@ -251,9 +251,6 @@ const onDeleteItineraryDate = (deletedItineraryDate) => {
   setUser({ ...user, trips: updatedTrip });
 };
 
-
-
-  
     return (
           <main>
             {user ? (
