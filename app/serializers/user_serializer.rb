@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :email, :username, :tsa_precheck
   has_many :trips
-  
+
   def trips
     object.trips.map do |trip|
       {
@@ -14,6 +14,14 @@ class UserSerializer < ActiveModel::Serializer
         return_flight_number: trip.return_flight_number,
         confirmation_number: trip.confirmation_number,
         destination_id: trip.destination_id,
+        packing_list_items: trip.packing_list_items.map do |item|
+          {
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity,
+            packed: item.packed
+          }
+        end,
         itinerary_days: trip.itinerary_days.map do |itinerary_day|
           {
             id: itinerary_day.id,

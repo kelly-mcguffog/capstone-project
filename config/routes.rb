@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   post '/trips/:trip_id/itinerary_days/:itinerary_day_id/restaurant_itinerary_times', to: 'restaurant_itinerary_times#create'
 
 
-  post '/trips/:trip_id/packing_list', to: 'packing_list#create'
+  post '/trips/:trip_id/packing_list_items', to: 'packing_list_items#create'
+  patch '/trips/:trip_id/packing_list_items/:id', to: 'packing_list_items#update'
 
   get '/users/:id', to: 'users#show'
   

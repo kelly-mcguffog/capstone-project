@@ -15,7 +15,7 @@ function Profile() {
                 <TripsListings />
             </div>
             <div className="trips">
-                <h1>welcome</h1>
+                <h1>Let's plan your vacation!</h1>
             </div>
         </div>
     )

@@ -32,6 +32,11 @@ class TripsController < ApplicationController
           :confirmation_number,
           :user_id,
           :destination_id,
+          packing_list_items: [
+            :name,
+            :quantity,
+            :trip_id,
+          ],
           itinerary_days: [
             :date,
             :trip_id,

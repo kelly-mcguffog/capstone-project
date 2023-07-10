@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-import TripsContainer from "./TripsContainer";
 import TripsListings from "./TripsListings";
 import PackingListForm from "./PackingListForm";
+import PackingList from "./PackingList";
 
 
 function PackingListContainer() {
@@ -15,8 +15,8 @@ function PackingListContainer() {
                 <TripsListings />
             </div>
             <div className="trips">
-                <h1>Packing List</h1>
                 <PackingListForm />
+                <PackingList />
             </div>
         </div>
     )
