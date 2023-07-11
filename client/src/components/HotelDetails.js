@@ -4,7 +4,7 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 
-function RestaurantDetails({ restaurants }) {
+function HotelDetails({ hotels }) {
 
     const { destinations } = useContext(DestinationsContext);
     const { destination_id, trip_id, id } = useParams()
@@ -12,36 +12,36 @@ function RestaurantDetails({ restaurants }) {
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
     })
 
-    const restaurant = restaurants.find(restaurant => restaurant.id === parseInt(id))
+    const hotel = hotels.find(hotel => hotel.id === parseInt(id))
 
-    if (!restaurant) return <div>Loading...</div>
+    if (!hotel) return <div>Loading...</div>
 
     if(!isLoaded) return <div>Loading...</div>
     
     return (
         <>
-            <div className="header-img" style={{ backgroundImage: `url(${restaurant.photo})` }}>
+            <div className="header-img" style={{ backgroundImage: `url(${hotel.photo})` }}>
             </div>
             <div className="background">
             <div className="back-link">
                 <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-                <Link className="link" to={`/destinations/${destination_id}/trips/${trip_id}/restaurants`}>Return to Listings</Link>
+                <Link className="link" to={`/destinations/${destination_id}/trips/${trip_id}/hotels`}>Return to Listings</Link>
             </div>
             <div className="details-wrapper">
                 <div className="details-container">
                     <div className="info-details">
-                        <h1 className="details-name">{restaurant.name}</h1>
-                        <h5 className="price details-price">{"$".repeat(restaurant.average_price)}</h5>
+                        <h1 className="details-name">{hotel.name}</h1>
+                        <h5 className="price details-price">{"$".repeat(hotel.average_price)}</h5>
                     </div>
                     <div>
-                        <h5 className="star">{"★ ".repeat(restaurant.rating)}</h5>
-                        <p>{restaurant.description}</p>
+                        <h5 className="star">{"★ ".repeat(hotel.rating)}</h5>
+                        <p>{hotel.description}</p>
                     </div>
                 </div>
                 <hr className="line-details"></hr>
                 <div className="map-details">
-                    <Map longitude={restaurant.longitude} latitude={restaurant.latitude}/>
-                    <p>{restaurant.address}</p>
+                    <Map longitude={hotel.longitude} latitude={hotel.latitude}/>
+                    <p>{hotel.address}</p>
                 </div>
             </div>
             </div>
@@ -49,4 +49,4 @@ function RestaurantDetails({ restaurants }) {
     );
 }
 
-export default RestaurantDetails;
+export default HotelDetails;

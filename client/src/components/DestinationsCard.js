@@ -6,7 +6,7 @@ function DestinationsCard({ destination }) {
     const { id, city, photo } = destination
     return (
         <div className="card-details">
-            <Link className="link" to={`/destinations/${id}/trips`}>
+            <Link className="link city" to={`/destinations/${id}/trips`}>
                 <div className="img-container">
                     <img className="img" src={photo} />
                 </div>

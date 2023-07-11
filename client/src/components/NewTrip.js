@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, NavLink, Link, useNavigate } from "react-router-dom";
+import HotelsContainer from "./HotelsContainer";
 
 function NewTrip() {
   const { id } = useParams();

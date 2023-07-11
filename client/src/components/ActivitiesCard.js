@@ -10,13 +10,15 @@ function ActivitiesCard({ activity, trip_id }) {
                     <img className="details-img" src={activity.photo}></img>
                 </div>
             </div>
-            <div className="details-info">
+            <div className="details-info-destinations">
                 <div className="details-copy">
                     <h2>{activity.name}</h2>
                     <p>{activity.description}</p>
                     <h5>{activity.price}</h5>
-                    {/* <button className="page-btn main-btn">Book Now</button> */}
+                    <div className="btn-container">
+                    <Link className="page-btn main-btn secondary-btn" to={`/destinations/${activity.destination_id}/trips/${trip_id}/activities/${activity.id}/details`}>View Details</Link>
                     <Link className="page-btn main-btn" to={`/destinations/${activity.destination_id}/trips/${trip_id}/activities/${activity.id}`}>Add to Itinerary</Link>
+                    </div>
                 </div>
             </div>
         </div>

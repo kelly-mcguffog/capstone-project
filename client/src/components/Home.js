@@ -32,6 +32,7 @@ function Home({search, setSearch}) {
       <Header search={search} setSearch={setSearch} searchDestinations={searchDestinations} />
       <DestinationsContainer
         renderDestinations={renderDestinations}
+        destinations={destinations}
       />
     </div>
   );

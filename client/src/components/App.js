@@ -16,6 +16,9 @@ import AddActivityToItinerary from "./AddActivityToItinerary";
 import TripID from "./TripID";
 import TripDetails from "./TripDetails";
 import PackingListContainer from "./PackingListContainer";
+import HotelDetails from "./HotelDetails";
+import RestaurantDetails from "./RestaurantDetails";
+import ActivityDetails from "./ActivityDetails";
 
 
 function App() {
@@ -273,7 +276,12 @@ function App() {
             </Route>
             <Route path="/destinations/:id/trips" element={<NewTrip />}>
             </Route>
-
+            <Route path="/destinations/:destination_id/trips/:trip_id/hotels/:id/details" element={<HotelDetails  hotels={hotels}/>}>
+            </Route>
+            <Route path="/destinations/:destination_id/trips/:trip_id/restaurants/:id/details" element={<RestaurantDetails  restaurants={restaurants}/>}>
+            </Route>
+            <Route path="/destinations/:destination_id/trips/:trip_id/activities/:id/details" element={<ActivityDetails  activities={activities}/>}>
+            </Route>
             <Route path="/users/:user_id/trips/:id" element={<TripDetails onDeleteItineraryDate={onDeleteItineraryDate} />}>
             </Route>
             <Route exact path="/trips/:id/packing_list" element={<PackingListContainer />}>

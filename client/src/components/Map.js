@@ -1,15 +1,15 @@
 import React, {useMemo} from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
-function Map() {
+function Map({longitude, latitude}) {
 
-    const center = useMemo(() => ({lat: 44, lng: -80}),[])
+    const center = useMemo(() => ({lat: latitude, lng: longitude}),[])
     return(
         <GoogleMap 
         zoom={10} 
         center={center} 
         mapContainerClassName='map-container'>
-            <Marker position={{lat:44, lng:-80}}/>
+            <Marker position={{lat:latitude, lng:longitude}}/>
         </GoogleMap>
     )
   }
