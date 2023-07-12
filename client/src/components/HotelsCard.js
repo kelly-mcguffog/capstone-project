@@ -7,7 +7,7 @@ function HotelsCard({ hotel, trip_id }) {
         <div className="details" key={hotel.id}>
             <div className="details-img-wrapper">
                 <div className="details-img-container">
-                    <img className="details-img" src={hotel.photo}></img>
+                    <img className="details-img" src={hotel.photo1}></img>
                 </div>
             </div>
             <div className="details-info-destinations">

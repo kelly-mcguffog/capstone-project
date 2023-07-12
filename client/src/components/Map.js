@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
-function Map({longitude, latitude}) {
+function Map({latitude, longitude}) {
 
     const center = useMemo(() => ({lat: latitude, lng: longitude}),[])
     return(

@@ -1,5 +1,5 @@
 class HotelSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :short_description, :average_price, :rating, :address, :latitude, :longitude, :photo, :reservation_link, :destination_id
+  attributes :id, :name, :description, :short_description, :average_price, :rating, :address, :phone_number, :latitude, :longitude, :photo1, :photo2, :photo3, :url, :destination_id
   belongs_to :destination
   has_many :hotel_itinerary_times
 

@@ -44,15 +44,19 @@ function SignUp() {
     });
   }
   return (
-    <div className="container signup">
-      <form onSubmit={handleSubmit}>
+    <div className="container">
+      <form className="signup-form" onSubmit={handleSubmit}>
         <h1 className="form-text head">Sign Up</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
+        {errors? 
         <ul className="error-message">
           {errors.map((err) => (
             <li key={err}>{err}</li>
           ))}
         </ul>
+        : null }
+         <div className="login-form">
+          <div className="credentials">
         <input
           type="text"
           id="first_name"
@@ -61,6 +65,7 @@ function SignUp() {
           placeholder="First Name"
           value={formData.first_name}
           onChange={handleChange}
+          className="login-form-input"
         />
         <input
           type="text"
@@ -70,6 +75,7 @@ function SignUp() {
           autoComplete="off"
           value={formData.last_name}
           onChange={handleChange}
+          className="login-form-input"
         />
         <input
           type="text"
@@ -79,6 +85,7 @@ function SignUp() {
           autoComplete="off"
           value={formData.tsa_precheck}
           onChange={handleChange}
+          className="login-form-input"
         />
         <input
           type="text"
@@ -88,6 +95,7 @@ function SignUp() {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          className="login-form-input"
         />
         <input
           type="text"
@@ -97,6 +105,7 @@ function SignUp() {
           placeholder="username"
           value={formData.username}
           onChange={handleChange}
+          className="login-form-input"
         />
         <input
           type="password"
@@ -106,6 +115,7 @@ function SignUp() {
           value={formData.password}
           onChange={handleChange}
           autoComplete="current-password"
+          className="login-form-input"
         />
         <input
           type="password"
@@ -115,10 +125,13 @@ function SignUp() {
           value={formData.passwordConfirmation}
           onChange={handleChange}
           autoComplete="current-password"
+          className="login-form-input"
         />
+        </div>
+        </div>
         <button className="form-button" type="submit">Sign Up</button>
         <h5 className="form-text">Already a member?<br></br>
-          <Link className="link" to="/login">Login to your account.</Link></h5>
+          <Link className="link login-link" to="/login">Login to your account.</Link></h5>
       </form>
     </div>
   );

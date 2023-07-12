@@ -8,7 +8,7 @@ function RestaurantsCard({ restaurant, trip_id }) {
         <div className="details" key={restaurant.id}>
             <div className="details-img-wrapper">
                 <div className="details-img-container">
-                    <img className="details-img" src={restaurant.photo}></img>
+                    <img className="details-img" src={restaurant.photo1}></img>
                 </div>
             </div>
             <div className="details-info-destinations">

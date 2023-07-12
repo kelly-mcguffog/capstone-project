@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   patch '/trips/:trip_id/packing_list_items/:id', to: 'packing_list_items#update'
   delete '/trips/:trip_id/packing_list_items/:id', to: 'packing_list_items#destroy'
 
-
+  get '/users', to: 'users#index'
   get '/users/:id', to: 'users#show'
   
   delete '/trips/:id', to: 'trips#destroy'

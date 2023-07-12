@@ -13,7 +13,6 @@ import AddHotelToItinerary from "./AddHotelToItinerary";
 import AddRestaurantToItinerary from "./AddRestaurantToItinerary";
 import RestaurantsContainer from "./RestaurantsContainer";
 import AddActivityToItinerary from "./AddActivityToItinerary";
-import TripID from "./TripID";
 import TripDetails from "./TripDetails";
 import PackingListContainer from "./PackingListContainer";
 import HotelDetails from "./HotelDetails";
@@ -225,7 +224,6 @@ function App() {
                 );
 
                 if (!shouldKeepTime) {
-                  // Reset the hotel, restaurant, or activity for the deleted itinerary time
                   if (itineraryTime.hotel) {
                     itineraryTime.hotel = null;
                   } else if (itineraryTime.restaurant) {

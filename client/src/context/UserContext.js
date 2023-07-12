@@ -1,23 +1,31 @@
-import React, {useState, useEffect} from 'react'
+import React, { createContext, useState, useEffect } from 'react';
 
-const UserContext = React.createContext();
+const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    
-    useEffect(() => {
-        fetch("/me").then((r) => {
-          if (r.ok) {
-            r.json().then((user) => setUser(user));
-          }
-        });
-      }, []);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch('/me')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to fetch user data.');
+        }
+      })
+      .then((data) => setUser(data))
+      .catch((error) => {
+        console.error(error);
+        setUser(null);
+      });
+  }, []);
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
-        {children}
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
     </UserContext.Provider>
-  )
-}
+  );
+};
 
-export {UserContext, UserProvider}
+export { UserContext, UserProvider };

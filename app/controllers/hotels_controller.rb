@@ -15,7 +15,7 @@ class HotelsController < ApplicationController
     private
 
     def hotel_params
-        params.permit(:name, :description, :average_price, :rating, :address, :latitude, :longitude, :photo, :reservation_link, :destination_id)
+        params.permit(:name, :description, :average_price, :rating, :phone_number, :address, :latitude, :longitude, :photo1, :photo2, :photo3, :url, :destination_id)
     end
 
     def find_hotel

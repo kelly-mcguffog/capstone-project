@@ -149,10 +149,11 @@ form {
   background-color: white;
   /* display: flex; */
   flex-direction: column;
-  padding: 40px;
+  /* padding: 40px; */
   text-align: center;
+  padding: 30px 80px;
   /* align-items: center; */
-  width: 40%;
+  /* width: 40%; */
   /* margin: 18% auto; */
   margin: auto;
 }
@@ -373,6 +374,27 @@ form {
   display: flex;
   column-gap: 30px;
 }
+a.link.login-link{
+  justify-content: center;
+  color: #0c0132;
+  text-decoration: underline;
+}
+.login-form-input{
+  border: none;
+  border-bottom: 1px solid #0c0132;
+  /* border-radius: 5px; */
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  /* padding: 5px 20px 5px 0px; */
+}
+.credentials{
+  margin-bottom: 20px;
+}
+/* .login-form{
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+} */
 /* .container{
   display: flex;
   align-items: center;
@@ -1056,4 +1078,45 @@ margin: 30px auto;
   text-decoration: none;
   display: flex;
   align-items: center;
+}
+
+button.form-button{
+  background-color: #0c0132;
+  padding: 10px 50px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  /* margin-top: 30px; */
+  color: white;
+}
+
+.signup-form{
+  width: 50%;
+}
+
+.small-details{
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.multiple-images{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-gap: 10px; /* Adjust the gap between images */
+}
+
+.grid-image{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%; /* Ensure each image takes up the full width of its container */
+  height: 100%; /* Ensure each image takes up the full height of its container */
+}
+.big-image {
+  grid-column: 1 / 2; /* Span the first column */
+  grid-row: 1 / span 2; /* Span two rows */
+}
+.small-image {
+  grid-column: 2 / span 2; /* Span two columns */
+  /* grid-row: 1 / span 1; */
 }

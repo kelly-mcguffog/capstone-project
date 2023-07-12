@@ -18,11 +18,13 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
   create_table "activities", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "duration"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.string "price"
     t.string "photo"
+    t.string "url"
     t.integer "destination_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -57,11 +59,14 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
     t.string "description"
     t.integer "average_price"
     t.integer "rating"
+    t.bigint "phone_number"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.string "photo"
-    t.string "reservation_link"
+    t.string "photo1"
+    t.string "photo2"
+    t.string "photo3"
+    t.string "url"
     t.integer "destination_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -97,11 +102,14 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
     t.string "description"
     t.integer "average_price"
     t.integer "rating"
+    t.bigint "phone_number"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.string "photo"
-    t.string "reservation_link"
+    t.string "photo1"
+    t.string "photo2"
+    t.string "photo3"
+    t.string "url"
     t.integer "destination_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -124,6 +132,7 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "avatar"
     t.string "email"
     t.string "username"
     t.string "password_digest"

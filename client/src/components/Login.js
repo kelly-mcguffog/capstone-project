@@ -41,11 +41,16 @@ function Login() {
   }
 
   return (
-    <div className="container login">
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <h1 className="form-text head">Wanderlust</h1>
         <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
-        <p className="error-message error">{errors}</p>
+        {errors ? <p className="error-message error">{errors}</p> : null}
+        <div className="login-form">
+          <div className="credentials">
+        <div className="input-text">
+          {/* <h3 className="input-title">Username</h3> */}
+        </div>
         <input
           type="text"
           id="username"
@@ -54,7 +59,13 @@ function Login() {
           placeholder="username"
           value={formData.username}
           onChange={handleChange}
+          className="login-form-input"
         />
+        </div>
+        <div className="credentials">
+        <div className="input-text">
+          {/* <h3 className="input-title">Password</h3> */}
+        </div>
         <input
           type="password"
           id="password"
@@ -63,9 +74,12 @@ function Login() {
           autoComplete="current-password"
           value={formData.password}
           onChange={handleChange}
+          className="login-form-input"
         />
+        </div>
+        </div>
         <button className="form-button" type="submit">Login</button>
-        <h5 className="form-text">Don't have an account?<br></br><Link className="link" to="/signup">Sign up now.</Link></h5>
+        <h5 className="form-text">Don't have an account?<br></br><Link className="link login-link" to="/signup">Sign up now.</Link></h5>
       </form>
     </div>
   );
