@@ -4,6 +4,7 @@ body, html {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #0f0043;
 }
 
 #root{
@@ -19,6 +20,16 @@ code {
 }
 
 header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(255, 255, 255, 0.5);
+}
+/* .custom{
+  display: flex;
+} */
+.navbar-header{
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -44,12 +55,16 @@ header {
 }
 .fa-magnifying-glass, .fa-arrow-right, .fa-map, .fa-hotel, .fa-utensils, .fa-plus{
   padding: 15px;
-  background-color: #0c0132;
+  background-color: #0f0043;
   border-radius: 50px;
   color: white;
 }
 .fa-plus{
   padding: 5px;
+  cursor: pointer;
+}
+.fa-bars, .fa-trash{
+  cursor: pointer;
 }
 .nav{
   /* width: 70%; */
@@ -90,15 +105,15 @@ header button, .dropdown {
   margin: 10px;
   padding: 10px;
   text-decoration: none;
-  color: #0c0132;
+  color: #0f0043;
   cursor: pointer;
 }
 
 a.link.active{
   /* text-decoration: underline; */
-  border-bottom: 1px solid #0c0132;
+  border-bottom: 1px solid #0f0043;
   /* font-weight: 700; */
-  color: #0c0132;
+  color: #0f0043;
   /* padding-bottom: 10px; */
 }
 
@@ -350,7 +365,7 @@ form {
 .main-btn{
   color: white;
   text-align: center;
-  background-color: #0c0132;
+  background-color: #0f0043;
   padding: 10px 20px;
   border: none;
   display: block;
@@ -361,8 +376,8 @@ form {
   font-size: 12px;
 }
 .secondary-btn{
-  border: 1px solid #0c0132;
-  color:  #0c0132;
+  border: 1px solid #0f0043;
+  color:  #0f0043;
   background-color: white;
 }
 .page-btn{
@@ -376,12 +391,12 @@ form {
 }
 a.link.login-link{
   justify-content: center;
-  color: #0c0132;
+  color: #0f0043;
   text-decoration: underline;
 }
 .login-form-input{
   border: none;
-  border-bottom: 1px solid #0c0132;
+  border-bottom: 1px solid #0f0043;
   /* border-radius: 5px; */
   width: 100%;
   padding: 10px 0px 10px 0px;
@@ -446,7 +461,7 @@ h3{
 }
 
 .city{
-  color: #0c0132;
+  color: #0f0043;
 }
 
 h5{
@@ -474,7 +489,7 @@ p{
 } */
 
 .logout{
-  color: #0c0132;
+  color: #0f0043;
   background-color: transparent;
   border-radius: none;
   font-size: 15px;
@@ -550,7 +565,7 @@ input[type="text"], input[type="search"], input[type="datetime-local"]{
   /* border-radius: 0px 5px 5px 0px; */
   background-color: rgb(255, 255, 255, 0.5);
   border: none;
-  color: #0c0132;
+  color: #0f0043;
 }
 
 input[type="search"]{
@@ -642,7 +657,7 @@ input[type="search"]{
   border: 1px solid rgb(210, 210, 210);
   text-decoration: none;
   padding: 10px 30px;
-  color: #0c0132;
+  color: #0f0043;
   border-radius: 70px;
   margin: 10px;
   height: auto;
@@ -754,15 +769,14 @@ input:focus {
 .my-trips{
   background-color: #f0f0f0;
   /* padding: 50px; */
-  color: #1a0566;
-  /* width: 100%; */
+  color: #0f0043;
+  width: 25%;
   height: 100%;
 }
 
-.trip{
-  /* padding: 10px 50px; */
+/* .trip{
   border-bottom: 0.5px solid rgb(210, 210, 210);
-}
+} */
 
 .trip-links:hover{
   /* background-color: rgb(210, 210, 210); */
@@ -770,18 +784,26 @@ input:focus {
 }
 
 .trip-links{
-  color: #1a0566;
+  color: #0f0043;
   text-decoration: none;
+  margin:10px;
 }
-
+.greeting-message{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .trip-listings{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 20px 20px 50px;
+  /* padding: 20px 20px 20px 50px; */
   grid-column-gap: 30px;
   column-gap: 30px;
-
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 0.5px solid rgb(210, 210, 210);
 }
 
 /* .trips-header{
@@ -793,12 +815,12 @@ input:focus {
   margin: 10px 0px;
 }
 .trips{
-  width: 68%;
-  padding: 0px 50px;
+  width: 75%;
+  /* padding: 0px 50px; */
 }
 .line{
   width: 90%;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted #0f0043;
   margin-top: 10px;
 }
 
@@ -807,11 +829,15 @@ input:focus {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  margin: 10px;
+  padding: 10px 40px;
 }
 
 .trip-info{
   display: flex;
   column-gap: 10px;
+  margin: 10px;
+  padding: 10px 40px;
 }
 
 /* .trip-details{
@@ -879,12 +905,12 @@ margin: 5px 0px;
 }
 
 input[type="text"], input[type="search"], input[type="datetime-local"]{
-  color: #0c0132;
+  color: #0f0043;
 }
 
 a.trip-links.active{
   /* background-color: rgb(210, 210, 210); */
-  color: #0c0132;
+  color: #0f0043;
 }
 
 /* .trip-icon{
@@ -894,23 +920,33 @@ a.trip-links.active{
 .links{
   display: flex;
   justify-content: space-between;
+  margin: 10px;
+  padding: 10px 40px;
+}
+
+.text{
+  margin: 10px;
 }
 
 .packing-form{
   display: flex;
   flex-direction: row;
+  justify-content:center;
 }
 .form-input{
   border: none;
 }
 
 .packing-form-wrapper{
-  width: 100%;
+  /* width: 100%; */
+  margin: 10px 40px;
+  padding: 10px;
+}
+.packing-form-container{
   border: 1px solid rgb(210, 210, 210);
   margin-bottom: 20px;
   border-radius: 10px;
 }
-
 .form-header{
   display: flex;
   align-items: center;
@@ -939,6 +975,8 @@ a.trip-links.active{
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 20px;
+  padding: 10px;
+  margin: 10px 40px;
 }
 
 .round-checkbox {
@@ -985,23 +1023,19 @@ a.trip-links.active{
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #000;
+  background: #0f0043;
 }
 
-.welcome-header{
+/* .welcome-header{
   text-align: center;
   margin-top: 30px;
-  /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; */
-}
+} */
 .greeting{
   margin: 5px;
 }
 
 .nav-arrow{
-color: #0c0132;
+color: #0f0043;
   padding: 1px 6px;
   font-size: 22px;
 }
@@ -1026,10 +1060,15 @@ color: #0c0132;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px 0px 50px;
+  /* padding: 0px 20px 0px 50px; */
   column-gap: 30px;
+  margin: 10px;
+  padding: 10px;
 }
 
+.trips-header{
+  margin: 10px;
+}
 .search-results{
 display: flex;
 column-gap: 30px;
@@ -1081,7 +1120,7 @@ margin: 30px auto;
 }
 
 button.form-button{
-  background-color: #0c0132;
+  background-color: #0f0043;
   padding: 10px 50px;
   border-radius: 50px;
   margin-bottom: 10px;
@@ -1126,7 +1165,7 @@ button.form-button{
   height: 30px;
   /* position: relative; */
   position: absolute;
-  border: 1px solid white;
+    border: 1px solid white;
   overflow: hidden;
 }
 

@@ -42,7 +42,7 @@ function PackingListForm({onAddPackingListItem}) {
 
     return (
         <div className="packing-form-wrapper">
-            <form onSubmit={handleSubmit}>
+            <form className="packing-form-container" onSubmit={handleSubmit}>
                 <h1 className="packing-list-header-text">Packing to-do list</h1>
                 {errors.length > 0 && (
             <ul>

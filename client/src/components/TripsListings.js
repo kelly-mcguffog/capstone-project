@@ -13,8 +13,6 @@ function TripsListings() {
     }
 
     return (
-        <div className="side-bar">
-            <div className="my-trips">
                 <div className="listings">
                     <div className="trips-header-wrapper">
                     <h1 className="trips-header">My Trips</h1>
@@ -22,8 +20,6 @@ function TripsListings() {
                     </div>
                     <TripsContainer trips={trips} isShowing={isShowing}/>
                 </div>
-            </div>
-        </div>
     )
 }
 

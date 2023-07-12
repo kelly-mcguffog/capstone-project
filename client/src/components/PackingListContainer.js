@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import TripsListings from "./TripsListings";
 import PackingListForm from "./PackingListForm";
 import PackingList from "./PackingList";
+import NavBar from "./NavBar";
 
 function PackingListContainer() {
   const { user, setUser } = useContext(UserContext);
@@ -29,6 +30,7 @@ function PackingListContainer() {
         <TripsListings />
       </div>
       <div className="trips">
+        <NavBar custom={false}/>
         <PackingListForm onAddPackingListItem={onAddPackingListItem} />
         <PackingList trip={trip} />
       </div>

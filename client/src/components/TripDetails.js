@@ -4,6 +4,7 @@ import ItineraryDaysContainer from "./ItineraryDaysContainer";
 import { Link, useParams } from "react-router-dom";
 import TripsListings from "./TripsListings";
 import TravelDetails from "./TravelDetails";
+import NavBar from "./NavBar";
 
 
 function TripDetails({ onDeleteItineraryDate }) {
@@ -22,18 +23,25 @@ function TripDetails({ onDeleteItineraryDate }) {
 
     return (
         <div className="side-bar">
+            <div className="my-trips">
             <TripsListings />
+            </div>
             <div className="trips">
+                <NavBar custom={false}/>
                 <TravelDetails trip={trip} />
                 <div className="links">
                     <Link className="link" to={`/destinations/${destination_id}/trips/${id}/hotels`}>
                     <button type="submit">
                         <i className="fa-solid fa-plus"></i>
                     </button>
+                        <p className="text">
                         Build Itinerary
+                        </p>
                     </Link>
                     <Link className="link" to={`/trips/${id}/packing_list`}>
+                    <p className="text">
                         View Packing List
+                        </p>
                         <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
                     </Link>
                 </div>

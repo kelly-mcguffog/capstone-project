@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useMatch } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -27,7 +27,10 @@ function App() {
   const [activities, setActivities] = useState([])
   const [restaurants, setRestaurants] = useState([])
   const [hotels, setHotels] = useState([])
-   
+  const match1 = useMatch("/users/:user_id/trips");
+  const match2 = useMatch("/users/:user_id/trips/:id");
+  const match3 = useMatch("/trips/:id/packing_list");
+  const match = match1 || match2 || match3;
 
   useEffect(() => {
     fetch("/activities")
@@ -254,50 +257,64 @@ function App() {
     setUser({ ...user, trips: updatedTrip });
   };
 
+  const isProfilePage = !!match;
+
+
   return (
     <main>
-      {user ? (
-        <>
-          <NavBar />
-          <Routes>
-            <Route exact path="/destinations/:destination_id/trips/:trip_id/hotels/:id" element={<AddHotelToItinerary onAddHotel={onAddHotel} />}>
-            </Route>
-            <Route exact path="/destinations/:destination_id/trips/:trip_id/activities/:id" element={<AddActivityToItinerary onAddActivity={onAddActivity} />}>
-            </Route>
-            <Route exact path="/destinations/:destination_id/trips/:trip_id/restaurants/:id" element={<AddRestaurantToItinerary onAddRestaurant={onAddRestaurant} />}>
-            </Route>
-            <Route exact path="/destinations/:destination_id/trips/:id/hotels" element={<HotelsContainer search={search} setSearch={setSearch} />}>
-            </Route>
-            <Route exact path="/destinations/:destination_id/trips/:id/activities" element={<ActivitiesContainer search={search} setSearch={setSearch} />}>
-            </Route>
-            <Route exact path="/destinations/:destination_id/trips/:id/restaurants" element={<RestaurantsContainer search={search} setSearch={setSearch} />}>
-            </Route>
-            <Route path="/destinations/:id/trips" element={<NewTrip />}>
-            </Route>
-            <Route path="/destinations/:destination_id/trips/:trip_id/hotels/:id/details" element={<HotelDetails  hotels={hotels}/>}>
-            </Route>
-            <Route path="/destinations/:destination_id/trips/:trip_id/restaurants/:id/details" element={<RestaurantDetails  restaurants={restaurants}/>}>
-            </Route>
-            <Route path="/destinations/:destination_id/trips/:trip_id/activities/:id/details" element={<ActivityDetails  activities={activities}/>}>
-            </Route>
-            <Route path="/users/:user_id/trips/:id" element={<TripDetails onDeleteItineraryDate={onDeleteItineraryDate} />}>
-            </Route>
-            <Route exact path="/trips/:id/packing_list" element={<PackingListContainer />}>
-            </Route>
-            <Route exact path="/users/:user_id/trips" element={<Profile />}>
-            </Route>
-            <Route exact path="/" element={<Home search={search} setSearch={setSearch} />}>
-            </Route>
-          </Routes>
-        </>
-      ) : (
-        <Routes>
-          <Route path="/signup" element={<SignUp />}>
-          </Route>
-          <Route path="/login" element={<Login />}>
-          </Route>
-        </Routes>
-      )}
+      {user && !isProfilePage && <NavBar custom={false} />}
+      <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
+        {user && (
+          <>
+            <Route
+              path="/destinations/:destination_id/trips/:trip_id/hotels/:id"
+              element={<AddHotelToItinerary onAddHotel={onAddHotel} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:trip_id/activities/:id"
+              element={<AddActivityToItinerary onAddActivity={onAddActivity} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:trip_id/restaurants/:id"
+              element={<AddRestaurantToItinerary onAddRestaurant={onAddRestaurant} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:id/hotels"
+              element={<HotelsContainer search={search} setSearch={setSearch} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:id/activities"
+              element={<ActivitiesContainer search={search} setSearch={setSearch} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:id/restaurants"
+              element={<RestaurantsContainer search={search} setSearch={setSearch} />}
+            />
+            <Route path="/destinations/:id/trips" element={<NewTrip />} />
+            <Route
+              path="/destinations/:destination_id/trips/:trip_id/hotels/:id/details"
+              element={<HotelDetails hotels={hotels} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:trip_id/restaurants/:id/details"
+              element={<RestaurantDetails restaurants={restaurants} />}
+            />
+            <Route
+              path="/destinations/:destination_id/trips/:trip_id/activities/:id/details"
+              element={<ActivityDetails activities={activities} />}
+            />
+            <Route
+              path="/users/:user_id/trips/:id"
+              element={<TripDetails onDeleteItineraryDate={onDeleteItineraryDate} />}
+            />
+            <Route path="/trips/:id/packing_list" element={<PackingListContainer />} />
+            <Route path="/users/:user_id/trips" element={<Profile />} />
+          </>
+        )}
+      </Routes>
     </main>
   );
 }
