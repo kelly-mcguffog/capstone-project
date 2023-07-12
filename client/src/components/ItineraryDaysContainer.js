@@ -2,6 +2,7 @@ import React from "react";
 import ItineraryDay from "./ItineraryDay";
 
 function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate }) {
+    
     const combinedItineraryDays = {};
 
     itinerary_days.forEach((day) => {
@@ -35,7 +36,7 @@ function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate })
     });
 
     return (
-        <div>
+        <>
             {nonEmptyFilteredItineraryDays.map((itinerary_day, index) => (
                 <ItineraryDay
                     key={index}
@@ -44,11 +45,8 @@ function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate })
                     onDeleteItineraryDate={onDeleteItineraryDate}
                 />
             ))}
-        </div>
+        </>
     );
 }
-
-
-
 
 export default ItineraryDaysContainer;

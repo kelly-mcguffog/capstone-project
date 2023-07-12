@@ -28,7 +28,6 @@ function TravelDetails({ trip }) {
     const formattedOutboundTime = outBoundDate.toLocaleTimeString(undefined, timeFormatOptions);
     const formattedReturnTime = returnDate.toLocaleTimeString(undefined, timeFormatOptions);
 
-
     return (
         <>
             <div className="icons">

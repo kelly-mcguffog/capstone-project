@@ -9,25 +9,26 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
   const { destinations } = useContext(DestinationsContext);
 
   const [errors, setErrors] = useState([]);
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    trip_id: trip_id,
+    trip_id: trip_id || "",
     date: "",
     restaurant_itinerary_times_attributes: [
       {
         time: "",
-        restaurant_id: restaurant_id
-      }
-    ]
+        restaurant_id: restaurant_id,
+      },
+    ],
   });
 
   if (destinations === null) {
     return <div>Loading...</div>;
   }
 
-  const destination = destinations.find((destination) => destination.id === parseInt(destination_id));
+  const destination = destinations.find(
+    (destination) => destination.id === parseInt(destination_id)
+  );
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -38,14 +39,14 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
           restaurant_itinerary_times_attributes: [
             {
               ...prevState.restaurant_itinerary_times_attributes[0],
-              time: value
-            }
-          ]
+              time: value,
+            },
+          ],
         };
       } else {
         return {
           ...prevState,
-          [name]: value
+          [name]: value,
         };
       }
     });
@@ -54,7 +55,9 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch(`/trips/${trip_id}/itinerary_days`, {
+    const submitTripId = formData.trip_id || user.trips[0]?.id || "";
+
+    fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +66,7 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((newRestaurant) => onAddRestaurant(newRestaurant));
-        navigate(`/users/${user.id}/trips/${trip_id}`);
+        navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -71,19 +74,22 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
   }
 
   return (
-    <div className="header-img" style={{ backgroundImage: `url(${destination.photo})` }}>
+    <div
+      className="header-img"
+      style={{ backgroundImage: `url(${destination.photo})` }}
+    >
       <div className="header-text">
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             {errors.length > 0 && (
-            <ul>
+              <ul>
                 {errors.map((error, index) => (
-                <li key={index}>{error}</li>
+                  <li key={index}>{error}</li>
                 ))}
-            </ul>
+              </ul>
             )}
-            <div className="label">
+            <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
                 <input
@@ -94,7 +100,7 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
                 />
               </div>
             </div>
-            <div className="label">
+            <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Restaurant Itinerary Time</h3>
                 <input
@@ -105,8 +111,34 @@ function AddRestaurantToItinerary({ onAddRestaurant }) {
                 />
               </div>
             </div>
+            {trip_id === undefined && (
+              <div className="label form-label">
+                <div className="input-text">
+                  <h3 className="input-title">Select a Trip</h3>
+                  <select
+                    name="trip_id"
+                    value={formData.trip_id}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select a Trip</option>
+                    {user.trips.map((trip) => {
+                      const tripDestination = destinations.find(
+                        (destination) => destination.id === trip.destination_id
+                      );
+                      return (
+                        <option key={trip.id} value={trip.id}>
+                          {tripDestination.city}, {tripDestination.country} ({new Date(trip.outbound_flight).toLocaleDateString()})
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+            )}
             <div className="form-button">
-              <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
+              <button type="submit">
+                <i className="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </form>
         </div>

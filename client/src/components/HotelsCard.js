@@ -3,7 +3,24 @@ import { Link } from "react-router-dom";
 
 function HotelsCard({ hotel, trip_id }) {
 
-    const {id, name, photo1, rating, average_price, short_description, destination_id } = hotel
+    const { id, name, photo1, rating, average_price, short_description, destination_id } = hotel
+
+    const getDetailsUrl = () => {
+        if (trip_id !== undefined) {
+            return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`;
+        } else {
+            return `/destinations/${destination_id}/hotels/${id}/details`;
+        }
+    };
+
+    const getItineraryUrl = () => {
+        if (trip_id !== undefined) {
+            return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`;
+        } else {
+            return `/destinations/${destination_id}/hotels/${id}`;
+        }
+    };
+
     return (
         <div className="details" key={id}>
             <div className="details-img-wrapper">
@@ -20,8 +37,12 @@ function HotelsCard({ hotel, trip_id }) {
                     <h2>{name}</h2>
                     <p>{short_description}</p>
                     <div className="btn-container">
-                    <Link className="page-btn main-btn secondary-btn" to={`/destinations/${destination_id}/trips/${trip_id}/hotels/${id}/details`}>View Details</Link>
-                    <Link className="page-btn main-btn" to={`/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`}>Add to Itinerary</Link>
+                        <Link className="page-btn main-btn secondary-btn" to={getDetailsUrl()}>
+                            View Details
+                        </Link>
+                        <Link className="page-btn main-btn" to={getItineraryUrl()}>
+                            Add to Itinerary
+                        </Link>
                     </div>
                 </div>
             </div>

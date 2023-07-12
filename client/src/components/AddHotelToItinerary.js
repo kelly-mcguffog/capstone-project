@@ -9,25 +9,26 @@ function AddHotelToItinerary({ onAddHotel }) {
   const { destinations } = useContext(DestinationsContext);
 
   const [errors, setErrors] = useState([]);
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    trip_id: trip_id,
+    trip_id: trip_id || "",
     date: "",
     hotel_itinerary_times_attributes: [
       {
         time: "",
-        hotel_id: hotel_id
-      }
-    ]
+        hotel_id: hotel_id,
+      },
+    ],
   });
 
   if (destinations === null) {
     return <div>Loading...</div>;
   }
 
-  const destination = destinations.find((destination) => destination.id === parseInt(destination_id));
+  const destination = destinations.find(
+    (destination) => destination.id === parseInt(destination_id)
+  );
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -38,14 +39,14 @@ function AddHotelToItinerary({ onAddHotel }) {
           hotel_itinerary_times_attributes: [
             {
               ...prevState.hotel_itinerary_times_attributes[0],
-              time: value
-            }
-          ]
+              time: value,
+            },
+          ],
         };
       } else {
         return {
           ...prevState,
-          [name]: value
+          [name]: value,
         };
       }
     });
@@ -54,7 +55,9 @@ function AddHotelToItinerary({ onAddHotel }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch(`/trips/${trip_id}/itinerary_days`, {
+    const submitTripId = formData.trip_id || user.trips[0]?.id || "";
+
+    fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +66,7 @@ function AddHotelToItinerary({ onAddHotel }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((newHotel) => onAddHotel(newHotel));
-        navigate(`/users/${user.id}/trips/${trip_id}`);
+        navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -71,19 +74,22 @@ function AddHotelToItinerary({ onAddHotel }) {
   }
 
   return (
-    <div className="header-img" style={{ backgroundImage: `url(${destination.photo})` }}>
+    <div
+      className="header-img"
+      style={{ backgroundImage: `url(${destination.photo})` }}
+    >
       <div className="header-text">
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             {errors.length > 0 && (
-            <ul>
+              <ul>
                 {errors.map((error, index) => (
-                <li key={index}>{error}</li>
+                  <li key={index}>{error}</li>
                 ))}
-            </ul>
+              </ul>
             )}
-            <div className="label">
+            <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
                 <input
@@ -91,10 +97,11 @@ function AddHotelToItinerary({ onAddHotel }) {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
+                  className="trip-form-input"
                 />
               </div>
             </div>
-            <div className="label">
+            <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Hotel Itinerary Time</h3>
                 <input
@@ -102,11 +109,39 @@ function AddHotelToItinerary({ onAddHotel }) {
                   name="time"
                   value={formData.hotel_itinerary_times_attributes[0]?.time || ""}
                   onChange={handleChange}
+                  className="trip-form-input"
                 />
               </div>
             </div>
+            {trip_id === undefined && (
+              <div className="label form-label">
+                <div className="input-text">
+                  <h3 className="input-title">Select a Trip</h3>
+                  <select
+                    name="trip_id"
+                    value={formData.trip_id}
+                    onChange={handleChange}
+                    className="trip-form-input"
+                  >
+                    <option value="">Select a Trip</option>
+                    {user.trips.map((trip) => {
+                      const tripDestination = destinations.find(
+                        (destination) => destination.id === trip.destination_id
+                      );
+                      return (
+                        <option key={trip.id} value={trip.id}>
+                          {tripDestination.city}, {tripDestination.country} ({new Date(trip.outbound_flight).toLocaleDateString()})
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+            )}
             <div className="form-button">
-              <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
+              <button type="submit">
+                <i className="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </form>
         </div>

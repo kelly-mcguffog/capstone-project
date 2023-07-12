@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
 function NewTrip() {
+  
   const { id } = useParams();
   const { user, setUser } = useContext(UserContext)
   const { destinations } = useContext(DestinationsContext);
@@ -27,7 +28,6 @@ function NewTrip() {
     return <div>Loading...</div>;
   }
 
-
   const destination = destinations.find(
     (destination) => destination.id === parseInt(id)
   );
@@ -46,7 +46,6 @@ function NewTrip() {
     });
   }
 
-
   function onAddTrip(newTrip) {
     if (newTrip.user_id === user.id) {
       setUser({ ...user, trips: [...user.trips, newTrip] })
@@ -54,7 +53,6 @@ function NewTrip() {
       return user
     }
   }
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -89,12 +87,12 @@ function NewTrip() {
       <div className="header-text">
         <h1 className="title">Plan Your Trip to {city}</h1>
         {errors.length > 0 && (
-            <ul>
-                {errors.map((error, index) => (
-                <li key={index}>{error}</li>
-                ))}
-            </ul>
-            )}
+          <ul>
+            {errors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        )}
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             <div id="trip-form" className="form-info">

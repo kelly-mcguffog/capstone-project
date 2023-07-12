@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 function Login() {
+  
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext)
   const [errors, setErrors] = useState([])
@@ -48,33 +49,33 @@ function Login() {
         {errors ? <p className="error-message error">{errors}</p> : null}
         <div className="login-form">
           <div className="credentials">
-        <div className="input-text">
-        </div>
-        <input
-          type="text"
-          id="username"
-          autoComplete="off"
-          name="username"
-          placeholder="username"
-          value={formData.username}
-          onChange={handleChange}
-          className="login-form-input"
-        />
-        </div>
-        <div className="credentials">
-        <div className="input-text">
-        </div>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="password"
-          autoComplete="current-password"
-          value={formData.password}
-          onChange={handleChange}
-          className="login-form-input"
-        />
-        </div>
+            <div className="input-text">
+            </div>
+            <input
+              type="text"
+              id="username"
+              autoComplete="off"
+              name="username"
+              placeholder="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="login-form-input"
+            />
+          </div>
+          <div className="credentials">
+            <div className="input-text">
+            </div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="password"
+              autoComplete="current-password"
+              value={formData.password}
+              onChange={handleChange}
+              className="login-form-input"
+            />
+          </div>
         </div>
         <button className="form-button" type="submit">Login</button>
         <h5 className="form-text">Don't have an account?<br></br><Link className="link login-link" to="/signup">Sign up now.</Link></h5>

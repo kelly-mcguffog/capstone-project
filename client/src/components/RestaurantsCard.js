@@ -3,9 +3,25 @@ import { Link } from "react-router-dom";
 
 function RestaurantsCard({ restaurant, trip_id }) {
 
-    const {id, name, photo1, rating, average_price, description, destination_id } = restaurant
-    return (
+    const { id, name, photo1, rating, average_price, description, destination_id } = restaurant
 
+    const getDetailsUrl = () => {
+        if (trip_id !== undefined) {
+            return `/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}`;
+        } else {
+            return `/destinations/${destination_id}/restaurants/${id}/details`;
+        }
+    };
+
+    const getItineraryUrl = () => {
+        if (trip_id !== undefined) {
+            return `/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}`;
+        } else {
+            return `/destinations/${destination_id}/restaurants/${id}`;
+        }
+    };
+
+    return (
         <div className="details" key={id}>
             <div className="details-img-wrapper">
                 <div className="details-img-container">
@@ -21,8 +37,12 @@ function RestaurantsCard({ restaurant, trip_id }) {
                     <h2>{name}</h2>
                     <p>{description}</p>
                     <div className="btn-container">
-                    <Link className="page-btn main-btn secondary-btn" to={`/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}/details`}>View Details</Link>
-                    <Link className="page-btn main-btn" to={`/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}`}>Add to Itinerary</Link>
+                        <Link className="page-btn main-btn secondary-btn" to={getDetailsUrl()}>
+                            View Details
+                        </Link>
+                        <Link className="page-btn main-btn" to={getItineraryUrl()}>
+                            Add to Itinerary
+                        </Link>
                     </div>
                 </div>
             </div>

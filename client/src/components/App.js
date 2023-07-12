@@ -154,8 +154,6 @@ function App() {
     setUser({ ...user, trips: updatedTrip });
   };
 
-
-
   const onAddHotel = (newHotel) => {
     const updatedTrip = user.trips.map((trip) => {
       if (trip.id === newHotel.trip_id) {
@@ -214,7 +212,6 @@ function App() {
     setUser({ ...user, trips: updatedTrip });
   };
 
-
   const onDeleteItineraryDate = (deletedItineraryDate) => {
     const updatedTrip = user.trips.map((trip) => {
       if (trip.id === deletedItineraryDate.trip_id) {
@@ -259,10 +256,9 @@ function App() {
 
   const isProfilePage = !!match;
 
-
   return (
     <main>
-      {user && !isProfilePage && <NavBar custom={false} />}
+      {user && !isProfilePage && <NavBar />}
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -274,7 +270,15 @@ function App() {
               element={<AddHotelToItinerary onAddHotel={onAddHotel} />}
             />
             <Route
+              path="/destinations/:destination_id/hotels/:id"
+              element={<AddHotelToItinerary onAddHotel={onAddHotel} />}
+            />
+            <Route
               path="/destinations/:destination_id/trips/:trip_id/activities/:id"
+              element={<AddActivityToItinerary onAddActivity={onAddActivity} />}
+            />
+            <Route
+              path="/destinations/:destination_id/activities/:id"
               element={<AddActivityToItinerary onAddActivity={onAddActivity} />}
             />
             <Route
@@ -282,7 +286,15 @@ function App() {
               element={<AddRestaurantToItinerary onAddRestaurant={onAddRestaurant} />}
             />
             <Route
+              path="/destinations/:destination_id/restaurants/:id"
+              element={<AddRestaurantToItinerary onAddRestaurant={onAddRestaurant} />}
+            />
+            <Route
               path="/destinations/:destination_id/trips/:id/hotels"
+              element={<HotelsContainer search={search} setSearch={setSearch} />}
+            />
+            <Route
+              path="/destinations/:destination_id/hotels"
               element={<HotelsContainer search={search} setSearch={setSearch} />}
             />
             <Route
@@ -290,7 +302,15 @@ function App() {
               element={<ActivitiesContainer search={search} setSearch={setSearch} />}
             />
             <Route
+              path="/destinations/:destination_id/activities"
+              element={<ActivitiesContainer search={search} setSearch={setSearch} />}
+            />
+            <Route
               path="/destinations/:destination_id/trips/:id/restaurants"
+              element={<RestaurantsContainer search={search} setSearch={setSearch} />}
+            />
+            <Route
+              path="/destinations/:destination_id/restaurants"
               element={<RestaurantsContainer search={search} setSearch={setSearch} />}
             />
             <Route path="/destinations/:id/trips" element={<NewTrip />} />
@@ -299,11 +319,23 @@ function App() {
               element={<HotelDetails hotels={hotels} />}
             />
             <Route
+              path="/destinations/:destination_id/hotels/:id/details"
+              element={<HotelDetails hotels={hotels} />}
+            />
+            <Route
               path="/destinations/:destination_id/trips/:trip_id/restaurants/:id/details"
               element={<RestaurantDetails restaurants={restaurants} />}
             />
             <Route
+              path="/destinations/:destination_id/restaurants/:id/details"
+              element={<RestaurantDetails restaurants={restaurants} />}
+            />
+            <Route
               path="/destinations/:destination_id/trips/:trip_id/activities/:id/details"
+              element={<ActivityDetails activities={activities} />}
+            />
+            <Route
+              path="/destinations/:destination_id/activities/:id/details"
               element={<ActivityDetails activities={activities} />}
             />
             <Route

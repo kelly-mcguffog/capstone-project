@@ -39,7 +39,6 @@ function RestaurantsContainer({ search, setSearch }) {
   });
 
   return (
-
     <>
       <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
       <div className="details-row">

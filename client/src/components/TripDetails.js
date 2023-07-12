@@ -8,6 +8,7 @@ import NavBar from "./NavBar";
 
 
 function TripDetails({ onDeleteItineraryDate }) {
+
     const { id } = useParams();
     const { user } = useContext(UserContext);
 
@@ -24,23 +25,23 @@ function TripDetails({ onDeleteItineraryDate }) {
     return (
         <div className="side-bar">
             <div className="my-trips">
-            <TripsListings />
+                <TripsListings />
             </div>
             <div className="trips">
-                <NavBar custom={false}/>
+                <NavBar />
                 <TravelDetails trip={trip} />
                 <div className="links">
                     <Link className="link" to={`/destinations/${destination_id}/trips/${id}/hotels`}>
-                    <button type="submit">
-                        <i className="fa-solid fa-plus"></i>
-                    </button>
+                        <button type="submit">
+                            <i className="fa-solid fa-plus"></i>
+                        </button>
                         <p className="text">
-                        Build Itinerary
+                            Build Itinerary
                         </p>
                     </Link>
                     <Link className="link" to={`/trips/${id}/packing_list`}>
-                    <p className="text">
-                        View Packing List
+                        <p className="text">
+                            View Packing List
                         </p>
                         <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
                     </Link>

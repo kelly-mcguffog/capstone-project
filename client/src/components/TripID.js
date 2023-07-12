@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 
 function TripID({ trip, onDeleteTrip, isShowing }) {
+
     const { destinations } = useContext(DestinationsContext);
     const { user } = useContext(UserContext);
 
@@ -29,7 +30,6 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
     const formattedDate = outboundFlight.toLocaleDateString(undefined, options);
 
     function handleDeleteTrip() {
-
         fetch(`/trips/${id}`, {
             method: "DELETE",
         })
@@ -37,7 +37,6 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                 if (response.ok) {
                     console.log("Trip deleted successfully");
                     onDeleteTrip(id)
-
                 } else {
                     console.log("Failed to delete trip");
                 }
@@ -46,7 +45,6 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                 console.log("Error occurred while deleting trip", error);
             });
     }
-
 
     return (
         <div className="trip-listings">
@@ -58,11 +56,11 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                     <h5 className="user-input">{formattedDate}</h5>
                 </div>
             </NavLink>
-            {isShowing ? 
-            <div className="trip-icon">
-                <i onClick={handleDeleteTrip} className="fa-solid fa-trash"></i>
-            </div>
-            : null
+            {isShowing ?
+                <div className="trip-icon">
+                    <i onClick={handleDeleteTrip} className="fa-solid fa-trash"></i>
+                </div>
+                : null
             }
         </div>
     );

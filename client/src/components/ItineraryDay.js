@@ -2,6 +2,7 @@ import React from "react";
 import ItineraryTimes from "./ItineraryTimes";
 
 function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
+  
   if (!itinerary_day) {
     return null;
   }
@@ -22,7 +23,7 @@ function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
   });
 
   return (
-    <div>
+    <div className="itinerary-info">
       <h1 className="time">{formattedDate}</h1>
       {combined_itinerary_times && combined_itinerary_times.map((itineraryTime, index) => (
         <ItineraryTimes

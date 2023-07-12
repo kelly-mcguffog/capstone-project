@@ -5,6 +5,7 @@ import ItineraryRestaurant from "./ItineraryRestaurant";
 import ItineraryActivity from "./ItineraryActivity";
 
 function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItineraryDay }) {
+  
   const { id, time, hotel, restaurant, activity } = itinerary_time;
 
   const { user, setUser } = useContext(UserContext);

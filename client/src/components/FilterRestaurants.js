@@ -2,7 +2,6 @@ import React from "react";
 
 function FilterRestaurants({ filterPrice, setFilterRating, setFilterCuisine, setFilterPrice }) {
 
-
     const handleFilterRatingChange = (event) => {
         setFilterRating(event.target.value);
     };
@@ -47,7 +46,6 @@ function FilterRestaurants({ filterPrice, setFilterRating, setFilterCuisine, set
                     />
                     4 Stars
                 </label>
-
                 <label>
                     <input
                         type="radio"
@@ -104,7 +102,6 @@ function FilterRestaurants({ filterPrice, setFilterRating, setFilterCuisine, set
                     />
                     Italian
                 </label>
-
                 <label>
                     <input
                         type="checkbox"
@@ -113,7 +110,6 @@ function FilterRestaurants({ filterPrice, setFilterRating, setFilterCuisine, set
                     />
                     Mexican
                 </label>
-
                 <label>
                     <input
                         type="checkbox"
@@ -122,7 +118,6 @@ function FilterRestaurants({ filterPrice, setFilterRating, setFilterCuisine, set
                     />
                     Indian
                 </label>
-
             </div>
         </div>
     )

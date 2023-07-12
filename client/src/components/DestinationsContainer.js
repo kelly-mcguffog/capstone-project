@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
-
-function DestinationsContainer({renderDestinations, destinations}) {
+function DestinationsContainer({ renderDestinations, destinations }) {
 
   const [position, setPosition] = useState(0)
-
 
   const advancePosition = () => {
     setPosition((position + 5) % destinations.length)
@@ -15,7 +13,6 @@ function DestinationsContainer({renderDestinations, destinations}) {
       setPosition((position - 5) % destinations.length)
     }
   }
-
 
   return (
     <div className="row">

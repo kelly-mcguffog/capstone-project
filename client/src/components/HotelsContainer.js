@@ -6,6 +6,7 @@ import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterHotels from "./FilterHotels";
 
 function HotelsContainer({ search, setSearch }) {
+  
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
   const [filterRating, setFilterRating] = useState("");
@@ -14,7 +15,6 @@ function HotelsContainer({ search, setSearch }) {
   if (destinations === null) {
     return <div>Loading...</div>;
   }
-
 
   const destination = destinations.find(
     (destination) => destination.id === parseInt(destination_id)
@@ -33,7 +33,6 @@ function HotelsContainer({ search, setSearch }) {
 
     return nameMatch && priceMatch && ratingMatch;
   });
-
 
   return (
     <>

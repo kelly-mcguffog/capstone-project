@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-function PackingListForm({onAddPackingListItem}) {
+function PackingListForm({ onAddPackingListItem }) {
+    
     const { id } = useParams()
     const [errors, setErrors] = useState([])
 
@@ -13,7 +14,6 @@ function PackingListForm({onAddPackingListItem}) {
     }
 
     const [formData, setFormData] = useState(initialState)
-
 
     function handleChange(event) {
         setFormData({
@@ -45,44 +45,44 @@ function PackingListForm({onAddPackingListItem}) {
             <form className="packing-form-container" onSubmit={handleSubmit}>
                 <h1 className="packing-list-header-text">Packing to-do list</h1>
                 {errors.length > 0 && (
-            <ul>
-                {errors.map((error, index) => (
-                <li key={index}>{error}</li>
-                ))}
-            </ul>
-            )}
+                    <ul>
+                        {errors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <div className="packing-form">
-                <div className="label">
-                    <div className="input-text">
-                        <h3 className="input-title">Item</h3>
+                    <div className="label">
+                        <div className="input-text">
+                            <h3 className="input-title">Item</h3>
+                        </div>
+                        <input
+                            type="text"
+                            name="name"
+                            onChange={handleChange}
+                            value={formData.name}
+                            className="form-input"
+                            placeholder="i.e. socks"
+                            autoComplete="off"
+                        />
                     </div>
-                    <input
-                        type="text"
-                        name="name"
-                        onChange={handleChange}
-                        value={formData.name}
-                        className="form-input"
-                        placeholder="i.e. socks"
-                        autoComplete="off"
-                    />
-                </div>
-                <div className="label">
-                    <div className="input-text">
-                        <h3 className="input-title">Quantity</h3>
+                    <div className="label">
+                        <div className="input-text">
+                            <h3 className="input-title">Quantity</h3>
+                        </div>
+                        <input
+                            type="text"
+                            name="quantity"
+                            onChange={handleChange}
+                            value={formData.quantity}
+                            className="form-input"
+                            placeholder="i.e. 10"
+                            autoComplete="off"
+                        />
                     </div>
-                    <input
-                        type="text"
-                        name="quantity"
-                        onChange={handleChange}
-                        value={formData.quantity}
-                        className="form-input"
-                        placeholder="i.e. 10"
-                        autoComplete="off"
-                    />
-                </div>
-                <button type="submit">
-                    <i className="fa-solid fa-plus"></i>
-                </button>
+                    <button type="submit">
+                        <i className="fa-solid fa-plus"></i>
+                    </button>
                 </div>
             </form>
         </div>

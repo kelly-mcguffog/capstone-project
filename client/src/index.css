@@ -63,6 +63,9 @@ header {
   padding: 5px;
   cursor: pointer;
 }
+a.page-btn.main-btn.trip-btn{
+  margin: auto;
+}
 .fa-bars, .fa-trash{
   cursor: pointer;
 }
@@ -441,6 +444,7 @@ input[type="datetime-local"]{
 .trip-form-input{
   width: 150px;
   border: none;
+  padding: 5px 0px;
 }
 
 h1{
@@ -708,6 +712,11 @@ input[type="search"]:focus {
   /* width: 200px; */
   outline : none;
 }
+
+select:focus{
+  outline: none;
+}
+
 /* .label{
   display: flex;
 }
@@ -816,6 +825,7 @@ input:focus {
 }
 .trips{
   width: 75%;
+  overflow: auto;
   /* padding: 0px 50px; */
 }
 .line{
@@ -836,6 +846,11 @@ input:focus {
 .trip-info{
   display: flex;
   column-gap: 10px;
+  margin: 10px;
+  padding: 10px 40px;
+}
+
+.itinerary-info{
   margin: 10px;
   padding: 10px 40px;
 }
@@ -1195,4 +1210,8 @@ button.form-button{
   width: 30px;
   height: 30px;
   margin: 20px 0px;
+}
+
+.form-label{
+  width: auto;
 }

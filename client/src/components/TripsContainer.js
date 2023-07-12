@@ -4,7 +4,9 @@ import TripID from "./TripID";
 
 
 function TripsContainer({ trips, isShowing }) {
+
     const { user, setUser } = useContext(UserContext)
+
     function handleDeleteTrip(tripId) {
         const updatedTrips = trips.filter((trip) => trip.id !== tripId);
         setUser({ ...user, trips: updatedTrips });
