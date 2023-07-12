@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
 
 function PackingListForm({onAddPackingListItem}) {
     const { id } = useParams()
-    const { user } = useContext(UserContext)
     const [errors, setErrors] = useState([])
 
     const initialState = {
@@ -46,6 +44,13 @@ function PackingListForm({onAddPackingListItem}) {
         <div className="packing-form-wrapper">
             <form onSubmit={handleSubmit}>
                 <h1 className="packing-list-header-text">Packing to-do list</h1>
+                {errors.length > 0 && (
+            <ul>
+                {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+                ))}
+            </ul>
+            )}
                 <div className="packing-form">
                 <div className="label">
                     <div className="input-text">

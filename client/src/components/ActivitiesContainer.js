@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ActivitiesCard from "./ActivitiesCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterActivities from "./FilterActivities";
@@ -9,7 +9,6 @@ function ActivitiesContainer({ search, setSearch }) {
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
   const [filterRating, setFilterRating] = useState("");
-  const [filterPrice, setFilterPrice] = useState(3)
 
   if (destinations === null) {
     return <div>Loading...</div>;
@@ -17,7 +16,7 @@ function ActivitiesContainer({ search, setSearch }) {
 
 
   const destination = destinations.find(
-    (destination) => destination.id == destination_id
+    (destination) => destination.id === parseInt(destination_id)
   );
 
   if (!destination) {
@@ -28,7 +27,6 @@ function ActivitiesContainer({ search, setSearch }) {
 
   let filterActivities = activities.filter(activity => {
     const nameMatch = activity.name.toLowerCase().includes(search.toLowerCase());
-    // const priceMatch = filterPrice ? activity.average_price === filterPrice : true;
     const ratingMatch = filterRating ? activity.rating.toString() === filterRating : true;
 
     return nameMatch && ratingMatch;

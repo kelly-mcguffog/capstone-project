@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { DestinationsContext } from "../context/DestinationsContext";
+import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
 
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
+import UsersCheckIn from "./UsersCheckIn";
 
 function ActivityDetails({ activities }) {
 
-    const { destinations } = useContext(DestinationsContext);
     const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
     const {isLoaded} = useLoadScript({
@@ -21,9 +20,19 @@ function ActivityDetails({ activities }) {
 
     if(!isLoaded) return <div>Loading...</div>
 
+    if (!users) return <div>Loading...</div>;
+
     const {photo, name, rating, description, price, longitude, latitude, address, duration, url} = activity
 
-    console.log(users)
+    const allUsers = users.flatMap((user) =>
+    user.trips.flatMap((trip) =>
+      trip.itinerary_days.flatMap((day) =>
+        day.combined_itinerary_times
+          .filter((time) => time.activity && time.activity.id && time.activity.id.toString() === id)
+          .map(() => user)
+      )
+    )
+  );
     
     return (
         <>
@@ -49,6 +58,7 @@ function ActivityDetails({ activities }) {
                 <hr className="line-details"></hr>
                 <div className="map-details">
                     <Map longitude={longitude} latitude={latitude}/>
+                    <UsersCheckIn allUsers={allUsers}/>
                     <div className="small-details">
                     <i className="fa-sharp fa-solid fa-location-dot"></i>
                     <p>{address}</p>
@@ -59,7 +69,7 @@ function ActivityDetails({ activities }) {
                     </div>
                     <div className="small-details">
                     <i className="fa-solid fa-up-right-from-square"></i>
-                    <a className="link" href={`${url}`} target="_blank"><p>Visit Website</p></a>
+                    <a className="link" href={`${url}`} rel="noreferrer" target="_blank"><p>Visit Website</p></a>
                     </div>
                 </div>
             </div>

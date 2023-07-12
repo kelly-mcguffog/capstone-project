@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { DestinationsContext } from "../context/DestinationsContext";
+import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
 import GridHeader from "./GridHeader";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
+import UsersCheckIn from "./UsersCheckIn";
 
 function HotelDetails({ hotels }) {
 
-    const { destinations } = useContext(DestinationsContext);
     const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
     
@@ -33,12 +32,11 @@ function HotelDetails({ hotels }) {
         trip.itinerary_days.flatMap((day) =>
           day.combined_itinerary_times
             .filter((time) => time.hotel && time.hotel.id && time.hotel.id.toString() === id)
-            .map(() => user.username)
+            .map(() => user)
         )
       )
     );
     
-    console.log(users);
     
     return (
         <>
@@ -63,6 +61,7 @@ function HotelDetails({ hotels }) {
                 <hr className="line-details"></hr>
                 <div className="map-details">
                     <Map longitude={longitude} latitude={latitude}/>
+                    <UsersCheckIn allUsers={allUsers}/>
                     <div className="small-details">
                     <i className="fa-sharp fa-solid fa-location-dot"></i>
                     <p>{address}</p>
@@ -73,7 +72,7 @@ function HotelDetails({ hotels }) {
                     </div>
                     <div className="small-details">
                     <i className="fa-solid fa-up-right-from-square"></i>
-                    <a className="link" href={`${url}`} target="_blank"><p>Visit Website</p></a>
+                    <a className="link" href={`${url}`} rel="noreferrer" target="_blank"><p>Visit Website</p></a>
                     </div>
                 </div>
             </div>

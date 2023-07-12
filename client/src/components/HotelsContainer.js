@@ -17,7 +17,7 @@ function HotelsContainer({ search, setSearch }) {
 
 
   const destination = destinations.find(
-    (destination) => destination.id == destination_id
+    (destination) => destination.id === parseInt(destination_id)
   );
 
   if (!destination) {

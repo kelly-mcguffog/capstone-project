@@ -1069,7 +1069,7 @@ margin: 30px auto;
 .line-details{
   border: 0.5px solid rgb(210, 210, 210);
   margin: 0;
-  height: 320px;
+  height: 450px;
 }
 
 .back-link{
@@ -1119,4 +1119,41 @@ button.form-button{
 .small-image {
   grid-column: 2 / span 2; /* Span two columns */
   /* grid-row: 1 / span 1; */
+}
+
+.checkin{
+  width: 30px;
+  height: 30px;
+  /* position: relative; */
+  position: absolute;
+  border: 1px solid white;
+  overflow: hidden;
+}
+
+.checkin1 {
+  top: 0;
+  left: 0;
+}
+
+.checkin2 {
+  top: 0px; /* Adjust position as needed */
+  left: 20px; /* Adjust position as needed */
+}
+
+.checkin3 {
+  top: 0px; /* Adjust position as needed */
+  left: 40px; /* Adjust position as needed */
+}
+
+/* .checkin-img{
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
+.checkin-container{
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 20px 0px;
 }

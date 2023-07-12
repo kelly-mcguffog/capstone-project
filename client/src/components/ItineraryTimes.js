@@ -20,20 +20,16 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
 
   function deleteItineraryTime(entityType) {
     let endpoint = "";
-    let updatedItineraryTime = null;
 
     switch (entityType) {
       case "restaurant":
         endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/restaurant_itinerary_times/${id}`;
-        updatedItineraryTime = { ...itinerary_time, restaurant: null };
         break;
       case "activity":
         endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/activity_itinerary_times/${id}`;
-        updatedItineraryTime = { ...itinerary_time, activity: null };
         break;
       case "hotel":
         endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/hotel_itinerary_times/${id}`;
-        updatedItineraryTime = { ...itinerary_time, hotel: null };
         break;
       default:
         return;
@@ -51,10 +47,8 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
           );
 
           if (updatedItineraryTimes.length === 0) {
-            // Delete the itinerary_day if there are no more itinerary_times
             deleteItineraryDay();
           } else {
-            // Update the itinerary_day with the updated itinerary_times
             const updatedItineraryDay = { ...itinerary_day, combined_itinerary_times: updatedItineraryTimes };
             updateItineraryDay(updatedItineraryDay);
           }
@@ -77,7 +71,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
         if (response.ok) {
           console.log("itinerary_day deleted successfully");
 
-          // Remove the deleted itinerary_day from the user's trips
           const updatedTrips = user.trips.map((t) => {
             if (t.id === trip.id) {
               const updatedItineraryDays = t.itinerary_days.filter((day) => day.id !== itinerary_day.id);
@@ -88,7 +81,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
 
           setUser({ ...user, trips: updatedTrips });
 
-          // Call the onDeleteItineraryDay function from the parent component
           onDeleteItineraryDay(itinerary_day);
         } else {
           console.log("Failed to delete itinerary_day");
@@ -113,7 +105,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
         if (response.ok) {
           console.log("itinerary_day updated successfully");
 
-          // Update the user's trips with the updated itinerary_day
           const updatedTrips = user.trips.map((t) => {
             if (t.id === trip.id) {
               const updatedItineraryDays = t.itinerary_days.map((day) => {

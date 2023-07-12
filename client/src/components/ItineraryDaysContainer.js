@@ -6,9 +6,6 @@ function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate })
 
     itinerary_days.forEach((day) => {
         const date = new Date(day.date);
-        //   const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-
-        //   const formattedDate = adjustedDate.toISOString().split("T")[0];
 
         if (combinedItineraryDays.hasOwnProperty(date)) {
             combinedItineraryDays[date].combined_itinerary_times.push(

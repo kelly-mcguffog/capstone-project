@@ -1,12 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import TripsContainer from "./TripsContainer";
 import TripsListings from "./TripsListings";
 
 
 function Profile() {
     const { user } = useContext(UserContext)
-    const { trips } = user
 
     console.log(user)
     return (

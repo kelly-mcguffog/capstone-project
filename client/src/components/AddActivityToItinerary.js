@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 function AddActivityToItinerary({ onAddActivity }) {
   const { trip_id, destination_id, id: activity_id } = useParams();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { destinations } = useContext(DestinationsContext);
 
   const [errors, setErrors] = useState([]);
@@ -27,7 +27,7 @@ function AddActivityToItinerary({ onAddActivity }) {
     return <div>Loading...</div>;
   }
 
-  const destination = destinations.find((destination) => destination.id == destination_id);
+  const destination = destinations.find((destination) => destination.id === parseInt(destination_id));
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -76,13 +76,13 @@ function AddActivityToItinerary({ onAddActivity }) {
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            {/* {errors.length > 0 && (
+            {errors.length > 0 && (
             <ul>
                 {errors.map((error, index) => (
                 <li key={index}>{error}</li>
                 ))}
             </ul>
-            )} */}
+            )}
             <div className="label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>

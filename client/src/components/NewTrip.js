@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
-import { useParams, NavLink, Link, useNavigate } from "react-router-dom";
-import HotelsContainer from "./HotelsContainer";
+import { useParams, useNavigate } from "react-router-dom";
 
 function NewTrip() {
   const { id } = useParams();
@@ -30,7 +29,7 @@ function NewTrip() {
 
 
   const destination = destinations.find(
-    (destination) => destination.id == id
+    (destination) => destination.id === parseInt(id)
   );
 
   if (!destination) {
@@ -78,7 +77,6 @@ function NewTrip() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((newTrip) => onAddTrip(newTrip));
-        // console.log(trip.id)
         navigate(`/users/${user.id}/trips`);
       } else {
         r.json().then((err) => setErrors(err.errors));
@@ -90,6 +88,13 @@ function NewTrip() {
     <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
       <div className="header-text">
         <h1 className="title">Plan Your Trip to {city}</h1>
+        {errors.length > 0 && (
+            <ul>
+                {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+                ))}
+            </ul>
+            )}
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             <div id="trip-form" className="form-info">

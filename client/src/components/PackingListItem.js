@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function PackingListItem({ item, onUpdatePackingItem, onDeletePackingItem }) {
@@ -33,7 +32,6 @@ const deleteItem = () => {
         method: 'DELETE',
     })
     onDeletePackingItem(item)
-    // .then(data => onDeletePackingItem(data))
 }
 
   return (
@@ -55,8 +53,6 @@ const deleteItem = () => {
         <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
         <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>
             <p onClick={deleteItem} className="drop-text">Delete</p>
-            {/* <hr></hr>
-            <p className="drop-text">Edit</p> */}
         </div>
         </div>
       </div>

@@ -1,27 +1,13 @@
 import React from "react";
 
-function FilterActivities({ setFilterPrice, setFilterRating, filterPrice }) {
+function FilterActivities({ setFilterRating }) {
 
     const handleFilterRatingChange = (event) => {
         setFilterRating(event.target.value);
     };
 
-    // const handleFilterPriceChange = (event) => {
-    //     setFilterPrice(parseInt(event.target.value));
-    // }
-
     return (
         <div className="filter">
-            {/* <div className="price">
-                <h2>Price</h2>
-                <input
-                type="range"
-                min="1"
-                max="5"
-                onChange={handleFilterPriceChange}
-                value={filterPrice}
-                />
-            </div> */}
             <div className="rating">
                 <h2>Rating</h2>
                 <label>

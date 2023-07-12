@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import RestaurantsCard from "./RestaurantsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterRestaurants from "./FilterRestaurants";
@@ -12,7 +12,6 @@ function RestaurantsContainer({ search, setSearch }) {
   const [filterCuisine, setFilterCuisine] = useState("");
   const [filterRating, setFilterRating] = useState("");
   const [filterPrice, setFilterPrice] = useState("")
-  // const [search, setSearch] = useState("")
 
 
   if (destinations === null) {
@@ -21,7 +20,7 @@ function RestaurantsContainer({ search, setSearch }) {
 
 
   const destination = destinations.find(
-    (destination) => destination.id == destination_id
+    (destination) => destination.id === parseInt(destination_id)
   );
 
   if (!destination) {

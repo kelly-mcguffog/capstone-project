@@ -49,7 +49,6 @@ function Login() {
         <div className="login-form">
           <div className="credentials">
         <div className="input-text">
-          {/* <h3 className="input-title">Username</h3> */}
         </div>
         <input
           type="text"
@@ -64,7 +63,6 @@ function Login() {
         </div>
         <div className="credentials">
         <div className="input-text">
-          {/* <h3 className="input-title">Password</h3> */}
         </div>
         <input
           type="password"

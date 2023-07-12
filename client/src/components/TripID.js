@@ -1,20 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { DestinationsContext } from "../context/DestinationsContext";
-import ItineraryDaysContainer from "./ItineraryDaysContainer";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 
 function TripID({ trip, onDeleteTrip, isShowing }) {
     const { destinations } = useContext(DestinationsContext);
-    const { user, setUser } = useContext(UserContext);
-    const navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
     const { id, outbound_flight, destination_id } = trip;
 
     const destination = destinations
-        ? destinations.find((destination) => destination.id == destination_id)
+        ? destinations.find((destination) => destination.id === parseInt(destination_id))
         : null;
     const city = destination ? destination.city : null;
     const country = destination ? destination.country : null;
@@ -40,7 +38,6 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                     console.log("Trip deleted successfully");
                     onDeleteTrip(id)
 
-                    // Remove the deleted trip from the user's trips
                 } else {
                     console.log("Failed to delete trip");
                 }

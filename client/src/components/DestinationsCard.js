@@ -8,7 +8,7 @@ function DestinationsCard({ destination }) {
         <div className="card-details">
             <Link className="link city" to={`/destinations/${id}/trips`}>
                 <div className="img-container">
-                    <img className="img" src={photo} />
+                    <img className="img" alt={city} src={photo} />
                 </div>
                 <div>
                     <h3 className="city">{city}</h3>

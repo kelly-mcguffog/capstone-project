@@ -1,26 +1,38 @@
 import React, { useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { DestinationsContext } from "../context/DestinationsContext";
+import { Link, useParams } from "react-router-dom";
+import { AllUsersContext } from "../context/AllUsersContext";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import GridHeader from "./GridHeader";
+import UsersCheckIn from "./UsersCheckIn";
 
 function RestaurantDetails({ restaurants }) {
 
-    const { destinations } = useContext(DestinationsContext);
     const { destination_id, trip_id, id } = useParams()
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
 
     const restaurant = restaurants.find(restaurant => restaurant.id === parseInt(id))
+    const { users } = useContext(AllUsersContext);
 
     if (!restaurant) return <div>Loading...</div>
 
     if(!isLoaded) return <div>Loading...</div>
 
-    const {name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3} = restaurant
+    if (!users) return <div>Loading...</div>;
 
+    const {name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3} = restaurant
+   
+    const allUsers = users.flatMap((user) =>
+    user.trips.flatMap((trip) =>
+      trip.itinerary_days.flatMap((day) =>
+        day.combined_itinerary_times
+          .filter((time) => time.restaurant && time.restaurant.id && time.restaurant.id.toString() === id)
+          .map(() => user)
+      )
+    )
+  );
     
     return (
         <>
@@ -45,6 +57,7 @@ function RestaurantDetails({ restaurants }) {
                 <hr className="line-details"></hr>
                 <div className="map-details">
                     <Map longitude={longitude} latitude={latitude}/>
+                    <UsersCheckIn allUsers={allUsers}/>
                     <div className="small-details">
                     <i className="fa-sharp fa-solid fa-location-dot"></i><p>{address}</p>
                     </div>
@@ -54,7 +67,7 @@ function RestaurantDetails({ restaurants }) {
                     </div>
                     <div className="small-details">
                     <i className="fa-solid fa-up-right-from-square"></i>
-                    <a className="link" href={`${url}`} target="_blank"><p>Visit Website</p></a>
+                    <a className="link" href={`${url}`} rel="noreferrer" target="_blank"><p>Visit Website</p></a>
                     </div>
                 </div>
             </div>

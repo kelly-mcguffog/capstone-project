@@ -17,7 +17,7 @@ function Header({ search, setSearch, searchDestinations }) {
           <Search
             search={search}
             setSearch={setSearch}
-            searchDestinations={searchDestinations} // Pass searchDestinations prop
+            searchDestinations={searchDestinations}
           />
         </div>
       </div>

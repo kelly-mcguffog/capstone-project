@@ -1,8 +1,7 @@
 import React from "react";
 
 function ItineraryActivity({ activity }) {
-    // console.log(activity)
-    const { address, description, name, price } = activity
+    const { address, description, name } = activity
     return (
         <div>
             <h3 className="itinerary-activity">{name}</h3>

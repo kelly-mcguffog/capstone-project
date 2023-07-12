@@ -1,8 +1,8 @@
 import React from "react";
 
 function ItineraryRestaurant({ restaurant }) {
-    // console.log(restaurant)
-    const { address, average_price, cuisine, description, name, rating } = restaurant
+
+    const { address, cuisine, description, name } = restaurant
 
     return (
 
