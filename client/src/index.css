@@ -59,6 +59,9 @@ header {
   border-radius: 50px;
   color: white;
 }
+.fa-arrow-right{
+  cursor: pointer;
+}
 .fa-plus{
   padding: 5px;
   cursor: pointer;
@@ -832,6 +835,18 @@ input:focus {
   width: 90%;
   border-bottom: 1px dotted #0f0043;
   margin-top: 10px;
+}
+
+.photo-upload{
+  text-align: left;
+  font-size: 12px;
+  padding: 10px 0px 10px 0px;
+  color: rgb(210, 210, 210);
+}
+
+.photo-upload-text{
+  color: #0f0043;
+  margin-right: 5px;
 }
 
 .icons{

@@ -7,7 +7,7 @@ function RestaurantsCard({ restaurant, trip_id }) {
 
     const getDetailsUrl = () => {
         if (trip_id !== undefined) {
-            return `/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}`;
+            return `/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}/details`;
         } else {
             return `/destinations/${destination_id}/restaurants/${id}/details`;
         }

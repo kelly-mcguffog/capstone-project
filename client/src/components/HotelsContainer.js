@@ -34,6 +34,7 @@ function HotelsContainer({ search, setSearch }) {
     return nameMatch && priceMatch && ratingMatch;
   });
 
+
   return (
     <>
       <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />

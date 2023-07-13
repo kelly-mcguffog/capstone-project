@@ -5,13 +5,15 @@ function ActivitiesCard({ activity, trip_id }) {
 
     const { id, photo, name, description, price, destination_id } = activity
 
+
     const getDetailsUrl = () => {
         if (trip_id !== undefined) {
-            return `/destinations/${destination_id}/trips/${trip_id}/activities/${id}`;
+          return `/destinations/${destination_id}/trips/${trip_id}/activities/${id}/details`;
         } else {
-            return `/destinations/${destination_id}/activities/${id}/details`;
+          return `/destinations/${destination_id}/activities/${id}/details`;
         }
-    };
+      };
+         
 
     const getItineraryUrl = () => {
         if (trip_id !== undefined) {

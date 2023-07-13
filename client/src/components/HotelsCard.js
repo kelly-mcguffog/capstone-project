@@ -7,7 +7,7 @@ function HotelsCard({ hotel, trip_id }) {
 
     const getDetailsUrl = () => {
         if (trip_id !== undefined) {
-            return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`;
+            return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}/details`;
         } else {
             return `/destinations/${destination_id}/hotels/${id}/details`;
         }

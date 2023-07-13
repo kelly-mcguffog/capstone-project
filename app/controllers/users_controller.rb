@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
     
     def index
-        render json: User.all, status: :ok
+        user = User.all
+        render json: user.all, status: :ok
     end
 
     def create

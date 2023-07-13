@@ -35,6 +35,7 @@ function HotelDetails({ hotels }) {
         )
     );
 
+    console.log(allUsers)
     const getItineraryUrl = () => {
         if (trip_id !== undefined) {
             return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`;

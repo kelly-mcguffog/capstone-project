@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 function SearchResults({ result }) {
 
     const { id, city, country, photo, hotels, restaurants, activities } = result
+    const destination_id = id
 
     return (
         <>
-            <Link className="link" to={`/destinations/${id}/trips`}>
+            <Link className="link" to={`/destinations/${destination_id}/hotels`}>
                 <div className="search-results">
                     <div className="img-container search-img-container">
                         <img className="img" alt={city} src={photo} />

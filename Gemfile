@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dotenv-rails'
 gem 'rest-client'
 gem 'json'
+gem 'carrierwave', '~> 3.0'
 
 group :development, :test do
   gem 'pry'
