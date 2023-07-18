@@ -7,6 +7,10 @@ body, html {
   color: #0f0043;
 }
 
+button{
+  cursor: pointer;
+}
+
 #root{
   height: 100%;
 }
@@ -18,7 +22,11 @@ body, html {
 code {
   font-family: Arial, Helvetica, sans-serif;
 }
-
+.time-menu{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 header {
   width: 100%;
   display: flex;
@@ -113,6 +121,7 @@ header button, .dropdown {
   text-decoration: none;
   color: #0f0043;
   cursor: pointer;
+  position: relative;
 }
 
 a.link.active{
@@ -236,13 +245,48 @@ form {
   border-radius: 10px;
   margin: 20px 0px;
 }
-
+.details-profile-container{
+  display: flex;
+  /* grid-column-gap: 20px;
+  column-gap: 20px;
+  flex-wrap: wrap; */
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 10px;
+  padding: 20px;
+  /* justify-content: space-around; */
+  margin: 20px auto;
+}
 .details-info-destinations{
   width: 65%;
   padding: 20px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
+.profile-form{
+  display: flex;
+}
+.profile-form-container{
+  padding: 30px 50px;
+}
+#photo{
+  margin-top:10px;
+}
+.profile-btn{
+  text-align: left;
+  text-align: center;
+  width: 40%;
+  /* margin-top: 20px; */
+}
+.profile-form-input{
+  margin-bottom: 20px;
+}
+.profile-credentials{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
 .details{
   display: flex;
   /* align-items: center; */
@@ -284,10 +328,20 @@ form {
   align-items: center;
   justify-content: space-between;
 }
+.profile-info-details{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  align-items: center;
+}
 .rectangle-card-info{
   margin: 10px;
 }
-
+.fa-pen-to-square{
+  padding: 0;
+  margin: 0;
+  color: #0f0043;
+}
 .img{
   /* width: 100%; */
   height: 100%;
@@ -532,6 +586,8 @@ p{
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  top: 100%;
+  right: 0;
 }
 
 .hidden{
@@ -626,7 +682,11 @@ input[type="search"]{
   height: 250px;
   top: 40%;
 }
-
+.user-map-container{
+  width: 100%;
+  height: 250px;
+  top: 40%;
+}
 .row{
   display: flex;
   align-items: center;
@@ -800,12 +860,22 @@ input:focus {
   text-decoration: none;
   margin:10px;
 }
-.greeting-message{
+.profile-details{
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+  justify-content: center;
+}
+
+.map-wrapper{
+  display: block;
+}
+/* .greeting-message{
   text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
+} */
 .trip-listings{
   display: flex;
   align-items: center;
@@ -897,6 +967,9 @@ input:focus {
   text-align: left;
   margin-top: 0;
 }
+/* i.fa-solid.fa-bars.dropbtn{
+  position: relative;
+} */
 
 .itinerary-activity-listing{
   /* margin: 20px auto;
@@ -906,7 +979,7 @@ input:focus {
     grid-column-gap: 40px;
     grid-column-gap: 40px;
     column-gap: 40px;
-    padding: 20px;
+    padding: 20px 30px 20px 20px;
     border-radius: 10px;
     margin: 20px 0px;
 }
@@ -1126,6 +1199,11 @@ margin: 30px auto;
 /* .details-container{
   width: 60%;
 } */
+
+.profile-container{
+  margin: 50px;
+  /* padding: 40px; */
+}
 
 .details-price{
   margin: 0;

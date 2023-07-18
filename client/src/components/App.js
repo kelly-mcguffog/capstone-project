@@ -18,6 +18,7 @@ import PackingListContainer from "./PackingListContainer";
 import HotelDetails from "./HotelDetails";
 import RestaurantDetails from "./RestaurantDetails";
 import ActivityDetails from "./ActivityDetails";
+import EditProfileForm from "./EditProfileForm";
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
   const match1 = useMatch("/users/:user_id/trips");
   const match2 = useMatch("/users/:user_id/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
-  const match = match1 || match2 || match3;
+  const match4 = useMatch("/users/:user_id/profile")
+  const match = match1 || match2 || match3 || match4;
 
   useEffect(() => {
     fetch("/activities")
@@ -343,6 +345,10 @@ function App() {
               element={<TripDetails onDeleteItineraryDate={onDeleteItineraryDate} />}
             />
             <Route path="/trips/:id/packing_list" element={<PackingListContainer />} />
+            <Route
+              path="/users/:user_id/profile"
+              element={<EditProfileForm />}
+            />
             <Route path="/users/:user_id/trips" element={<Profile />} />
           </>
         )}

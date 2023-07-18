@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
     t.string "country"
     t.string "city"
     t.string "photo"
+    t.float "longitude"
+    t.float "latitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,17 +1,36 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Link } from "react-router-dom";
 import TripsListings from "./TripsListings";
 import NavBar from "./NavBar";
+import UserMap from "./UserMap";
+import { useLoadScript } from "@react-google-maps/api";
+import { DestinationsContext } from "../context/DestinationsContext";
 
 function Profile() {
-    
     const { user } = useContext(UserContext);
+    const { destinations } = useContext(DestinationsContext);
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    })
+
+    if (!isLoaded) return <div>Loading...</div>
 
     if (!user) {
         return null;
     }
 
-    console.log(user)
+    if (!destinations) {
+        return <div>Loading destinations...</div>;
+    }
+
+    const { first_name, last_name, email, username, avatar, trips } = user;
+
+    const destinationMarkers = trips.map((trip) => {
+        const destination = destinations.find((dest) => dest.id === trip.destination_id);
+        return { longitude: destination.longitude, latitude: destination.latitude };
+    });
+
     return (
         <div className="side-bar">
             <div className="my-trips">
@@ -19,12 +38,36 @@ function Profile() {
             </div>
             <div className="trips welcome-header">
                 <NavBar />
-                <div className="greeting-message">
-                    <h3 className="greeting">Welcome back, {user.first_name}!</h3>
-                    <h1 className="greeting">Let's plan your vacation</h1>
+                <div className="map-wrapper">
+                    {isLoaded ? (
+                        <UserMap destinationMarkers={destinationMarkers} />
+                    ) : (
+                        <div>Loading...</div>
+                    )}
                 </div>
-                <div className="img-container">
-                    <img className="img" alt={user.username} src={user.avatar.url} />
+                <div className="details profile-container">
+                    <div className="details-img-wrapper">
+                        <div className="details-img-container">
+                            <img className="details-img" alt={username} src={avatar.url}></img>
+                        </div>
+                    </div>
+                    <div className="details-info-destinations">
+                        <div className="profile-info-details">
+                            <h2>{first_name} {last_name}</h2>
+                            <Link to={`/users/${user.id}/profile`}>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                            </Link>
+                        </div>
+                        <div className="details-copy">
+                            <p><i className="fa-solid fa-envelope"></i> {email}</p>
+                            <p><i className="fa-solid fa-user"></i> {username}</p>
+                            <div className="btn-container">
+                                <Link className="page-btn main-btn">
+                                    Follow
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

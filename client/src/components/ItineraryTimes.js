@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import ItineraryHotel from "./ItineraryHotel";
 import ItineraryRestaurant from "./ItineraryRestaurant";
 import ItineraryActivity from "./ItineraryActivity";
 
 function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItineraryDay }) {
-  
   const { id, time, hotel, restaurant, activity } = itinerary_time;
+  const [isShowing, setIsShowing] = useState(false)
 
   const { user, setUser } = useContext(UserContext);
   const itineraryTime = new Date(time);
@@ -129,6 +129,10 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
       });
   }
 
+  const handleDropdown = () => {
+    setIsShowing(isShowing => !isShowing)
+  }
+
   return (
     <div className="itinerary-activity-listing">
       <div className="icon">
@@ -136,33 +140,54 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
         {hotel ? <i className="fa-solid fa-hotel"></i> : null}
         {restaurant ? <i className="fa-solid fa-utensils"></i> : null}
       </div>
-      <div>
-        {hotel && (
-          <div>
+      {hotel && (
+        <div>
+          <div className="time-menu">
             <h3 className="time">{formattedTime}</h3>
-            <ItineraryHotel hotel={hotel} />
-            <button onClick={() => deleteItineraryTime("hotel")}>Delete Hotel</button>
+
+            <div className="dropdown">
+                    <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+                    <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                        <p onClick={() => deleteItineraryTime("hotel")} className="drop-text">Delete</p>
+                    </div>
+                </div>
           </div>
-        )}
-      </div>
-      <div>
-        {restaurant && (
-          <div>
+          <ItineraryHotel hotel={hotel} />
+          {/* <button onClick={() => deleteItineraryTime("hotel")}>Delete Hotel</button> */}
+        </div>
+      )}
+      {restaurant && (
+        <div>
+          <div className="time-menu">
             <h3 className="time">{formattedTime}</h3>
-            <ItineraryRestaurant restaurant={restaurant} />
-            <button onClick={() => deleteItineraryTime("restaurant")}>Delete Restaurant</button>
+            <div className="dropdown">
+                    <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+                    <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                        <p onClick={() => deleteItineraryTime("restaurant")} className="drop-text">Delete</p>
+                    </div>
+                </div>
           </div>
-        )}
-      </div>
-      <div>
-        {activity && (
-          <div>
+          <ItineraryRestaurant restaurant={restaurant} />
+          {/* <button onClick={() => deleteItineraryTime("restaurant")}>Delete Restaurant</button> */}
+        </div>
+      )}
+      {activity && (
+        <div>
+          <div className="time-menu">
+            <div>
             <h3 className="time">{formattedTime}</h3>
-            <ItineraryActivity activity={activity} />
-            <button onClick={() => deleteItineraryTime("activity")}>Delete Activity</button>
+            </div>
+            <div className="dropdown">
+                    <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+                    <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                        <p onClick={() => deleteItineraryTime("activity")} className="drop-text">Delete</p>
+                    </div>
+                </div>
           </div>
-        )}
-      </div>
+          <ItineraryActivity activity={activity} />
+          {/* <button onClick={() => deleteItineraryTime("activity")}>Delete Activity</button> */}
+        </div>
+      )}
     </div>
   );
 }
