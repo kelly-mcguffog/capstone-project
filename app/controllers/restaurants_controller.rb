@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+    
     def index
         render json: Restaurant.all, status: :ok
     end
@@ -16,5 +17,5 @@ class RestaurantsController < ApplicationController
     def find_restaurant
         @restaurant = Restaurant.find(params[:id])
     end
-
+    
 end

@@ -1,10 +1,17 @@
 class ItineraryDaySerializer < ActiveModel::Serializer
-  attributes :id, :date, :trip_id
-  belongs_to :trip
-  
-  has_many :hotel_itinerary_times
-  has_many :activity_itinerary_times
-  has_many :restaurant_itinerary_times
+  attributes :id, :date, :combined_itinerary_times, :trip_id
 
+  def combined_itinerary_times
+    combined_times = object.combined_itinerary_times.map do |itinerary_time|
+      {
+        id: itinerary_time[:id],
+        time: itinerary_time[:time],
+        activity: itinerary_time[:activity],
+        hotel: itinerary_time[:hotel],
+        restaurant: itinerary_time[:restaurant]
+      }
+    end
+    combined_times.sort_by { |time| time[:time] }
+  end
 end
 

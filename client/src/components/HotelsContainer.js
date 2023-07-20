@@ -5,8 +5,8 @@ import HotelsCard from "./HotelsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterHotels from "./FilterHotels";
 
-function HotelsContainer({ search, setSearch }) {
-  
+function HotelsContainer({ search, setSearch, handleSearch }) {
+
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
   const [filterRating, setFilterRating] = useState("");
@@ -41,7 +41,7 @@ function HotelsContainer({ search, setSearch }) {
       <div className="details-row">
         <FilterHotels setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
-          {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel} />)}
+          {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel} handleSearch={handleSearch} />)}
         </div>
       </div>
     </>

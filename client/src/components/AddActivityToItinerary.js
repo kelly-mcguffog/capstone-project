@@ -3,7 +3,7 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
-function AddActivityToItinerary({ onAddActivity }) {
+function AddActivityToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: activity_id } = useParams();
   const { user } = useContext(UserContext);
   const { destinations } = useContext(DestinationsContext);
@@ -55,7 +55,7 @@ function AddActivityToItinerary({ onAddActivity }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const submitTripId = formData.trip_id || user.trips[0]?.id || "";
+    const submitTripId = formData.trip_id || "";
 
     fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
@@ -65,12 +65,20 @@ function AddActivityToItinerary({ onAddActivity }) {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((newActivity) => onAddActivity(newActivity));
+        r.json().then((newActivity) => {
+          onAddItinerary(newActivity);
+        });
         navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((errorData) => {
+          console.log("Error Data:", errorData);
+          setErrors(errorData.errors);
+        });
       }
-    });
+    })
+      .catch((error) => {
+        console.error("Error adding restaurant to itinerary:", error);
+      });
   }
 
   return (
@@ -106,7 +114,7 @@ function AddActivityToItinerary({ onAddActivity }) {
                 <input
                   type="datetime-local"
                   name="time"
-                  value={formData.activity_itinerary_times_attributes[0]?.time || ""}
+                  value={formData.activity_itinerary_times_attributes[0].time}
                   onChange={handleChange}
                 />
               </div>

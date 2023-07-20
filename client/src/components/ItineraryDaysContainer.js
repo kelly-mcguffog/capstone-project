@@ -2,44 +2,36 @@ import React from "react";
 import ItineraryDay from "./ItineraryDay";
 
 function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate }) {
-    
-    const combinedItineraryDays = {};
+    const nonEmptyFilteredItineraryDays = [];
 
     itinerary_days.forEach((day) => {
-        const date = new Date(day.date);
+        const existingItineraryDay = nonEmptyFilteredItineraryDays.find(
+            (itineraryDay) => itineraryDay.date === day.date
+        );
 
-        if (combinedItineraryDays.hasOwnProperty(date)) {
-            combinedItineraryDays[date].combined_itinerary_times.push(
-                ...day.combined_itinerary_times
+        if (existingItineraryDay) {
+            const existingTimes = existingItineraryDay.combined_itinerary_times.map(
+                (time) => time.id
             );
+            const newTimes = day.combined_itinerary_times.filter(
+                (time) => !existingTimes.includes(time.id)
+            );
+
+            existingItineraryDay.combined_itinerary_times.push(...newTimes);
         } else {
-            combinedItineraryDays[date] = { ...day };
+            const newItineraryDay = {
+                ...day,
+                combined_itinerary_times: [...day.combined_itinerary_times],
+            };
+            nonEmptyFilteredItineraryDays.push(newItineraryDay);
         }
-    });
-
-    const filteredItineraryDays = Object.values(combinedItineraryDays).map((day) => {
-        const uniqueCombinedItineraryTimes = [...new Set(day.combined_itinerary_times)];
-
-        return {
-            ...day,
-            combined_itinerary_times: uniqueCombinedItineraryTimes,
-        };
-    });
-
-    const nonEmptyFilteredItineraryDays = filteredItineraryDays.filter((day) => {
-        const itineraryTimesExist = day.combined_itinerary_times.length > 0;
-        const restaurantExists = day.combined_itinerary_times.some((time) => time.restaurant);
-        const hotelExists = day.combined_itinerary_times.some((time) => time.hotel);
-        const activityExists = day.combined_itinerary_times.some((time) => time.activity);
-
-        return itineraryTimesExist || restaurantExists || hotelExists || activityExists;
     });
 
     return (
         <>
-            {nonEmptyFilteredItineraryDays.map((itinerary_day, index) => (
+            {nonEmptyFilteredItineraryDays.map((itinerary_day) => (
                 <ItineraryDay
-                    key={index}
+                    key={itinerary_day.id}
                     trip={trip}
                     itinerary_day={itinerary_day}
                     onDeleteItineraryDate={onDeleteItineraryDate}

@@ -5,7 +5,7 @@ import ActivitiesCard from "./ActivitiesCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterActivities from "./FilterActivities";
 
-function ActivitiesContainer({ search, setSearch }) {
+function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
   const [filterRating, setFilterRating] = useState("");
@@ -38,7 +38,7 @@ function ActivitiesContainer({ search, setSearch }) {
       <div className="details-row">
         <FilterActivities setFilterRating={setFilterRating} />
         <div className="cards">
-          {filterActivities.map(activity => <ActivitiesCard key={activity.id} trip_id={id} activity={activity} />)}
+          {filterActivities.map(activity => <ActivitiesCard key={activity.id} trip_id={id} handleSearch={handleSearch} activity={activity} />)}
         </div>
       </div>
     </>

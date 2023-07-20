@@ -4,12 +4,13 @@ import ItineraryHotel from "./ItineraryHotel";
 import ItineraryRestaurant from "./ItineraryRestaurant";
 import ItineraryActivity from "./ItineraryActivity";
 
-function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItineraryDay }) {
-  const { id, time, hotel, restaurant, activity } = itinerary_time;
+function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
+
   const [isShowing, setIsShowing] = useState(false)
 
   const { user, setUser } = useContext(UserContext);
-  const itineraryTime = new Date(time);
+
+  const itineraryTime = new Date(itinerary_time.time);
 
   const options = {
     hour: "numeric",
@@ -21,16 +22,15 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
 
   function deleteItineraryTime(entityType) {
     let endpoint = "";
-
     switch (entityType) {
-      case "restaurant":
-        endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/restaurant_itinerary_times/${id}`;
+      case "hotel":
+        endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/hotel_itinerary_times/${itinerary_time.id}`;
         break;
       case "activity":
-        endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/activity_itinerary_times/${id}`;
+        endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/activity_itinerary_times/${itinerary_time.id}`;
         break;
-      case "hotel":
-        endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/hotel_itinerary_times/${id}`;
+      case "restaurant":
+        endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}/restaurant_itinerary_times/${itinerary_time.id}`;
         break;
       default:
         return;
@@ -43,15 +43,38 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
         if (response.ok) {
           console.log(`${entityType} deleted successfully`);
 
-          const updatedItineraryTimes = itinerary_day.combined_itinerary_times.filter(
-            (time) => time.id !== id
+          const updatedCombinedItineraryTimes = itinerary_day.combined_itinerary_times.filter(
+            (itineraryTime) => itineraryTime.id !== itinerary_time.id
           );
 
-          if (updatedItineraryTimes.length === 0) {
-            deleteItineraryDay();
+          const updatedItineraryDay = {
+            ...itinerary_day,
+            combined_itinerary_times: updatedCombinedItineraryTimes,
+          };
+
+          if (updatedCombinedItineraryTimes.length === 0) {
+            deleteItineraryDay(updatedItineraryDay);
           } else {
-            const updatedItineraryDay = { ...itinerary_day, combined_itinerary_times: updatedItineraryTimes };
-            updateItineraryDay(updatedItineraryDay);
+            const updatedTrip = user.trips.find((t) => t.id === trip.id);
+
+            const updatedItineraryDays = updatedTrip.itinerary_days.map((itineraryDay) => {
+              if (itineraryDay.id === updatedItineraryDay.id) {
+                return updatedItineraryDay;
+              }
+              return itineraryDay;
+            });
+
+            const updatedUser = {
+              ...user,
+              trips: user.trips.map((t) => {
+                if (t.id === trip.id) {
+                  return { ...t, itinerary_days: updatedItineraryDays };
+                }
+                return t;
+              }),
+            };
+
+            setUser(updatedUser);
           }
         } else {
           console.log(`Failed to delete ${entityType}`);
@@ -62,8 +85,8 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
       });
   }
 
-  function deleteItineraryDay() {
-    const endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}`;
+  function deleteItineraryDay(deletedItineraryDay) {
+    const endpoint = `/trips/${trip.id}/itinerary_days/${deletedItineraryDay.id}`;
 
     fetch(endpoint, {
       method: "DELETE",
@@ -71,18 +94,18 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
       .then((response) => {
         if (response.ok) {
           console.log("itinerary_day deleted successfully");
+          const updatedUser = {
+            ...user,
+            trips: user.trips.map((t) => {
+              if (t.id === trip.id) {
+                const updatedItineraryDays = t.itinerary_days.filter((day) => day.id !== deletedItineraryDay.id);
+                return { ...t, itinerary_days: updatedItineraryDays };
+              }
+              return t;
+            }),
+          };
 
-          const updatedTrips = user.trips.map((t) => {
-            if (t.id === trip.id) {
-              const updatedItineraryDays = t.itinerary_days.filter((day) => day.id !== itinerary_day.id);
-              return { ...t, itinerary_days: updatedItineraryDays };
-            }
-            return t;
-          });
-
-          setUser({ ...user, trips: updatedTrips });
-
-          onDeleteItineraryDay(itinerary_day);
+          setUser(updatedUser);
         } else {
           console.log("Failed to delete itinerary_day");
         }
@@ -92,42 +115,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
       });
   }
 
-  function updateItineraryDay(updatedItineraryDay) {
-    const endpoint = `/trips/${trip.id}/itinerary_days/${itinerary_day.id}`;
-
-    fetch(endpoint, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedItineraryDay),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("itinerary_day updated successfully");
-
-          const updatedTrips = user.trips.map((t) => {
-            if (t.id === trip.id) {
-              const updatedItineraryDays = t.itinerary_days.map((day) => {
-                if (day.id === itinerary_day.id) {
-                  return updatedItineraryDay;
-                }
-                return day;
-              });
-              return { ...t, itinerary_days: updatedItineraryDays };
-            }
-            return t;
-          });
-
-          setUser({ ...user, trips: updatedTrips });
-        } else {
-          console.log("Failed to update itinerary_day");
-        }
-      })
-      .catch((error) => {
-        console.log("Error occurred while updating itinerary_day", error);
-      });
-  }
 
   const handleDropdown = () => {
     setIsShowing(isShowing => !isShowing)
@@ -136,56 +123,53 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time, onDeleteItinerary
   return (
     <div className="itinerary-activity-listing">
       <div className="icon">
-        {activity ? <i className="fa-solid fa-map"></i> : null}
-        {hotel ? <i className="fa-solid fa-hotel"></i> : null}
-        {restaurant ? <i className="fa-solid fa-utensils"></i> : null}
+        {itinerary_time.activity ? <i className="fa-solid fa-map"></i> : null}
+        {itinerary_time.hotel ? <i className="fa-solid fa-hotel"></i> : null}
+        {itinerary_time.restaurant ? <i className="fa-solid fa-utensils"></i> : null}
       </div>
-      {hotel && (
-        <div>
+      {itinerary_time.hotel && (
+        <div className="itinerary-container">
           <div className="time-menu">
             <h3 className="time">{formattedTime}</h3>
 
             <div className="dropdown">
-                    <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
-                    <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
-                        <p onClick={() => deleteItineraryTime("hotel")} className="drop-text">Delete</p>
-                    </div>
-                </div>
+              <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+              <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                <p onClick={() => deleteItineraryTime("hotel")} className="drop-text">Delete</p>
+              </div>
+            </div>
           </div>
-          <ItineraryHotel hotel={hotel} />
-          {/* <button onClick={() => deleteItineraryTime("hotel")}>Delete Hotel</button> */}
+          <ItineraryHotel hotel={itinerary_time.hotel} />
         </div>
       )}
-      {restaurant && (
-        <div>
+      {itinerary_time.restaurant && (
+        <div className="itinerary-container">
           <div className="time-menu">
             <h3 className="time">{formattedTime}</h3>
             <div className="dropdown">
-                    <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
-                    <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
-                        <p onClick={() => deleteItineraryTime("restaurant")} className="drop-text">Delete</p>
-                    </div>
-                </div>
+              <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+              <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                <p onClick={() => deleteItineraryTime("restaurant")} className="drop-text">Delete</p>
+              </div>
+            </div>
           </div>
-          <ItineraryRestaurant restaurant={restaurant} />
-          {/* <button onClick={() => deleteItineraryTime("restaurant")}>Delete Restaurant</button> */}
+          <ItineraryRestaurant restaurant={itinerary_time.restaurant} />
         </div>
       )}
-      {activity && (
-        <div>
+      {itinerary_time.activity && (
+        <div className="itinerary-container">
           <div className="time-menu">
             <div>
-            <h3 className="time">{formattedTime}</h3>
+              <h3 className="time">{formattedTime}</h3>
             </div>
             <div className="dropdown">
-                    <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
-                    <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
-                        <p onClick={() => deleteItineraryTime("activity")} className="drop-text">Delete</p>
-                    </div>
-                </div>
+              <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
+              <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                <p onClick={() => deleteItineraryTime("activity")} className="drop-text">Delete</p>
+              </div>
+            </div>
           </div>
-          <ItineraryActivity activity={activity} />
-          {/* <button onClick={() => deleteItineraryTime("activity")}>Delete Activity</button> */}
+          <ItineraryActivity activity={itinerary_time.activity} />
         </div>
       )}
     </div>

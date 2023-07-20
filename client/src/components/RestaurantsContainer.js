@@ -5,7 +5,7 @@ import RestaurantsCard from "./RestaurantsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterRestaurants from "./FilterRestaurants";
 
-function RestaurantsContainer({ search, setSearch }) {
+function RestaurantsContainer({ search, setSearch, handleSearch }) {
 
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
@@ -44,7 +44,7 @@ function RestaurantsContainer({ search, setSearch }) {
       <div className="details-row">
         <FilterRestaurants setFilterCuisine={setFilterCuisine} setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
-          {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} trip_id={id} restaurant={restaurant} />)}
+          {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} trip_id={id} handleSearch={handleSearch} restaurant={restaurant} />)}
         </div>
       </div>
     </>

@@ -17,7 +17,7 @@ function Search({ search, setSearch, searchDestinations }) {
             {searchDestinations && searchDestinations.length > 0 && (
                 <div>
                     {searchDestinations.map((result) => (
-                        <SearchResults key={result.id} result={result} />
+                        <SearchResults key={result.id} setSearch={setSearch} result={result} />
                     ))}
                 </div>
             )}

@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
     
     def index
-        user = User.all
-        render json: user.all, status: :ok
+        users = User.all
+        render json: users, include: ["trips", "trips.itinerary_days"], status: :ok
     end
 
     def create
         user = User.create!(user_params)
         session[:user_id] ||= user.id
-        render json: user, status: :created
+        render json: user, include: ["trips", "trips.itinerary_days"], status: :created
     end
 
     def show
         user = User.find(session[:user_id])
-        render json: user, status: :ok
-    end
+        render json: user, include: ["trips", "trips.itinerary_days"], status: :ok
+    end      
 
     def update
         user = User.find(session[:user_id])
@@ -27,4 +27,5 @@ class UsersController < ApplicationController
     def user_params
         params.permit(:first_name, :last_name, :avatar, :email, :username, :password, :password_confirmation, :tsa_precheck)
     end
+    
 end

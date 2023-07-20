@@ -3,5 +3,5 @@ class TripSerializer < ActiveModel::Serializer
   belongs_to :user
   belongs_to :destination
   has_many :packing_list_items
-  has_many :itinerary_days
+  has_many :itinerary_days, serializer: ItineraryDaySerializer
 end

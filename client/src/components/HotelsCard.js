@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function HotelsCard({ hotel, trip_id }) {
+function HotelsCard({ hotel, trip_id, handleSearch }) {
 
     const { id, name, photo1, rating, average_price, short_description, destination_id } = hotel
 
@@ -37,10 +37,10 @@ function HotelsCard({ hotel, trip_id }) {
                     <h2>{name}</h2>
                     <p>{short_description}</p>
                     <div className="btn-container">
-                        <Link className="page-btn main-btn secondary-btn" to={getDetailsUrl()}>
+                        <Link onClick={handleSearch} className="page-btn main-btn secondary-btn" to={getDetailsUrl()}>
                             View Details
                         </Link>
-                        <Link className="page-btn main-btn" to={getItineraryUrl()}>
+                        <Link onClick={handleSearch} className="page-btn main-btn" to={getItineraryUrl()}>
                             Add to Itinerary
                         </Link>
                     </div>

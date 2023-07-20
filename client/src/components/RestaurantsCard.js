@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function RestaurantsCard({ restaurant, trip_id }) {
+function RestaurantsCard({ restaurant, trip_id, handleSearch }) {
 
     const { id, name, photo1, rating, average_price, description, destination_id } = restaurant
 
@@ -37,10 +37,10 @@ function RestaurantsCard({ restaurant, trip_id }) {
                     <h2>{name}</h2>
                     <p>{description}</p>
                     <div className="btn-container">
-                        <Link className="page-btn main-btn secondary-btn" to={getDetailsUrl()}>
+                        <Link onClick={handleSearch} className="page-btn main-btn secondary-btn" to={getDetailsUrl()}>
                             View Details
                         </Link>
-                        <Link className="page-btn main-btn" to={getItineraryUrl()}>
+                        <Link onClick={handleSearch} className="page-btn main-btn" to={getItineraryUrl()}>
                             Add to Itinerary
                         </Link>
                     </div>

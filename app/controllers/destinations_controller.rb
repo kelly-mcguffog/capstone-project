@@ -1,4 +1,5 @@
 class DestinationsController < ApplicationController
+    
     def index
         render json: Destination.all, status: :ok
     end
@@ -16,4 +17,5 @@ class DestinationsController < ApplicationController
     def find_destination
         @destination = Destination.find(params[:id])
     end
+    
 end

@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-function SearchResults({ result }) {
+function SearchResults({ result, setSearch }) {
 
     const { id, city, country, photo, hotels, restaurants, activities } = result
     const destination_id = id
 
+    const handleSearch = () => {
+        setSearch("");
+      };
+
     return (
         <>
-            <Link className="link" to={`/destinations/${destination_id}/hotels`}>
+            <Link onClick={handleSearch} className="link" to={`/destinations/${destination_id}/hotels`}>
                 <div className="search-results">
                     <div className="img-container search-img-container">
                         <img className="img" alt={city} src={photo} />
