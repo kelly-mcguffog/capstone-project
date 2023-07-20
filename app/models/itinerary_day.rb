@@ -12,6 +12,8 @@ class ItineraryDay < ApplicationRecord
   accepts_nested_attributes_for :activity_itinerary_times, allow_destroy: true
   accepts_nested_attributes_for :restaurant_itinerary_times, allow_destroy: true
 
+  validates :date, presence: true
+
   
   def combined_itinerary_times
     combined_times = []

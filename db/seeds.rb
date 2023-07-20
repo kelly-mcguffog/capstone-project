@@ -1,19 +1,3 @@
-# response = RestClient.get("https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation?query=london", 
-#     headers: {
-#         'X-RapidAPI-Key': "#{ENV["TRAVEL_ADVISOR_API_KEY"]}",
-#         'X-RapidAPI-Host': "travel-advisor.p.rapidapi.com",
-#     }
-# )
-# destinations_array = JSON.parse(response)
-
-# destinations_array.each do |destination|
-#     binding.pry
-# end
-
-
-
-#user
-
 user1 = User.create({
     first_name: "Olivia",
     last_name: "Hammer",

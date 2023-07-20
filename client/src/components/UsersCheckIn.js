@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 function UsersCheckIn({ allUsers }) {
-  
+  console.log(allUsers)
   return (
     <div className="checkin-container">
       {allUsers.slice(0, 3).map((user, index) => {
