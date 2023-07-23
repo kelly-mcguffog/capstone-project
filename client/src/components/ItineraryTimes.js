@@ -12,13 +12,19 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
 
   const itineraryTime = new Date(itinerary_time.time);
 
+  const adjustedTime = new Date(
+    itineraryTime.getTime() +
+    itineraryTime.getTimezoneOffset() * 60 * 1000
+  );
+
   const options = {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
   };
+  
 
-  const formattedTime = itineraryTime.toLocaleTimeString(undefined, options);
+  const formattedTime = adjustedTime.toLocaleTimeString(undefined, options);
 
   function deleteItineraryTime(entityType) {
     let endpoint = "";
@@ -115,6 +121,8 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
       });
   }
 
+
+  console.log(user)
 
   const handleDropdown = () => {
     setIsShowing(isShowing => !isShowing)

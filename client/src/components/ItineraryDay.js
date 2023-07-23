@@ -25,15 +25,16 @@ function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
   return (
     <div className="itinerary-info">
       <h1 className="time">{formattedDate}</h1>
-      {combined_itinerary_times && combined_itinerary_times.map((itineraryTime) => (
-        <ItineraryTimes
-          key={`${itineraryTime.id}`}
-          trip={trip}
-          itinerary_day={itinerary_day}
-          itinerary_time={itineraryTime}
-          onDeleteItineraryDate={onDeleteItineraryDate}
-        />
-      ))}
+      {combined_itinerary_times &&
+        combined_itinerary_times.map((itineraryTime) => (
+          <ItineraryTimes
+            key={itineraryTime.id}
+            trip={trip}
+            itinerary_day={itinerary_day}
+            itinerary_time={itineraryTime}
+            onDeleteItineraryDate={onDeleteItineraryDate}
+          />
+        ))}
     </div>
   );
 }
