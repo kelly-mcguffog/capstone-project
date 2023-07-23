@@ -1,11 +1,3 @@
-class EmailValidator < ActiveModel::EachValidator
-    def validate_each(record, attribute, value)
-      unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-        record.errors.add attribute
-      end
-    end
-  end
-
 class User < ApplicationRecord
     
     has_many :trips
@@ -15,11 +7,16 @@ class User < ApplicationRecord
 
     mount_uploader :avatar, AvatarUploader
 
-    validates :first_name, presence: true
-    validates :last_name, presence: true
-    validates :username, presence: true, uniqueness: true
-    validates :email, presence: true, email: true, uniqueness: true
-    validates :password, length: { in: 6..20 }
-    validates :tsa_precheck, numericality: { only_integer: true }, length: { is: 9 }, allow_blank: true
+    validates :first_name, presence: { message: "Required" }
+    validates :last_name, presence: { message: "Required" }
+    validates :username, presence: { message: "Required" }, 
+                         uniqueness: { message: "Username is already taken" }
+    validates :email, presence: { message: "Required" }, 
+                    #   email: { message: "Invalid email format" },
+                      uniqueness: { message: "Email is already taken" }
+    validates :password, length: { in: 6..20, message: "Must be between 6 and 20 characters" }
+    validates :tsa_precheck, numericality: { only_integer: true, message: "Invalid TSA Precheck number" }, 
+                             length: { is: 9, message: "Must be 9 digits" }, 
+                             allow_blank: true
 
 end

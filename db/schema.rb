@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
   end
 
   create_table "packing_list_items", force: :cascade do |t|
-    t.string "name"
+    t.string "item"
     t.integer "quantity"
     t.boolean "packed"
     t.integer "trip_id"

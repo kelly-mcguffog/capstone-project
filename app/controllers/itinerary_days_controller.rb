@@ -34,9 +34,9 @@ class ItineraryDaysController < ApplicationController
     def create
       itinerary_day = ItineraryDay.find_by(date: params[:itinerary_day][:date], trip_id: params[:itinerary_day][:trip_id])
       if itinerary_day
-        itinerary_day.update(itinerary_day_params)
+        itinerary_day.update!(itinerary_day_params)
       else
-        itinerary_day = ItineraryDay.create(itinerary_day_params)
+        itinerary_day = ItineraryDay.create!(itinerary_day_params)
       end
       render json: itinerary_day, include: {
         hotel_itinerary_times: {},

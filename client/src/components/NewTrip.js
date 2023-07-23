@@ -44,6 +44,10 @@ function NewTrip() {
       ...formData,
       [event.target.name]: event.target.value
     });
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [event.target.name]: null,
+    }));
   }
 
   function onAddTrip(newTrip) {
@@ -86,13 +90,6 @@ function NewTrip() {
     <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
       <div className="header-text">
         <h1 className="title">Plan Your Trip to {city}</h1>
-        {errors.length > 0 && (
-          <ul>
-            {errors.map((error, index) => (
-              <li key={index}>{error}</li>
-            ))}
-          </ul>
-        )}
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             <div id="trip-form" className="form-info">
@@ -105,10 +102,19 @@ function NewTrip() {
                   name="origin_airport"
                   autoComplete="off"
                   placeholder="Your Origin"
-                  className="trip-form-input"
                   onChange={handleChange}
                   value={formData.origin_airport}
+                  className={`trip-form-input ${
+                    errors.origin_airport ? "input-error" : ""
+                  }`}
                 />
+                {errors.origin_airport && (
+            <span className="error-message">
+              {Array.isArray(errors.origin_airport)
+                ? errors.origin_airport.join(", ")
+                : errors.origin_airport}
+            </span>
+          )}
               </div>
               <div className="label">
                 <div className="input-text">
@@ -119,10 +125,19 @@ function NewTrip() {
                   name="destination_airport"
                   autoComplete="off"
                   placeholder="Your Destination"
-                  className="trip-form-input"
+                  className={`trip-form-input ${
+                    errors.destination_airport ? "input-error" : ""
+                  }`}
                   onChange={handleChange}
                   value={formData.destination_airport}
                 />
+                {errors.destination_airport && (
+            <span className="error-message">
+              {Array.isArray(errors.destination_airport)
+                ? errors.destination_airport.join(", ")
+                : errors.destination_airport}
+            </span>
+          )}
               </div>
               <div className="label">
                 <div className="input-text">
@@ -133,8 +148,17 @@ function NewTrip() {
                   name="outbound_flight"
                   value={formData.outbound_flight}
                   onChange={handleChange}
-                  className="trip-form-input"
+                  className={`trip-form-input ${
+                    errors.outbound_flight ? "input-error" : ""
+                  }`}
                 />
+                {errors.outbound_flight && (
+            <span className="error-message">
+              {Array.isArray(errors.outbound_flight)
+                ? errors.outbound_flight.join(", ")
+                : errors.outbound_flight}
+            </span>
+          )}
               </div>
               <div className="label">
                 <div className="input-text">
@@ -145,8 +169,18 @@ function NewTrip() {
                   name="return_flight"
                   value={formData.return_flight}
                   onChange={handleChange}
-                  className="trip-form-input"
+                  className={`trip-form-input ${
+                    errors.return_flight ? "input-error" : ""
+                  }`}
+                  // className="trip-form-input"
                 />
+                {errors.return_flight && (
+            <span className="error-message">
+              {Array.isArray(errors.return_flight)
+                ? errors.return_flight.join(", ")
+                : errors.return_flight}
+            </span>
+          )}
               </div>
               <div className="label">
                 <div className="input-text">
@@ -157,10 +191,20 @@ function NewTrip() {
                   name="outbound_flight_number"
                   autoComplete="off"
                   placeholder="i.e. AA353"
-                  className="trip-form-input"
+                  // className="trip-form-input"
+                  className={`trip-form-input ${
+                    errors.outbound_flight_number ? "input-error" : ""
+                  }`}
                   onChange={handleChange}
                   value={formData.outbound_flight_number}
                 />
+                {errors.outbound_flight_number && (
+            <span className="error-message">
+              {Array.isArray(errors.outbound_flight_number)
+                ? errors.outbound_flight_number.join(", ")
+                : errors.outbound_flight_number}
+            </span>
+          )}
               </div>
               <div className="label">
                 <div className="input-text">
@@ -171,10 +215,19 @@ function NewTrip() {
                   name="return_flight_number"
                   autoComplete="off"
                   placeholder="i.e. AA353"
-                  className="trip-form-input"
+                  className={`trip-form-input ${
+                    errors.return_flight_number ? "input-error" : ""
+                  }`}
                   onChange={handleChange}
                   value={formData.return_flight_number}
                 />
+                {errors.return_flight_number && (
+            <span className="error-message">
+              {Array.isArray(errors.return_flight_number)
+                ? errors.return_flight_number.join(", ")
+                : errors.return_flight_number}
+            </span>
+          )}
               </div>
               <div className="label">
                 <div className="input-text">
@@ -185,10 +238,19 @@ function NewTrip() {
                   name="confirmation_number"
                   autoComplete="off"
                   placeholder="9-Digit Code"
-                  className="trip-form-input"
+                  className={`trip-form-input ${
+                    errors.confirmation_number ? "input-error" : ""
+                  }`}
                   onChange={handleChange}
                   value={formData.confirmation_number}
                 />
+                {errors.confirmation_number && (
+            <span className="error-message">
+              {Array.isArray(errors.confirmation_number)
+                ? errors.confirmation_number.join(", ")
+                : errors.confirmation_number}
+            </span>
+          )}
               </div>
             </div>
             <div className="form-button">

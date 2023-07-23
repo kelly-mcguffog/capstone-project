@@ -21,5 +21,5 @@ class RestaurantItineraryTimesController < ApplicationController
     def restaurant_itinerary_time_params
         params.require(:restaurant_itinerary_time).permit(:time, :restaurant_id, :itinerary_day_id)
     end
-    
+
 end

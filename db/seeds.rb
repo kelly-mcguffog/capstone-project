@@ -418,16 +418,18 @@ activity17 = Activity.create({
     destination_id: australia.id
 })
 
-# activity18 = Activity.create({
-#     name: 
-#     description: 
-#     address: 
-#     latitude: 
-#     longitude:
-#     price: 
-#     photo: 
-#     destination_id: australia.id
-# })
+activity18 = Activity.create({
+    name: "Art Gallery of New South Wales",
+    description: "From its magnificent site on Sydney Harbour, on Gadigal land, the Art Gallery of New South Wales is one of Australia's flagship art museums and the state's leading visual arts institution.",
+    address: "Art Gallery Road, The Domain, Sydney NSW 2000, Australia",
+    duration: "2 to 3 hours",
+    latitude: -33.8688,
+    longitude: 151.2174,
+    price: "Admission is free, and so are most exhibitions and events.",
+    photo: "https://media.cntraveler.com/photos/5a7e178926924e3c324ef2f8/16:9/w_2560%2Cc_limit/Art-Gallery-NSW-TTD-and-Museums__2018_20090818oldcourts_1.jpg",
+    url: "https://www.artgallery.nsw.gov.au/",
+    destination_id: australia.id
+})
 
 activity19 = Activity.create({
     name: "Royal Botanic Garden Sydney",
@@ -811,37 +813,8 @@ restaurant6 = Restaurant.create({
     destination_id: paris.id
 })
 
-# restaurant7 = Restaurant.create({
-#     name: 
-#     cuisine: 
-#     description:
-#     avaerage_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude: 
-#     photo:
-#     reservation_link:
-#     destination_id: paris.id
-# })
-
-# restaurant8 = Restaurant.create({
-#     name: 
-#     cuisine: 
-#     description:
-#     avaerage_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude: 
-#     photo:
-#     reservation_link:
-#     destination_id: paris.id
-# })
-
 #florence
-
-restaurant9 = Restaurant.create({
+restaurant7 = Restaurant.create({
     name: "Trattoria 13 Gobbi",
     cuisine: "Italian",
     description: "Trattoria 13 Gobbi wants to tell you the essence of Florence in every dish. The menu combines the culinary tradition of our country with some more current dishes.",
@@ -860,19 +833,22 @@ restaurant9 = Restaurant.create({
 
 #london
 
-# restaurant10 = Restaurant.create({
-#     name: 
-#     cuisine: 
-#     description:
-#     average_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude: 
-#     photo:
-#     reservation_link:
-#     destination_id: london.id
-# })
+restaurant8 = Restaurant.create({
+    name: "The Clove Club",
+    cuisine: "European",
+    description: "The Clove Club is a relaxed fine dining restaurant set in the historic rooms of the Grade II-listed shoreditch town hall, london. We serve a seasonal tasting menu featuring modern, elegant dishes rooted in technique but stripped back to their essential elements. We place a great emphasis on sourcing the best produce the british isles has to offer.",
+    average_price: 4,
+    phone_number: 442077296496,
+    rating: 4,
+    address: "The Clove Club, Shoreditch Town Hall, 380 Old Street, London EC2",
+    latitude: 43.77298,
+    longitude: 11.24656,
+    photo1:"https://cdn.vox-cdn.com/thumbor/uioLVu8uqaJJyc7iefdK-QBvpKk=/0x0:3550x2367/1200x800/filters:focal(1491x900:2059x1468)/cdn.vox-cdn.com/uploads/chorus_image/image/67225109/Eater_day5_The_Clove_Club_0208.0.jpg",
+    photo2: "https://static.standard.co.uk/s3fs-public/thumbnails/image/2016/11/16/10/clove-club.jpg?width=968&auto=webp&quality=50&crop=968%3A645%2Csmart",
+    photo3: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.bonappetit.com%2Fcity-guides%2Flondon%2Fvenue%2Fclove-club&psig=AOvVaw2PiRFzZLoq5CzVKOTnsDR-&ust=1690042736116000&source=images&cd=vfe&opi=89978449&ved=0CA0QjRxqFwoTCOin0v-ZoIADFQAAAAAdAAAAABAD", 
+    url: "http://thecloveclub.com/",
+    destination_id: london.id
+})
 
 # #tokyo
 
@@ -1161,21 +1137,21 @@ activity_itinerary_time7 = ActivityItineraryTime.create({
 #packing item
 
 item1 = PackingListItem.create({
-    name: "underwear",
+    item: "underwear",
     quantity: 12,
     packed: true,
     trip_id: trip1.id
 })
 
 item2 = PackingListItem.create({
-    name: "underwear",
+    item: "underwear",
     quantity: 12,
     packed: true,
     trip_id: trip2.id
 })
 
 item3 = PackingListItem.create({
-    name: "underwear",
+    item: "underwear",
     quantity: 12,
     packed: true,
     trip_id: trip3.id

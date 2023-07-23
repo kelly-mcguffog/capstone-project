@@ -25,5 +25,5 @@ class TripsController < ApplicationController
     def trip_params
       params.require(:trip).permit(:origin_airport, :destination_airport, :outbound_flight, :return_flight, :outbound_flight_number, :return_flight_number, :confirmation_number, :user_id, :destination_id)
     end
-    
+
   end

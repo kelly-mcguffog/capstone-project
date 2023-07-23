@@ -12,9 +12,6 @@ class ItineraryDay < ApplicationRecord
   accepts_nested_attributes_for :activity_itinerary_times, allow_destroy: true
   accepts_nested_attributes_for :restaurant_itinerary_times, allow_destroy: true
 
-  validates :date, presence: true
-
-  
   def combined_itinerary_times
     combined_times = []
     combined_times += hotel_itinerary_times.map do |hotel_itinerary_time|
@@ -40,4 +37,7 @@ class ItineraryDay < ApplicationRecord
     end
     combined_times.sort_by { |time| time[:time] }
   end
+
+  validates :date, presence: true
+  
 end

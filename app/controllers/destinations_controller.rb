@@ -1,5 +1,7 @@
 class DestinationsController < ApplicationController
-    
+
+    skip_before_action :authorized, only: [:index]
+
     def index
         render json: Destination.all, status: :ok
     end
@@ -17,5 +19,5 @@ class DestinationsController < ApplicationController
     def find_destination
         @destination = Destination.find(params[:id])
     end
-    
+
 end

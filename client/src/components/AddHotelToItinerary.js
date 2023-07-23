@@ -65,22 +65,15 @@ function AddHotelToItinerary({ onAddItinerary }) {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((newHotel) => {
-          onAddItinerary(newHotel);
-        });
+        r.json().then((newItinerary) => onAddItinerary(newItinerary));
         navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
-        r.json().then((errorData) => {
-          console.log("Error Data:", errorData);
-          setErrors(errorData.errors);
-        });
+        r.json().then((err) => setErrors(err.errors));
       }
-    })
-      .catch((error) => {
-        console.error("Error adding restaurant to itinerary:", error);
-      });
+    });
   }
 
+  console.log(errors)
   return (
     <div
       className="header-img"
@@ -105,8 +98,16 @@ function AddHotelToItinerary({ onAddItinerary }) {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
-                  className="trip-form-input"
+                  className={`trip-form-input ${errors.date ? "input-error" : ""
+                    }`}
                 />
+                {errors.date && (
+                  <span className="error-message">
+                    {Array.isArray(errors.date)
+                      ? errors.date.join(", ")
+                      : errors.date}
+                  </span>
+                )}
               </div>
             </div>
             <div className="label form-label">
@@ -117,8 +118,16 @@ function AddHotelToItinerary({ onAddItinerary }) {
                   name="time"
                   value={formData.hotel_itinerary_times_attributes[0].time}
                   onChange={handleChange}
-                  className="trip-form-input"
+                  className={`trip-form-input ${errors["hotel_itinerary_times.time"] ? "input-error" : ""
+                    }`}
                 />
+                {errors["hotel_itinerary_times.time"] && (
+                  <span className="error-message">
+                    {Array.isArray(errors["hotel_itinerary_times.time"])
+                      ? errors["hotel_itinerary_times.time"].join(", ")
+                      : errors["hotel_itinerary_times.time"]}
+                  </span>
+                )}
               </div>
             </div>
             {trip_id === undefined && (
@@ -129,7 +138,7 @@ function AddHotelToItinerary({ onAddItinerary }) {
                     name="trip_id"
                     value={formData.trip_id}
                     onChange={handleChange}
-                    className="trip-form-input"
+                    required
                   >
                     <option value="">Select a Trip</option>
                     {user.trips.map((trip) => {
@@ -138,7 +147,8 @@ function AddHotelToItinerary({ onAddItinerary }) {
                       );
                       return (
                         <option key={trip.id} value={trip.id}>
-                          {tripDestination.city}, {tripDestination.country} ({new Date(trip.outbound_flight).toLocaleDateString()})
+                          {tripDestination.city}, {tripDestination.country} (
+                          {new Date(trip.outbound_flight).toLocaleDateString()})
                         </option>
                       );
                     })}

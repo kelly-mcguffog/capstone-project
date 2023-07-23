@@ -7,13 +7,14 @@ function PackingList({ trip }) {
     
     const { user, setUser } = useContext(UserContext);
     const { id } = useParams();
+    const packingListItems = trip?.packing_list_items ?? [];
 
-    const onUpdatePackingItem = (item) => {
+    const onUpdatePackingItem = (packingListItem) => {
         const userTrips = user.trips.map((trip) => {
             if (trip.id === parseInt(id)) {
                 const updatedPackingList = trip.packing_list_items.map((packingItem) => {
-                    if (packingItem.id === item.id) {
-                        return item;
+                    if (packingItem.id === packingListItem.id) {
+                        return packingListItem;
                     } else {
                         return packingItem;
                     }
@@ -26,11 +27,11 @@ function PackingList({ trip }) {
         setUser({ ...user, trips: userTrips });
     };
 
-    const onDeletePackingItem = (item) => {
+    const onDeletePackingItem = (packingListItem) => {
         const userTrips = user.trips.map((trip) => {
             if (trip.id === parseInt(id)) {
                 const updatedPackingList = trip.packing_list_items.filter(
-                    (packingItem) => packingItem.id !== item.id
+                    (packingItem) => packingItem.id !== packingListItem.id
                 );
                 return { ...trip, packing_list_items: updatedPackingList };
             } else {
@@ -42,12 +43,12 @@ function PackingList({ trip }) {
 
     return (
         <div id="packing">
-            {trip.packing_list_items.map((item) => {
+            {packingListItems.map((packingListItem) => {
                 return (
                     <PackingListItem
-                        key={item.id}
+                        key={packingListItem.id}
                         trip={trip}
-                        item={item}
+                        packingListItem={packingListItem}
                         onDeletePackingItem={onDeletePackingItem}
                         onUpdatePackingItem={onUpdatePackingItem}
                     />

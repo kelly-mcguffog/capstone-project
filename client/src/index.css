@@ -19,6 +19,7 @@ button{
   background-color: #f0f0f0;
 
 }
+
 code {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -813,7 +814,8 @@ input:focus {
   width: auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
   column-gap: 70px;
   justify-content: center;
 }
@@ -1310,4 +1312,16 @@ button.form-button{
 
 .form-label{
   width: auto;
+}
+
+.input-error{
+  border-bottom: 1px solid firebrick;
+}
+
+.error-message{
+  text-align: left;
+  display: block;
+  color: firebrick;
+  font-size: 12px;
+  margin: 5px 0px;
 }

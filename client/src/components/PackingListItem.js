@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-function PackingListItem({ item, onUpdatePackingItem, onDeletePackingItem }) {
-    const { name, quantity, packed } = item;
+function PackingListItem({ packingListItem, onUpdatePackingItem, onDeletePackingItem }) {
+    const { item, quantity, packed } = packingListItem;
     const { id } = useParams();
     const [isDropdown, setDropdown] = useState(false)
 
@@ -16,7 +16,7 @@ function PackingListItem({ item, onUpdatePackingItem, onDeletePackingItem }) {
     };
 
     const updatePackedStatus = (newPackedStatus) => {
-        fetch(`/trips/${id}/packing_list_items/${item.id}`, {
+        fetch(`/trips/${id}/packing_list_items/${packingListItem.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -28,16 +28,16 @@ function PackingListItem({ item, onUpdatePackingItem, onDeletePackingItem }) {
     }
 
     const deleteItem = () => {
-        fetch(`/trips/${id}/packing_list_items/${item.id}`, {
+        fetch(`/trips/${id}/packing_list_items/${packingListItem.id}`, {
             method: 'DELETE',
         })
-        onDeletePackingItem(item)
+        onDeletePackingItem(packingListItem)
     }
 
     return (
         <div className="packing-list">
             <div className="list">
-                <h3 className="packing-item">{name}</h3>
+                <h3 className="packing-item">{item}</h3>
                 <small>qty. {quantity}</small>
             </div>
             <div className="packing-icons">

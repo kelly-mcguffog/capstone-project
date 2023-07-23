@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Routes, Route, useMatch } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Login from "./Login";
@@ -25,32 +25,11 @@ function App() {
 
   const { user, setUser } = useContext(UserContext)
   const [search, setSearch] = useState("")
-  const [activities, setActivities] = useState([])
-  const [restaurants, setRestaurants] = useState([])
-  const [hotels, setHotels] = useState([])
   const match1 = useMatch("/users/:user_id/trips");
   const match2 = useMatch("/users/:user_id/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
   const match4 = useMatch("/users/:user_id/profile")
   const match = match1 || match2 || match3 || match4;
-
-  useEffect(() => {
-    fetch("/activities")
-      .then(res => res.json())
-      .then(data => setActivities(data))
-  }, [])
-
-  useEffect(() => {
-    fetch("/restaurants")
-      .then(res => res.json())
-      .then(data => setRestaurants(data))
-  }, [])
-
-  useEffect(() => {
-    fetch("/hotels")
-      .then(res => res.json())
-      .then(data => setHotels(data))
-  }, [])
 
   const onAddItinerary = (newItinerary) => {
     const { trip_id, date, combined_itinerary_times } = newItinerary;
@@ -82,9 +61,9 @@ function App() {
     });
   };
 
-  console.log(user)
+  // console.log(user)
 
-  const isProfilePage = !!match;
+  const isMatch = !!match;
 
   const handleSearch = () => {
     setSearch("");
@@ -92,12 +71,9 @@ function App() {
 
   return (
     <main>
-      {user && !isProfilePage && <NavBar />}
+      {user && !isMatch && <NavBar />}
+      {user ? (
       <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
-        {user && (
           <>
             <Route
               path="/destinations/:destination_id/trips/:trip_id/hotels/:id"
@@ -150,27 +126,27 @@ function App() {
             <Route path="/destinations/:id/trips" element={<NewTrip />} />
             <Route
               path="/destinations/:destination_id/trips/:trip_id/hotels/:id/details"
-              element={<HotelDetails hotels={hotels} />}
+              element={<HotelDetails />}
             />
             <Route
               path="/destinations/:destination_id/hotels/:id/details"
-              element={<HotelDetails hotels={hotels} />}
+              element={<HotelDetails />}
             />
             <Route
               path="/destinations/:destination_id/trips/:trip_id/restaurants/:id/details"
-              element={<RestaurantDetails restaurants={restaurants} />}
+              element={<RestaurantDetails />}
             />
             <Route
               path="/destinations/:destination_id/restaurants/:id/details"
-              element={<RestaurantDetails restaurants={restaurants} />}
+              element={<RestaurantDetails />}
             />
             <Route
               path="/destinations/:destination_id/trips/:trip_id/activities/:id/details"
-              element={<ActivityDetails activities={activities} />}
+              element={<ActivityDetails />}
             />
             <Route
               path="/destinations/:destination_id/activities/:id/details"
-              element={<ActivityDetails activities={activities} />}
+              element={<ActivityDetails />}
             />
             <Route
               path="/users/:user_id/trips/:id"
@@ -182,9 +158,17 @@ function App() {
               element={<EditProfileForm />}
             />
             <Route path="/users/:user_id/trips" element={<Profile />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
           </>
-        )}
       </Routes>
+      ): 
+      <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      }
     </main>
   );
 }

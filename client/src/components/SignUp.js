@@ -15,7 +15,7 @@ function SignUp() {
     email: "",
     username: "",
     password: "",
-    passwordConfirmation: ""
+    password_confirmation: ""
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -26,8 +26,12 @@ function SignUp() {
     } else {
       setFormData({
         ...formData,
-        [event.target.name]: event.target.value
+        [event.target.name]: event.target.value,
       });
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [event.target.name]: null,
+      }));
     }
   }
 
@@ -40,7 +44,7 @@ function SignUp() {
     data.append("email", formData.email);
     data.append("username", formData.username);
     data.append("password", formData.password);
-    data.append("passwordConfirmation", formData.passwordConfirmation);
+    data.append("passwordConfirmation", formData.password_confirmation);
     data.append("avatar", photoFile);
 
     fetch("/signup", {
@@ -56,19 +60,12 @@ function SignUp() {
         }
       });
   }
-
+console.log(errors)
   return (
     <div className="container">
       <form className="signup-form" onSubmit={handleSubmit}>
         <h1 className="form-text head">Sign Up</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
-        {errors && (
-          <ul className="error-message">
-            {errors.map((err) => (
-              <li key={err}>{err}</li>
-            ))}
-          </ul>
-        )}
         <div className="login-form">
           <div className="credentials">
             <input
@@ -79,8 +76,17 @@ function SignUp() {
               placeholder="First Name"
               value={formData.first_name}
               onChange={handleChange}
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.first_name ? "input-error" : ""
+              }`}
             />
+            {errors.first_name && (
+            <span className="error-message">
+              {Array.isArray(errors.first_name)
+                ? errors.first_name.join(", ")
+                : errors.first_name}
+            </span>
+          )}
             <input
               type="text"
               id="last_name"
@@ -89,8 +95,17 @@ function SignUp() {
               autoComplete="off"
               value={formData.last_name}
               onChange={handleChange}
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.last_name ? "input-error" : ""
+              }`}
             />
+            {errors.last_name && (
+            <span className="error-message">
+              {Array.isArray(errors.last_name)
+                ? errors.last_name.join(", ")
+                : errors.last_name}
+            </span>
+          )}
             <input
               type="text"
               id="tsa_precheck"
@@ -99,8 +114,17 @@ function SignUp() {
               autoComplete="off"
               value={formData.tsa_precheck}
               onChange={handleChange}
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.tsa_precheck ? "input-error" : ""
+              }`}
             />
+            {errors.tsa_precheck && (
+            <span className="error-message">
+              {Array.isArray(errors.tsa_precheck)
+                ? errors.tsa_precheck.join(", ")
+                : errors.tsa_precheck}
+            </span>
+          )}
             <input
               type="text"
               id="email"
@@ -109,8 +133,17 @@ function SignUp() {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.email ? "input-error" : ""
+              }`}
             />
+            {errors.email && (
+            <span className="error-message">
+              {Array.isArray(errors.email)
+                ? errors.email.join(", ")
+                : errors.email}
+            </span>
+          )}
             <input
               type="text"
               id="username"
@@ -119,8 +152,17 @@ function SignUp() {
               placeholder="username"
               value={formData.username}
               onChange={handleChange}
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.username ? "input-error" : ""
+              }`}
             />
+            {errors.username && (
+            <span className="error-message">
+              {Array.isArray(errors.username)
+                ? errors.username.join(", ")
+                : errors.username}
+            </span>
+          )}
             <input
               type="password"
               id="password"
@@ -129,18 +171,36 @@ function SignUp() {
               value={formData.password}
               onChange={handleChange}
               autoComplete="current-password"
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.password ? "input-error" : ""
+              }`}
             />
+            {errors.password && (
+            <span className="error-message">
+              {Array.isArray(errors.password)
+                ? errors.password.join(", ")
+                : errors.password}
+            </span>
+          )}
             <input
               type="password"
               id="password_confirmation"
-              name="passwordConfirmation"
+              name="password_confirmation"
               placeholder="password confirmation"
-              value={formData.passwordConfirmation}
+              value={formData.password_confirmation}
               onChange={handleChange}
               autoComplete="current-password"
-              className="login-form-input"
+              className={`login-form-input ${
+                errors.password_confirmation ? "input-error" : ""
+              }`}
             />
+            {errors.password_confirmation && (
+            <span className="error-message">
+              {Array.isArray(errors.password_confirmation)
+                ? errors.password_confirmation.join(", ")
+                : errors.password_confirmation}
+            </span>
+          )}
             <div className="photo-upload">
             <label className="photo-upload-text" htmlFor="photo">Upload Photo:</label>
             <input
@@ -149,7 +209,6 @@ function SignUp() {
               name="avatar"
               accept="image/*"
               onChange={handleChange}
-              // className="photo-upload"
             />
           </div>
           </div>

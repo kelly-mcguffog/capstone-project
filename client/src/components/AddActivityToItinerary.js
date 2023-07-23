@@ -65,20 +65,12 @@ function AddActivityToItinerary({ onAddItinerary }) {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((newActivity) => {
-          onAddItinerary(newActivity);
-        });
+        r.json().then((newItinerary) => onAddItinerary(newItinerary));
         navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
-        r.json().then((errorData) => {
-          console.log("Error Data:", errorData);
-          setErrors(errorData.errors);
-        });
+        r.json().then((err) => setErrors(err.errors));
       }
-    })
-      .catch((error) => {
-        console.error("Error adding restaurant to itinerary:", error);
-      });
+    });
   }
 
   return (
@@ -90,13 +82,6 @@ function AddActivityToItinerary({ onAddItinerary }) {
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            {errors.length > 0 && (
-              <ul>
-                {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
-            )}
             <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
@@ -105,7 +90,16 @@ function AddActivityToItinerary({ onAddItinerary }) {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
+                  className={`trip-form-input ${errors.date ? "input-error" : ""
+                    }`}
                 />
+                {errors.date && (
+                  <span className="error-message">
+                    {Array.isArray(errors.date)
+                      ? errors.date.join(", ")
+                      : errors.date}
+                  </span>
+                )}
               </div>
             </div>
             <div className="label form-label">
@@ -116,7 +110,16 @@ function AddActivityToItinerary({ onAddItinerary }) {
                   name="time"
                   value={formData.activity_itinerary_times_attributes[0].time}
                   onChange={handleChange}
+                  className={`trip-form-input ${errors["activity_itinerary_times.time"] ? "input-error" : ""
+                    }`}
                 />
+                {errors["activity_itinerary_times.time"] && (
+                  <span className="error-message">
+                    {Array.isArray(errors["activity_itinerary_times.time"])
+                      ? errors["activity_itinerary_times.time"].join(", ")
+                      : errors["activity_itinerary_times.time"]}
+                  </span>
+                )}
               </div>
             </div>
             {trip_id === undefined && (
@@ -127,6 +130,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
                     name="trip_id"
                     value={formData.trip_id}
                     onChange={handleChange}
+                    required
                   >
                     <option value="">Select a Trip</option>
                     {user.trips.map((trip) => {
@@ -135,7 +139,8 @@ function AddActivityToItinerary({ onAddItinerary }) {
                       );
                       return (
                         <option key={trip.id} value={trip.id}>
-                          {tripDestination.city}, {tripDestination.country} ({new Date(trip.outbound_flight).toLocaleDateString()})
+                          {tripDestination.city}, {tripDestination.country} (
+                          {new Date(trip.outbound_flight).toLocaleDateString()})
                         </option>
                       );
                     })}

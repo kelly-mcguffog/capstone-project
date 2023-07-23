@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
 
@@ -6,13 +6,20 @@ import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import UsersCheckIn from "./UsersCheckIn";
 
-function ActivityDetails({ activities }) {
+function ActivityDetails() {
 
+    const [activities, setActivities] = useState([])
     const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
+
+    useEffect(() => {
+        fetch("/activities")
+          .then(res => res.json())
+          .then(data => setActivities(data))
+      }, [])
 
     const activity = activities.find(activity => activity.id === parseInt(id))
 

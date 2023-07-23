@@ -65,21 +65,15 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((newRestaurant) => {
-          onAddItinerary(newRestaurant);
-        });
+        r.json().then((newItinerary) => onAddItinerary(newItinerary));
         navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
-        r.json().then((errorData) => {
-          console.log("Error Data:", errorData);
-          setErrors(errorData.errors);
-        });
+        r.json().then((err) => setErrors(err.errors));
       }
-    })
-      .catch((error) => {
-        console.error("Error adding restaurant to itinerary:", error);
-      });
+    });
   }
+
+  console.log(errors)
 
   return (
     <div
@@ -90,13 +84,6 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            {errors.length > 0 && (
-              <ul>
-                {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
-            )}
             <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
@@ -105,7 +92,16 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
+                  className={`trip-form-input ${errors.date ? "input-error" : ""
+                    }`}
                 />
+                {errors.date && (
+                  <span className="error-message">
+                    {Array.isArray(errors.date)
+                      ? errors.date.join(", ")
+                      : errors.date}
+                  </span>
+                )}
               </div>
             </div>
             <div className="label form-label">
@@ -116,7 +112,16 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                   name="time"
                   value={formData.restaurant_itinerary_times_attributes[0].time}
                   onChange={handleChange}
+                  className={`trip-form-input ${errors["restaurant_itinerary_times.time"] ? "input-error" : ""
+                    }`}
                 />
+                {errors["restaurant_itinerary_times.time"] && (
+                  <span className="error-message">
+                    {Array.isArray(errors["restaurant_itinerary_times.time"])
+                      ? errors["restaurant_itinerary_times.time"].join(", ")
+                      : errors["restaurant_itinerary_times.time"]}
+                  </span>
+                )}
               </div>
             </div>
             {trip_id === undefined && (
@@ -127,6 +132,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                     name="trip_id"
                     value={formData.trip_id}
                     onChange={handleChange}
+                    required
                   >
                     <option value="">Select a Trip</option>
                     {user.trips.map((trip) => {
@@ -135,7 +141,8 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                       );
                       return (
                         <option key={trip.id} value={trip.id}>
-                          {tripDestination.city}, {tripDestination.country} ({new Date(trip.outbound_flight).toLocaleDateString()})
+                          {tripDestination.city}, {tripDestination.country} (
+                          {new Date(trip.outbound_flight).toLocaleDateString()})
                         </option>
                       );
                     })}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
 import GridHeader from "./GridHeader";
@@ -6,14 +6,21 @@ import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import UsersCheckIn from "./UsersCheckIn";
 
-function HotelDetails({ hotels }) {
-
+function HotelDetails() {
+    
+    const [hotels, setHotels] = useState([])
     const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
+
+    useEffect(() => {
+        fetch("/hotels")
+          .then(res => res.json())
+          .then(data => setHotels(data))
+      }, [])
 
     const hotel = hotels.find(hotel => hotel.id === parseInt(id))
 
@@ -35,7 +42,7 @@ function HotelDetails({ hotels }) {
         )
     );
 
-    console.log(allUsers)
+  
     const getItineraryUrl = () => {
         if (trip_id !== undefined) {
             return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`;
