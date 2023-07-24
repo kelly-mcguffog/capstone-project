@@ -65,8 +65,10 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((newItinerary) => onAddItinerary(newItinerary));
-        console.log(user)
+        r.json().then((newItinerary) => {
+          onAddItinerary(newItinerary);
+        });
+
         navigate(`/users/${user.id}/trips/${submitTripId}`);
       } else {
         r.json().then((err) => setErrors(err.errors));

@@ -7,6 +7,7 @@ class ActivityItineraryTimesController < ApplicationController
     def create
         itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
         activity_itinerary_time = itinerary_day.activity_itinerary_time.create!(activity_itinerary_time_params)
+        itinerary_day.combined_itinerary_times << activity_itinerary_time
         render json: hotel_itinerary_time, status: :created
     end
   

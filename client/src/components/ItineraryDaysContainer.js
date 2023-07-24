@@ -1,7 +1,9 @@
 import React from "react";
 import ItineraryDay from "./ItineraryDay";
 
+
 function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate }) {
+
     const nonEmptyFilteredItineraryDays = [];
 
     itinerary_days.forEach((day) => {

@@ -7,8 +7,9 @@ class RestaurantItineraryTimesController < ApplicationController
     def create
         itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
         restaurant_itinerary_time = itinerary_day.restaurant_itinerary_times.create!(restaurant_itinerary_time_params)
+        itinerary_day.combined_itinerary_times << restaurant_itinerary_time
         render json: restaurant_itinerary_time, status: :created
-    end
+      end
 
     def destroy
         restaurant_itinerary_time = RestaurantItineraryTime.find(params[:id])
