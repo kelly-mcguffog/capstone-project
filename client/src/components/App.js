@@ -19,6 +19,7 @@ import HotelDetails from "./HotelDetails";
 import RestaurantDetails from "./RestaurantDetails";
 import ActivityDetails from "./ActivityDetails";
 import EditProfileForm from "./EditProfileForm";
+import EditTripForm from "./EditTripForm";
 
 function App() {
 
@@ -151,6 +152,10 @@ function App() {
             <Route
               path="/destinations/:destination_id/activities/:id/details"
               element={<ActivityDetails />}
+            />
+            <Route
+              path="/users/:user_id/trips/:id/edit"
+              element={<EditTripForm />}
             />
             <Route
               path="/users/:user_id/trips/:id"

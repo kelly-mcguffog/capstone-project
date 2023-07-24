@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 function AddRestaurantToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: restaurant_id } = useParams();
@@ -160,6 +160,22 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
             </div>
           </form>
         </div>
+        {trip_id === undefined && (
+          <div className="back-link">
+            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+            <Link className="link" to={`/destinations/${destination_id}/restaurants/${restaurant_id}/details`}>
+              Return to Restaurant
+            </Link>
+          </div>
+        )}
+        {trip_id && (
+          <div className="back-link">
+            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+              Return to Trip
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

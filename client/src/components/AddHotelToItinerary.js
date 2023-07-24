@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 function AddHotelToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: hotel_id } = useParams();
@@ -85,13 +85,6 @@ function AddHotelToItinerary({ onAddItinerary }) {
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            {/* {errors.length > 0 && (
-              <ul>
-                {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
-            )} */}
             <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
@@ -161,6 +154,22 @@ function AddHotelToItinerary({ onAddItinerary }) {
             </div>
           </form>
         </div>
+        {trip_id === undefined && (
+          <div className="back-link">
+            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+            <Link className="link" to={`/destinations/${destination_id}/hotels/${hotel_id}/details`}>
+              Return to Hotel
+            </Link>
+          </div>
+        )}
+        {trip_id && (
+          <div className="back-link">
+            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+              Return to Trip
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

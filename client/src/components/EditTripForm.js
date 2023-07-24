@@ -1,35 +1,61 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
-function NewTrip() {
-
-  const { id } = useParams();
-  const { user, setUser } = useContext(UserContext)
-  const { destinations } = useContext(DestinationsContext);
-  const navigate = useNavigate();
-
-  const initialState = {
-    origin_airport: "",
-    destination_airport: "",
-    outbound_flight: "",
-    return_flight: "",
-    outbound_flight_number: "",
-    return_flight_number: "",
-    confirmation_number: "",
+function EditTripForm() {
+    const [errors, setErrors] = useState([]);
+    const { id } = useParams();
+    const { user, setUser } = useContext(UserContext);
+    const { destinations } = useContext(DestinationsContext);
+    const navigate = useNavigate();
+  
+    const [formData, setFormData] = useState({
+      origin_airport: "",
+      destination_airport: "",
+      outbound_flight: "",
+      return_flight: "",
+      outbound_flight_number: "",
+      return_flight_number: "",
+      confirmation_number: "",
+    });
+  
+    const findTrip = user.trips?.find((trip) => trip.id === parseInt(id));
+  
+function formatDateTime(dateTimeString) {
+    const date = new Date(dateTimeString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
-
-  const [formData, setFormData] = useState(initialState)
-  const [errors, setErrors] = useState([])
-
+  
+    useEffect(() => {
+      if (findTrip) {
+        setFormData({
+          origin_airport: findTrip.origin_airport,
+          destination_airport: findTrip.destination_airport,
+          outbound_flight: formatDateTime(findTrip.outbound_flight),
+          return_flight: formatDateTime(findTrip.return_flight),
+          outbound_flight_number: findTrip.outbound_flight_number,
+          return_flight_number: findTrip.return_flight_number,
+          confirmation_number: findTrip.confirmation_number,
+        });
+      }
+    }, [findTrip]);
+  
+    if (!findTrip) {
+      return <div>Loading...</div>;
+    }
 
   if (destinations === null) {
     return <div>Loading...</div>;
   }
 
   const destination = destinations.find(
-    (destination) => destination.id === parseInt(id)
+    (destination) => destination.id === parseInt(findTrip.destination_id)
   );
 
   if (!destination) {
@@ -38,6 +64,14 @@ function NewTrip() {
 
   const { photo, city } = destination;
 
+  function onUpdateTrip(updatedTrip) {
+    setUser((prevUser) => {
+      const updatedTrips = prevUser.trips.map((trip) =>
+        trip.id === updatedTrip.id ? updatedTrip : trip
+      );
+      return { ...prevUser, trips: updatedTrips };
+    });
+  }
 
   function handleChange(event) {
     setFormData({
@@ -50,40 +84,30 @@ function NewTrip() {
     }));
   }
 
-  function onAddTrip(newTrip) {
-    if (newTrip.user_id === user.id) {
-      setUser({ ...user, trips: [...user.trips, newTrip] })
-    } else {
-      return user
-    }
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/users/${user.id}/trips`, {
-      method: "POST",
+    fetch(`/users/${user.id}/trips/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        origin_airport: formData.origin_airport,
-        destination_airport: formData.destination_airport,
-        outbound_flight: formData.outbound_flight,
-        return_flight: formData.return_flight,
-        outbound_flight_number: formData.outbound_flight_number,
-        return_flight_number: formData.return_flight_number,
-        confirmation_number: formData.confirmation_number,
-        user_id: user.id,
-        destination_id: id
-      }),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((newTrip) => onAddTrip(newTrip));
-        navigate(`/users/${user.id}/trips`);
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+      body: JSON.stringify(formData),
+    })
+    .then((r) => {
+        if (r.ok) {
+          return r.json();
+        } else {
+          throw new Error("Form submission failed");
+        }
+      })
+      .then((updatedTrip) => {
+        onUpdateTrip(updatedTrip);
+        navigate(`/users/${user.id}/trips/${id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrors(["An error occurred. Please try again later."]);
+      });
   }
 
   return (
@@ -168,7 +192,6 @@ function NewTrip() {
                   onChange={handleChange}
                   className={`trip-form-input ${errors.return_flight ? "input-error" : ""
                     }`}
-                // className="trip-form-input"
                 />
                 {errors.return_flight && (
                   <span className="error-message">
@@ -187,7 +210,6 @@ function NewTrip() {
                   name="outbound_flight_number"
                   autoComplete="off"
                   placeholder="i.e. AA353"
-                  // className="trip-form-input"
                   className={`trip-form-input ${errors.outbound_flight_number ? "input-error" : ""
                     }`}
                   onChange={handleChange}
@@ -247,7 +269,9 @@ function NewTrip() {
               </div>
             </div>
             <div className="form-button">
-              <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
+              <button type="submit">
+              <i className="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </form>
         </div>
@@ -256,4 +280,4 @@ function NewTrip() {
   )
 }
 
-export default NewTrip;
+export default EditTripForm;

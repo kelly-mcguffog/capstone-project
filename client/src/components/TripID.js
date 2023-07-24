@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 
 
@@ -48,7 +48,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
 
     return (
         <div className="trip-listings">
-            <NavLink className="trip-links" to={`/users/${user.id}/trips/${trip.id}`}>
+            <NavLink className="trip-links" to={`/users/${user.id}/trips/${id}`}>
                 <div className="trip">
                     <h3 className="trip-destination-name">
                         {city}, {country}
@@ -58,6 +58,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
             </NavLink>
             {isShowing ?
                 <div className="trip-icon">
+                    <Link to={`/users/${user.id}/trips/${trip.id}/edit`}><i className="fa-solid fa-pen-to-square"></i></Link>
                     <i onClick={handleDeleteTrip} className="fa-solid fa-trash"></i>
                 </div>
                 : null

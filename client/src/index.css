@@ -78,8 +78,11 @@ header {
 a.page-btn.main-btn.trip-btn{
   margin: auto;
 }
-.fa-bars, .fa-trash{
+.fa-bars, .fa-trash, .fa-pen-to-square{
   cursor: pointer;
+}
+.fa-trash{
+  margin-left: 10px;
 }
 .nav{
   /* width: 70%; */

@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :users, only: [:index, :show, :create, :update] do
-    resources :trips, only: [:index, :show, :create]
+    resources :trips, only: [:index, :show, :create, :update, :destroy]
   end
 
-  resources :trips, only: [:index, :show, :create, :destroy] do
+  resources :trips, only: [:index, :show, :create, :update, :destroy] do
     resources :itinerary_days, only: [:index, :show, :update, :create, :destroy] do
       resources :hotel_itinerary_times, only: [:index, :destroy, :create]
       resources :activity_itinerary_times, only: [:index, :destroy, :create]
