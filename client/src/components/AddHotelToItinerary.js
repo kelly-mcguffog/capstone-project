@@ -85,13 +85,13 @@ function AddHotelToItinerary({ onAddItinerary }) {
         <h1 className="title">Plan Your Trip</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            {errors.length > 0 && (
+            {/* {errors.length > 0 && (
               <ul>
                 {errors.map((error, index) => (
                   <li key={index}>{error}</li>
                 ))}
               </ul>
-            )}
+            )} */}
             <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
@@ -105,9 +105,7 @@ function AddHotelToItinerary({ onAddItinerary }) {
                 />
                 {errors.date && (
                   <span className="error-message">
-                    {Array.isArray(errors.date)
-                      ? errors.date.join(", ")
-                      : errors.date}
+                    {errors.date}
                   </span>
                 )}
               </div>
@@ -125,9 +123,7 @@ function AddHotelToItinerary({ onAddItinerary }) {
                 />
                 {errors["hotel_itinerary_times.time"] && (
                   <span className="error-message">
-                    {Array.isArray(errors["hotel_itinerary_times.time"])
-                      ? errors["hotel_itinerary_times.time"].join(", ")
-                      : errors["hotel_itinerary_times.time"]}
+                    {errors["hotel_itinerary_times.time"]}
                   </span>
                 )}
               </div>

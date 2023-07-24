@@ -97,9 +97,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
                 />
                 {errors.date && (
                   <span className="error-message">
-                    {Array.isArray(errors.date)
-                      ? errors.date.join(", ")
-                      : errors.date}
+                    {errors.date}
                   </span>
                 )}
               </div>
@@ -117,9 +115,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
                 />
                 {errors["activity_itinerary_times.time"] && (
                   <span className="error-message">
-                    {Array.isArray(errors["activity_itinerary_times.time"])
-                      ? errors["activity_itinerary_times.time"].join(", ")
-                      : errors["activity_itinerary_times.time"]}
+                    {errors["activity_itinerary_times.time"]}
                   </span>
                 )}
               </div>

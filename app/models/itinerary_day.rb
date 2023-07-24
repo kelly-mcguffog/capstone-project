@@ -39,5 +39,14 @@ class ItineraryDay < ApplicationRecord
   end
 
   validates :date, presence: true
-  
+  validate :only_one_hotel_per_day
+
+  private
+
+  def only_one_hotel_per_day
+    unique_hotel_dates = hotel_itinerary_times.map { |hotel_itinerary| hotel_itinerary.time&.to_date }.compact.uniq
+    if unique_hotel_dates.size != hotel_itinerary_times.size
+      errors.add(:hotel_itinerary_times, "can only have one hotel per day")
+    end
+  end
 end

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
@@ -63,18 +63,24 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((newItinerary) => {
-          onAddItinerary(newItinerary);
-        });
-
+    })
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        } else {
+          return r.json().then((err) => Promise.reject(err.errors));
+        }
+      })
+      .then((newItinerary) => {
+        onAddItinerary(newItinerary);
         navigate(`/users/${user.id}/trips/${submitTripId}`);
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+      })
+      .catch((error) => {
+        setErrors(error);
+      });
   }
+
+
 
   return (
     <div
@@ -98,9 +104,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                 />
                 {errors.date && (
                   <span className="error-message">
-                    {Array.isArray(errors.date)
-                      ? errors.date.join(", ")
-                      : errors.date}
+                    {errors.date}
                   </span>
                 )}
               </div>
@@ -118,9 +122,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                 />
                 {errors["restaurant_itinerary_times.time"] && (
                   <span className="error-message">
-                    {Array.isArray(errors["restaurant_itinerary_times.time"])
-                      ? errors["restaurant_itinerary_times.time"].join(", ")
-                      : errors["restaurant_itinerary_times.time"]}
+                    {errors["restaurant_itinerary_times.time"]}
                   </span>
                 )}
               </div>

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Routes, Route, useMatch } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { v4 as uuidv4 } from "uuid"; // Import v4 function from uuid
 import Login from "./Login";
 import SignUp from "./SignUp";
 import NavBar from "./NavBar";
@@ -31,36 +30,6 @@ function App() {
   const match4 = useMatch("/users/:user_id/profile")
   const match = match1 || match2 || match3 || match4;
 
-  // const onAddItinerary = (newItinerary) => {
-  //   const { trip_id, date, combined_itinerary_times } = newItinerary;
-
-  //   setUser((prevUser) => {
-  //     const updatedUser = {
-  //       ...prevUser,
-  //       trips: prevUser.trips.map((trip) => {
-  //         if (trip.id === trip_id) {
-  //           const updatedItineraryDays = trip.itinerary_days.map((itineraryDay) => {
-  //             if (itineraryDay.date === date) {
-  //               const existingTimesIds = itineraryDay.combined_itinerary_times.map((time) => time.id);
-  //               const newTimes = combined_itinerary_times.filter((time) => !existingTimesIds.includes(time.id));
-  //               const updatedCombinedItineraryTimes = [...itineraryDay.combined_itinerary_times, ...newTimes];
-
-  //               return { ...itineraryDay, combined_itinerary_times: updatedCombinedItineraryTimes };
-  //             } else {
-  //               return itineraryDay;
-  //             }
-  //           });
-  //           return { ...trip, itinerary_days: updatedItineraryDays };
-  //         } else {
-  //           return trip;
-  //         }
-  //       }),
-  //     };
-
-  //     return updatedUser;
-  //   });
-  // };
-
   const onAddItinerary = (newItinerary) => {
     const { trip_id, date, combined_itinerary_times } = newItinerary;
 
@@ -69,13 +38,13 @@ function App() {
         ...prevUser,
         trips: prevUser.trips.map((trip) => {
           if (trip.id === trip_id) {
-            const existingDate =  trip.itinerary_days.find((itineraryDay) => itineraryDay.date === date);
-            if(!existingDate){
+            const existingDate = trip.itinerary_days.find((itineraryDay) => itineraryDay.date === date);
+            if (!existingDate) {
               return {
                 ...trip,
                 itinerary_days: [...trip.itinerary_days, newItinerary],
               }
-            } 
+            }
             const updatedItineraryDays = trip.itinerary_days.map((itineraryDay) => {
               if (itineraryDay.date === date) {
                 const existingTimesIds = itineraryDay.combined_itinerary_times.map((time) => time.id);
@@ -108,7 +77,7 @@ function App() {
     <main>
       {user && !isMatch && <NavBar />}
       {user ? (
-      <Routes>
+        <Routes>
           <>
             <Route
               path="/destinations/:destination_id/trips/:trip_id/hotels/:id"
@@ -197,12 +166,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
           </>
-      </Routes>
-      ): 
-      <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+        </Routes>
+      ) :
+        <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       }
     </main>
   );
