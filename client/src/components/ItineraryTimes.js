@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import { AllUsersContext } from "../context/AllUsersContext";
 import ItineraryHotel from "./ItineraryHotel";
 import ItineraryRestaurant from "./ItineraryRestaurant";
 import ItineraryActivity from "./ItineraryActivity";
@@ -9,7 +11,9 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
   const [isShowing, setIsShowing] = useState(false)
 
   const { user, setUser } = useContext(UserContext);
+  const { setUsers } = useContext(AllUsersContext);
 
+  console.log(user)
   const itineraryTime = new Date(itinerary_time.time);
 
   const adjustedTime = new Date(
@@ -22,7 +26,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
     minute: "numeric",
     hour12: true,
   };
-  
 
   const formattedTime = adjustedTime.toLocaleTimeString(undefined, options);
 
@@ -81,6 +84,8 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
             };
 
             setUser(updatedUser);
+            setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
+
           }
         } else {
           console.log(`Failed to delete ${entityType}`);
@@ -112,6 +117,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
           };
 
           setUser(updatedUser);
+          setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
         } else {
           console.log("Failed to delete itinerary_day");
         }
@@ -144,6 +150,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
               <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
                 <p onClick={() => deleteItineraryTime("hotel")} className="drop-text">Delete</p>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><p className="drop-text">Edit</p></Link>
               </div>
             </div>
           </div>
@@ -158,6 +165,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
               <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
                 <p onClick={() => deleteItineraryTime("restaurant")} className="drop-text">Delete</p>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><p className="drop-text">Edit</p></Link>
               </div>
             </div>
           </div>
@@ -174,6 +182,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
               <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
                 <p onClick={() => deleteItineraryTime("activity")} className="drop-text">Delete</p>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><p className="drop-text">Edit</p></Link>
               </div>
             </div>
           </div>

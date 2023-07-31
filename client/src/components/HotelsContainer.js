@@ -9,7 +9,7 @@ function HotelsContainer({ search, setSearch, handleSearch }) {
 
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
-  const [filterRating, setFilterRating] = useState("");
+  const [filterRating, setFilterRating] = useState(false);
   const [filterPrice, setFilterPrice] = useState("")
 
   if (destinations === null) {
@@ -39,7 +39,7 @@ function HotelsContainer({ search, setSearch, handleSearch }) {
     <>
       <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
       <div className="details-row">
-        <FilterHotels setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
+        <FilterHotels setFilterRating={setFilterRating} filterRating={filterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
           {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel} handleSearch={handleSearch} />)}
         </div>

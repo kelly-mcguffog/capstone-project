@@ -14,14 +14,33 @@ function DestinationsContainer({ renderDestinations, destinations }) {
     }
   }
 
+  const mobileAdvancePosition = () => {
+    setPosition((position + 2) % destinations.length)
+  }
+
+  const mobileRetreatPosition = () => {
+    if (position > 0) {
+      setPosition((position - 2) % destinations.length)
+    }
+  }
+
   return (
-    <div className="row">
-      <div className="arrow-button" onClick={retreatPosition}><i className="fa-sharp fa-solid fa-circle-chevron-left"></i></div>
-      <div className="spotlight">
-        {renderDestinations.slice(position, position + 5)}
+    <>
+      <div className="row">
+        <div className="arrow-button" onClick={retreatPosition}><i className="fa-sharp fa-solid fa-circle-chevron-left"></i></div>
+        <div className="spotlight">
+          {renderDestinations.slice(position, position + 5)}
+        </div>
+        <div className="arrow-button" onClick={advancePosition}><i className="fa-sharp fa-solid fa-circle-chevron-right"></i></div>
       </div>
-      <div className="arrow-button" onClick={advancePosition}><i className="fa-sharp fa-solid fa-circle-chevron-right"></i></div>
-    </div>
+      <div className="mobile">
+        <div className="arrow-button mobile-arrow-button" onClick={mobileRetreatPosition}><i className="fa-sharp fa-solid fa-circle-chevron-left"></i></div>
+        <div className="spotlight mobile-spotlight">
+          {renderDestinations.slice(position, position + 2)}
+        </div>
+        <div className="arrow-button mobile-arrow-button" onClick={mobileAdvancePosition}><i className="fa-sharp fa-solid fa-circle-chevron-right"></i></div>
+      </div>
+    </>
   );
 }
 

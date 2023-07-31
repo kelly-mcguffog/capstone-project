@@ -11,6 +11,12 @@ function PackingListContainer() {
     const { user, setUser } = useContext(UserContext);
     const { id } = useParams();
 
+    console.log(id)
+
+    if (!user) {
+        return <div>Loading...</div>;
+      }
+
     const trip = user.trips.find((trip) => trip.id === parseInt(id));
 
     const onAddPackingListItem = (newItem) => {
@@ -22,15 +28,21 @@ function PackingListContainer() {
             }
         });
         setUser({ ...user, trips: userTrips });
+        console.log(user);
     };
 
     return (
         <div className="side-bar">
+            <div className="mobile-nav">
+                <NavBar />
+            </div>
             <div className="my-trips">
                 <TripsListings />
             </div>
-            <div className="trips">
-                <NavBar />
+            <div className="trips welcome-header">
+                <div className="desktop-nav">
+                    <NavBar />
+                </div>
                 <PackingListForm onAddPackingListItem={onAddPackingListItem} />
                 <PackingList trip={trip} />
             </div>

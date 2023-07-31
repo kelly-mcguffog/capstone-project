@@ -24,7 +24,7 @@ function Profile() {
         return <div>Loading destinations...</div>;
     }
 
-    const { first_name, last_name, email, username, avatar, trips } = user;
+    const { first_name, last_name, email, username, avatar, trips, tsa_precheck } = user;
 
     const destinationMarkers = trips.map((trip) => {
         const destination = destinations.find((dest) => dest.id === trip.destination_id);
@@ -33,11 +33,16 @@ function Profile() {
 
     return (
         <div className="side-bar">
+            <div className="mobile-nav">
+                <NavBar />
+            </div>
             <div className="my-trips">
                 <TripsListings />
             </div>
             <div className="trips welcome-header">
-                <NavBar />
+                <div className="desktop-nav">
+                    <NavBar />
+                </div>
                 <div className="map-wrapper">
                     {isLoaded ? (
                         <UserMap destinationMarkers={destinationMarkers} />
@@ -61,6 +66,7 @@ function Profile() {
                         <div className="details-copy">
                             <p><i className="fa-solid fa-envelope"></i> {email}</p>
                             <p><i className="fa-solid fa-user"></i> {username}</p>
+                            <p><strong>TSA Precheck:</strong>{tsa_precheck}</p>
                             <div className="btn-container">
                                 <Link className="page-btn main-btn">
                                     Follow

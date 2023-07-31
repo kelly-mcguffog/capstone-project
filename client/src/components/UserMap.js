@@ -10,6 +10,10 @@ function UserMap({ destinationMarkers }) {
         return null;
     }, [destinationMarkers]);
 
+    if (center === null) {
+        return null;
+    }
+
     return (
         <GoogleMap zoom={2} center={center} mapContainerClassName='user-map-container'>
             {destinationMarkers.map((destination, index) => (

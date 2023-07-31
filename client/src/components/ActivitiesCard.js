@@ -26,8 +26,8 @@ function ActivitiesCard({ activity, trip_id, handleSearch }) {
     return (
         <div className="details" key={id}>
             <div className="details-img-wrapper">
-                <div className="details-img-container">
-                    <img alt={name} className="details-img" src={photo}></img>
+                <div className="details-img-container img-container-details">
+                    <img alt={name} className="details-img img-details" src={photo}></img>
                 </div>
             </div>
             <div className="details-info-destinations">

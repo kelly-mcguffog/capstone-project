@@ -20,5 +20,4 @@ class RestaurantItineraryTime < ApplicationRecord
       end
     end
   end
-
 end

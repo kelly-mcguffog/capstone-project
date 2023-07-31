@@ -8,7 +8,9 @@ import FilterActivities from "./FilterActivities";
 function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
-  const [filterRating, setFilterRating] = useState("");
+  const [filterRating, setFilterRating] = useState(false);
+  const [filterDuration, setFilterDuration] = useState(false);
+  const [filterPrice, setFilterPrice] = useState(0);
 
   if (destinations === null) {
     return <div>Loading...</div>;
@@ -25,18 +27,41 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
 
   const { activities } = destination
 
+  const extractNumericValue = (priceString) => {
+    if (typeof priceString === "string") {
+      const matches = priceString.match(/\d+(\.\d+)?/g);
+      if (matches) {
+        return parseFloat(matches[0]);
+      }
+    }
+    return 0;
+  };
+
   let filterActivities = activities.filter(activity => {
     const nameMatch = activity.name.toLowerCase().includes(search.toLowerCase());
     const ratingMatch = filterRating ? activity.rating.toString() === filterRating : true;
-
-    return nameMatch && ratingMatch;
+    const durationMatch =
+    filterDuration === "Up to 1 hour"
+    ? activity.duration.toLowerCase().includes("minutes") || activity.duration === "1 hour"
+    : filterDuration === "1 to 4 hours"
+    ? /\d+\s*hour/.test(activity.duration) && /\d+\s*hours/.test(activity.duration)
+    : filterDuration === "4 hours to 1 day"
+    ? /\d+\s*hours/.test(activity.duration) && activity.duration.includes("day")
+    : filterDuration
+    ? activity.duration.toLowerCase() === filterDuration.toLowerCase()
+    : true;
+    const activityPrice = extractNumericValue(activity.price);
+    const priceMatch = filterPrice ? activityPrice > filterPrice : true;
+    return nameMatch && ratingMatch && durationMatch && priceMatch;
   });
+
+  console.log(activities)
 
   return (
     <>
       <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
       <div className="details-row">
-        <FilterActivities setFilterRating={setFilterRating} />
+        <FilterActivities filterPrice={filterPrice} setFilterPrice={setFilterPrice} setFilterDuration={setFilterDuration} filterDuration={filterDuration} setFilterRating={setFilterRating} filterRating={filterRating} />
         <div className="cards">
           {filterActivities.map(activity => <ActivitiesCard key={activity.id} trip_id={id} handleSearch={handleSearch} activity={activity} />)}
         </div>

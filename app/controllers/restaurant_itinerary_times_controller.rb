@@ -17,10 +17,16 @@ class RestaurantItineraryTimesController < ApplicationController
         head :no_content
     end
 
+    def update
+        itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
+        restaurant_itinerary_time = itinerary_day.restaurant_itinerary_times.find(params[:id])
+        restaurant_itinerary_time.update!(restaurant_itinerary_time_params)
+        render json: restaurant_itinerary_time, status: :ok
+      end
+
     private
 
     def restaurant_itinerary_time_params
-        params.require(:restaurant_itinerary_time).permit(:time, :restaurant_id, :itinerary_day_id)
+        params.require(:restaurant_itinerary_time).permit(:time, :restaurant_id, :itinerary_day_id)    
     end
-
 end

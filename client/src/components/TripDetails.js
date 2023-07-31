@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import ItineraryDaysContainer from "./ItineraryDaysContainer";
 import { Link, useParams } from "react-router-dom";
@@ -8,7 +8,6 @@ import NavBar from "./NavBar";
 
 
 function TripDetails({ onDeleteItineraryDate }) {
-
     const { id } = useParams();
     const { user } = useContext(UserContext);
 
@@ -27,12 +26,19 @@ function TripDetails({ onDeleteItineraryDate }) {
     const itineraryDays = trip?.itinerary_days || [];
 
     return (
+
         <div className="side-bar">
-            <div className="my-trips">
-                <TripsListings />
+        <div className="mobile-nav">
+            <NavBar />
+        </div>
+        <div className="my-trips">
+            <TripsListings />
+        </div>
+        <div className="trips welcome-header">
+            <div className="desktop-nav">
+                <NavBar />
             </div>
             <div className="trips">
-                <NavBar />
                 <TravelDetails trip={trip} />
                 <div className="links">
                     <Link className="link" to={`/destinations/${destination_id}/trips/${id}/hotels`}>
@@ -56,6 +62,7 @@ function TripDetails({ onDeleteItineraryDate }) {
                     onDeleteItineraryDate={onDeleteItineraryDate}
                 />
             </div>
+        </div>
         </div>
     );
 }

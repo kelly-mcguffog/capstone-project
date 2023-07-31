@@ -8,7 +8,7 @@ class ItineraryDaySerializer < ActiveModel::Serializer
         time: itinerary_time[:time],
         activity: itinerary_time[:activity],
         hotel: itinerary_time[:hotel],
-        restaurant: itinerary_time[:restaurant]
+        restaurant: itinerary_time[:restaurant],
       }
     end
     combined_times.sort_by { |time| time[:time] }

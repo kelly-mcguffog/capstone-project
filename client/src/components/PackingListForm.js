@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function PackingListForm({ onAddPackingListItem }) {
-    
+
     const { id } = useParams()
     const [errors, setErrors] = useState([])
 
@@ -23,7 +23,7 @@ function PackingListForm({ onAddPackingListItem }) {
         setErrors((prevErrors) => ({
             ...prevErrors,
             [event.target.name]: null,
-          }));
+        }));
     }
 
     function handleSubmit(e) {
@@ -57,7 +57,7 @@ function PackingListForm({ onAddPackingListItem }) {
                     </ul>
                 )} */}
                 <div className="packing-form">
-                    <div className="label">
+                    <div className="label packing-label">
                         <div className="input-text">
                             <h3 className="input-title">Item</h3>
                         </div>
@@ -68,19 +68,18 @@ function PackingListForm({ onAddPackingListItem }) {
                             value={formData.item}
                             placeholder="i.e. socks"
                             autoComplete="off"
-                            className={`trip-form-input ${
-                                errors.item ? "input-error" : ""
-                              }`}
+                            className={`trip-form-input ${errors.item ? "input-error" : ""
+                                }`}
                         />
                         {errors.item && (
-            <span className="error-message">
-              {Array.isArray(errors.item)
-                ? errors.item.join(", ")
-                : errors.item}
-            </span>
-          )}
+                            <span className="error-message">
+                                {Array.isArray(errors.item)
+                                    ? errors.item.join(", ")
+                                    : errors.item}
+                            </span>
+                        )}
                     </div>
-                    <div className="label">
+                    <div className="label packing-label">
                         <div className="input-text">
                             <h3 className="input-title">Quantity</h3>
                         </div>
@@ -91,17 +90,16 @@ function PackingListForm({ onAddPackingListItem }) {
                             value={formData.quantity}
                             placeholder="i.e. 10"
                             autoComplete="off"
-                            className={`trip-form-input ${
-                                errors.quantity ? "input-error" : ""
-                              }`}
+                            className={`trip-form-input ${errors.quantity ? "input-error" : ""
+                                }`}
                         />
                         {errors.quantity && (
-            <span className="error-message">
-              {Array.isArray(errors.quantity)
-                ? errors.quantity.join(", ")
-                : errors.quantity}
-            </span>
-          )}
+                            <span className="error-message">
+                                {Array.isArray(errors.quantity)
+                                    ? errors.quantity.join(", ")
+                                    : errors.quantity}
+                            </span>
+                        )}
                     </div>
                     <button type="submit">
                         <i className="fa-solid fa-plus"></i>

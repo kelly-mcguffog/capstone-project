@@ -16,6 +16,13 @@ class ActivityItineraryTimesController < ApplicationController
         activity_itinerary_time.destroy
         head :no_content
     end
+
+    def update
+        itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
+        activity_itinerary_time = itinerary_day.activity_itinerary_times.find(params[:id])
+        activity_itinerary_time.update!(activity_itinerary_time_params)
+        render json: activity_itinerary_time, status: :ok
+      end
   
     private
   

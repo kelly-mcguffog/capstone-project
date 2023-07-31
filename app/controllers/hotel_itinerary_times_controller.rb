@@ -11,6 +11,13 @@ class HotelItineraryTimesController < ApplicationController
       render json: hotel_itinerary_time, status: :created
   end
 
+  def update
+    itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
+    hotel_itinerary_time = itinerary_day.hotel_itinerary_times.find(params[:id])
+    hotel_itinerary_time.update!(hotel_itinerary_time_params)
+    render json: hotel_itinerary_time, status: :ok
+  end
+
   def destroy
       hotel_itinerary_time = HotelItineraryTime.find(params[:id])
       hotel_itinerary_time.destroy

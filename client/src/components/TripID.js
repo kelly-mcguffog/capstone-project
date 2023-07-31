@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { NavLink, Link } from "react-router-dom";
-
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 
 function TripID({ trip, onDeleteTrip, isShowing }) {
 
     const { destinations } = useContext(DestinationsContext);
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const { id, outbound_flight, destination_id } = trip;
 
@@ -37,6 +37,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                 if (response.ok) {
                     console.log("Trip deleted successfully");
                     onDeleteTrip(id)
+                    navigate(`/users/${user.id}/trips`);
                 } else {
                     console.log("Failed to delete trip");
                 }

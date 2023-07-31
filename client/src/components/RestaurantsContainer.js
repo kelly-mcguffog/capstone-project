@@ -9,8 +9,8 @@ function RestaurantsContainer({ search, setSearch, handleSearch }) {
 
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
-  const [filterCuisine, setFilterCuisine] = useState("");
-  const [filterRating, setFilterRating] = useState("");
+  const [filterCuisine, setFilterCuisine] = useState(false);
+  const [filterRating, setFilterRating] = useState(false);
   const [filterPrice, setFilterPrice] = useState("")
 
 
@@ -42,7 +42,7 @@ function RestaurantsContainer({ search, setSearch, handleSearch }) {
     <>
       <DestinationDetailsHeader destination={destination} trip_id={id} search={search} setSearch={setSearch} />
       <div className="details-row">
-        <FilterRestaurants setFilterCuisine={setFilterCuisine} setFilterRating={setFilterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
+        <FilterRestaurants filterCuisine={filterCuisine} setFilterCuisine={setFilterCuisine} setFilterRating={setFilterRating} filterRating={filterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
           {filterRestaurants.map(restaurant => <RestaurantsCard key={restaurant.id} trip_id={id} handleSearch={handleSearch} restaurant={restaurant} />)}
         </div>

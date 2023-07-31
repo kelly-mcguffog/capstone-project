@@ -16,7 +16,10 @@ function EditProfileForm() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  const [formData, setFormData] = useState({ ...user });
+  const [formData, setFormData] = useState({
+    ...user,
+    password: "",
+  });
 
   if (!isLoaded) return <div>Loading...</div>;
 
@@ -28,7 +31,7 @@ function EditProfileForm() {
     return <div>Loading destinations...</div>;
   }
 
-  const { id, first_name, last_name, email, username, avatar, tsa_precheck } = formData;
+  const { id, first_name, last_name, email, username, avatar, tsa_precheck, password } = formData;
 
   const destinationMarkers = user.trips.map((trip) => {
     const destination = destinations.find((dest) => dest.id === trip.destination_id);
@@ -75,6 +78,7 @@ function EditProfileForm() {
     formDataToSend.append("email", formData.email);
     formDataToSend.append("username", formData.username);
     formDataToSend.append("tsa_precheck", formData.tsa_precheck);
+    formDataToSend.append("password", formData.password);
 
     fetch(`/users/${id}`, {
       method: "PATCH",
@@ -239,6 +243,30 @@ console.log(errors)
               {Array.isArray(errors.username)
                 ? errors.username.join(", ")
                 : errors.username}
+            </span>
+          )}
+          </div>
+              <div className="profile-form-input">
+                <div className="input-text">
+                  <h3 className="input-title">Password</h3>
+                </div>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autoComplete="off"
+                  placeholder="Password"
+                  value={password}
+                  onChange={handleChangeInput}
+                  className={`login-form-input ${
+                    errors.password ? "input-error" : ""
+                  }`}
+                />
+                {errors.password && (
+            <span className="error-message">
+              {Array.isArray(errors.password)
+                ? errors.password.join(", ")
+                : errors.password}
             </span>
           )}
               </div>

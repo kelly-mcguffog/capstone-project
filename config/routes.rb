@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
   resources :trips, only: [:index, :show, :create, :update, :destroy] do
     resources :itinerary_days, only: [:index, :show, :update, :create, :destroy] do
-      resources :hotel_itinerary_times, only: [:index, :destroy, :create]
-      resources :activity_itinerary_times, only: [:index, :destroy, :create]
-      resources :restaurant_itinerary_times, only: [:index, :destroy, :create]
+      resources :hotel_itinerary_times, only: [:index, :destroy, :create, :update]
+      resources :activity_itinerary_times, only: [:index, :destroy, :create, :update]
+      resources :restaurant_itinerary_times, only: [:index, :destroy, :create, :update]
     end
     resources :packing_list_items, only: [:create, :update, :destroy]
   end
