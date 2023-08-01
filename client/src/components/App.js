@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Routes, Route, useMatch } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { AllUsersContext } from "../context/AllUsersContext";
@@ -29,11 +29,21 @@ function App() {
   const { user, setUser } = useContext(UserContext)
   const { setUsers } = useContext(AllUsersContext)
   const [search, setSearch] = useState("")
+  const [isLoading, setIsLoading] = useState(true);
   const match1 = useMatch("/users/:user_id/trips");
   const match2 = useMatch("/users/:user_id/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
-  const match4 = useMatch("/users/:user_id/profile")
+  const match4 = useMatch("/users/:user_id/profile");
   const match = match1 || match2 || match3 || match4;
+  
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const onAddItinerary = (newItinerary) => {
     const { trip_id, date, combined_itinerary_times } = newItinerary;
@@ -80,7 +90,7 @@ function App() {
   return (
     <main>
       {user && !isMatch && <NavBar />}
-      <RestrictedAccess />
+      {!user && !isMatch && !isLoading && <RestrictedAccess />}
       {user ? (
         <Routes>
           <>

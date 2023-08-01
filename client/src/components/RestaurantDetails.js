@@ -25,11 +25,11 @@ function RestaurantDetails() {
     const { users } = useContext(AllUsersContext);
     const { user } = useContext(UserContext);
 
-    if (!restaurant) return <div>Loading...</div>
+    if (!restaurant) return <div className="loading">Loading...</div>;
 
-    if (!isLoaded) return <div>Loading...</div>
+    if (!isLoaded) return <div className="loading">Loading...</div>;
 
-    if (!users) return <div>Loading...</div>;
+    if (!users) return <div className="loading">Loading...</div>;
 
     const { name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3 } = restaurant
 

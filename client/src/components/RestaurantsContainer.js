@@ -17,7 +17,7 @@ function RestaurantsContainer({ search, setSearch, handleSearch }) {
 
 
   if (destinations === null) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
 

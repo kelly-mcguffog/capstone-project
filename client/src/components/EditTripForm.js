@@ -47,11 +47,11 @@ function EditTripForm() {
   }, [findTrip]);
 
   if (!findTrip) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (destinations === null) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   const destination = destinations.find(

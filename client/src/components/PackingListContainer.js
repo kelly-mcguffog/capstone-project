@@ -11,10 +11,8 @@ function PackingListContainer() {
     const { user, setUser } = useContext(UserContext);
     const { id } = useParams();
 
-    console.log(id)
-
     if (!user) {
-        return <div>Loading...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));

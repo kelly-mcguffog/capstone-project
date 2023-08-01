@@ -26,11 +26,12 @@ function HotelDetails() {
 
     const hotel = hotels.find(hotel => hotel.id === parseInt(id))
 
-    if (!hotel) return <div>Loading...</div>
+    if (!hotel) return <div className="loading">Loading...</div>;
 
-    if (!isLoaded) return <div>Loading...</div>
+    if (!isLoaded) return <div className="loading">Loading...</div>;
 
-    if (!users) return <div>Loading...</div>;
+    if (!users) return <div className="loading">Loading...</div>;
+
 
     const { name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3 } = hotel
 

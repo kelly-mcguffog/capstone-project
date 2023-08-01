@@ -25,11 +25,14 @@ function ActivityDetails() {
 
     const activity = activities.find(activity => activity.id === parseInt(id))
 
-    if (!activity) return <div>Loading...</div>
+    if (!activity) return <div className="loading">Loading...</div>;
 
-    if (!isLoaded) return <div>Loading...</div>
 
-    if (!users) return <div>Loading...</div>;
+    if (!isLoaded) return <div className="loading">Loading...</div>;
+
+
+    if (!users) return <div className="loading">Loading...</div>;
+
 
     const { photo, name, rating, description, price, longitude, latitude, address, duration, url } = activity
 

@@ -21,14 +21,15 @@ function EditProfileForm() {
     password: "",
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div className="loading">Loading...</div>;
+
 
   if (!user) {
     return null;
   }
 
   if (!destinations) {
-    return <div>Loading destinations...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   const { id, first_name, last_name, email, username, avatar, tsa_precheck, password } = formData;
@@ -106,7 +107,7 @@ function EditProfileForm() {
           {isLoaded ? (
             <UserMap destinationMarkers={destinationMarkers} />
           ) : (
-            <div>Loading...</div>
+            <div className="loading">Loading...</div>
           )}
         </div>
         <form className="profile-form-container" onSubmit={handleSubmitEdit}>

@@ -15,7 +15,7 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const [filterPrice, setFilterPrice] = useState(0);
 
   if (destinations === null) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
 

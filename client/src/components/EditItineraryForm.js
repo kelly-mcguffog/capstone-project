@@ -57,7 +57,7 @@ function EditItineraryForm() {
   const [formData, setFormData] = useState(initialFormData);
 
   if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !user) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   const destination = destinations.find(

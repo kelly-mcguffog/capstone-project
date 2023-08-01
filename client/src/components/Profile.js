@@ -14,14 +14,15 @@ function Profile() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
 
-    if (!isLoaded) return <div>Loading...</div>
+    if (!isLoaded) return <div className="loading">Loading...</div>;
+
 
     if (!user) {
         return null;
     }
 
     if (!destinations) {
-        return <div>Loading destinations...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     const { first_name, last_name, email, username, avatar, trips, tsa_precheck } = user;
@@ -47,7 +48,7 @@ function Profile() {
                     {isLoaded ? (
                         <UserMap destinationMarkers={destinationMarkers} />
                     ) : (
-                        <div>Loading...</div>
+                        <div className="loading">Loading...</div>
                     )}
                 </div>
                 <div className="details profile-container">

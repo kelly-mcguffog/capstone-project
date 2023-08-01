@@ -23,7 +23,7 @@ function AddHotelToItinerary({ onAddItinerary }) {
   });
 
   if (destinations === null) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   const destination = destinations.find(

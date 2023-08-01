@@ -21,7 +21,7 @@ function Home({ search, setSearch }) {
   }, [search, destinations]);
 
   if (destinations === null) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   const renderDestinations = destinations.map((destination) => (

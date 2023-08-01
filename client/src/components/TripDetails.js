@@ -12,13 +12,13 @@ function TripDetails({ onDeleteItineraryDate }) {
     const { user } = useContext(UserContext);
 
     if (!user?.trips) {
-        return <div>Loading...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));
 
     if (!trip) {
-        return <div>Loading...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     const { destination_id } = trip;

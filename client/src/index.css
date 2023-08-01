@@ -1144,6 +1144,9 @@ button.form-button{
   border-radius: 50px;
   text-align: center;
 }
+.error-icon-restriced{
+  width: 7%;
+}
 .error-text{
   color: firebrick;
   text-align: center;
@@ -1152,7 +1155,6 @@ button.form-button{
   color: white;
 }
 .error-btn{
-  /* background-color: firebrick; */
   margin: 20px auto auto auto;
   border: 1px solid firebrick;
   color: firebrick;
@@ -1161,6 +1163,11 @@ button.form-button{
 .error-btn:hover{
   background-color: firebrick;
   color: white;
+}
+.loading{
+  text-align: center;
+  color: rgb(210, 210, 210);
+  font-size: 30px;
 }
 .pop-up-error{
   text-align: center;

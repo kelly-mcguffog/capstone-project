@@ -20,7 +20,7 @@ function RestrictedAccess() {
     return (
         <>
             <div className="error-popup restricted">
-                <div className="error-icon">
+                <div className="error-icon error-icon-restriced">
                     <i className="fa-solid fa-exclamation"></i>
                 </div>
                 <h2 className="error-text">Error</h2>
