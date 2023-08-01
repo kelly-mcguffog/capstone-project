@@ -22,6 +22,7 @@ import ActivityDetails from "./ActivityDetails";
 import EditProfileForm from "./EditProfileForm";
 import EditTripForm from "./EditTripForm";
 import EditItineraryForm from "./EditItineraryForm";
+import RestrictedAccess from "./RestrictedAccess";
 
 function App() {
 
@@ -79,6 +80,7 @@ function App() {
   return (
     <main>
       {user && !isMatch && <NavBar />}
+      <RestrictedAccess />
       {user ? (
         <Routes>
           <>

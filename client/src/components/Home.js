@@ -5,7 +5,7 @@ import DestinationsCard from "./DestinationsCard";
 import { DestinationsContext } from "../context/DestinationsContext";
 
 function Home({ search, setSearch }) {
-  
+
   const { destinations } = useContext(DestinationsContext);
   const [searchDestinations, setSearchDestinations] = useState([]);
 

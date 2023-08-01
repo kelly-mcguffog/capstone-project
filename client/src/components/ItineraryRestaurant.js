@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function ItineraryRestaurant({ restaurant }) {
+function ItineraryRestaurant({ trip_id, restaurant }) {
 
-    const { address, cuisine, description, name } = restaurant
+    const { id, address, cuisine, description, name, destination_id } = restaurant
 
     return (
 
@@ -10,7 +11,10 @@ function ItineraryRestaurant({ restaurant }) {
             <h3 className="itinerary-activity">{name}</h3>
             <h5>{address}</h5>
             <h5>{cuisine}</h5>
-            <p>{description}</p>
+            <p className="description">{description}</p>
+            <Link className="page-btn main-btn secondary-btn" to={`/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}/details`}>
+                View Details
+            </Link>
         </div>
     )
 }

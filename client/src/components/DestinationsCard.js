@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function DestinationsCard({ destination }) {
 
     const { id, city, photo } = destination
-    
+
     return (
         <div className="card-details">
             <Link className="link city" to={`/destinations/${id}/hotels`}>

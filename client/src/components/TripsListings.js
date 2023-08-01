@@ -4,7 +4,7 @@ import TripsContainer from "./TripsContainer";
 
 
 function TripsListings() {
-    
+
     const { user } = useContext(UserContext)
     const { trips } = user
     const [isShowing, setIsShowing] = useState(false)
@@ -26,11 +26,11 @@ function TripsListings() {
                 <i onClick={handleShowTrips} className={isShowingTrips ? "fa-solid fa-caret-up mobile-drop" : "fa-solid fa-caret-down mobile-drop"}></i>
             </div>
             <div className="desktop-trips">
-            <TripsContainer trips={trips} isShowing={isShowing} />
+                <TripsContainer trips={trips} isShowing={isShowing} />
             </div>
-            {isShowingTrips ? 
-            <TripsContainer trips={trips} isShowing={isShowing} />
-            : null}
+            {isShowingTrips ?
+                <TripsContainer trips={trips} isShowing={isShowing} />
+                : null}
         </div>
     )
 }

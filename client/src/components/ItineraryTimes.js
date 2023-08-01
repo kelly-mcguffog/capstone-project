@@ -13,7 +13,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
   const { user, setUser } = useContext(UserContext);
   const { setUsers } = useContext(AllUsersContext);
 
-  console.log(user)
   const itineraryTime = new Date(itinerary_time.time);
 
   const adjustedTime = new Date(
@@ -28,6 +27,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
   };
 
   const formattedTime = adjustedTime.toLocaleTimeString(undefined, options);
+
 
   function deleteItineraryTime(entityType) {
     let endpoint = "";
@@ -149,12 +149,13 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
             <div className="dropdown">
               <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`} className="drop-text-link"><p className="drop-text">Edit</p></Link>
+                <hr></hr>
                 <p onClick={() => deleteItineraryTime("hotel")} className="drop-text">Delete</p>
-                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><p className="drop-text">Edit</p></Link>
               </div>
             </div>
           </div>
-          <ItineraryHotel hotel={itinerary_time.hotel} />
+          <ItineraryHotel trip_id={trip.id} hotel={itinerary_time.hotel} />
         </div>
       )}
       {itinerary_time.restaurant && (
@@ -164,12 +165,13 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
             <div className="dropdown">
               <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`} className="drop-text-link"><p className="drop-text">Edit</p></Link>
+                <hr></hr>
                 <p onClick={() => deleteItineraryTime("restaurant")} className="drop-text">Delete</p>
-                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><p className="drop-text">Edit</p></Link>
               </div>
             </div>
           </div>
-          <ItineraryRestaurant restaurant={itinerary_time.restaurant} />
+          <ItineraryRestaurant trip_id={trip.id} restaurant={itinerary_time.restaurant} />
         </div>
       )}
       {itinerary_time.activity && (
@@ -181,12 +183,13 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
             <div className="dropdown">
               <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`} className="drop-text-link"><p className="drop-text">Edit</p></Link>
+                <hr></hr>
                 <p onClick={() => deleteItineraryTime("activity")} className="drop-text">Delete</p>
-                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><p className="drop-text">Edit</p></Link>
               </div>
             </div>
           </div>
-          <ItineraryActivity activity={itinerary_time.activity} />
+          <ItineraryActivity trip_id={trip.id} activity={itinerary_time.activity} />
         </div>
       )}
     </div>

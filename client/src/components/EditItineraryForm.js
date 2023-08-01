@@ -16,15 +16,15 @@ function EditItineraryForm() {
   const itineraryTripId = parseInt(trip_id);
   const itineraryTrips = user?.trips || [];
   const findTrip = itineraryTrips.find((trip) => trip.id === itineraryTripId);
-  
+
   const itineraryDayId = parseInt(itinerary_day_id);
   const itineraryDays = findTrip?.itinerary_days || [];
   const findItineraryDay = itineraryDays.find((day) => day.id === itineraryDayId);
-  
+
   const itineraryTimeId = parseInt(itinerary_time_id);
   const combinedItineraryTimes = findItineraryDay?.combined_itinerary_times || [];
   const findItineraryTime = combinedItineraryTimes.find((time) => time.id === itineraryTimeId);
-  
+
 
   const initialFormData = {
     id: findItineraryDay?.id,
@@ -56,9 +56,9 @@ function EditItineraryForm() {
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState(initialFormData);
 
-if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !user) {
-  return <div>Loading...</div>;
-}
+  if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !user) {
+    return <div>Loading...</div>;
+  }
 
   const destination = destinations.find(
     (destination) => destination.id === parseInt(findTrip.destination_id)
@@ -66,17 +66,17 @@ if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !us
 
   const onUpdateItinerary = (updatedItinerary) => {
     const { trip_id, date, combined_itinerary_times } = updatedItinerary;
-  
+
     console.log("trip_id:", trip_id);
     console.log("date:", date);
-  
+
     const updatedUser = {
       ...user,
       trips: user.trips.map((trip) => {
         if (trip.id === trip_id) {
           let updatedItineraryDays = trip.itinerary_days.map((itineraryDay) => {
             console.log("itineraryDay.date:", itineraryDay.date);
-  
+
             if (itineraryDay.date !== date) {
               const updatedCombinedItineraryTimes = itineraryDay.combined_itinerary_times.filter(
                 (timeObj) => timeObj.id !== findItineraryTime.id
@@ -99,13 +99,13 @@ if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !us
                 }
                 return timeObj;
               });
-  
+
               console.log("updatedItineraryTimes:", updatedItineraryTimes);
-  
+
               return { ...itineraryDay, combined_itinerary_times: updatedItineraryTimes };
             }
           });
-  
+
           const dateExists = updatedItineraryDays.some((itineraryDay) => itineraryDay.date === date);
           if (!dateExists) {
             const newItineraryDay = {
@@ -128,21 +128,21 @@ if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !us
             };
             updatedItineraryDays.push(newItineraryDay);
           }
-  
+
           updatedItineraryDays = updatedItineraryDays.filter((itineraryDay) => itineraryDay.combined_itinerary_times.length > 0);
-  
+
           return { ...trip, itinerary_days: updatedItineraryDays };
         } else {
           return trip;
         }
       }),
     };
-  
+
     setUser(updatedUser);
     setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
   };
-  
-  
+
+
 
 
   function handleChange(event) {
@@ -190,7 +190,7 @@ if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !us
   function updateItineraryDay() {
     console.log("formData in updateItineraryDay:", formData);
     const endpoint = `/trips/${trip_id}/itinerary_days/${itinerary_day_id}`;
-  
+
     fetch(endpoint, {
       method: "PATCH",
       headers: {
@@ -215,7 +215,7 @@ if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !us
         setErrors([error]);
       });
   }
-  
+
 
   const handleSubmit = (event) => {
     event.preventDefault();

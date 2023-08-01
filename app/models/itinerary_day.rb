@@ -49,9 +49,11 @@ class ItineraryDay < ApplicationRecord
   private
 
   def only_one_hotel_per_day
-    unique_hotel_dates = hotel_itinerary_times.map { |hotel_itinerary| hotel_itinerary.time&.to_date }.compact.uniq
-    if unique_hotel_dates.size != hotel_itinerary_times.size
-      errors.add(:hotel_itinerary_times, "can only have one hotel per day")
+    hotels_count = hotel_itinerary_times.reject(&:marked_for_destruction?).size
+    unique_hotel_dates = hotel_itinerary_times.reject(&:marked_for_destruction?).map { |hotel_itinerary| hotel_itinerary.time&.to_date }.compact.uniq
+  
+    if hotels_count > 1 && unique_hotel_dates.size != hotels_count
+      errors.add(:hotel_itinerary_times, "You can only have one hotel per day")
     end
   end
 end

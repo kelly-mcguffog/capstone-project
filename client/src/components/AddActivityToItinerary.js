@@ -154,18 +154,22 @@ function AddActivityToItinerary({ onAddItinerary }) {
           </form>
         </div>
         {trip_id === undefined && (
-          <div className="back-link">
+          <div className="back-link-btn back-btn-form">
             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
             <Link className="link" to={`/destinations/${destination_id}/activities/${activity_id}/details`}>
-              Return to Activity
+              <p className="text">
+                Return to Hotel
+              </p>
             </Link>
           </div>
         )}
         {trip_id && (
-          <div className="back-link">
-            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+          <div className="back-link-btn back-link-btn-details">
             <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
-              Return to Trip
+              <p className="text">
+                Return to Trip
+              </p>
+              <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
             </Link>
           </div>
         )}

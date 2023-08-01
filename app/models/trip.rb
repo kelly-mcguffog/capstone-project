@@ -15,8 +15,8 @@ class Trip < ApplicationRecord
 
     validates :outbound_flight, :return_flight, presence: true
 
-    validates :outbound_flight_number, :return_flight_number, format: { with: /\A[A-Za-z]{2}\d{1,4}\z/, message: "must start with two letters followed by 1 to 4 digits" },  allow_blank: true
+    validates :outbound_flight_number, :return_flight_number, format: { with: /\A[A-Za-z]{2}\d{1,4}\z/, message: "Must start with two letters followed by 1 to 4 digits" },  allow_blank: true
 
-    validates :confirmation_number, numericality: { only_integer: true }, length: { is: 9, message: "must be 9 digits"}, allow_blank: true
+    validates :confirmation_number, numericality: { only_integer: true }, length: { is: 9, message: "Must be 9 digits"}, allow_blank: true
 
 end

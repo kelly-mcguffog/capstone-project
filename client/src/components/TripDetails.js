@@ -13,7 +13,7 @@ function TripDetails({ onDeleteItineraryDate }) {
 
     if (!user?.trips) {
         return <div>Loading...</div>;
-      }
+    }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));
 
@@ -28,41 +28,41 @@ function TripDetails({ onDeleteItineraryDate }) {
     return (
 
         <div className="side-bar">
-        <div className="mobile-nav">
-            <NavBar />
-        </div>
-        <div className="my-trips">
-            <TripsListings />
-        </div>
-        <div className="trips welcome-header">
-            <div className="desktop-nav">
+            <div className="mobile-nav">
                 <NavBar />
             </div>
-            <div className="trips">
-                <TravelDetails trip={trip} />
-                <div className="links">
-                    <Link className="link" to={`/destinations/${destination_id}/trips/${id}/hotels`}>
-                        <button type="submit">
-                            <i className="fa-solid fa-plus"></i>
-                        </button>
-                        <p className="text">
-                            Build Itinerary
-                        </p>
-                    </Link>
-                    <Link className="link" to={`/trips/${id}/packing_list`}>
-                        <p className="text">
-                            View Packing List
-                        </p>
-                        <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
-                    </Link>
-                </div>
-                <ItineraryDaysContainer
-                    trip={trip}
-                    itinerary_days={itineraryDays}
-                    onDeleteItineraryDate={onDeleteItineraryDate}
-                />
+            <div className="my-trips">
+                <TripsListings />
             </div>
-        </div>
+            <div className="trips welcome-header">
+                <div className="desktop-nav">
+                    <NavBar />
+                </div>
+                <div className="trips">
+                    <TravelDetails trip={trip} />
+                    <div className="links">
+                        <Link className="link" to={`/destinations/${destination_id}/trips/${id}/hotels`}>
+                            <button type="submit">
+                                <i className="fa-solid fa-plus"></i>
+                            </button>
+                            <p className="text">
+                                Build Itinerary
+                            </p>
+                        </Link>
+                        <Link className="link" to={`/trips/${id}/packing_list`}>
+                            <p className="text">
+                                View Packing List
+                            </p>
+                            <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
+                        </Link>
+                    </div>
+                    <ItineraryDaysContainer
+                        trip={trip}
+                        itinerary_days={itineraryDays}
+                        onDeleteItineraryDate={onDeleteItineraryDate}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

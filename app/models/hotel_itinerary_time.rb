@@ -14,7 +14,7 @@ class HotelItineraryTime < ApplicationRecord
         existing_times.each do |existing_time|
           time_diff = (existing_time - time).abs / 60
           if time_diff < 30
-            errors.add(:time, "must be at least 30 minutes apart from existing times.")
+            errors.add(:time, "Must be at least 30 minutes apart from existing times.")
             return
           end
         end

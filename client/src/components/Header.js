@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 
 function Header({ search, setSearch, searchDestinations }) {
-    
+
     return (
         <div className="header-text">
             <h1 className="title">Wanderlust</h1>

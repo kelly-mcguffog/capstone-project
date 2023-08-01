@@ -11,11 +11,10 @@ function UsersCheckIn({ allUsers }) {
         console.log(user)
         return (
           <div key={user.id} className={`img-container checkin checkin${index + 1}`}>
-
             {/* <Link to={`/users/${user.id}/trips`} key={user.id} className={`img-container checkin checkin${index + 1}`}> */}
-              <img className="img checkin-img" alt={user.username} src={decodedUrl} />
-             {/* </Link> */}
-            </div>
+            <img className="img checkin-img" alt={user.username} src={decodedUrl} />
+            {/* </Link> */}
+          </div>
         );
       })}
     </div>

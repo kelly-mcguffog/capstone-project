@@ -9,7 +9,7 @@ function SearchResults({ result, setSearch }) {
 
     const handleSearch = () => {
         setSearch("");
-      };
+    };
 
     return (
         <>

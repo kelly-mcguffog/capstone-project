@@ -7,7 +7,7 @@ import PackingList from "./PackingList";
 import NavBar from "./NavBar";
 
 function PackingListContainer() {
-    
+
     const { user, setUser } = useContext(UserContext);
     const { id } = useParams();
 
@@ -15,7 +15,7 @@ function PackingListContainer() {
 
     if (!user) {
         return <div>Loading...</div>;
-      }
+    }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));
 

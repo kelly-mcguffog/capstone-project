@@ -1,37 +1,28 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useParams } from "react-router-dom";
 import Search from "./Search";
 
-function DestinationDetailsHeader({ destination, trip_id, search, setSearch }) {
+function DestinationDetailsHeader({ destination, search, setSearch }) {
 
-    const { photo, city, id } = destination;
+    const { photo, city } = destination;
+    const { destination_id, id } = useParams()
 
     const getUrlFormat = (component) => {
-        if (trip_id !== undefined) {
-            return `/destinations/${id}/trips/${trip_id}/${component}`;
+        if (id !== undefined) {
+            return `/destinations/${destination_id}/trips/${id}/${component}`;
         } else {
-            return `/destinations/${id}/${component}`;
+            return `/destinations/${destination_id}/${component}`;
         }
     };
-
-    const getTripButton = () => {
-        if (trip_id === undefined) {
-            return (
-                <Link className="page-btn main-btn trip-btn" to={`/destinations/${id}/trips`}>
-                    Add a Trip
-                </Link>
-            )
-        } else {
-            return null
-        }
-    }
 
     return (
         <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
             <div className="header-copy">
                 <h1 className="title">Welcome to {city}</h1>
-                {getTripButton()}
-                <div className="results">
+                {!id ? <Link className="page-btn main-btn trip-btn" to={`/destinations/${destination_id}/trips`}>
+                    Add a Trip
+                </Link> : null}
+                <div className={id ? "results destination-results-trip" : "results destination-results"}>
                     <div className="nav">
                         <NavLink className="link" to={getUrlFormat("hotels")}>
                             Hotels

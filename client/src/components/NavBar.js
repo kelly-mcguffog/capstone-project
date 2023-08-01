@@ -55,12 +55,12 @@ function NavBar() {
                                 Profile
                             </Link>
                             <hr></hr>
-                            {isMobile ? 
-                            <>
-                            <TripsListings />
-                            <hr></hr>
-                            </>
-                            : null }
+                            {isMobile ?
+                                <>
+                                    <TripsListings />
+                                    <hr></hr>
+                                </>
+                                : null}
                             <button className="logout" onClick={handleLogoutClick}>
                                 Logout
                             </button>

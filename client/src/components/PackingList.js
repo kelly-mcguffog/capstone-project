@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import PackingListItem from "./PackingListItem";
 
 function PackingList({ trip }) {
-    
+
     const { user, setUser } = useContext(UserContext);
     const { id } = useParams();
     const packingListItems = trip?.packing_list_items ?? [];

@@ -29,6 +29,12 @@ function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate })
         }
     });
 
+    nonEmptyFilteredItineraryDays.forEach((itinerary_day) => {
+        itinerary_day.date = new Date(itinerary_day.date);
+    });
+
+    nonEmptyFilteredItineraryDays.sort((a, b) => a.date - b.date);
+
     return (
         <>
             {nonEmptyFilteredItineraryDays.map((itinerary_day) => (

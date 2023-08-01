@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
+import { UserContext } from "../context/UserContext";
 import GridHeader from "./GridHeader";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import UsersCheckIn from "./UsersCheckIn";
 
 function HotelDetails() {
-    
+
     const [hotels, setHotels] = useState([])
     const { users } = useContext(AllUsersContext);
+    const { user } = useContext(UserContext);
     const { destination_id, trip_id, id } = useParams()
 
     const { isLoaded } = useLoadScript({
@@ -18,9 +20,9 @@ function HotelDetails() {
 
     useEffect(() => {
         fetch("/hotels")
-          .then(res => res.json())
-          .then(data => setHotels(data))
-      }, [])
+            .then(res => res.json())
+            .then(data => setHotels(data))
+    }, [])
 
     const hotel = hotels.find(hotel => hotel.id === parseInt(id))
 
@@ -42,7 +44,7 @@ function HotelDetails() {
         )
     );
 
-  
+
     const getItineraryUrl = () => {
         if (trip_id !== undefined) {
             return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}`;
@@ -64,10 +66,25 @@ function HotelDetails() {
             <GridHeader photo1={photo1} photo2={photo2} photo3={photo3} />
             <div className="background">
                 <div className="back-link">
-                    <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-                    <Link className="link" to={getListingsUrl()}>
-                        Return to Listings
-                    </Link>
+                    <div className="back-link-btn">
+                        <Link className="link" to={getListingsUrl()}>
+                            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+                            <p className="text">
+                                Return to Listings
+                            </p>
+                        </Link>
+                    </div>
+
+                    {trip_id ?
+                        <div className="back-link-btn">
+                            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+                                <p className="text">
+                                    Return to Trip
+                                </p>
+                            </Link>
+                            <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
+                        </div>
+                        : null}
                 </div>
                 <div className="details-wrapper">
                     <div className="details-container">

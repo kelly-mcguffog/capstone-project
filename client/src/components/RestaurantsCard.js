@@ -24,7 +24,7 @@ function RestaurantsCard({ restaurant, trip_id, handleSearch }) {
     return (
         <div className="details" key={id}>
             <div className="details-img-wrapper">
-            <div className="details-img-container img-container-details">
+                <div className="details-img-container img-container-details">
                     <img alt={name} className="details-img img-details" src={photo1}></img>
                 </div>
             </div>

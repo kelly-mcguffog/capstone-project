@@ -4,25 +4,25 @@ import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 
 function EditTripForm() {
-    const [errors, setErrors] = useState([]);
-    const { id } = useParams();
-    const { user, setUser } = useContext(UserContext);
-    const { destinations } = useContext(DestinationsContext);
-    const navigate = useNavigate();
-  
-    const [formData, setFormData] = useState({
-      origin_airport: "",
-      destination_airport: "",
-      outbound_flight: "",
-      return_flight: "",
-      outbound_flight_number: "",
-      return_flight_number: "",
-      confirmation_number: "",
-    });
-  
-    const findTrip = user.trips?.find((trip) => trip.id === parseInt(id));
-  
-function formatDateTime(dateTimeString) {
+  const [errors, setErrors] = useState([]);
+  const { id } = useParams();
+  const { user, setUser } = useContext(UserContext);
+  const { destinations } = useContext(DestinationsContext);
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    origin_airport: "",
+    destination_airport: "",
+    outbound_flight: "",
+    return_flight: "",
+    outbound_flight_number: "",
+    return_flight_number: "",
+    confirmation_number: "",
+  });
+
+  const findTrip = user.trips?.find((trip) => trip.id === parseInt(id));
+
+  function formatDateTime(dateTimeString) {
     const date = new Date(dateTimeString);
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -31,24 +31,24 @@ function formatDateTime(dateTimeString) {
     const minutes = date.getMinutes().toString().padStart(2, "0");
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
-  
-    useEffect(() => {
-      if (findTrip) {
-        setFormData({
-          origin_airport: findTrip.origin_airport,
-          destination_airport: findTrip.destination_airport,
-          outbound_flight: formatDateTime(findTrip.outbound_flight),
-          return_flight: formatDateTime(findTrip.return_flight),
-          outbound_flight_number: findTrip.outbound_flight_number,
-          return_flight_number: findTrip.return_flight_number,
-          confirmation_number: findTrip.confirmation_number,
-        });
-      }
-    }, [findTrip]);
-  
-    if (!findTrip) {
-      return <div>Loading...</div>;
+
+  useEffect(() => {
+    if (findTrip) {
+      setFormData({
+        origin_airport: findTrip.origin_airport,
+        destination_airport: findTrip.destination_airport,
+        outbound_flight: formatDateTime(findTrip.outbound_flight),
+        return_flight: formatDateTime(findTrip.return_flight),
+        outbound_flight_number: findTrip.outbound_flight_number,
+        return_flight_number: findTrip.return_flight_number,
+        confirmation_number: findTrip.confirmation_number,
+      });
     }
+  }, [findTrip]);
+
+  if (!findTrip) {
+    return <div>Loading...</div>;
+  }
 
   if (destinations === null) {
     return <div>Loading...</div>;
@@ -92,22 +92,14 @@ function formatDateTime(dateTimeString) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-    .then((r) => {
-        if (r.ok) {
-          return r.json();
-        } else {
-          throw new Error("Form submission failed");
-        }
-      })
-      .then((updatedTrip) => {
-        onUpdateTrip(updatedTrip);
-        navigate(`/users/${user.id}/trips/${id}`);
-      })
-      .catch((error) => {
-        console.error(error);
-        setErrors(["An error occurred. Please try again later."]);
-      });
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((updatedTrip) => onUpdateTrip(updatedTrip))
+        navigate(`/users/${user.id}/trips/${id}`)
+      } else {
+        r.json().then((err) => setErrors(err.errors))
+      }
+    });
   }
 
   return (
@@ -270,7 +262,7 @@ function formatDateTime(dateTimeString) {
             </div>
             <div className="form-button">
               <button type="submit">
-              <i className="fa-solid fa-arrow-right"></i>
+                <i className="fa-solid fa-arrow-right"></i>
               </button>
             </div>
           </form>

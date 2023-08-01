@@ -49,13 +49,6 @@ function PackingListForm({ onAddPackingListItem }) {
         <div className="packing-form-wrapper">
             <form className="packing-form-container" onSubmit={handleSubmit}>
                 <h1 className="packing-list-header-text">Packing to-do list</h1>
-                {/* {errors.length > 0 && (
-                    <ul>
-                        {errors.map((error, index) => (
-                            <li key={index}>{error}</li>
-                        ))}
-                    </ul>
-                )} */}
                 <div className="packing-form">
                     <div className="label packing-label">
                         <div className="input-text">

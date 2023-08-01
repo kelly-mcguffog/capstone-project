@@ -10,6 +10,11 @@ function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
   const { date, combined_itinerary_times } = itinerary_day;
   const itineraryDate = new Date(date);
 
+  combined_itinerary_times.forEach((itinerary_time) => {
+    itinerary_time.time = new Date(itinerary_time.time);
+  });
+  combined_itinerary_times.sort((a, b) => a.time - b.time);
+
   const adjustedDate = new Date(
     itineraryDate.getTime() +
     itineraryDate.getTimezoneOffset() * 60 * 1000

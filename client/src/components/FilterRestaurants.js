@@ -20,74 +20,74 @@ function FilterRestaurants({ filterCuisine, setFilterCuisine, setFilterPrice, se
         setFilterCuisine(false)
     }
     return (
-            <div className="filter">
-                <div className="price">
-                    <h2>Price</h2>
-                    <input
-                        type="range"
-                        min="1"
-                        max="5"
-                        onChange={handleFilterPriceChange}
-                        value={filterPrice}
-                    />
-                </div>
-                <div className="rating">
-                    <h2>Rating</h2>
-                    <div className="filter-input">
-                        <label>
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="5"
-                                checked={filterRating === "5"}
-                                onChange={handleFilterRatingChange}
-                            />
-                            5 <span className="star-rating">Stars</span>
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="4"
-                                checked={filterRating === "4"}
-                                onChange={handleFilterRatingChange}
-                            />
-                            4 <span className="star-rating">Stars</span>
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="3"
-                                checked={filterRating === "3"}
-                                onChange={handleFilterRatingChange}
-                            />
-                            3 <span className="star-rating">Stars</span>
-                        </label>
+        <div className="filter">
+            <div className="price">
+                <h2>Price</h2>
+                <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    onChange={handleFilterPriceChange}
+                    value={filterPrice}
+                />
+            </div>
+            <div className="rating">
+                <h2>Rating</h2>
+                <div className="filter-input">
+                    <label>
+                        <input
+                            type="radio"
+                            name="rating"
+                            value="5"
+                            checked={filterRating === "5"}
+                            onChange={handleFilterRatingChange}
+                        />
+                        5 <span className="star-rating">Stars</span>
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="rating"
+                            value="4"
+                            checked={filterRating === "4"}
+                            onChange={handleFilterRatingChange}
+                        />
+                        4 <span className="star-rating">Stars</span>
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="rating"
+                            value="3"
+                            checked={filterRating === "3"}
+                            onChange={handleFilterRatingChange}
+                        />
+                        3 <span className="star-rating">Stars</span>
+                    </label>
 
-                        <label>
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="2"
-                                checked={filterRating === "2"}
-                                onChange={handleFilterRatingChange}
-                            />
-                            2 <span className="star-rating">Stars</span>
-                        </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="rating"
+                            value="2"
+                            checked={filterRating === "2"}
+                            onChange={handleFilterRatingChange}
+                        />
+                        2 <span className="star-rating">Stars</span>
+                    </label>
 
-                        <label>
-                            <input
-                                type="radio"
-                                name="rating"
-                                value="1"
-                                checked={filterRating === "1"}
-                                onChange={handleFilterRatingChange}
-                            />
-                            1 <span className="star-rating">Stars</span>
-                        </label>
-                    </div>
+                    <label>
+                        <input
+                            type="radio"
+                            name="rating"
+                            value="1"
+                            checked={filterRating === "1"}
+                            onChange={handleFilterRatingChange}
+                        />
+                        1 <span className="star-rating">Stars</span>
+                    </label>
                 </div>
+            </div>
             <div className="cuisines">
                 <h2>Cuisines</h2>
                 <div className="filter-input full-filter">
@@ -104,7 +104,7 @@ function FilterRestaurants({ filterCuisine, setFilterCuisine, setFilterPrice, se
                         <input
                             type="checkbox"
                             value="American"
-                            checked={filterCuisine  === "American"}
+                            checked={filterCuisine === "American"}
                             onChange={handleFilterCuisineChange}
                         />
                         American
@@ -113,7 +113,7 @@ function FilterRestaurants({ filterCuisine, setFilterCuisine, setFilterPrice, se
                         <input
                             type="checkbox"
                             value="Italian"
-                            checked={filterCuisine  === "Italian"}
+                            checked={filterCuisine === "Italian"}
                             onChange={handleFilterCuisineChange}
                         />
                         Italian

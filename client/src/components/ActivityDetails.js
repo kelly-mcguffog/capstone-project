@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
+import { UserContext } from "../context/UserContext";
 
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
@@ -10,6 +11,7 @@ function ActivityDetails() {
 
     const [activities, setActivities] = useState([])
     const { users } = useContext(AllUsersContext);
+    const { user } = useContext(UserContext);
     const { destination_id, trip_id, id } = useParams()
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -17,9 +19,9 @@ function ActivityDetails() {
 
     useEffect(() => {
         fetch("/activities")
-          .then(res => res.json())
-          .then(data => setActivities(data))
-      }, [])
+            .then(res => res.json())
+            .then(data => setActivities(data))
+    }, [])
 
     const activity = activities.find(activity => activity.id === parseInt(id))
 
@@ -63,10 +65,24 @@ function ActivityDetails() {
             </div>
             <div className="background">
                 <div className="back-link">
-                    <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-                    <Link className="link" to={getListingsUrl()}>
-                        Return to Listings
-                    </Link>
+                    <div className="back-link-btn">
+                        <Link className="link" to={getListingsUrl()}>
+                            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+                            <p className="text">
+                                Return to Listings
+                            </p>
+                        </Link>
+                    </div>
+                    {trip_id ?
+                        <div className="back-link-btn">
+                            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+                                <p className="text">
+                                    Return to Trip
+                                </p>
+                                <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
+                            </Link>
+                        </div>
+                        : null}
                 </div>
                 <div className="details-wrapper">
                     <div className="details-container">

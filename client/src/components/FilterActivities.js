@@ -8,22 +8,22 @@ function FilterActivities({ filterPrice, setFilterPrice, setFilterDuration, filt
 
     const handleFilterDurationChange = (event) => {
         const { value } = event.target;
-      
+
         if (value === "Up to 1 hour") {
-          setFilterDuration(value);
+            setFilterDuration(value);
         } else if (value === "1 to 4 hours") {
-                setFilterDuration(value);
-        } else if (value === "4 hours to 1 day"){
-          setFilterDuration(value);
+            setFilterDuration(value);
+        } else if (value === "4 hours to 1 day") {
+            setFilterDuration(value);
         } else {
             setFilterDuration("");
         }
-      };
+    };
 
-      
-      const handleFilterPriceChange = (event) => {
+
+    const handleFilterPriceChange = (event) => {
         setFilterPrice(parseFloat(event.target.value));
-      };
+    };
 
     const handleClearFilters = () => {
         setFilterRating(false)

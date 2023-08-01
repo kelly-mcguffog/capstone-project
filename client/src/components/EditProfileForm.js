@@ -83,17 +83,17 @@ function EditProfileForm() {
     fetch(`/users/${id}`, {
       method: "PATCH",
       body: formDataToSend,
-  }).then((r) => {
-    if (r.ok) {
-      r.json().then((updatedUser) => setUser(updatedUser));
-      navigate(`/users/${id}/trips`);
-    } else {
-      r.json().then((err) => setErrors(err.errors));
-    }
-  });
-}
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((updatedUser) => setUser(updatedUser));
+        navigate(`/users/${id}/trips`);
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
+  }
 
-console.log(errors)
+  console.log(errors)
 
   return (
     <div className="side-bar">
@@ -138,17 +138,16 @@ console.log(errors)
                   placeholder="First Name"
                   value={first_name}
                   onChange={handleChangeInput}
-                  className={`login-form-input ${
-                    errors.first_name ? "input-error" : ""
-                  }`}
+                  className={`login-form-input ${errors.first_name ? "input-error" : ""
+                    }`}
                 />
                 {errors.first_name && (
-            <span className="error-message">
-              {Array.isArray(errors.first_name)
-                ? errors.first_name.join(", ")
-                : errors.first_name}
-            </span>
-          )}
+                  <span className="error-message">
+                    {Array.isArray(errors.first_name)
+                      ? errors.first_name.join(", ")
+                      : errors.first_name}
+                  </span>
+                )}
               </div>
               <div className="profile-form-input">
                 <div className="input-text">
@@ -162,17 +161,16 @@ console.log(errors)
                   autoComplete="off"
                   value={last_name}
                   onChange={handleChangeInput}
-                  className={`login-form-input ${
-                    errors.last_name ? "input-error" : ""
-                  }`}
+                  className={`login-form-input ${errors.last_name ? "input-error" : ""
+                    }`}
                 />
                 {errors.last_name && (
-            <span className="error-message">
-              {Array.isArray(errors.last_name)
-                ? errors.last_name.join(", ")
-                : errors.last_name}
-            </span>
-          )}
+                  <span className="error-message">
+                    {Array.isArray(errors.last_name)
+                      ? errors.last_name.join(", ")
+                      : errors.last_name}
+                  </span>
+                )}
               </div>
               <div className="profile-form-input">
                 <div className="input-text">
@@ -186,17 +184,16 @@ console.log(errors)
                   autoComplete="off"
                   value={tsa_precheck}
                   onChange={handleChangeInput}
-                  className={`login-form-input ${
-                    errors.tsa_precheck ? "input-error" : ""
-                  }`}
+                  className={`login-form-input ${errors.tsa_precheck ? "input-error" : ""
+                    }`}
                 />
                 {errors.tsa_precheck && (
-            <span className="error-message">
-              {Array.isArray(errors.tsa_precheck)
-                ? errors.tsa_precheck.join(", ")
-                : errors.tsa_precheck}
-            </span>
-          )}
+                  <span className="error-message">
+                    {Array.isArray(errors.tsa_precheck)
+                      ? errors.tsa_precheck.join(", ")
+                      : errors.tsa_precheck}
+                  </span>
+                )}
               </div>
               <div className="profile-form-input">
                 <div className="input-text">
@@ -210,17 +207,16 @@ console.log(errors)
                   placeholder="Email"
                   value={email}
                   onChange={handleChangeInput}
-                  className={`login-form-input ${
-                    errors.email ? "input-error" : ""
-                  }`}
+                  className={`login-form-input ${errors.email ? "input-error" : ""
+                    }`}
                 />
                 {errors.email && (
-            <span className="error-message">
-              {Array.isArray(errors.email)
-                ? errors.email.join(", ")
-                : errors.email}
-            </span>
-          )}
+                  <span className="error-message">
+                    {Array.isArray(errors.email)
+                      ? errors.email.join(", ")
+                      : errors.email}
+                  </span>
+                )}
               </div>
               <div className="profile-form-input">
                 <div className="input-text">
@@ -234,18 +230,17 @@ console.log(errors)
                   placeholder="Username"
                   value={username}
                   onChange={handleChangeInput}
-                  className={`login-form-input ${
-                    errors.username ? "input-error" : ""
-                  }`}
+                  className={`login-form-input ${errors.username ? "input-error" : ""
+                    }`}
                 />
                 {errors.username && (
-            <span className="error-message">
-              {Array.isArray(errors.username)
-                ? errors.username.join(", ")
-                : errors.username}
-            </span>
-          )}
-          </div>
+                  <span className="error-message">
+                    {Array.isArray(errors.username)
+                      ? errors.username.join(", ")
+                      : errors.username}
+                  </span>
+                )}
+              </div>
               <div className="profile-form-input">
                 <div className="input-text">
                   <h3 className="input-title">Password</h3>
@@ -258,17 +253,16 @@ console.log(errors)
                   placeholder="Password"
                   value={password}
                   onChange={handleChangeInput}
-                  className={`login-form-input ${
-                    errors.password ? "input-error" : ""
-                  }`}
+                  className={`login-form-input ${errors.password ? "input-error" : ""
+                    }`}
                 />
                 {errors.password && (
-            <span className="error-message">
-              {Array.isArray(errors.password)
-                ? errors.password.join(", ")
-                : errors.password}
-            </span>
-          )}
+                  <span className="error-message">
+                    {Array.isArray(errors.password)
+                      ? errors.password.join(", ")
+                      : errors.password}
+                  </span>
+                )}
               </div>
               <button className="form-button profile-btn" type="submit">
                 Update Profile
