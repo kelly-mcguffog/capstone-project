@@ -73,6 +73,8 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
       })
       .then((newItinerary) => {
         onAddItinerary(newItinerary);
+        console.log("add restaurant form data", formData)
+        console.log("add restaurant new itinerary", newItinerary)
         navigate(`/users/${user.id}/trips/${submitTripId}`);
       })
       .catch((error) => {

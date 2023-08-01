@@ -42,16 +42,6 @@ class ItineraryDay < ApplicationRecord
   
     combined_times.sort_by { |time| time[:time] }
   end
-
-  # def update_selected_time(selected_time, restaurant_id)
-  #   self.combined_itinerary_times.each do |time_obj|
-  #     if time_obj[:time].present? && time_obj[:time] == selected_time
-  #       time_obj[:time] = selected_time
-  #       time_obj[:restaurant_id] = restaurant_id
-  #     end
-  #   end
-  #   self.save
-  # end
   
   validates :date, presence: true
   validate :only_one_hotel_per_day

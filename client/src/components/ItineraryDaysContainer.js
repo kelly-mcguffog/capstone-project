@@ -33,7 +33,7 @@ function ItineraryDaysContainer({ itinerary_days, trip, onDeleteItineraryDate })
         <>
             {nonEmptyFilteredItineraryDays.map((itinerary_day) => (
                 <ItineraryDay
-                    key={itinerary_day.id}
+                    key={`itinerary_day_${itinerary_day.id}`}
                     trip={trip}
                     itinerary_day={itinerary_day}
                     onDeleteItineraryDate={onDeleteItineraryDate}
