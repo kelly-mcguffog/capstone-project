@@ -60,7 +60,7 @@ function Profile() {
                     <div className="details-info-destinations">
                         <div className="profile-info-details">
                             <h2>{first_name} {last_name}</h2>
-                            <Link to={`/users/${user.id}/profile`}>
+                            <Link to={`/profile/${user.id}/edit`}>
                                 <i className="fa-solid fa-pen-to-square"></i>
                             </Link>
                         </div>

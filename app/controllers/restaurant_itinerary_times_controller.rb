@@ -1,13 +1,9 @@
 class RestaurantItineraryTimesController < ApplicationController
-    
-    def index
-        render json: RestaurantItineraryTime.all, status: :ok
-    end
+    before_action :find_itinerary_day, only: [:update, :create]
 
     def create
-        itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
-        restaurant_itinerary_time = itinerary_day.restaurant_itinerary_times.create!(restaurant_itinerary_time_params)
-        itinerary_day.combined_itinerary_times << restaurant_itinerary_time
+        restaurant_itinerary_time = @itinerary_day.restaurant_itinerary_times.create!(restaurant_itinerary_time_params)
+        @itinerary_day.combined_itinerary_times << restaurant_itinerary_time
         render json: restaurant_itinerary_time, status: :created
       end
 
@@ -18,8 +14,7 @@ class RestaurantItineraryTimesController < ApplicationController
     end
 
     def update
-        itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
-        restaurant_itinerary_time = itinerary_day.restaurant_itinerary_times.find(params[:id])
+        restaurant_itinerary_time = @itinerary_day.restaurant_itinerary_times.find(params[:id])
         restaurant_itinerary_time.update!(restaurant_itinerary_time_params)
         render json: restaurant_itinerary_time, status: :ok
       end
@@ -28,5 +23,9 @@ class RestaurantItineraryTimesController < ApplicationController
 
     def restaurant_itinerary_time_params
         params.require(:restaurant_itinerary_time).permit(:time, :restaurant_id, :itinerary_day_id)    
+    end
+
+    def find_itinerary_day
+        @itinerary_day = ItineraryDay.find(params[:id])
     end
 end

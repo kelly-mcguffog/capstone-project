@@ -9,6 +9,7 @@ import ItineraryActivity from "./ItineraryActivity";
 function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
 
   const [isShowing, setIsShowing] = useState(false)
+  const [errors, setErrors] = useState("")
 
   const { user, setUser } = useContext(UserContext);
   const { setUsers } = useContext(AllUsersContext);
@@ -50,8 +51,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
     })
       .then((response) => {
         if (response.ok) {
-          console.log(`${entityType} deleted successfully`);
-
           const updatedCombinedItineraryTimes = itinerary_day.combined_itinerary_times.filter(
             (itineraryTime) => itineraryTime.id !== itinerary_time.id
           );
@@ -88,11 +87,8 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
 
           }
         } else {
-          console.log(`Failed to delete ${entityType}`);
+          response.json().then((err) => setErrors(err.errors));
         }
-      })
-      .catch((error) => {
-        console.log(`Error occurred while deleting ${entityType}`, error);
       });
   }
 
@@ -104,7 +100,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("itinerary_day deleted successfully");
           const updatedUser = {
             ...user,
             trips: user.trips.map((t) => {
@@ -119,16 +114,10 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
           setUser(updatedUser);
           setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
         } else {
-          console.log("Failed to delete itinerary_day");
+          response.json().then((err) => setErrors(err.errors));
         }
-      })
-      .catch((error) => {
-        console.log("Error occurred while deleting itinerary_day", error);
       });
   }
-
-
-  console.log(user)
 
   const handleDropdown = () => {
     setIsShowing(isShowing => !isShowing)

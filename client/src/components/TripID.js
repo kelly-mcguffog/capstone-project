@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 
 function TripID({ trip, onDeleteTrip, isShowing }) {
 
+    const [errors, setErrors] = useState("")
     const { destinations } = useContext(DestinationsContext);
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
@@ -35,21 +36,17 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    console.log("Trip deleted successfully");
                     onDeleteTrip(id)
-                    navigate(`/users/${user.id}/trips`);
+                    navigate(`/profile/${user.id}`);
                 } else {
-                    console.log("Failed to delete trip");
+                    response.json().then((err) => setErrors(err.errors));
                 }
-            })
-            .catch((error) => {
-                console.log("Error occurred while deleting trip", error);
             });
     }
 
     return (
         <div className="trip-listings">
-            <NavLink className="trip-links" to={`/users/${user.id}/trips/${id}`}>
+            <NavLink className="trip-links" to={`/trips/${id}`}>
                 <div className="trip">
                     <h3 className="trip-destination-name">
                         {city}, {country}
@@ -59,7 +56,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
             </NavLink>
             {isShowing ?
                 <div className="trip-icon">
-                    <Link to={`/users/${user.id}/trips/${trip.id}/edit`}><i className="fa-solid fa-pen-to-square"></i></Link>
+                    <Link to={`/trips/${trip.id}/edit`}><i className="fa-solid fa-pen-to-square"></i></Link>
                     <i onClick={handleDeleteTrip} className="fa-solid fa-trash"></i>
                 </div>
                 : null

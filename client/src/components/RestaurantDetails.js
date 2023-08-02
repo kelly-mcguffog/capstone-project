@@ -16,7 +16,7 @@ function RestaurantDetails() {
     })
 
     useEffect(() => {
-        fetch("/restaurants")
+        fetch(`/restaurants`)
             .then(res => res.json())
             .then(data => setRestaurants(data))
     }, [])
@@ -74,7 +74,7 @@ function RestaurantDetails() {
                     </div>
                     {trip_id ?
                         <div className="back-link-btn">
-                            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+                            <Link className="link" to={`/trips/${trip_id}`}>
                                 <p className="text">
                                     Return to Trip
                                 </p>

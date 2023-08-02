@@ -26,7 +26,6 @@ function PackingListContainer() {
             }
         });
         setUser({ ...user, trips: userTrips });
-        console.log(user);
     };
 
     return (

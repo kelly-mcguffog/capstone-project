@@ -52,8 +52,6 @@ function AddActivityToItinerary({ onAddItinerary }) {
     });
   }
 
-  console.log(errors)
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -70,7 +68,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
         r.json().then((newItinerary) => {
           onAddItinerary(newItinerary);
         });
-        navigate(`/users/${user.id}/trips/${submitTripId}`);
+        navigate(`/trips/${submitTripId}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -84,7 +82,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
     >
       <div className="header-text">
         <h1 className="title">Plan Your Trip</h1>
-        <div className="results trip-form">
+        <div className="results itinerary-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             <div className="label form-label">
               <div className="input-text">
@@ -167,7 +165,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
         )}
         {trip_id && (
           <div className="back-link-btn back-link-btn-details">
-            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+            <Link className="link" to={`/trips/${trip_id}`}>
               <p className="text">
                 Return to Trip
               </p>

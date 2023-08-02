@@ -87,14 +87,12 @@ function EditProfileForm() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((updatedUser) => setUser(updatedUser));
-        navigate(`/users/${id}/trips`);
+        navigate(`/profile/${id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
     });
   }
-
-  console.log(errors)
 
   return (
     <div className="side-bar">

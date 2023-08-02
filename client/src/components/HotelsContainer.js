@@ -4,18 +4,16 @@ import { Link, useParams } from "react-router-dom";
 import HotelsCard from "./HotelsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterHotels from "./FilterHotels";
-import { UserContext } from "../context/UserContext";
 
 function HotelsContainer({ search, setSearch, handleSearch }) {
 
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
-  const { user } = useContext(UserContext);
   const [filterRating, setFilterRating] = useState(false);
   const [filterPrice, setFilterPrice] = useState("")
 
   if (destinations === null) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   const destination = destinations.find(
@@ -42,7 +40,7 @@ function HotelsContainer({ search, setSearch, handleSearch }) {
       <DestinationDetailsHeader destination={destination} search={search} setSearch={setSearch} />
       {id ?
         <div className="back-link-btn back-link-btn-trip">
-          <Link className="link" to={`/users/${user.id}/trips/${id}`}>
+          <Link className="link" to={`/trips/${id}`}>
             <p className="text">
               Return to Trip
             </p>

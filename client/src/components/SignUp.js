@@ -60,7 +60,7 @@ function SignUp() {
         }
       });
   }
-  console.log(errors)
+
   return (
     <div className="container">
       <form className="signup-form" onSubmit={handleSubmit}>

@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
     
-    # skip_before_action :authorized, only: [:show, :create]
+    skip_before_action :authorized, only: [:show, :create]
 
     def index
-        users = User.includes(trips: :packing_list_items)
-        render json: users, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
+        render json: User.all, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
     end
 
     def create
@@ -14,7 +13,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.includes(trips: :packing_list_items).find(session[:user_id])
+        user = User.find(session[:user_id])
         render json: user, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
     end      
 

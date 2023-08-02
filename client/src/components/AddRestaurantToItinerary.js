@@ -73,9 +73,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
       })
       .then((newItinerary) => {
         onAddItinerary(newItinerary);
-        console.log("add restaurant form data", formData)
-        console.log("add restaurant new itinerary", newItinerary)
-        navigate(`/users/${user.id}/trips/${submitTripId}`);
+        navigate(`/trips/${submitTripId}`);
       })
       .catch((error) => {
         setErrors(error);
@@ -89,7 +87,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
     >
       <div className="header-text">
         <h1 className="title">Plan Your Trip</h1>
-        <div className="results trip-form">
+        <div className="results itinerary-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             <div className="label form-label">
               <div className="input-text">
@@ -172,7 +170,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
         )}
         {trip_id && (
           <div className="back-link-btn back-link-btn-details">
-            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+            <Link className="link" to={`/trips/${trip_id}`}>
               <p className="text">
                 Return to Trip
               </p>

@@ -6,7 +6,6 @@ function ItineraryRestaurant({ trip_id, restaurant }) {
     const { id, address, cuisine, description, name, destination_id } = restaurant
 
     return (
-
         <div>
             <h3 className="itinerary-activity">{name}</h3>
             <h5>{address}</h5>

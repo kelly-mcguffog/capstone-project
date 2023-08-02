@@ -51,7 +51,7 @@ function NavBar() {
                                 isDropdown || isMobile ? "dropdown-content visible" : "dropdown-content hidden"
                             }
                         >
-                            <Link onClick={handleMenuItemClick} to={`/users/${user.id}/trips`}>
+                            <Link onClick={handleMenuItemClick} to={`/profile/${user.id}`}>
                                 Profile
                             </Link>
                             <hr></hr>

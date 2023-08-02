@@ -60,7 +60,7 @@ function NewTrip() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/users/${user.id}/trips`, {
+    fetch(`/trips`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ function NewTrip() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((newTrip) => onAddTrip(newTrip));
-        navigate(`/users/${user.id}/trips`);
+        navigate(`/profile/${user.id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -88,7 +88,7 @@ function NewTrip() {
 
   return (
     <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
-      <div className="header-text">
+      <div className="header-text-trip-form">
         <h1 className="title">Plan Your Trip to {city}</h1>
         <div className="results trip-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
@@ -168,7 +168,6 @@ function NewTrip() {
                   onChange={handleChange}
                   className={`trip-form-input ${errors.return_flight ? "input-error" : ""
                     }`}
-                // className="trip-form-input"
                 />
                 {errors.return_flight && (
                   <span className="error-message">
@@ -187,7 +186,6 @@ function NewTrip() {
                   name="outbound_flight_number"
                   autoComplete="off"
                   placeholder="i.e. AA353"
-                  // className="trip-form-input"
                   className={`trip-form-input ${errors.outbound_flight_number ? "input-error" : ""
                     }`}
                   onChange={handleChange}

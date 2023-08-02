@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
-import { UserContext } from "../context/UserContext";
 import GridHeader from "./GridHeader";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
@@ -11,7 +10,6 @@ function HotelDetails() {
 
     const [hotels, setHotels] = useState([])
     const { users } = useContext(AllUsersContext);
-    const { user } = useContext(UserContext);
     const { destination_id, trip_id, id } = useParams()
 
     const { isLoaded } = useLoadScript({
@@ -19,7 +17,7 @@ function HotelDetails() {
     })
 
     useEffect(() => {
-        fetch("/hotels")
+        fetch(`/hotels`)
             .then(res => res.json())
             .then(data => setHotels(data))
     }, [])
@@ -78,7 +76,7 @@ function HotelDetails() {
 
                     {trip_id ?
                         <div className="back-link-btn">
-                            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+                            <Link className="link" to={`/trips/${trip_id}`}>
                                 <p className="text">
                                     Return to Trip
                                 </p>

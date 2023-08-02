@@ -1,38 +1,19 @@
 class ItineraryDaysController < ApplicationController
-
-  def index
-      render json: ItineraryDay.all, include: { 
-        hotel_itinerary_times: {}, 
-        activity_itinerary_times: {}, 
-        restaurant_itinerary_times: {},
-      }, status: :ok
-  end
-
-  def show
-    itinerary = ItineraryDay.find(params[:id])
-    render json: itinerary, include: { 
-      hotel_itinerary_times: {}, 
-      activity_itinerary_times: {}, 
-      restaurant_itinerary_times: {},
-    }, status: :ok
-
-  end
+  before_action :find_itinerary_day, only: [:destroy, :update]
 
   def destroy
-      itinerary= ItineraryDay.find(params[:id])
-      itinerary.destroy
+      @itinerary_day.destroy
       head :no_content
   end
 
   def update
-    itinerary_day = ItineraryDay.find(params[:id])
     date = params[:itinerary_day].delete(:date)
   
     restaurant_itinerary_times_attributes = params[:itinerary_day][:restaurant_itinerary_times_attributes]
     hotel_itinerary_times_attributes = params[:itinerary_day][:hotel_itinerary_times_attributes]
     activity_itinerary_times_attributes = params[:itinerary_day][:activity_itinerary_times_attributes]
   
-    existing_itinerary_day = ItineraryDay.find_by(date: date, trip_id: itinerary_day.trip_id)
+    existing_itinerary_day = ItineraryDay.find_by(date: date, trip_id: @itinerary_day.trip_id)
   
     if existing_itinerary_day
       if existing_itinerary_day.date.to_date.strftime('%Y-%m-%d') != date.to_date.strftime('%Y-%m-%d')
@@ -42,7 +23,7 @@ class ItineraryDaysController < ApplicationController
             time: restaurant_itinerary_times_attributes[0][:time],
             restaurant_id: selected_restaurant_id
           )
-          itinerary_day.restaurant_itinerary_times.where(restaurant_id: selected_restaurant_id).destroy_all
+          @itinerary_day.restaurant_itinerary_times.where(restaurant_id: selected_restaurant_id).destroy_all
         end
   
         if hotel_itinerary_times_attributes && hotel_itinerary_times_attributes[0][:time].present?
@@ -60,7 +41,7 @@ class ItineraryDaysController < ApplicationController
             time: activity_itinerary_times_attributes[0][:time],
             activity_id: selected_activity_id
           )
-          itinerary_day.activity_itinerary_times.where(activity_id: selected_activity_id).destroy_all
+          @itinerary_day.activity_itinerary_times.where(activity_id: selected_activity_id).destroy_all
         end
       else
         if restaurant_itinerary_times_attributes && restaurant_itinerary_times_attributes[0][:time].present?
@@ -76,7 +57,7 @@ class ItineraryDaysController < ApplicationController
               time: restaurant_itinerary_times_attributes[0][:time],
               restaurant_id: selected_restaurant_id
             )
-            itinerary_day.restaurant_itinerary_times.where(restaurant_id: selected_restaurant_id).destroy_all
+            @itinerary_day.restaurant_itinerary_times.where(restaurant_id: selected_restaurant_id).destroy_all
           end
         end
   
@@ -93,7 +74,7 @@ class ItineraryDaysController < ApplicationController
               time: hotel_itinerary_times_attributes[0][:time],
               hotel_id: selected_hotel_id
             )
-            itinerary_day.hotel_itinerary_times.where(hotel_id: selected_hotel_id).destroy_all
+            @itinerary_day.hotel_itinerary_times.where(hotel_id: selected_hotel_id).destroy_all
           end
         end
   
@@ -110,7 +91,7 @@ class ItineraryDaysController < ApplicationController
               time: activity_itinerary_times_attributes[0][:time],
               activity_id: selected_activity_id
             )
-            itinerary_day.activity_itinerary_times.where(activity_id: selected_activity_id).destroy_all
+            @itinerary_day.activity_itinerary_times.where(activity_id: selected_activity_id).destroy_all
           end
         end
   
@@ -119,9 +100,9 @@ class ItineraryDaysController < ApplicationController
     else
       if restaurant_itinerary_times_attributes && restaurant_itinerary_times_attributes[0][:time].present?
         selected_restaurant_id = restaurant_itinerary_times_attributes[0][:restaurant_id]
-        itinerary_day.restaurant_itinerary_times.where(restaurant_id: selected_restaurant_id).each do |itinerary_time|
+        @itinerary_day.restaurant_itinerary_times.where(restaurant_id: selected_restaurant_id).each do |itinerary_time|
           if existing_itinerary_day.nil?
-            existing_itinerary_day = ItineraryDay.create!(date: date, trip_id: itinerary_day.trip_id)
+            existing_itinerary_day = ItineraryDay.create!(date: date, trip_id: @itinerary_day.trip_id)
           end
   
           existing_itinerary_day.restaurant_itinerary_times.create!(
@@ -134,9 +115,9 @@ class ItineraryDaysController < ApplicationController
   
       if hotel_itinerary_times_attributes && hotel_itinerary_times_attributes[0][:time].present?
         selected_hotel_id = hotel_itinerary_times_attributes[0][:hotel_id]
-        itinerary_day.hotel_itinerary_times.where(hotel_id: selected_hotel_id).each do |itinerary_time|
+        @itinerary_day.hotel_itinerary_times.where(hotel_id: selected_hotel_id).each do |itinerary_time|
           if existing_itinerary_day.nil?
-            existing_itinerary_day = ItineraryDay.create!(date: date, trip_id: itinerary_day.trip_id)
+            existing_itinerary_day = ItineraryDay.create!(date: date, trip_id: @itinerary_day.trip_id)
           end
   
           existing_itinerary_day.hotel_itinerary_times.create!(
@@ -149,9 +130,9 @@ class ItineraryDaysController < ApplicationController
   
       if activity_itinerary_times_attributes && activity_itinerary_times_attributes[0][:time].present?
         selected_activity_id = activity_itinerary_times_attributes[0][:activity_id]
-        itinerary_day.activity_itinerary_times.where(activity_id: selected_activity_id).each do |itinerary_time|
+        @itinerary_day.activity_itinerary_times.where(activity_id: selected_activity_id).each do |itinerary_time|
           if existing_itinerary_day.nil?
-            existing_itinerary_day = ItineraryDay.create!(date: date, trip_id: itinerary_day.trip_id)
+            existing_itinerary_day = ItineraryDay.create!(date: date, trip_id: @itinerary_day.trip_id)
           end
   
           existing_itinerary_day.activity_itinerary_times.create!(
@@ -165,7 +146,7 @@ class ItineraryDaysController < ApplicationController
       existing_itinerary_day.save!
     end
   
-    itinerary_day.destroy if itinerary_day.combined_itinerary_times.empty? && itinerary_day.date.to_date.strftime('%Y-%m-%d') != date.to_date.strftime('%Y-%m-%d')
+    @itinerary_day.destroy if @itinerary_day.combined_itinerary_times.empty? && @itinerary_day.date.to_date.strftime('%Y-%m-%d') != date.to_date.strftime('%Y-%m-%d')
   
     render json: existing_itinerary_day, status: :ok
   end
@@ -177,11 +158,7 @@ def create
   else
     itinerary_day = ItineraryDay.create!(itinerary_day_params)
   end
-  render json: itinerary_day, include: {
-    hotel_itinerary_times: {},
-    activity_itinerary_times: {},
-    restaurant_itinerary_times: {}
-  }, status: :created
+  render json: itinerary_day, status: :created
 end  
 
   private
@@ -212,6 +189,10 @@ end
         :_destroy
       ]
     )
+  end
+
+  def find_itinerary_day
+    @itinerary_day = ItineraryDay.find(params[:id])
   end
 
 end

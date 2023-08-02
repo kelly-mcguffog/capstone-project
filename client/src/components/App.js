@@ -30,10 +30,10 @@ function App() {
   const { setUsers } = useContext(AllUsersContext)
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
-  const match1 = useMatch("/users/:user_id/trips");
-  const match2 = useMatch("/users/:user_id/trips/:id");
+  const match1 = useMatch("/trips");
+  const match2 = useMatch("/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
-  const match4 = useMatch("/users/:user_id/profile");
+  const match4 = useMatch("/profile/:id");
   const match = match1 || match2 || match3 || match4;
   
 
@@ -172,19 +172,19 @@ function App() {
               element={<ActivityDetails />}
             />
             <Route
-              path="/users/:user_id/trips/:id/edit"
+              path="/trips/:id/edit"
               element={<EditTripForm />}
             />
             <Route
-              path="/users/:user_id/trips/:id"
+              path="/trips/:id"
               element={<TripDetails />}
             />
             <Route path="/trips/:id/packing_list" element={<PackingListContainer />} />
             <Route
-              path="/users/:user_id/profile"
+              path="/profile/:id/edit"
               element={<EditProfileForm />}
             />
-            <Route path="/users/:user_id/trips" element={<Profile />} />
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home search={search} setSearch={setSearch} />} />

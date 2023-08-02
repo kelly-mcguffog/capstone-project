@@ -4,25 +4,21 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :users, only: [:index, :show, :create, :update] do
-    resources :trips, only: [:index, :show, :create, :update, :destroy]
-  end
+  
+  resources :trips, only: [:create, :update, :destroy]
 
-  resources :trips, only: [:index, :show, :create, :update, :destroy] do
-    resources :itinerary_days, only: [:index, :show, :update, :create, :destroy] do
-      resources :hotel_itinerary_times, only: [:index, :destroy, :create, :update]
-      resources :activity_itinerary_times, only: [:index, :destroy, :create, :update]
-      resources :restaurant_itinerary_times, only: [:index, :destroy, :create, :update]
+  resources :users, only: [:index, :show, :create, :update] 
+
+  resources :trips, only: [:create, :update, :destroy] do
+    resources :itinerary_days, only: [:update, :create, :destroy] do
+      resources :hotel_itinerary_times, only: [:destroy, :create, :update]
+      resources :activity_itinerary_times, only: [:destroy, :create, :update]
+      resources :restaurant_itinerary_times, only: [:destroy, :create, :update]
     end
     resources :packing_list_items, only: [:create, :update, :destroy]
   end
 
-  resources :users, only: [:index, :show, :create, :update]
-  resources :destinations, only: [:index] do
-    resources :hotels, only: [:index]
-    resources :restaurants, only: [:index]
-    resources :activities, only: [:index]
-  end
+  resources :destinations, only: [:index]
   resources :hotels, only: [:index]
   resources :activities, only: [:index]
   resources :restaurants, only: [:index]

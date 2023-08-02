@@ -44,7 +44,6 @@ function PackingListForm({ onAddPackingListItem }) {
         });
     }
 
-    console.log(errors)
     return (
         <div className="packing-form-wrapper">
             <form className="packing-form-container" onSubmit={handleSubmit}>

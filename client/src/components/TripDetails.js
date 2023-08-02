@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import ItineraryDaysContainer from "./ItineraryDaysContainer";
 import { Link, useParams } from "react-router-dom";

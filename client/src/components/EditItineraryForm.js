@@ -69,10 +69,6 @@ function EditItineraryForm() {
   const onUpdateItinerary = (updatedItinerary) => {
     const { trip_id, date, combined_itinerary_times } = updatedItinerary;
 
-    console.log("trip_id:", trip_id);
-    console.log("date:", date);
-    console.log(updatedItinerary)
-
     const updatedUser = {
       ...user,
       trips: user.trips.map((trip) => {
@@ -187,7 +183,6 @@ function EditItineraryForm() {
   }
 
   function updateItineraryDay() {
-    console.log("formData in updateItineraryDay:", formData);
     const endpoint = `/trips/${trip_id}/itinerary_days/${itinerary_day_id}`;
 
     fetch(endpoint, {
@@ -198,29 +193,14 @@ function EditItineraryForm() {
       },
       body: JSON.stringify(formData),
     }).then((r) => {
-    if (r.ok) {
-      r.json().then((newItinerary) => onUpdateItinerary(newItinerary))
-      navigate(`/users/${user.id}/trips/${trip_id}`);
-    } else {
-      r.json().then((err) => setErrors(err.errors));
-    }
-  });
-}
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((newItinerary) => {
-  //       onUpdateItinerary(newItinerary);
-  //       navigate(`/users/${user.id}/trips/${trip_id}`);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error updating itinerary day:", error);
-  //       setErrors(["An error occurred while updating the itinerary day."]);
-  //     });
-  // }
+      if (r.ok) {
+        r.json().then((newItinerary) => onUpdateItinerary(newItinerary))
+        navigate(`/trips/${trip_id}`);
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();

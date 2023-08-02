@@ -1,15 +1,6 @@
 class TripsController < ApplicationController
   
-    before_action :find_trip, only: [:show, :update, :destroy]
-
-    
-    def index
-        render json: Trip.all, include: ["itinerary_days", "itinerary_days.combined_itinerary_times"], status: :ok
-    end
-
-    def show
-        render json: @trip, include: ["itinerary_days", "itinerary_days.combined_itinerary_times"], status: :ok
-    end
+    before_action :find_trip, only: [:update, :destroy]
 
     def create
         trip = Trip.create!(trip_params)

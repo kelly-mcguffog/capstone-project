@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
-import { UserContext } from "../context/UserContext";
 
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
@@ -11,14 +10,13 @@ function ActivityDetails() {
 
     const [activities, setActivities] = useState([])
     const { users } = useContext(AllUsersContext);
-    const { user } = useContext(UserContext);
     const { destination_id, trip_id, id } = useParams()
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
 
     useEffect(() => {
-        fetch("/activities")
+        fetch(`/activities`)
             .then(res => res.json())
             .then(data => setActivities(data))
     }, [])
@@ -78,7 +76,7 @@ function ActivityDetails() {
                     </div>
                     {trip_id ?
                         <div className="back-link-btn">
-                            <Link className="link" to={`/users/${user.id}/trips/${trip_id}`}>
+                            <Link className="link" to={`/trips/${trip_id}`}>
                                 <p className="text">
                                     Return to Trip
                                 </p>

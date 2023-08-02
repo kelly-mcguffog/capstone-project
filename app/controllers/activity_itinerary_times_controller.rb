@@ -1,14 +1,10 @@
 class ActivityItineraryTimesController < ApplicationController
-
-    def index
-        render json: ActivityItineraryTime.all, status: :ok
-    end
+    before_action :find_itinerary_day, only: [:update, :create]
   
     def create
-        itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
-        activity_itinerary_time = itinerary_day.activity_itinerary_time.create!(activity_itinerary_time_params)
-        itinerary_day.combined_itinerary_times << activity_itinerary_time
-        render json: hotel_itinerary_time, status: :created
+        activity_itinerary_time = @itinerary_day.activity_itinerary_time.create!(activity_itinerary_time_params)
+        @itinerary_day.combined_itinerary_times << activity_itinerary_time
+        render json: activity_itinerary_time, status: :created
     end
   
     def destroy
@@ -18,8 +14,7 @@ class ActivityItineraryTimesController < ApplicationController
     end
 
     def update
-        itinerary_day = ItineraryDay.find(params[:itinerary_day_id])
-        activity_itinerary_time = itinerary_day.activity_itinerary_times.find(params[:id])
+        activity_itinerary_time = @itinerary_day.activity_itinerary_times.find(params[:id])
         activity_itinerary_time.update!(activity_itinerary_time_params)
         render json: activity_itinerary_time, status: :ok
       end
@@ -28,6 +23,10 @@ class ActivityItineraryTimesController < ApplicationController
   
     def activity_itinerary_time_params
         params.require(:activity_itinerary_time).permit(:time, :activity_id, :itinerary_day_id)
+    end
+
+    def find_itinerary_day
+        @itinerary_day = ItineraryDay.find(params[:id])
     end
     
   end

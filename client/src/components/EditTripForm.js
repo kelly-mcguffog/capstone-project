@@ -86,7 +86,7 @@ function EditTripForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/users/${user.id}/trips/${id}`, {
+    fetch(`/trips/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +95,7 @@ function EditTripForm() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((updatedTrip) => onUpdateTrip(updatedTrip))
-        navigate(`/users/${user.id}/trips/${id}`)
+        navigate(`/trips/${id}`)
       } else {
         r.json().then((err) => setErrors(err.errors))
       }
