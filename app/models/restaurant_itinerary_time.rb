@@ -10,7 +10,7 @@ class RestaurantItineraryTime < ApplicationRecord
   private
 
   def time_slots_must_have_gap
-    existing_times = itinerary_day.restaurant_itinerary_times.pluck(:time)
+    existing_times = (itinerary_day.activity_itinerary_times.pluck(:time) + itinerary_day.restaurant_itinerary_times.pluck(:time) + itinerary_day.hotel_itinerary_times.pluck(:time)).flatten
 
     existing_times.each do |existing_time|
       time_diff = (existing_time - time).abs / 60

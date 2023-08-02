@@ -118,7 +118,7 @@ function AddHotelToItinerary({ onAddItinerary }) {
                     }`}
                 />
                 {errors["hotel_itinerary_times.time"] && (
-                  <span className="error-message">
+                  <span className="error-message error-message-time">
                     {errors["hotel_itinerary_times.time"]}
                   </span>
                 )}

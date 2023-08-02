@@ -6,6 +6,10 @@ body, html {
   -moz-osx-font-smoothing: grayscale;
   color: #0f0043;
 }
+small{
+  margin: 20px 0px 10px 0px;
+  display: block;
+}
 button{
   cursor: pointer;
 }
@@ -182,8 +186,8 @@ form {
 }
 
 .details-img-container{
-  width: 200px;
-  height: 200px;
+  width: 230px;
+  height: 230px;
   overflow: hidden;
   border-radius: 10px;
   display: flex;
@@ -340,7 +344,7 @@ form {
   color: white;
   text-align: center;
   background-color: #0f0043;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border: none;
   display: block;
   margin: 20px auto;
@@ -1106,6 +1110,9 @@ button.form-button{
   color: firebrick;
   font-size: 12px;
   margin: 5px 0px;
+}
+
+.error-message-time{
   width: 150px;
 }
 

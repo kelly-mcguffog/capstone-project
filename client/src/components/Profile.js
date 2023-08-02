@@ -68,6 +68,7 @@ function Profile() {
                             <p><i className="fa-solid fa-envelope"></i> {email}</p>
                             <p><i className="fa-solid fa-user"></i> {username}</p>
                             <p><strong>TSA Precheck:</strong>{tsa_precheck}</p>
+                            <small><em>coming soon..</em></small>
                             <div className="btn-container">
                                 <Link className="page-btn main-btn">
                                     Follow

@@ -82,8 +82,6 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
       });
   }
 
-  console.log(errors)
-
   return (
     <div
       className="header-img"
@@ -123,7 +121,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                     }`}
                 />
                 {errors["restaurant_itinerary_times.time"] && (
-                  <span className="error-message">
+                  <span className="error-message error-message-time">
                     {errors["restaurant_itinerary_times.time"]}
                   </span>
                 )}

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   rescue_from ActiveRecord::RecordInvalid, with: :data_invalid
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :authorized
+  # before_action :authorized
   
   def data_invalid(invalid)
     render json: { errors: invalid.record.errors.messages }, status: :unprocessable_entity

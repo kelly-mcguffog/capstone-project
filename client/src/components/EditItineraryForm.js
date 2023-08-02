@@ -25,29 +25,31 @@ function EditItineraryForm() {
   const combinedItineraryTimes = findItineraryDay?.combined_itinerary_times || [];
   const findItineraryTime = combinedItineraryTimes.find((time) => time.id === itineraryTimeId);
 
+  const date_format = new Date(findItineraryDay?.date).toISOString().slice(0, 16);
+  const time_format = new Date(findItineraryTime?.time).toISOString().slice(0, 16);
 
   const initialFormData = {
     id: findItineraryDay?.id,
     trip_id: trip_id,
-    date: findItineraryDay?.date,
+    date: date_format,
     restaurant_itinerary_times_attributes: [
       {
         id: findItineraryTime?.restaurant ? findItineraryTime.id : "",
-        time: findItineraryTime?.restaurant ? findItineraryTime.time : "",
+        time: findItineraryTime?.restaurant ? time_format : "",
         restaurant_id: findItineraryTime?.restaurant ? findItineraryTime.restaurant.id : "",
       },
     ],
     hotel_itinerary_times_attributes: [
       {
         id: findItineraryTime?.hotel ? findItineraryTime.id : "",
-        time: findItineraryTime?.hotel ? findItineraryTime.time : "",
+        time: findItineraryTime?.hotel ? time_format : "",
         hotel_id: findItineraryTime?.hotel ? findItineraryTime.hotel.id : "",
       },
     ],
     activity_itinerary_times_attributes: [
       {
         id: findItineraryTime?.activity ? findItineraryTime.id : "",
-        time: findItineraryTime?.activity ? findItineraryTime.time : "",
+        time: findItineraryTime?.activity ? time_format : "",
         activity_id: findItineraryTime?.activity ? findItineraryTime.activity.id : "",
       },
     ],
@@ -69,19 +71,17 @@ function EditItineraryForm() {
 
     console.log("trip_id:", trip_id);
     console.log("date:", date);
+    console.log(updatedItinerary)
 
     const updatedUser = {
       ...user,
       trips: user.trips.map((trip) => {
         if (trip.id === trip_id) {
           let updatedItineraryDays = trip.itinerary_days.map((itineraryDay) => {
-            console.log("itineraryDay.date:", itineraryDay.date);
-
             if (itineraryDay.date !== date) {
               const updatedCombinedItineraryTimes = itineraryDay.combined_itinerary_times.filter(
                 (timeObj) => timeObj.id !== findItineraryTime.id
               );
-              console.log("updatedCombinedItineraryTimes:", updatedCombinedItineraryTimes);
               return { ...itineraryDay, combined_itinerary_times: updatedCombinedItineraryTimes };
             } else {
               const updatedItineraryTimes = combined_itinerary_times.map((timeObj) => {
@@ -99,9 +99,6 @@ function EditItineraryForm() {
                 }
                 return timeObj;
               });
-
-              console.log("updatedItineraryTimes:", updatedItineraryTimes);
-
               return { ...itineraryDay, combined_itinerary_times: updatedItineraryTimes };
             }
           });
@@ -109,6 +106,8 @@ function EditItineraryForm() {
           const dateExists = updatedItineraryDays.some((itineraryDay) => itineraryDay.date === date);
           if (!dateExists) {
             const newItineraryDay = {
+              id: updatedItinerary.id,
+              trip_id: updatedItinerary.trip_id,
               date,
               combined_itinerary_times: combined_itinerary_times.map((timeObj) => {
                 if (timeObj.id === findItineraryTime.id) {
@@ -198,24 +197,30 @@ function EditItineraryForm() {
         "Cache-Control": "no-cache",
       },
       body: JSON.stringify(formData),
-    })
-      .then((r) => {
-        if (r.ok) {
-          return r.json();
-        } else {
-          return r.json().then((err) => Promise.reject(err.errors));
-        }
-      })
-      .then((newItinerary) => {
-        onUpdateItinerary(newItinerary);
-        navigate(`/users/${user.id}/trips/${trip_id}`);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setErrors([error]);
-      });
-  }
-
+    }).then((r) => {
+    if (r.ok) {
+      r.json().then((newItinerary) => onUpdateItinerary(newItinerary))
+      navigate(`/users/${user.id}/trips/${trip_id}`);
+    } else {
+      r.json().then((err) => setErrors(err.errors));
+    }
+  });
+}
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((newItinerary) => {
+  //       onUpdateItinerary(newItinerary);
+  //       navigate(`/users/${user.id}/trips/${trip_id}`);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error updating itinerary day:", error);
+  //       setErrors(["An error occurred while updating the itinerary day."]);
+  //     });
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();

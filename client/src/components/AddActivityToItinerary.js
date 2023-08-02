@@ -52,6 +52,8 @@ function AddActivityToItinerary({ onAddItinerary }) {
     });
   }
 
+  console.log(errors)
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -114,7 +116,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
                     }`}
                 />
                 {errors["activity_itinerary_times.time"] && (
-                  <span className="error-message">
+                  <span className="error-message error-message-time">
                     {errors["activity_itinerary_times.time"]}
                   </span>
                 )}
