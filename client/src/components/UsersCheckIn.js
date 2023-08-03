@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 function UsersCheckIn({ allUsers }) {
+  const uniqueUsers = {};
+
+  allUsers.forEach((user) => {
+    uniqueUsers[user.id] = user;
+  });
+
+  const uniqueUsersArray = Object.values(uniqueUsers);
+
   return (
     <div className="checkin-container">
-      {allUsers.slice(0, 3).map((user, index) => {
+      {uniqueUsersArray.slice(0, 3).map((user, index) => {
         const decodedUrl = decodeURIComponent(user.avatar.url);
         return (
           <div key={user.id} className={`img-container checkin checkin${index + 1}`}>

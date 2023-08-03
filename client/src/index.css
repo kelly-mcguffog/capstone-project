@@ -113,11 +113,14 @@ a.page-btn.main-btn.trip-btn{
   border-radius: 10px;
   border: 1px solid rgb(210, 210, 210);
 }
-.destination-results-trip{
-  margin: 130px auto auto auto;
+.results.trip-form{
+  margin: 120px auto;
 }
 .itinerary-form{
-  margin: 115px auto 20px auto;
+  margin: 120px auto 20px auto;
+}
+.destination-results-trip{
+  margin: 130px auto auto auto;
 }
 button[type="submit"]{
   border: none;
@@ -418,6 +421,7 @@ p{
   margin-bottom: 10px;
   margin-top: 0px;
   font-weight: 700;
+  text-shadow: 0 2px 3px rgba(0,0,0,.3);
 }
 .mobile-dropdown{
   display: none;
@@ -428,6 +432,7 @@ p{
 .subtitle{
   font-size: 15px;
   padding: 0px 200px;
+  text-shadow: 0 3px 10px rgba(0,0,0,27);
   color: white;
   text-align: center;
   margin: 0px;
@@ -920,11 +925,11 @@ a.trip-links.active{
   align-items: center;
 }
 .back-link-btn-trip{
-  margin: 100px 75px auto auto;
+  margin: 100px 55px auto auto;
   justify-content: flex-end;
 }
 .back-link-btn-details{
-  margin: 20px 75px auto auto;
+  margin: 20px 0px 20px 55px;
   justify-content: flex-end;
 }
 button.form-button{
@@ -961,31 +966,6 @@ button.form-button{
 .small-image {
   grid-column: 2 / span 2;
 }
-.checkin{
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  border: 1px solid white;
-  overflow: hidden;
-}
-.checkin1 {
-  top: 0;
-  left: 0;
-}
-.checkin2 {
-  top: 0px;
-  left: 20px;
-}
-.checkin3 {
-  top: 0px;
-  left: 40px;
-}
-.checkin-container{
-  position: relative;
-  width: 30px;
-  height: 30px;
-  margin: 20px 0px;
-}
 .form-label{
   width: auto;
 }
@@ -1017,7 +997,8 @@ button.form-button{
 .error-popup{
   position: absolute;
   background-color: white;
-  box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+  border: 1px solid firebrick;
+  border-radius: 5px;
   padding: 70px 109px;
   top: 60%;
   left: 50%;
@@ -1065,11 +1046,45 @@ button.form-button{
   width: auto;
   color: #0c0132;
 }
+.checkin{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  border: 1px solid white;
+  overflow: hidden;
+}
+.checkin1 {
+  top: 0;
+  left: 0;
+}
+.checkin2 {
+  top: 0px;
+  left: 20px;
+}
+.checkin3 {
+  top: 0px;
+  left: 40px;
+}
+.checkin-container{
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 20px 0px;
+}
 
 @media only screen and (max-width: 990px) and (min-width: 900px) {
   .img-container{
     width: 130px;
     height: 130px;
+  }
+  .back-link-btn,  .back-link-btn-details{
+    margin: 0px;
+  }
+  .back-link-btn-trip{
+    margin: 80px 45px auto auto;
+  }
+  .back-btn-form{
+    margin: 0px 40px;
   }
   .header-text{
     padding: 85px 0px 0px 0px;
@@ -1079,6 +1094,12 @@ button.form-button{
   }
   .results{
     margin: 75px auto 30px auto;
+  }
+  .results.trip-form{
+    margin: 60px auto;
+  }
+  .itinerary-form{
+    margin: 95px auto 20px auto;
   }
   .destination-results{
     margin: 45px auto auto auto;
@@ -1092,6 +1113,7 @@ button.form-button{
   }
   form{
     padding: 30px 30px;
+    border-radius: 15px;
   }
   .search{
     padding: 5px;
@@ -1168,9 +1190,6 @@ button.form-button{
   .map-container{
     width: 300px;
     height: 200px;
-  }
-  .checkin-container{
-    display: none;
   }
   .back-link{
     padding: 20px 20px;
@@ -1257,6 +1276,10 @@ button.form-button{
   .details-row-trips{
     margin: 20px auto;
   }
+  .checkin{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media only screen and (max-width: 899px) and (min-width: 710px) {
@@ -1264,8 +1287,17 @@ button.form-button{
     width: 100px;
     height: 100px;
   }
+  .back-link-btn,  .back-link-btn-details{
+    margin: 0px;
+  }
+  .back-link-btn-trip{
+    margin: 80px 35px auto auto;
+  }
   .details-row-trips{
     margin: 20px auto;
+  }
+  .back-btn-form{
+    margin: 0px 40px;
   }
   .header-text{
     padding: 85px 0px 0px 0px;
@@ -1275,6 +1307,12 @@ button.form-button{
   }
   .results{
     margin: 55px auto 30px auto;
+  }
+  .results.trip-form{
+    margin: 60px auto;
+  }
+  .itinerary-form{
+    margin: 100px auto 20px auto;
   }
   .destination-results-trip{
     margin: 85px auto auto auto;
@@ -1370,9 +1408,6 @@ button.form-button{
   .map-container{
     width: 300px;
     height: 200px;
-  }
-  .checkin-container{
-    display: none;
   }
   .back-link{
     padding: 20px 20px;
@@ -1473,20 +1508,36 @@ button.form-button{
   input[type="range"]{
     width: 100px;
   }
+  .checkin{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media only screen and (max-width: 709px) and (min-width: 475px) {
   #mobile{
     display: block;
   }
-  .header-text{
-    padding: 85px 0px 0px 0px;
-  }
   .header-text-trip-form{
     padding: 85px 0px 30px 0px;
   }
+  .back-link-btn,  .back-link-btn-details{
+    margin: 0px;
+  }
+  .back-btn-form{
+    margin: 0px 25px;
+  }
+  .header-text{
+    padding: 95px 0px 0px 0px;
+  }
   .results{
-    margin: 100px auto 30px auto;
+    margin: 82px auto 30px auto;
+  }
+  .results.trip-form{
+    margin: 80px auto;
+  }
+  .itinerary-form{
+    margin: 90px auto 20px auto;
   }
   .destination-results{
     margin: 65px auto auto auto;
@@ -1641,7 +1692,7 @@ button.form-button{
     flex-wrap: wrap;
   }
   h1, .title{
-    font-size: 30px;
+    font-size: 40px;
   }
   .filter-input{
     flex-direction: row;
@@ -1697,9 +1748,6 @@ button.form-button{
     width: 100%;
     height: 220px;
     margin-top: 20px;
-  }
-  .checkin-container{
-    display: none;
   }
   .back-link{
     padding: 20px 20px;
@@ -1787,6 +1835,10 @@ button.form-button{
     margin: 10px 20px;
     padding: 0px 10px;
   }
+  .checkin{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media only screen and (max-width: 474px) and (min-width: 200px) {
@@ -1795,6 +1847,9 @@ button.form-button{
   }
   .back-link-btn-trip{
     display: none;
+  }
+  .back-link-btn,  .back-link-btn-details{
+    margin: 0px 20px;
   }
   #mobile i{
     font-size: 24px;
@@ -1873,6 +1928,12 @@ button.form-button{
     display: block;
     margin: 90px auto;
   }
+  .details-row-trips{
+    margin: 90px auto;
+  }
+  span{
+    font-size: 12px;
+  }
   #trip-form-wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -1935,7 +1996,7 @@ button.form-button{
     flex-wrap: wrap;
   }
   h1, .title{
-    font-size: 25px;
+    font-size: 30px;
   }
   .filter-input{
     flex-direction: row;
@@ -1986,7 +2047,16 @@ button.form-button{
     justify-content: space-between;
   }
   .results{
-    margin: 65px auto auto auto;
+    margin: 60px auto auto auto;
+  }
+  .results.trip-form{
+    margin: 80px auto;
+  }
+  .itinerary-form{
+    margin: 90px auto 20px auto;
+  }
+  .destination-results-trip{
+    margin: 110px auto auto auto;
   }
   .destination-results{
     margin: 65px auto auto auto;
@@ -2006,9 +2076,6 @@ button.form-button{
     width: 100%;
     height: 220px;
     margin-top: 20px;
-  }
-  .checkin-container{
-    display: none;
   }
   .back-link{
     padding: 20px 20px;
@@ -2101,5 +2168,9 @@ button.form-button{
   }
   .filter-btn{
     width: 100%;
+  }
+  .checkin{
+    width: 30px;
+    height: 30px;
   }
 }

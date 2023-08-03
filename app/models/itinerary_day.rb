@@ -45,6 +45,7 @@ class ItineraryDay < ApplicationRecord
   
   validates :date, presence: true
   validate :only_one_hotel_per_day
+  validate :time_slots_must_have_gap
 
   private
 
@@ -54,6 +55,18 @@ class ItineraryDay < ApplicationRecord
   
     if hotels_count > 1 && unique_hotel_dates.size != hotels_count
       errors.add(:hotel_itinerary_times, "You can only have one hotel per day")
+    end
+  end
+
+  def time_slots_must_have_gap
+    existing_times = (activity_itinerary_times.pluck(:time) + restaurant_itinerary_times.pluck(:time) + hotel_itinerary_times.pluck(:time)).flatten
+  
+    existing_times.each do |existing_time|
+      time_diff = (existing_time - time).abs / 60
+      if time_diff < 30
+        errors.add(:time, "Must be at least 30 minutes apart from existing times.")
+        return
+      end
     end
   end
 end

@@ -13,6 +13,8 @@ class UsersController < ApplicationController
     end
 
     def show
+        Rails.logger.debug "Session: #{session.inspect}"
+        Rails.logger.debug "Params: #{params.inspect}"
         user = User.find(session[:user_id])
         render json: user, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
     end      

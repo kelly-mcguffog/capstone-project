@@ -1,10 +1,12 @@
+
 user1 = User.create({
     first_name: "Olivia",
     last_name: "Hammer",
     email: "olivia.hammer@gmail.com",
-    avatar: "https://spectrumservicesnyc.com/wp-content/uploads/2022/08/Screenshot-2022-08-15-at-12.28.04-PM.jpeg",
+    avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo1.jpg")),
     username: "olivia.hammer",
-    password_digest: "westport123",
+    password: "westport123",
+    password_confirmation: "westport123",
     tsa_precheck: 123456789
 })
 
@@ -12,23 +14,23 @@ user2 = User.create({
     first_name: "Jake",
     last_name: "McGuffog",
     email: "jake.mcguffog@gmail.com",
-    avatar: "https://nyinvestmentsaleslib.cushwake.com/MKSSDocument/MKSS_PublicSite/agentimages/regular/7bc075d9-7f3b-4d87-9278-056b4c040e1d_Jake%20McGuffog%202022.jpg",
+    avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo2.jpg")),
     username: "jake.mcguffog",
-    password_digest: "skis123",
+    password: "skis123",
+    password_confirmation: "skis123",
     tsa_precheck: 123456789
 })
 
 user3 = User.create({
-    first_name: "Katie",
-    last_name: "Segel",
-    email: "katie.segel@gmail.com",
-    avatar: "https://images.squarespace-cdn.com/content/v1/56b18d3022482e966ff606d3/1585431183115-NGIZJV6NCL8L0LGHHGL7/image-asset.jpeg?format=1000w",
-    username: "katie.segel",
-    password_digest: "malibu123",
+    first_name: "Ilyssa",
+    last_name: "Rudman",
+    email: "ilyssa.rudman@gmail.com",
+    avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo3.jpg")),
+    username: "ilyssa.rudman",
+    password: "malibu123",
+    password_confirmation: "malibu123",
     tsa_precheck: 123456789
 })
-
-#Destinations
 
 paris = Destination.create({
     country: "France",
@@ -189,6 +191,7 @@ marrakesh = Destination.create({
     latitude: 31.6295,
     longitude: -7.9811
 })
+
 
 #Activities
 
@@ -949,11 +952,11 @@ hotel2 = Hotel.create({
 trip1 = Trip.create({
     origin_airport: "JFK",
     destination_airport: "CDG",
-    outbound_flight: DateTime.parse("2023-06-22 16:25:00"),
+    outbound_flight: DateTime.parse("2023-06-25 16:25:00"),
     return_flight: DateTime.parse("2023-06-20 07:30:00"),
-    outbound_flight_number: "AA7991",
-    return_flight_number: "AA34526",
-    confirmation_number: "C5CEKV",
+    outbound_flight_number: "AA799",
+    return_flight_number: "AA345",
+    confirmation_number: "123456789",
     user_id: user1.id,
     destination_id: paris.id
 })
@@ -961,11 +964,11 @@ trip1 = Trip.create({
 trip2 = Trip.create({
     origin_airport: "JFK",
     destination_airport: "CDG",
-    outbound_flight: DateTime.parse("2023-06-22 16:25:00"),
+    outbound_flight: DateTime.parse("2023-06-25 16:25:00"),
     return_flight: DateTime.parse("2023-06-20 07:30:00"),
     outbound_flight_number: "AA7991",
-    return_flight_number: "AA34526",
-    confirmation_number: "C5CEKV",
+    return_flight_number: "AA345",
+    confirmation_number: "123456789",
     user_id: user2.id,
     destination_id: paris.id
 })
@@ -973,11 +976,11 @@ trip2 = Trip.create({
 trip3 = Trip.create({
     origin_airport: "JFK",
     destination_airport: "CDG",
-    outbound_flight: DateTime.parse("2023-06-22 16:25:00"),
+    outbound_flight: DateTime.parse("2023-06-25 16:25:00"),
     return_flight: DateTime.parse("2023-06-20 07:30:00"),
-    outbound_flight_number: "AA7991",
-    return_flight_number: "AA34526",
-    confirmation_number: "C5CEKV",
+    outbound_flight_number: "AA791",
+    return_flight_number: "AA345",
+    confirmation_number: "123456789",
     user_id: user3.id,
     destination_id: paris.id
 })
@@ -991,26 +994,26 @@ itinerary1 = ItineraryDay.create({
 
 itinerary2 = ItineraryDay.create({
     date: Date.parse("2023-06-21"),
-    trip_id: trip1.id
+    trip_id: trip2.id
 })
 
 itinerary3 = ItineraryDay.create({
-    date: Date.parse("2023-06-20"),
-    trip_id: trip2.id
-})
-
-itinerary4 = ItineraryDay.create({
-    date: Date.parse("2023-06-21"),
-    trip_id: trip2.id
-})
-
-itinerary5 = ItineraryDay.create({
-    date: Date.parse("2023-06-20"),
+    date: Date.parse("2023-06-22"),
     trip_id: trip3.id
 })
 
+itinerary4 = ItineraryDay.create({
+    date: Date.parse("2023-06-23"),
+    trip_id: trip1.id
+})
+
+itinerary5 = ItineraryDay.create({
+    date: Date.parse("2023-06-24"),
+    trip_id: trip2.id
+})
+
 itinerary6 = ItineraryDay.create({
-    date: Date.parse("2023-06-21"),
+    date: Date.parse("2023-06-25"),
     trip_id: trip3.id
 })
 
@@ -1023,15 +1026,15 @@ hotel_itinerary_time1 = HotelItineraryTime.create({
 })
 
 hotel_itinerary_time2 = HotelItineraryTime.create({
-    time: DateTime.parse("2023-06-20 06:00:00"),
+    time: DateTime.parse("2023-06-21 07:00:00"),
     hotel_id: hotel2.id,
-    itinerary_day_id: itinerary3.id
+    itinerary_day_id: itinerary2.id
 })
 
 hotel_itinerary_time3 = HotelItineraryTime.create({
-    time: DateTime.parse("2023-06-20 06:00:00"),
+    time: DateTime.parse("2023-06-22 08:00:00"),
     hotel_id: hotel2.id,
-    itinerary_day_id: itinerary5.id
+    itinerary_day_id: itinerary3.id
 })
 
 #restaurant itinerary time
@@ -1043,95 +1046,83 @@ restaurant_itinerary_time1 = RestaurantItineraryTime.create({
 })
 
 restaurant_itinerary_time2 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-20 12:00:00"),
+    time: DateTime.parse("2023-06-21 10:00:00"),
     restaurant_id: restaurant2.id,
-    itinerary_day_id: itinerary1.id
+    itinerary_day_id: itinerary2.id
 })
 
 restaurant_itinerary_time3 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-21 07:00:00"),
+    time: DateTime.parse("2023-06-22 11:00:00"),
     restaurant_id: restaurant3.id,
-    itinerary_day_id: itinerary2.id
+    itinerary_day_id: itinerary3.id
 })
 
 restaurant_itinerary_time4 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-21 18:00:00"),
+    time: DateTime.parse("2023-06-23 12:00:00"),
     restaurant_id: restaurant4.id,
-    itinerary_day_id: itinerary2.id
-})
-
-restaurant_itinerary_time5 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-20 09:00:00"),
-    restaurant_id: restaurant1.id,
-    itinerary_day_id: itinerary3.id
-})
-
-restaurant_itinerary_time6 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-21 18:00:00"),
-    restaurant_id: restaurant5.id,
-    itinerary_day_id: itinerary3.id
-})
-
-restaurant_itinerary_time7 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-21 07:00:00"),
-    restaurant_id: restaurant6.id,
     itinerary_day_id: itinerary4.id
 })
 
-restaurant_itinerary_time8 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-20 12:00:00"),
-    restaurant_id: restaurant2.id,
+restaurant_itinerary_time5 = RestaurantItineraryTime.create({
+    time: DateTime.parse("2023-06-24 13:00:00"),
+    restaurant_id: restaurant5.id,
     itinerary_day_id: itinerary5.id
 })
 
-restaurant_itinerary_time9 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-20 09:00:00"),
-    restaurant_id: restaurant1.id,
+restaurant_itinerary_time6 = RestaurantItineraryTime.create({
+    time: DateTime.parse("2023-06-25 14:00:00"),
+    restaurant_id: restaurant6.id,
     itinerary_day_id: itinerary6.id
+})
+
+restaurant_itinerary_time7 = RestaurantItineraryTime.create({
+    time: DateTime.parse("2023-06-20 15:00:00"),
+    restaurant_id: restaurant1.id,
+    itinerary_day_id: itinerary1.id
 })
 
 #activity itinerary time
 
 activity_itinerary_time1 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-20 14:00:00"),
+    time: DateTime.parse("2023-06-20 16:00:00"),
     activity_id: activity1.id,
     itinerary_day_id: itinerary1.id
 })
 
 activity_itinerary_time2 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-20 11:00:00"),
+    time: DateTime.parse("2023-06-22 17:00:00"),
     activity_id: activity2.id,
-    itinerary_day_id: itinerary1.id
-})
-
-activity_itinerary_time3 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-21 10:00:00"),
-    activity_id: activity3.id,
-    itinerary_day_id: itinerary2.id
-})
-
-activity_itinerary_time4 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-20 14:00:00"),
-    activity_id: activity4.id,
     itinerary_day_id: itinerary3.id
 })
 
+activity_itinerary_time3 = ActivityItineraryTime.create({
+    time: DateTime.parse("2023-06-20 20:00:00"),
+    activity_id: activity3.id,
+    itinerary_day_id: itinerary1.id
+})
+
+activity_itinerary_time4 = ActivityItineraryTime.create({
+    time: DateTime.parse("2023-06-21 21:00:00"),
+    activity_id: activity4.id,
+    itinerary_day_id: itinerary2.id
+})
+
 activity_itinerary_time5 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-20 11:00:00"),
+    time: DateTime.parse("2023-06-23 22:00:00"),
     activity_id: activity2.id,
     itinerary_day_id: itinerary4.id
 })
 
 activity_itinerary_time6 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-21 10:00:00"),
+    time: DateTime.parse("2023-06-21 23:00:00"),
     activity_id: activity3.id,
-    itinerary_day_id: itinerary5.id
+    itinerary_day_id: itinerary2.id
 })
 
 activity_itinerary_time7 = ActivityItineraryTime.create({
-    time: DateTime.parse("2023-06-20 14:00:00"),
+    time: DateTime.parse("2023-06-22 08:30:00"),
     activity_id: activity1.id,
-    itinerary_day_id: itinerary6.id
+    itinerary_day_id: itinerary3.id
 })
 
 #packing item

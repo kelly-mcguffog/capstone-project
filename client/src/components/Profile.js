@@ -16,7 +16,6 @@ function Profile() {
 
     if (!isLoaded) return <div className="loading">Loading...</div>;
 
-
     if (!user) {
         return null;
     }
@@ -25,7 +24,9 @@ function Profile() {
         return <div className="loading">Loading...</div>;
     }
 
-    const { first_name, last_name, email, username, avatar, trips, tsa_precheck } = user;
+    const { id, first_name, last_name, email, username, avatar, trips, tsa_precheck } = user;
+    const decodedUrl = decodeURIComponent(avatar.url);
+
 
     const destinationMarkers = trips.map((trip) => {
         const destination = destinations.find((dest) => dest.id === trip.destination_id);
@@ -54,13 +55,13 @@ function Profile() {
                 <div className="details profile-container">
                     <div className="details-img-wrapper">
                         <div className="details-img-container">
-                            <img className="details-img" alt={username} src={avatar.url}></img>
+                            <img className="details-img" alt={username} src={decodedUrl}></img>
                         </div>
                     </div>
                     <div className="details-info-destinations">
                         <div className="profile-info-details">
                             <h2>{first_name} {last_name}</h2>
-                            <Link to={`/profile/${user.id}/edit`}>
+                            <Link to={`/profile/${id}/edit`}>
                                 <i className="fa-solid fa-pen-to-square"></i>
                             </Link>
                         </div>

@@ -66,7 +66,7 @@ function ActivityDetails() {
             </div>
             <div className="background">
                 <div className="back-link">
-                    <div className="back-link-btn">
+                    <div className={trip_id ? "back-link-btn" : "back-link-btn back-link-btn-details"}>
                         <Link className="link" to={getListingsUrl()}>
                             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
                             <p className="text">

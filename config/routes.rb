@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
-  post '/signup', to: 'users#create'
-  get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-
+  post '/signup', to: 'users#create'
+  get '/me', to: 'users#show'
+  resources :users, only: [:index, :update] 
   
   resources :trips, only: [:create, :update, :destroy]
-
-  resources :users, only: [:index, :show, :create, :update] 
 
   resources :trips, only: [:create, :update, :destroy] do
     resources :itinerary_days, only: [:update, :create, :destroy] do

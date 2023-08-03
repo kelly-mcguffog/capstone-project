@@ -1,12 +1,11 @@
 class User < ApplicationRecord
-    
+  
+    mount_uploader :avatar, AvatarUploader
     has_many :trips
     has_many :destinations, through: :trips
     has_many :itinerary_days, through: :trips
     # has_many :packing_list_items, through :trips
     has_secure_password
-
-    mount_uploader :avatar, AvatarUploader
 
     validates :first_name, presence: { message: "Required" }
     validates :last_name, presence: { message: "Required" }

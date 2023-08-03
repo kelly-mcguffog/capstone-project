@@ -19,7 +19,7 @@ const UserProvider = ({ children }) => {
         console.error(error);
         setUser(null);
       });
-  }, []);
+  }, []);  
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

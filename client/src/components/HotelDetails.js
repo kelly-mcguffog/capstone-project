@@ -12,6 +12,8 @@ function HotelDetails() {
     const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
 
+    console.log(users)
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
@@ -65,7 +67,7 @@ function HotelDetails() {
             <GridHeader photo1={photo1} photo2={photo2} photo3={photo3} />
             <div className="background">
                 <div className="back-link">
-                    <div className="back-link-btn">
+                    <div className={trip_id ? "back-link-btn" : "back-link-btn back-link-btn-details"}>
                         <Link className="link" to={getListingsUrl()}>
                             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
                             <p className="text">
