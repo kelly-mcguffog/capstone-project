@@ -12,7 +12,6 @@ class ItineraryDay < ApplicationRecord
   accepts_nested_attributes_for :activity_itinerary_times, allow_destroy: true
   accepts_nested_attributes_for :restaurant_itinerary_times, allow_destroy: true
 
-
   def combined_itinerary_times
     combined_times = []
   
@@ -59,14 +58,24 @@ class ItineraryDay < ApplicationRecord
   end
 
   def time_slots_must_have_gap
-    existing_times = (activity_itinerary_times.pluck(:time) + restaurant_itinerary_times.pluck(:time) + hotel_itinerary_times.pluck(:time)).flatten
+    existing_times = combined_itinerary_times.map { |time| time[:time] }
+    
+    existing_times.each_cons(2) do |time1, time2|
+      formatted_time1 = Time.parse(time1.to_s)
+      formatted_time2 = Time.parse(time2.to_s)
+      time_difference = (formatted_time2 - formatted_time1).abs
   
-    existing_times.each do |existing_time|
-      time_diff = (existing_time - time).abs / 60
-      if time_diff < 30
-        errors.add(:time, "Must be at least 30 minutes apart from existing times.")
-        return
+      if time_difference < 30 * 60
+        if restaurant_itinerary_times.map { |time| Time.parse((time[:time]).to_s) == formatted_time1 || formatted_time2}
+          errors.add(:restaurant_itinerary_times, "Time slots must have a gap of at least 30 minutes.")
+        
+        elsif hotel_itinerary_times.map { |time| Time.parse((time[:time]).to_s) == formatted_time1 || formatted_time2}
+          errors.add(:hotel_itinerary_times, "Time slots must have a gap of at least 30 minutes.")
+        
+        elsif activity_itinerary_times.map { |time| Time.parse((time[:time]).to_s) == formatted_time1 || formatted_time2}
+          errors.add(:activity_itinerary_times, "Time slots must have a gap of at least 30 minutes.")
+        end
       end
     end
-  end
+  end  
 end

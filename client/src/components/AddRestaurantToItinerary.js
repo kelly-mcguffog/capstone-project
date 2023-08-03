@@ -63,21 +63,18 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-      .then((r) => {
-        if (r.ok) {
-          return r.json();
-        } else {
-          return r.json().then((err) => Promise.reject(err.errors));
-        }
-      })
-      .then((newItinerary) => {
-        onAddItinerary(newItinerary);
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((newItinerary) => onAddItinerary(newItinerary));
         navigate(`/trips/${submitTripId}`);
-      })
-      .catch((error) => {
-        setErrors(error);
-      });
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
+  }
+
+  const deleteError = () => {
+    setErrors("")
   }
 
   return (
@@ -115,9 +112,24 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                   name="time"
                   value={formData.restaurant_itinerary_times_attributes[0].time}
                   onChange={handleChange}
-                  className={`trip-form-input ${errors["restaurant_itinerary_times.time"] ? "input-error" : ""
+                  className={`trip-form-input ${(errors.restaurant_itinerary_times) ||
+                    errors["restaurant_itinerary_times.time"]
+                    ? "input-error"
+                    : ""
                     }`}
                 />
+                {errors["restaurant_itinerary_times"] && (
+                  <div className="error-popup">
+                    <div className="error-icon">
+                      <i className="fa-solid fa-exclamation"></i>
+                    </div>
+                    <h2 className="error-text">Error</h2>
+                    <span className="error-message pop-up-error">
+                      {errors["restaurant_itinerary_times"]}
+                    </span>
+                    <button className="page-btn main-btn error-btn" onClick={deleteError}>Try Again</button>
+                  </div>
+                )}
                 {errors["restaurant_itinerary_times.time"] && (
                   <span className="error-message error-message-time">
                     {errors["restaurant_itinerary_times.time"]}
@@ -158,26 +170,26 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
             </div>
           </form>
         </div>
-        {trip_id === undefined && (
-          <div className="back-link-btn back-btn-form">
+        <div className={trip_id ? "back-link back-link-form" : ""}>
+          <div className="back-link-btn back-link-btn-form">
             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
             <Link className="link" to={`/destinations/${destination_id}/restaurants/${restaurant_id}/details`}>
               <p className="text">
-                Return to Hotel
+                Return to Restaurant
               </p>
             </Link>
           </div>
-        )}
-        {trip_id && (
-          <div className="back-link-btn back-link-btn-details">
-            <Link className="link" to={`/trips/${trip_id}`}>
-              <p className="text">
-                Return to Trip
-              </p>
-              <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
-            </Link>
-          </div>
-        )}
+          {trip_id && (
+            <div className="back-link-btn">
+              <Link className="link" to={`/trips/${trip_id}`}>
+                <p className="text">
+                  Return to Trip
+                </p>
+                <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

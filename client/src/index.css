@@ -160,6 +160,7 @@ form {
   text-align: center;
   padding: 30px 80px;
   margin: auto;
+  border-radius: 15px;
 }
 .img-container{
   width: 150px;
@@ -919,7 +920,7 @@ a.trip-links.active{
   justify-content: space-between;
 }
 .back-link-btn{
-  margin: 20px 50px;
+  margin: 20px 55px;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -929,8 +930,11 @@ a.trip-links.active{
   justify-content: flex-end;
 }
 .back-link-btn-details{
-  margin: 20px 0px 20px 55px;
+  margin: 20px 55px 20px 55px;
   justify-content: flex-end;
+}
+.back-link-btn-form{
+  margin-left: 55px;
 }
 button.form-button{
   background-color: #0f0043;
@@ -999,9 +1003,10 @@ button.form-button{
   background-color: white;
   border: 1px solid firebrick;
   border-radius: 5px;
-  padding: 70px 109px;
+  padding: 70px 50px;
   top: 60%;
   left: 50%;
+  width: auto;
   transform: translate(-50%, -50%);
 }
 .restricted{
@@ -1010,16 +1015,17 @@ button.form-button{
 .error-icon{
   background-color: firebrick;
   margin: auto auto 10px auto;
-  display: block;
-  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
   padding: 10px;
   border-radius: 50px;
   text-align: center;
 }
-.error-icon-restriced{
-  width: 7%;
-}
 .error-text{
+  font-size: 20px;
   color: firebrick;
   text-align: center;
 }
@@ -1077,14 +1083,26 @@ button.form-button{
     width: 130px;
     height: 130px;
   }
+  .back-link{
+    padding: 20px 20px;
+  }
   .back-link-btn,  .back-link-btn-details{
     margin: 0px;
+  }
+  .back-link-btn-details{
+    margin-right: 45px;
   }
   .back-link-btn-trip{
     margin: 80px 45px auto auto;
   }
   .back-btn-form{
     margin: 0px 40px;
+  }
+  .back-link-form{
+    padding: 20px 40px;
+  }
+  .back-link-btn-form{
+    margin-left: 40px;
   }
   .header-text{
     padding: 85px 0px 0px 0px;
@@ -1113,7 +1131,6 @@ button.form-button{
   }
   form{
     padding: 30px 30px;
-    border-radius: 15px;
   }
   .search{
     padding: 5px;
@@ -1190,9 +1207,6 @@ button.form-button{
   .map-container{
     width: 300px;
     height: 200px;
-  }
-  .back-link{
-    padding: 20px 20px;
   }
   .header-img{
     height: 300px
@@ -1280,6 +1294,10 @@ button.form-button{
     width: 30px;
     height: 30px;
   }
+  .error-icon{
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media only screen and (max-width: 899px) and (min-width: 710px) {
@@ -1287,17 +1305,29 @@ button.form-button{
     width: 100px;
     height: 100px;
   }
+  .back-link{
+    padding: 20px 20px;
+  }
   .back-link-btn,  .back-link-btn-details{
     margin: 0px;
   }
+  .back-link-btn-details{
+    margin-right: 35px;
+  }
   .back-link-btn-trip{
     margin: 80px 35px auto auto;
+  }
+  .back-link-btn-form{
+    margin-left: 35px;
   }
   .details-row-trips{
     margin: 20px auto;
   }
   .back-btn-form{
     margin: 0px 40px;
+  }
+  .back-link-form{
+    padding: 20px 40px;
   }
   .header-text{
     padding: 85px 0px 0px 0px;
@@ -1409,9 +1439,6 @@ button.form-button{
     width: 300px;
     height: 200px;
   }
-  .back-link{
-    padding: 20px 20px;
-  }
   .header-img{
     height: 300px
   }
@@ -1512,6 +1539,10 @@ button.form-button{
     width: 30px;
     height: 30px;
   }
+  .error-icon{
+    width: 15px;
+    height: 15px;
+  }
 }
 
 @media only screen and (max-width: 709px) and (min-width: 475px) {
@@ -1521,11 +1552,23 @@ button.form-button{
   .header-text-trip-form{
     padding: 85px 0px 30px 0px;
   }
+  .back-link{
+    padding: 20px 20px;
+  }
   .back-link-btn,  .back-link-btn-details{
     margin: 0px;
   }
+  .back-link-btn-details{
+    margin-right: 25px;
+  }
+  .back-link-form{
+    padding: 20px 40px;
+  }
   .back-btn-form{
     margin: 0px 25px;
+  }
+  .back-link-btn-form{
+    margin-left: 25px;
   }
   .header-text{
     padding: 95px 0px 0px 0px;
@@ -1749,9 +1792,6 @@ button.form-button{
     height: 220px;
     margin-top: 20px;
   }
-  .back-link{
-    padding: 20px 20px;
-  }
   .header-img{
     height: 300px
   }
@@ -1839,11 +1879,22 @@ button.form-button{
     width: 30px;
     height: 30px;
   }
+  .error-icon{
+    width: 15px;
+    height: 15px;
+  }
+  .error-popup{
+    width: 80%;
+    padding: 70px 0px;
+  }
 }
 
 @media only screen and (max-width: 474px) and (min-width: 200px) {
   #mobile{
     display: block;
+  }
+  .back-link{
+    padding: 20px 20px;
   }
   .back-link-btn-trip{
     display: none;
@@ -2077,9 +2128,6 @@ button.form-button{
     height: 220px;
     margin-top: 20px;
   }
-  .back-link{
-    padding: 20px 20px;
-  }
   .header-img{
     height: 300px
   }
@@ -2172,5 +2220,13 @@ button.form-button{
   .checkin{
     width: 30px;
     height: 30px;
+  }
+  .error-icon{
+    width: 10px;
+    height: 10px;
+  }
+  .error-popup{
+    width: 80%;
+    padding: 70px 0px;
   }
 }
