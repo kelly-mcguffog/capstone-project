@@ -6,10 +6,12 @@ import NavBar from "./NavBar";
 import UserMap from "./UserMap";
 import { useLoadScript } from "@react-google-maps/api";
 import { DestinationsContext } from "../context/DestinationsContext";
+import { AllUsersContext } from "../context/AllUsersContext";
 
 function EditProfileForm() {
   const [errors, setErrors] = useState([])
   const { user, setUser } = useContext(UserContext);
+  const { users, setUsers } = useContext(AllUsersContext)
   const { destinations } = useContext(DestinationsContext);
   const navigate = useNavigate();
   const { isLoaded } = useLoadScript({
@@ -86,7 +88,11 @@ function EditProfileForm() {
       body: formDataToSend,
     }).then((r) => {
       if (r.ok) {
-        r.json().then((updatedUser) => setUser(updatedUser));
+        r.json().then((updatedUser) => {
+          setUser(updatedUser)
+          setUsers(users.map((u) => (u.id === id ? updatedUser : u))
+        );
+        })
         navigate(`/profile/${id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));

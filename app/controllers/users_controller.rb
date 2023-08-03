@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     def update
         user = User.find(session[:user_id])
         user.update!(user_params)
-        render json: user, status: :ok
+        render json: user, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
     end
 
     def update_password
