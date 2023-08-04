@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage";
 
 function AddActivityToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: activity_id } = useParams();
@@ -113,23 +114,12 @@ function AddActivityToItinerary({ onAddItinerary }) {
                   value={formData.activity_itinerary_times_attributes[0].time}
                   onChange={handleChange}
                   className={`trip-form-input ${(errors.restaurant_itinerary_times) ||
-                      errors["activity_itinerary_times.time"]
-                      ? "input-error"
-                      : ""
+                    errors["activity_itinerary_times.time"]
+                    ? "input-error"
+                    : ""
                     }`}
                 />
-                {errors["restaurant_itinerary_times"] && (
-                  <div className="error-popup">
-                    <div className="error-icon">
-                      <i className="fa-solid fa-exclamation"></i>
-                    </div>
-                    <h2 className="error-text">Error</h2>
-                    <span className="error-message pop-up-error">
-                      {errors["restaurant_itinerary_times"]}
-                    </span>
-                    <button className="page-btn main-btn error-btn" onClick={deleteError}>Try Again</button>
-                  </div>
-                )}
+                <ErrorMessage deleteError={deleteError} errors={errors} />
                 {errors["activity_itinerary_times.time"] && (
                   <span className="error-message error-message-time">
                     {errors["activity_itinerary_times.time"]}

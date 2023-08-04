@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 2023_06_19_203912) do
     t.string "first_name"
     t.string "last_name"
     t.string "avatar"
-    t.string "email"
     t.string "username"
     t.string "password_digest"
     t.integer "tsa_precheck"

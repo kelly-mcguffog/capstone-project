@@ -66,13 +66,12 @@ class ItineraryDay < ApplicationRecord
       time_difference = (formatted_time2 - formatted_time1).abs
   
       if time_difference < 30 * 60
-        if restaurant_itinerary_times.map { |time| Time.parse((time[:time]).to_s) == formatted_time1 || formatted_time2}
-          errors.add(:restaurant_itinerary_times, "Time slots must have a gap of at least 30 minutes.")
-        
-        elsif hotel_itinerary_times.map { |time| Time.parse((time[:time]).to_s) == formatted_time1 || formatted_time2}
+        if restaurant_itinerary_times.any? { |time| Time.parse((time[:time]).to_s) == formatted_time1 || Time.parse((time[:time]).to_s) == formatted_time2 }
+        errors.add(:restaurant_itinerary_times, "Time slots must have a gap of at least 30 minutes.")     
+        elsif hotel_itinerary_times.any? { |time| Time.parse((time[:time]).to_s) == formatted_time1 || Time.parse((time[:time]).to_s) == formatted_time2 }
           errors.add(:hotel_itinerary_times, "Time slots must have a gap of at least 30 minutes.")
         
-        elsif activity_itinerary_times.map { |time| Time.parse((time[:time]).to_s) == formatted_time1 || formatted_time2}
+        elsif activity_itinerary_times.any? { |time| Time.parse((time[:time]).to_s) == formatted_time1 || Time.parse((time[:time]).to_s) == formatted_time2 }
           errors.add(:activity_itinerary_times, "Time slots must have a gap of at least 30 minutes.")
         end
       end

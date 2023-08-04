@@ -34,7 +34,8 @@ function App() {
   const match2 = useMatch("/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
   const match4 = useMatch("/profile/:id");
-  const customNavBar = match1 || match2 || match3 || match4;
+  const match5 = useMatch("/profile/:id/edit");
+  const customNavBar = match1 || match2 || match3 || match4 || match5;
   const notRestricted1 = useMatch("/login");
   const notRestricted2 = useMatch("/signup");
   const notRestricted = notRestricted1 || notRestricted2

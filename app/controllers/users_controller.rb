@@ -13,35 +13,20 @@ class UsersController < ApplicationController
     end
 
     def show
-        Rails.logger.debug "Session: #{session.inspect}"
-        Rails.logger.debug "Params: #{params.inspect}"
         user = User.find(session[:user_id])
         render json: user, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
-    end      
+    end
 
     def update
         user = User.find(session[:user_id])
         user.update!(user_params)
         render json: user, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :ok
     end
-
-    def update_password
-        user = User.find(session[:user_id])
-        if user.authenticate(params[:current_password]) && user.update(user_params_for_password_update)
-          render json: { message: "Password updated successfully." }, status: :ok
-        else
-          render json: { error: "Invalid current password or unable to update the password." }, status: :unprocessable_entity
-        end
-      end
     
     private
 
     def user_params
-        params.permit(:first_name, :last_name, :avatar, :email, :username, :password, :password_confirmation, :tsa_precheck)
-    end
-
-    def user_params_for_password_update
-        params.permit(:password, :password_confirmation)
+        params.permit(:first_name, :last_name, :avatar, :username, :password, :password_confirmation, :tsa_precheck)
     end
 
 end

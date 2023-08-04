@@ -19,7 +19,11 @@ function EditProfileForm() {
   });
 
   const [formData, setFormData] = useState({
-    ...user,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    username: user.username,
+    avatar: user.avatar,
+    tsa_precheck: user.tsa_precheck || "",
     password: "",
   });
 
@@ -34,7 +38,7 @@ function EditProfileForm() {
     return <div className="loading">Loading...</div>;
   }
 
-  const { id, first_name, last_name, email, username, avatar, tsa_precheck, password } = formData;
+  const { id, first_name, last_name, username, avatar, tsa_precheck, password } = formData;
 
   const destinationMarkers = user.trips.map((trip) => {
     const destination = destinations.find((dest) => dest.id === trip.destination_id);
@@ -78,7 +82,6 @@ function EditProfileForm() {
     }
     formDataToSend.append("first_name", formData.first_name);
     formDataToSend.append("last_name", formData.last_name);
-    formDataToSend.append("email", formData.email);
     formDataToSend.append("username", formData.username);
     formDataToSend.append("tsa_precheck", formData.tsa_precheck);
     formDataToSend.append("password", formData.password);
@@ -91,7 +94,7 @@ function EditProfileForm() {
         r.json().then((updatedUser) => {
           setUser(updatedUser)
           setUsers(users.map((u) => (u.id === id ? updatedUser : u))
-        );
+          );
         })
         navigate(`/profile/${id}`);
       } else {
@@ -202,29 +205,6 @@ function EditProfileForm() {
               </div>
               <div className="profile-form-input">
                 <div className="input-text">
-                  <h3 className="input-title">Email</h3>
-                </div>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  autoComplete="off"
-                  placeholder="Email"
-                  value={email}
-                  onChange={handleChangeInput}
-                  className={`login-form-input ${errors.email ? "input-error" : ""
-                    }`}
-                />
-                {errors.email && (
-                  <span className="error-message">
-                    {Array.isArray(errors.email)
-                      ? errors.email.join(", ")
-                      : errors.email}
-                  </span>
-                )}
-              </div>
-              <div className="profile-form-input">
-                <div className="input-text">
                   <h3 className="input-title">Username</h3>
                 </div>
                 <input
@@ -248,14 +228,14 @@ function EditProfileForm() {
               </div>
               <div className="profile-form-input">
                 <div className="input-text">
-                  <h3 className="input-title">Password</h3>
+                  <h3 className="input-title">New Password</h3>
                 </div>
                 <input
                   type="password"
                   id="password"
                   name="password"
                   autoComplete="off"
-                  placeholder="Password"
+                  placeholder="Enter New Pasword"
                   value={password}
                   onChange={handleChangeInput}
                   className={`login-form-input ${errors.password ? "input-error" : ""

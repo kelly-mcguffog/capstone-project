@@ -12,7 +12,6 @@ function SignUp() {
     first_name: "",
     last_name: "",
     tsa_precheck: "",
-    email: "",
     username: "",
     password: "",
     password_confirmation: ""
@@ -41,7 +40,6 @@ function SignUp() {
     data.append("first_name", formData.first_name);
     data.append("last_name", formData.last_name);
     data.append("tsa_precheck", formData.tsa_precheck);
-    data.append("email", formData.email);
     data.append("username", formData.username);
     data.append("password", formData.password);
     data.append("passwordConfirmation", formData.password_confirmation);
@@ -120,24 +118,6 @@ function SignUp() {
                 {Array.isArray(errors.tsa_precheck)
                   ? errors.tsa_precheck.join(", ")
                   : errors.tsa_precheck}
-              </span>
-            )}
-            <input
-              type="text"
-              id="email"
-              name="email"
-              autoComplete="off"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`login-form-input ${errors.email ? "input-error" : ""
-                }`}
-            />
-            {errors.email && (
-              <span className="error-message">
-                {Array.isArray(errors.email)
-                  ? errors.email.join(", ")
-                  : errors.email}
               </span>
             )}
             <input

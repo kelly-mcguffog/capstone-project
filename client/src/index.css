@@ -377,7 +377,7 @@ input[type="datetime-local"]{
   padding: 5px 0px;
 }
 h1{
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
   text-align: center;
 }
@@ -944,7 +944,7 @@ button.form-button{
   color: white;
 }
 .signup-form{
-  width: 50%;
+  width: 40%;
 }
 .small-details{
   display: flex;
@@ -1076,6 +1076,9 @@ button.form-button{
   width: 30px;
   height: 30px;
   margin: 20px 0px;
+}
+.form-text.head{
+  font-size: 30px;
 }
 
 @media only screen and (max-width: 990px) and (min-width: 900px) {

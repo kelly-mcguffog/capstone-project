@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage";
 
 function AddRestaurantToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: restaurant_id } = useParams();
@@ -118,18 +119,7 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
                     : ""
                     }`}
                 />
-                {errors["restaurant_itinerary_times"] && (
-                  <div className="error-popup">
-                    <div className="error-icon">
-                      <i className="fa-solid fa-exclamation"></i>
-                    </div>
-                    <h2 className="error-text">Error</h2>
-                    <span className="error-message pop-up-error">
-                      {errors["restaurant_itinerary_times"]}
-                    </span>
-                    <button className="page-btn main-btn error-btn" onClick={deleteError}>Try Again</button>
-                  </div>
-                )}
+                <ErrorMessage deleteError={deleteError} errors={errors} />
                 {errors["restaurant_itinerary_times.time"] && (
                   <span className="error-message error-message-time">
                     {errors["restaurant_itinerary_times.time"]}

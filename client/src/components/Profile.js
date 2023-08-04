@@ -24,7 +24,7 @@ function Profile() {
         return <div className="loading">Loading...</div>;
     }
 
-    const { id, first_name, last_name, email, username, avatar, trips, tsa_precheck } = user;
+    const { id, first_name, last_name, username, avatar, trips, tsa_precheck } = user;
     const decodedUrl = decodeURIComponent(avatar.url);
 
 
@@ -66,15 +66,9 @@ function Profile() {
                             </Link>
                         </div>
                         <div className="details-copy">
-                            <p><i className="fa-solid fa-envelope"></i> {email}</p>
-                            <p><i className="fa-solid fa-user"></i> {username}</p>
-                            <p><strong>TSA Precheck:</strong>{tsa_precheck}</p>
-                            <small><em>coming soon..</em></small>
-                            <div className="btn-container">
-                                <Link className="page-btn main-btn">
-                                    Follow
-                                </Link>
-                            </div>
+                            <p><strong>Username:</strong> {username}</p>
+                            <p><strong>TSA Precheck:</strong> {tsa_precheck}</p>
+                            <small><em>social media follow feature coming soon</em></small>
                         </div>
                     </div>
                 </div>
