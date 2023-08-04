@@ -64,7 +64,7 @@ function SignUp() {
   return (
     <div className="container">
       <form className="signup-form" onSubmit={handleSubmit}>
-        <h1 className="form-text head">Sign Up</h1>
+        <h1 className="form-text head">Wanderlust</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
         <div className="login-form">
           <div className="credentials">
