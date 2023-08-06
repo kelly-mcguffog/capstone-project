@@ -10,7 +10,7 @@ import { parseISO } from "date-fns";
 
 function EditItineraryForm() {
   const { trip_id, itinerary_day_id, id: itinerary_time_id } = useParams();
-
+  const [formErrors, setFormErrors] = useState({ date: "", time: "" })
   const { user, setUser } = useContext(UserContext);
   const { setUsers } = useContext(AllUsersContext);
   const { destinations } = useContext(DestinationsContext);
@@ -188,8 +188,31 @@ function EditItineraryForm() {
   }
 
   function updateItineraryDay() {
-    const endpoint = `/trips/${trip_id}/itinerary_days/${itinerary_day_id}`;
+    let errors = {};
+    if (!formData.date) {
+      errors.date = "Date is required";
+    }
+    if (findItineraryTime.hotel) {
+      if (!formData.hotel_itinerary_times_attributes[0].time) {
+        errors.time = "Time is required";
+      }
+    }
+    if (findItineraryTime.restaurant) {
+      if (!formData.restaurant_itinerary_times_attributes[0].time) {
+        errors.time = "Time is required";
+      }
+    }
+    if (findItineraryTime.activity) {
+      if (!formData.activity_itinerary_times_attributes[0].time) {
+        errors.time = "Time is required";
+      }
+    }
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
 
+    const endpoint = `/trips/${trip_id}/itinerary_days/${itinerary_day_id}`;
     const dateTime = new Date(formData.date);
 
     if (findItineraryTime.restaurant) {
@@ -260,13 +283,10 @@ function EditItineraryForm() {
                   placeholderText="MM/DD/YYYY"
                   onChange={(date) => handleChange({ target: { name: "date", value: date } })}
                   dateFormat="MMMM d, yyyy"
-                  className={`trip-form-input ${errors.date ? "input-error" : ""}`}
+                  className={`trip-form-input ${formErrors.date || errors.date ? "input-error" : ""
+                    }`}
                 />
-                {errors.date && (
-                  <span className="error-message">
-                    {errors.date}
-                  </span>
-                )}
+                {formErrors.date && <span className="error-message">{formErrors.date}</span>}
               </div>
             </div>
 
@@ -279,17 +299,10 @@ function EditItineraryForm() {
                     name="time"
                     value={formData.restaurant_itinerary_times_attributes[0].time}
                     onChange={handleChange}
-                    className={`trip-form-input ${(errors.restaurant_itinerary_times) ||
-                      errors["restaurant_itinerary_times.time"]
-                      ? "input-error"
-                      : ""
+                    className={`trip-form-input ${formErrors.time || errors.time ? "input-error" : ""
                       }`}
                   />
-                  {errors["restaurant_itinerary_times.time"] && (
-                    <span className="error-message">
-                      {errors["restaurant_itinerary_times.time"]}
-                    </span>
-                  )}
+                  {formErrors.time && <span className="error-message">{formErrors.time}</span>}
                 </div>
               </div>
             )}
@@ -302,17 +315,10 @@ function EditItineraryForm() {
                     name="time"
                     value={formData.hotel_itinerary_times_attributes[0].time}
                     onChange={handleChange}
-                    className={`trip-form-input ${(errors.hotel_itinerary_times) ||
-                      errors["hotel_itinerary_times.time"]
-                      ? "input-error"
-                      : ""
+                    className={`trip-form-input ${formErrors.time || errors.time ? "input-error" : ""
                       }`}
                   />
-                  {errors["hotel_itinerary_times.time"] && (
-                    <span className="error-message">
-                      {errors["hotel_itinerary_times.time"]}
-                    </span>
-                  )}
+                  {formErrors.time && <span className="error-message">{formErrors.time}</span>}
                 </div>
               </div>
             )}
@@ -325,17 +331,10 @@ function EditItineraryForm() {
                     name="time"
                     value={formData.activity_itinerary_times_attributes[0].time}
                     onChange={handleChange}
-                    className={`trip-form-input ${(errors.activity_itinerary_times) ||
-                      errors["activity_itinerary_times.time"]
-                      ? "input-error"
-                      : ""
+                    className={`trip-form-input ${formErrors.time || errors.time ? "input-error" : ""
                       }`}
                   />
-                  {errors["activity_itinerary_times.time"] && (
-                    <span className="error-message">
-                      {errors["activity_itinerary_times.time"]}
-                    </span>
-                  )}
+                  {formErrors.time && <span className="error-message">{formErrors.time}</span>}
                 </div>
               </div>
             )}

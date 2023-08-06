@@ -1084,6 +1084,9 @@ button.form-button{
 #login-form{
   padding: 30px 80px;
 }
+input[type="time"]{
+  padding-bottom: 0px;
+}
 
 @media only screen and (max-width: 990px) and (min-width: 900px) {
   .img-container{

@@ -10,8 +10,8 @@ function AddHotelToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: hotel_id } = useParams();
   const { user } = useContext(UserContext);
   const { destinations } = useContext(DestinationsContext);
-
   const [errors, setErrors] = useState([]);
+  const [formErrors, setFormErrors] = useState({ date: "", time: "" })
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -65,6 +65,18 @@ function AddHotelToItinerary({ onAddItinerary }) {
 
     const submitTripId = formData.trip_id || "";
 
+    let errors = {};
+    if (!formData.date) {
+      errors.date = "Date is required";
+    }
+    if (!formData.hotel_itinerary_times_attributes[0].time) {
+      errors.time = "Time is required";
+    }
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
     const dateTime = new Date(formData.date);
     dateTime.setHours(parseInt(formData.hotel_itinerary_times_attributes[0].time.split(":")[0]));
     dateTime.setMinutes(parseInt(formData.hotel_itinerary_times_attributes[0].time.split(":")[1]));
@@ -85,7 +97,9 @@ function AddHotelToItinerary({ onAddItinerary }) {
         r.json().then((newItinerary) => onAddItinerary(newItinerary));
         navigate(`/trips/${submitTripId}`);
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => {
+          setErrors(err.errors);
+        });
       }
     });
   }
@@ -93,6 +107,8 @@ function AddHotelToItinerary({ onAddItinerary }) {
   const deleteError = () => {
     setErrors("")
   }
+
+  console.log(errors)
 
   return (
     <div
@@ -111,13 +127,10 @@ function AddHotelToItinerary({ onAddItinerary }) {
                   onChange={(date) => handleChange({ target: { name: "date", value: date } })}
                   dateFormat="MMMM d, yyyy"
                   placeholderText="MM/DD/YYY"
-                  className={`trip-form-input ${errors.date ? "input-error" : ""}`}
+                  className={`trip-form-input ${formErrors.date || errors.date ? "input-error" : ""
+                    }`}
                 />
-                {errors.date && (
-                  <span className="error-message">
-                    {errors.date}
-                  </span>
-                )}
+                {formErrors.date && <span className="error-message">{formErrors.date}</span>}
               </div>
             </div>
             <div className="label form-label">
@@ -128,12 +141,10 @@ function AddHotelToItinerary({ onAddItinerary }) {
                   name="time"
                   value={formData.hotel_itinerary_times_attributes[0].time}
                   onChange={handleChange}
-                  className={`trip-form-input ${(errors.hotel_itinerary_times) ||
-                      errors["hotel_itinerary_times.time"]
-                      ? "input-error"
-                      : ""
+                  className={`trip-form-input ${formErrors.time || errors.time ? "input-error" : ""
                     }`}
                 />
+                {formErrors.time && <span className="error-message">{formErrors.time}</span>}
                 <ErrorMessage deleteError={deleteError} errors={errors} />
                 {errors["hotel_itinerary_times.time"] && (
                   <span className="error-message error-message-time">
