@@ -5,6 +5,8 @@ import { AllUsersContext } from "../context/AllUsersContext";
 import { useParams, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { parseISO } from "date-fns";
+
 
 function EditItineraryForm() {
   const { trip_id, itinerary_day_id, id: itinerary_time_id } = useParams();
@@ -29,11 +31,10 @@ function EditItineraryForm() {
 
   const timeDate = new Date(findItineraryTime?.time);
 
-  console.log(timeDate)
   const initialFormData = {
     id: findItineraryDay?.id,
     trip_id: trip_id,
-    date: new Date(findItineraryDay?.date),
+    date: parseISO(findItineraryDay?.date),
     restaurant_itinerary_times_attributes: [
       {
         id: findItineraryTime?.restaurant ? findItineraryTime.id : "",
@@ -256,7 +257,7 @@ function EditItineraryForm() {
                 <h3 className="input-title">Itinerary Day Date</h3>
                 <DatePicker
                   selected={formData.date}
-                  placeholderText="MM/DD/YYY"
+                  placeholderText="MM/DD/YYYY"
                   onChange={(date) => handleChange({ target: { name: "date", value: date } })}
                   dateFormat="MMMM d, yyyy"
                   className={`trip-form-input ${errors.date ? "input-error" : ""}`}
