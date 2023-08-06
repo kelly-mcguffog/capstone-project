@@ -3,6 +3,8 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function AddHotelToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: hotel_id } = useParams();
@@ -34,7 +36,12 @@ function AddHotelToItinerary({ onAddItinerary }) {
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevState) => {
-      if (name === "time") {
+      if (name === "date") {
+        return {
+          ...prevState,
+          date: new Date(value),
+        };
+      } else if (name === "time") {
         return {
           ...prevState,
           hotel_itinerary_times_attributes: [
@@ -58,12 +65,21 @@ function AddHotelToItinerary({ onAddItinerary }) {
 
     const submitTripId = formData.trip_id || "";
 
+    const dateTime = new Date(formData.date);
+    dateTime.setHours(parseInt(formData.hotel_itinerary_times_attributes[0].time.split(":")[0]));
+    dateTime.setMinutes(parseInt(formData.hotel_itinerary_times_attributes[0].time.split(":")[1]));
+
+    const updatedData = {
+      ...formData,
+      date: dateTime.toISOString(),
+    };
+
     fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((newItinerary) => onAddItinerary(newItinerary));
@@ -90,13 +106,12 @@ function AddHotelToItinerary({ onAddItinerary }) {
             <div className="label form-label">
               <div className="input-text">
                 <h3 className="input-title">Itinerary Day Date</h3>
-                <input
-                  type="datetime-local"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  className={`trip-form-input ${errors.date ? "input-error" : ""
-                    }`}
+                <DatePicker
+                  selected={formData.date}
+                  onChange={(date) => handleChange({ target: { name: "date", value: date } })}
+                  dateFormat="MMMM d, yyyy"
+                  placeholderText="MM/DD/YYY"
+                  className={`trip-form-input ${errors.date ? "input-error" : ""}`}
                 />
                 {errors.date && (
                   <span className="error-message">
@@ -109,14 +124,14 @@ function AddHotelToItinerary({ onAddItinerary }) {
               <div className="input-text">
                 <h3 className="input-title">Hotel Itinerary Time</h3>
                 <input
-                  type="datetime-local"
+                  type="time"
                   name="time"
                   value={formData.hotel_itinerary_times_attributes[0].time}
                   onChange={handleChange}
-                  className={`trip-form-input ${(errors.restaurant_itinerary_times) || (errors.hotel_itinerary_times) || (errors.activity_itinerary_times) ||
-                    errors["hotel_itinerary_times.time"]
-                    ? "input-error"
-                    : ""
+                  className={`trip-form-input ${(errors.hotel_itinerary_times) ||
+                      errors["hotel_itinerary_times.time"]
+                      ? "input-error"
+                      : ""
                     }`}
                 />
                 <ErrorMessage deleteError={deleteError} errors={errors} />

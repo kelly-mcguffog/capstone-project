@@ -375,6 +375,7 @@ input[type="datetime-local"]{
   width: 170px;
   border: none;
   padding: 5px 0px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 h1{
   font-size: 30px;
@@ -1080,6 +1081,9 @@ button.form-button{
 .form-text.head{
   font-size: 30px;
 }
+#login-form{
+  padding: 30px 80px;
+}
 
 @media only screen and (max-width: 990px) and (min-width: 900px) {
   .img-container{
@@ -1244,7 +1248,7 @@ button.form-button{
     padding: 10px 20px;
   }
   .trip-form-input{
-    padding: 5px 0px 20px 0px;
+    padding: 5px 0px;
     flex-wrap: wrap;
   }
   .signup-form{
@@ -1890,6 +1894,9 @@ button.form-button{
     width: 80%;
     padding: 70px 0px;
   }
+  #login-form{
+    padding: 30px 60px;
+  }
 }
 
 @media only screen and (max-width: 474px) and (min-width: 200px) {
@@ -2231,5 +2238,8 @@ button.form-button{
   .error-popup{
     width: 80%;
     padding: 70px 0px;
+  }
+  #login-form{
+    padding: 30px 30px;
   }
 }

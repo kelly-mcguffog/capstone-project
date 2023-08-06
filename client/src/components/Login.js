@@ -43,7 +43,7 @@ function Login() {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form id="login-form" onSubmit={handleSubmit}>
         <h1 className="form-text head">Wanderlust</h1>
         <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
         {errors ? <p className="error-message error">{errors}</p> : null}

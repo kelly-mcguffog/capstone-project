@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function EditTripForm() {
   const [errors, setErrors] = useState([]);
@@ -22,23 +24,15 @@ function EditTripForm() {
 
   const findTrip = user.trips?.find((trip) => trip.id === parseInt(id));
 
-  function formatDateTime(dateTimeString) {
-    const date = new Date(dateTimeString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  }
-
   useEffect(() => {
     if (findTrip) {
       setFormData({
         origin_airport: findTrip.origin_airport,
         destination_airport: findTrip.destination_airport,
-        outbound_flight: formatDateTime(findTrip.outbound_flight),
-        return_flight: formatDateTime(findTrip.return_flight),
+        outbound_flight: "",
+        return_flight:"",
+        outbound_flight: new Date(findTrip.outbound_flight),
+        return_flight: new Date(findTrip.return_flight),
         outbound_flight_number: findTrip.outbound_flight_number,
         return_flight_number: findTrip.return_flight_number,
         confirmation_number: findTrip.confirmation_number,
@@ -74,13 +68,15 @@ function EditTripForm() {
   }
 
   function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    });
+    const { name, value } = event.target;
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }))
+
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [event.target.name]: null,
+      [name]: null,
     }));
   }
 
@@ -157,13 +153,14 @@ function EditTripForm() {
                 <div className="input-text">
                   <h3 className="input-title">Outbound Flight</h3>
                 </div>
-                <input
-                  type="datetime-local"
-                  name="outbound_flight"
-                  value={formData.outbound_flight}
-                  onChange={handleChange}
-                  className={`trip-form-input ${errors.outbound_flight ? "input-error" : ""
-                    }`}
+                <DatePicker
+                  selected={formData.outbound_flight}
+                  onChange={(date) => handleChange({ target: { name: "outbound_flight", value: date } })}
+                  showTimeSelect
+                  timeIntervals={30}
+                  placeholderText="MM/DD/YYY HH:MM"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  className={`trip-form-input ${errors.outbound_flight ? "input-error" : ""}`}
                 />
                 {errors.outbound_flight && (
                   <span className="error-message">
@@ -177,13 +174,14 @@ function EditTripForm() {
                 <div className="input-text">
                   <h3 className="input-title">Return Flight</h3>
                 </div>
-                <input
-                  type="datetime-local"
-                  name="return_flight"
-                  value={formData.return_flight}
-                  onChange={handleChange}
-                  className={`trip-form-input ${errors.return_flight ? "input-error" : ""
-                    }`}
+                <DatePicker
+                  selected={formData.return_flight}
+                  onChange={(date) => handleChange({ target: { name: "return_flight", value: date } })}
+                  showTimeSelect
+                  timeIntervals={30}
+                  placeholderText="MM/DD/YYY HH:MM"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  className={`trip-form-input ${errors.outbound_flight ? "input-error" : ""}`}
                 />
                 {errors.return_flight && (
                   <span className="error-message">
