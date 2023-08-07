@@ -1,6 +1,6 @@
 class DestinationsController < ApplicationController
 
-    skip_before_action :authorized, only: [:index]
+    skip_before_action :authorized
 
     def index
         render json: Destination.all, status: :ok

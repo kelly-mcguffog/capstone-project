@@ -2,6 +2,7 @@
 
 Wanderlust: Travel the world with ease and make the most of your adventures. Build itineraries, manage packing lists, and share your travel information with friends and family.
 
+
 ## MVP
 
 As a user, I can:
@@ -30,6 +31,14 @@ As a user, I can:
 * Mark an item as packed on my packing list
 * Delete an itiem from my packing list
 * Resize the application for any screen
+
+
+## Notes
+
+* As of August 2023, seed data is only available for Paris.
+* You must plant seed data before using this application.
+* Social media follow feature coming soon.
+
 
 ## Resources
 
