@@ -108,8 +108,6 @@ function AddHotelToItinerary({ onAddItinerary }) {
     setErrors("")
   }
 
-  console.log(errors)
-
   return (
     <div
       className="header-img"

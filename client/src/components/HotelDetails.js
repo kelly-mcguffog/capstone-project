@@ -12,8 +12,6 @@ function HotelDetails() {
     const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
 
-    console.log(users)
-
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })

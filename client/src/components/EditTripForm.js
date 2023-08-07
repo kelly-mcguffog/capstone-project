@@ -29,8 +29,6 @@ function EditTripForm() {
       setFormData({
         origin_airport: findTrip.origin_airport,
         destination_airport: findTrip.destination_airport,
-        outbound_flight: "",
-        return_flight:"",
         outbound_flight: new Date(findTrip.outbound_flight),
         return_flight: new Date(findTrip.return_flight),
         outbound_flight_number: findTrip.outbound_flight_number,

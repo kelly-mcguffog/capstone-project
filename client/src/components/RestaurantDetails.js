@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AllUsersContext } from "../context/AllUsersContext";
-import { UserContext } from "../context/UserContext";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import GridHeader from "./GridHeader";
@@ -23,7 +22,6 @@ function RestaurantDetails() {
 
     const restaurant = restaurants.find(restaurant => restaurant.id === parseInt(id))
     const { users } = useContext(AllUsersContext);
-    const { user } = useContext(UserContext);
 
     if (!restaurant) return <div className="loading">Loading...</div>;
 
