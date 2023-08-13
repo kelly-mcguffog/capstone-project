@@ -20,13 +20,17 @@ function PackingListContainer() {
     const onAddPackingListItem = (newItem) => {
         const userTrips = user.trips.map((trip) => {
             if (trip.id === parseInt(id)) {
-                return { ...trip, packing_list_items: [...trip.packing_list_items, newItem] };
+                const updatedPackingListItems = trip.packing_list_items
+                    ? [...trip.packing_list_items, newItem]
+                    : [newItem];
+                return { ...trip, packing_list_items: updatedPackingListItems };
             } else {
                 return trip;
             }
         });
         setUser({ ...user, trips: userTrips });
     };
+    
 
     return (
         <div className="side-bar">

@@ -19,7 +19,7 @@ class PackingListItemsController < ApplicationController
     private
   
     def packing_list_item_params
-      params.permit(:item, :quantity, :packed, :trip_id)
+      params.require(:packing_list_item).permit(:item, :quantity, :packed, :trip_id)
     end
 
     def find_packing_list_item

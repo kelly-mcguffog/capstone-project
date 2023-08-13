@@ -12,6 +12,7 @@ class User < ApplicationRecord
     validates :username, presence: { message: "Required" }, 
                          uniqueness: { message: "Username is already taken" }
     validates :password, length: { in: 6..20, message: "Must be between 6 and 20 characters" }
+    validates :password_confirmation, presence: { message: "Required" }
     validates :tsa_precheck, numericality: { only_integer: true, message: "Invalid TSA Precheck number" }, 
                              length: { is: 9, message: "Must be 9 digits" }, 
                              allow_blank: true

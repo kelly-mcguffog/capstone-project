@@ -42,7 +42,7 @@ function SignUp() {
     data.append("tsa_precheck", formData.tsa_precheck);
     data.append("username", formData.username);
     data.append("password", formData.password);
-    data.append("passwordConfirmation", formData.password_confirmation);
+    data.append("password_confirmation", formData.password_confirmation);
     data.append("avatar", photoFile);
 
     fetch("/signup", {
