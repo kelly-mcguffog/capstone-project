@@ -77,21 +77,12 @@ function AddHotelToItinerary({ onAddItinerary }) {
       return;
     }
 
-    const dateTime = new Date(formData.date);
-    dateTime.setHours(parseInt(formData.hotel_itinerary_times_attributes[0].time.split(":")[0]));
-    dateTime.setMinutes(parseInt(formData.hotel_itinerary_times_attributes[0].time.split(":")[1]));
-
-    const updatedData = {
-      ...formData,
-      date: dateTime.toISOString(),
-    };
-
     fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((newItinerary) => onAddItinerary(newItinerary));
@@ -107,6 +98,14 @@ function AddHotelToItinerary({ onAddItinerary }) {
   const deleteError = () => {
     setErrors("")
   }
+
+  const getDetailsUrl = () => {
+    if (trip_id !== undefined) {
+      return `/destinations/${destination_id}/trips/${trip_id}/hotels/${hotel_id}/details`;
+    } else {
+      return `/destinations/${destination_id}/hotels/${hotel_id}/details`;
+    }
+  };
 
   return (
     <div
@@ -200,7 +199,7 @@ function AddHotelToItinerary({ onAddItinerary }) {
         <div className={trip_id ? "back-link back-link-form" : ""}>
           <div className="back-link-btn back-link-btn-form">
             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-            <Link className="link" to={`/destinations/${destination_id}/hotels/${hotel_id}/details`}>
+            <Link className="link" to={getDetailsUrl()}>
               <p className="text">
                 Return to Hotel
               </p>

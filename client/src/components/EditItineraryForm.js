@@ -174,10 +174,10 @@ function EditItineraryForm() {
           ],
         };
       } else if (name === "date") {
-        return {
-          ...prevState,
-          date: new Date(value),
-        }
+          return {
+            ...prevState,
+            date: new Date(value),
+          };
       } else {
         return {
           ...prevState,
@@ -211,39 +211,36 @@ function EditItineraryForm() {
       setFormErrors(errors);
       return;
     }
-
+  
     const endpoint = `/trips/${trip_id}/itinerary_days/${itinerary_day_id}`;
-    const dateTime = new Date(formData.date);
+    const updatedDate = new Date(formData.date);
+
+    const formattedDate = updatedDate.toISOString().split("T")[0];
+
 
     if (findItineraryTime.restaurant) {
       const restaurantTime = formData.restaurant_itinerary_times_attributes[0].time;
-      const restaurantHours = parseInt(restaurantTime.split(":")[0]);
-      const restaurantMinutes = parseInt(restaurantTime.split(":")[1]);
-      dateTime.setHours(restaurantHours);
-      dateTime.setMinutes(restaurantMinutes);
+      const [restaurantHours, restaurantMinutes] = restaurantTime.split(":");
+      updatedDate.setHours(restaurantHours, restaurantMinutes, 0);
     }
-
+  
     if (findItineraryTime.hotel) {
       const hotelTime = formData.hotel_itinerary_times_attributes[0].time;
-      const hotelHours = parseInt(hotelTime.split(":")[0]);
-      const hotelMinutes = parseInt(hotelTime.split(":")[1]);
-      dateTime.setHours(hotelHours);
-      dateTime.setMinutes(hotelMinutes);
+      const [hotelHours, hotelMinutes] = hotelTime.split(":");
+      updatedDate.setHours(hotelHours, hotelMinutes, 0);
     }
-
+  
     if (findItineraryTime.activity) {
       const activityTime = formData.activity_itinerary_times_attributes[0].time;
-      const activityHours = parseInt(activityTime.split(":")[0]);
-      const activityMinutes = parseInt(activityTime.split(":")[1]);
-      dateTime.setHours(activityHours);
-      dateTime.setMinutes(activityMinutes);
+      const [activityHours, activityMinutes] = activityTime.split(":");
+      updatedDate.setHours(activityHours, activityMinutes, 0);
     }
-
+  
     const updatedData = {
       ...formData,
-      date: dateTime.toISOString(),
+      date: formattedDate,
     };
-
+  
     fetch(endpoint, {
       method: "PATCH",
       headers: {
@@ -260,6 +257,7 @@ function EditItineraryForm() {
       }
     });
   }
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

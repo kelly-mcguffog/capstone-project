@@ -7,8 +7,7 @@ class ItineraryDaysController < ApplicationController
   end
 
   def update
-    date = params[:itinerary_day].delete(:date)
-  
+    date = params[:itinerary_day][:date]
     restaurant_itinerary_times_attributes = params[:itinerary_day][:restaurant_itinerary_times_attributes]
     hotel_itinerary_times_attributes = params[:itinerary_day][:hotel_itinerary_times_attributes]
     activity_itinerary_times_attributes = params[:itinerary_day][:activity_itinerary_times_attributes]

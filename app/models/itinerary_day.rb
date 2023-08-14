@@ -59,12 +59,10 @@ class ItineraryDay < ApplicationRecord
 
   def time_slots_must_have_gap
     existing_times = combined_itinerary_times.map { |time| time[:time] }
-    
     existing_times.each_cons(2) do |time1, time2|
       formatted_time1 = Time.parse(time1.to_s)
       formatted_time2 = Time.parse(time2.to_s)
       time_difference = (formatted_time2 - formatted_time1).abs
-  
       if time_difference < 30 * 60
         if restaurant_itinerary_times.any? { |time| Time.parse((time[:time]).to_s) == formatted_time1 || Time.parse((time[:time]).to_s) == formatted_time2 }
         errors.add(:restaurant_itinerary_times, "Time slots must have a gap of at least 30 minutes.")     
