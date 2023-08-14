@@ -29,7 +29,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
 
   const formattedTime = adjustedTime.toLocaleTimeString(undefined, options);
 
-
   function deleteItineraryTime(entityType) {
     let endpoint = "";
     switch (entityType) {

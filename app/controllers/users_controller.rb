@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     def create
         user = User.create!(user_params)
         session[:user_id] ||= user.id
-        render json: user, include: ["trips", "trips.itinerary_days", "trips", "trips.itinerary_days"], status: :created
+        render json: user, include: ["trips", "trips.packing_list_items", "trips", "trips.itinerary_days"], status: :created
     end
 
     def show
