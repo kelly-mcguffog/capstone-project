@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
 import { AllUsersContext } from "../context/AllUsersContext";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { parseISO } from "date-fns";
@@ -31,6 +32,14 @@ function EditItineraryForm() {
 
   const timeDate = new Date(findItineraryTime?.time);
 
+  const options = {
+    hour: "2-digit",
+    minute: "numeric",
+    hour12: false,
+  };
+
+  const formattedTime = timeDate.toLocaleTimeString(undefined, options);
+
   const initialFormData = {
     id: findItineraryDay?.id,
     trip_id: trip_id,
@@ -38,21 +47,21 @@ function EditItineraryForm() {
     restaurant_itinerary_times_attributes: [
       {
         id: findItineraryTime?.restaurant ? findItineraryTime.id : "",
-        time: findItineraryTime?.restaurant ? timeDate.toISOString().slice(11, 16) : "",
+        time: findItineraryTime?.restaurant ? formattedTime : "",
         restaurant_id: findItineraryTime?.restaurant ? findItineraryTime.restaurant.id : "",
       },
     ],
     hotel_itinerary_times_attributes: [
       {
         id: findItineraryTime?.hotel ? findItineraryTime.id : "",
-        time: findItineraryTime?.hotel ? timeDate.toISOString().slice(11, 16) : "",
+        time: findItineraryTime?.hotel ? formattedTime : "",
         hotel_id: findItineraryTime?.hotel ? findItineraryTime.hotel.id : "",
       },
     ],
     activity_itinerary_times_attributes: [
       {
         id: findItineraryTime?.activity ? findItineraryTime.id : "",
-        time: findItineraryTime?.activity ? timeDate.toISOString().slice(11, 16) : "",
+        time: findItineraryTime?.activity ? formattedTime : "",
         activity_id: findItineraryTime?.activity ? findItineraryTime.activity.id : "",
       },
     ],
@@ -174,10 +183,10 @@ function EditItineraryForm() {
           ],
         };
       } else if (name === "date") {
-          return {
-            ...prevState,
-            date: new Date(value),
-          };
+        return {
+          ...prevState,
+          date: new Date(value),
+        };
       } else {
         return {
           ...prevState,
@@ -211,36 +220,57 @@ function EditItineraryForm() {
       setFormErrors(errors);
       return;
     }
-  
+
     const endpoint = `/trips/${trip_id}/itinerary_days/${itinerary_day_id}`;
     const updatedDate = new Date(formData.date);
 
     const formattedDate = updatedDate.toISOString().split("T")[0];
-
 
     if (findItineraryTime.restaurant) {
       const restaurantTime = formData.restaurant_itinerary_times_attributes[0].time;
       const [restaurantHours, restaurantMinutes] = restaurantTime.split(":");
       updatedDate.setHours(restaurantHours, restaurantMinutes, 0);
     }
-  
+
     if (findItineraryTime.hotel) {
       const hotelTime = formData.hotel_itinerary_times_attributes[0].time;
       const [hotelHours, hotelMinutes] = hotelTime.split(":");
       updatedDate.setHours(hotelHours, hotelMinutes, 0);
     }
-  
+
     if (findItineraryTime.activity) {
       const activityTime = formData.activity_itinerary_times_attributes[0].time;
       const [activityHours, activityMinutes] = activityTime.split(":");
       updatedDate.setHours(activityHours, activityMinutes, 0);
     }
-  
+
     const updatedData = {
-      ...formData,
+      id: findItineraryDay?.id,
+      trip_id: trip_id,
       date: formattedDate,
+      restaurant_itinerary_times_attributes: [
+        {
+          id: findItineraryTime?.restaurant ? findItineraryTime.id : "",
+          time: findItineraryTime?.restaurant ? updatedDate.toISOString() : "",
+          restaurant_id: findItineraryTime?.restaurant ? findItineraryTime.restaurant.id : "",
+        },
+      ],
+      hotel_itinerary_times_attributes: [
+        {
+          id: findItineraryTime?.hotel ? findItineraryTime.id : "",
+          time: findItineraryTime?.hotel ? updatedDate.toISOString() : "",
+          hotel_id: findItineraryTime?.hotel ? findItineraryTime.hotel.id : "",
+        },
+      ],
+      activity_itinerary_times_attributes: [
+        {
+          id: findItineraryTime?.activity ? findItineraryTime.id : "",
+          time: findItineraryTime?.activity ? updatedDate.toISOString() : "",
+          activity_id: findItineraryTime?.activity ? findItineraryTime.activity.id : "",
+        },
+      ],
     };
-  
+
     fetch(endpoint, {
       method: "PATCH",
       headers: {
@@ -257,12 +287,15 @@ function EditItineraryForm() {
       }
     });
   }
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
     updateItineraryDay();
   };
+
+  const deleteError = () => {
+    setErrors("")
+  }
 
   return (
     <div
@@ -271,7 +304,7 @@ function EditItineraryForm() {
     >
       <div className="header-text">
         <h1 className="title">Plan Your Trip</h1>
-        <div className="results trip-form">
+        <div className="results itinerary-form">
           <form id="trip-form-wrapper" onSubmit={handleSubmit}>
             <div className="label form-label">
               <div className="input-text">
@@ -301,6 +334,12 @@ function EditItineraryForm() {
                       }`}
                   />
                   {formErrors.time && <span className="error-message">{formErrors.time}</span>}
+                  <ErrorMessage deleteError={deleteError} errors={errors} />
+                  {errors["restaurant_itinerary_times.time"] && (
+                    <span className="error-message error-message-time">
+                      {errors["restaurant_itinerary_times.time"]}
+                    </span>
+                  )}
                 </div>
               </div>
             )}
@@ -317,6 +356,12 @@ function EditItineraryForm() {
                       }`}
                   />
                   {formErrors.time && <span className="error-message">{formErrors.time}</span>}
+                  <ErrorMessage deleteError={deleteError} errors={errors} />
+                  {errors["hotel_itinerary_times.time"] && (
+                    <span className="error-message error-message-time">
+                      {errors["hotel_itinerary_times.time"]}
+                    </span>
+                  )}
                 </div>
               </div>
             )}
@@ -333,6 +378,12 @@ function EditItineraryForm() {
                       }`}
                   />
                   {formErrors.time && <span className="error-message">{formErrors.time}</span>}
+                  <ErrorMessage deleteError={deleteError} errors={errors} />
+                  {errors["activity_itinerary_times.time"] && (
+                    <span className="error-message error-message-time">
+                      {errors["activity_itinerary_times.time"]}
+                    </span>
+                  )}
                 </div>
               </div>
             )}
@@ -342,6 +393,16 @@ function EditItineraryForm() {
               </button>
             </div>
           </form>
+        </div>
+        <div className="back-link">
+          <div className="back-link-btn back-link-btn-form">
+            <Link className="link" to={`/trips/${trip_id}`}>
+              <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
+              <p className="text">
+                Return to Trip
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

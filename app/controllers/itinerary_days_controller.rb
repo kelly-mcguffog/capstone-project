@@ -94,7 +94,7 @@ class ItineraryDaysController < ApplicationController
           end
         end
   
-        existing_itinerary_day.save
+        existing_itinerary_day.save!
       end
     else
       if restaurant_itinerary_times_attributes && restaurant_itinerary_times_attributes[0][:time].present?

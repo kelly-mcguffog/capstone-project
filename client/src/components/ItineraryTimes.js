@@ -16,18 +16,13 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
 
   const itineraryTime = new Date(itinerary_time.time);
 
-  const adjustedTime = new Date(
-    itineraryTime.getTime() +
-    itineraryTime.getTimezoneOffset() * 60 * 1000
-  );
-
   const options = {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
   };
 
-  const formattedTime = adjustedTime.toLocaleTimeString(undefined, options);
+  const formattedTime = itineraryTime.toLocaleTimeString(undefined, options);
 
   function deleteItineraryTime(entityType) {
     let endpoint = "";

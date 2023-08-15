@@ -77,12 +77,29 @@ function AddActivityToItinerary({ onAddItinerary }) {
       return;
     }
 
+    const updatedDate = new Date(formData.date);
+    const activityTime = formData.activity_itinerary_times_attributes[0].time;
+    const [activityHours, activityMinutes] = activityTime.split(":");
+    updatedDate.setHours(activityHours, activityMinutes, 0);
+
+
+    const updatedData = {
+      trip_id: trip_id || "",
+      date: formData.date,
+      activity_itinerary_times_attributes: [
+        {
+          time: updatedDate.toISOString(),
+          activity_id: activity_id,
+        },
+      ],
+    }
+
     fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((newItinerary) => onAddItinerary(newItinerary));

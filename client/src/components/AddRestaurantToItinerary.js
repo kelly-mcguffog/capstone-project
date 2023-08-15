@@ -77,12 +77,29 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
       return;
     }
 
+    const updatedDate = new Date(formData.date);
+    const restaurantTime = formData.restaurant_itinerary_times_attributes[0].time;
+    const [restaurantHours, restaurantMinutes] = restaurantTime.split(":");
+    updatedDate.setHours(restaurantHours, restaurantMinutes, 0);
+
+
+    const updatedData = {
+      trip_id: trip_id || "",
+      date: formData.date,
+      restaurant_itinerary_times_attributes: [
+        {
+          time: updatedDate.toISOString(),
+          restaurant_id: restaurant_id,
+        },
+      ],
+    }
+
     fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((newItinerary) => onAddItinerary(newItinerary));

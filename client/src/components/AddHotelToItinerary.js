@@ -77,12 +77,29 @@ function AddHotelToItinerary({ onAddItinerary }) {
       return;
     }
 
+    const updatedDate = new Date(formData.date);
+    const hotelTime = formData.hotel_itinerary_times_attributes[0].time;
+    const [hotelHours, hotelMinutes] = hotelTime.split(":");
+    updatedDate.setHours(hotelHours, hotelMinutes, 0);
+
+
+    const updatedData = {
+      trip_id: trip_id || "",
+      date: formData.date,
+      hotel_itinerary_times_attributes: [
+        {
+          time: updatedDate.toISOString(),
+          hotel_id: hotel_id,
+        },
+      ],
+    }
+
     fetch(`/trips/${submitTripId}/itinerary_days`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((newItinerary) => onAddItinerary(newItinerary));
