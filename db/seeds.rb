@@ -850,38 +850,6 @@ restaurant8 = Restaurant.create({
     destination_id: london.id
 })
 
-# #tokyo
-
-# restaurant11 = Restaurant.create({
-#     name: 
-#     cuisine: 
-#     description:
-#     average_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude: 
-#     photo:
-#     reservation_link:
-#     destination_id: tokyo.id
-# })
-
-# #australia
-
-# restaurant12 = Restaurant.create({
-#     name: 
-#     cuisine: 
-#     description:
-#     average_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude: 
-#     photo:
-#     reservation_link:
-#     destination_id: tokyo.id
-# })
-
 #hotel
 
 #paris
@@ -917,32 +885,6 @@ hotel2 = Hotel.create({
     url: "https://www.lamaisonfavart.com/en/",
     destination_id: paris.id
 })
-
-# hotel3 = Hotel.create({
-#     name:
-#     description:
-#     average_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude:
-#     photo:
-#     reservation_link:
-#     destination_id: paris.id
-# })
-
-# hotel4 = Hotel.create({
-#     name:
-#     description:
-#     average_price: 
-#     rating:
-#     address:
-#     latitude: 
-#     longitude:
-#     photo:
-#     reservation_link:
-#     destination_id: paris.id
-# })
 
 #trip
 
@@ -1072,11 +1014,6 @@ restaurant_itinerary_time6 = RestaurantItineraryTime.create({
     itinerary_day_id: itinerary6.id
 })
 
-restaurant_itinerary_time7 = RestaurantItineraryTime.create({
-    time: DateTime.parse("2023-06-20 15:00:00"),
-    restaurant_id: restaurant1.id,
-    itinerary_day_id: itinerary1.id
-})
 
 #activity itinerary time
 
