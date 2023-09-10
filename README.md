@@ -87,6 +87,6 @@ As a user, I can:
 
 ## Resources
 
-* [TripAdvisor]: https://www.tripadvisor.com/
+* [TripAdvisor](https://www.tripadvisor.com/)
 * Google Maps API
 * FontAwesome
