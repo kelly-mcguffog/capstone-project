@@ -10,21 +10,23 @@ Wanderlust: Travel the world with ease and make the most of your adventures. Bui
 
 ## Setup
 
-To run this application locally on your machine, follow these steps
+### To run this application locally on your machine, follow these steps:
 
-* Fork and clone the repository to your local machine using Git:
+Fork and clone the repository to your local machine using Git:
 
 ```console
 $ git clone git@github.com:your-username/capstone-project.git
 ```
 
-* Navigate to the project directory:
+
+Navigate to the project directory:
 
 ```console
 $ cd capstone-project
 ```
 
-* Set up the frontend and backend dependencies from the root directory:
+
+Set up the frontend and backend dependencies from the root directory:
 
 ```console
 $ npm install --prefix client
@@ -32,11 +34,13 @@ $ bundle install
 $ rails db:migrate db:seed
 ```
 
-* Run the Rails application in one terminal:
+
+Run the Rails application in one terminal:
 
 ```console
 $ rails s
 ```
+
 
 Then, **open another terminal** and run React:
 
