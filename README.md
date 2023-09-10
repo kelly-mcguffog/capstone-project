@@ -5,28 +5,28 @@ Wanderlust: Travel the world with ease and make the most of your adventures. Bui
 ## Requirements
 
 * Ruby 2.7.4
-* NodeJS (v16), and npm
-* HomeBrew
+* NodeJS (v16) and npm
+* Homebrew
 
 ## Setup
 
-### To run this application locally on your machine, follow these steps:
+To run this application locally on your machine, follow these steps:
 
-Fork and clone the repository to your local machine using Git:
+1. Fork and clone the repository to your local machine using Git:
 
 ```console
 $ git clone git@github.com:your-username/capstone-project.git
 ```
 
 
-Navigate to the project directory:
+2. Navigate to the project directory:
 
 ```console
 $ cd capstone-project
 ```
 
 
-Set up the frontend and backend dependencies from the root directory:
+3. Set up the frontend and backend dependencies from the root directory:
 
 ```console
 $ npm install --prefix client
@@ -35,14 +35,14 @@ $ rails db:migrate db:seed
 ```
 
 
-Run the Rails application in one terminal:
+4. Run the Rails application in one terminal:
 
 ```console
 $ rails s
 ```
 
 
-Then, **open another terminal** and run React:
+5. Then, **open another terminal** and run React:
 
 ```console
 $ npm start --prefix client
@@ -75,7 +75,7 @@ As a user, I can:
 * Modify my profile information
 * Create a packing list for my trip
 * Mark an item as packed on my packing list
-* Delete an itiem from my packing list
+* Delete an item from my packing list
 * Resize the application for any screen
 
 
@@ -87,6 +87,6 @@ As a user, I can:
 
 ## Resources
 
-* TripAdvisor: https://www.tripadvisor.com/
+* [TripAdvisor]: https://www.tripadvisor.com/
 * Google Maps API
 * FontAwesome
