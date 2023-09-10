@@ -2,6 +2,48 @@
 
 Wanderlust: Travel the world with ease and make the most of your adventures. Build itineraries, manage packing lists, and share your travel information with friends and family.
 
+## Requirements
+
+* Ruby 2.7.4
+* NodeJS (v16), and npm
+* HomeBrew
+
+## Setup
+
+To run this application locally on your machine, follow these steps
+
+* Fork and clone the repository to your local machine using Git:
+
+```console
+$ git clone git@github.com:your-username/capstone-project.git
+```
+
+* Navigate to the project directory:
+
+```console
+$ cd capstone-project
+```
+
+* Set up the frontend and backend dependencies from the root directory:
+
+```console
+$ npm install --prefix client
+$ bundle install
+$ rails db:migrate db:seed
+```
+
+* Run the Rails application in one terminal:
+
+```console
+$ rails s
+```
+
+Then, **open another terminal** and run React:
+
+```console
+$ npm start --prefix client
+```
+
 
 ## MVP
 
@@ -33,10 +75,9 @@ As a user, I can:
 * Resize the application for any screen
 
 
-## Notes
+## Roadmap
 
-* As of August 2023, seed data is only available for Paris.
-* You must plant seed data before using this application.
+* As of August 2023, seed data is only available for Paris. More data will be available soon.
 * Social media follow feature coming soon.
 
 
