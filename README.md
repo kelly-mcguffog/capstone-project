@@ -48,6 +48,18 @@ $ rails s
 $ npm start --prefix client
 ```
 
+## Demo
+<p float="left">
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-1.gif" width="245"/>
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-2.gif" width="245"/>
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-3.gif" width="245"/>
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-4.gif" width="245"/>
+</p>
+<p float="left">
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-5.gif" width="245"/>
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-6.gif" width="245"/>
+<img src="https://github.com/kelly-mcguffog/capstone-project/blob/main/Demo/Capstone_Wanderlust_Demo-7.gif" width="245"/>
+</p>
 
 ## MVP
 
