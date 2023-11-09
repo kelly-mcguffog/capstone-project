@@ -38,7 +38,8 @@ function EditProfileForm() {
     return <div className="loading">Loading...</div>;
   }
 
-  const { id, first_name, last_name, username, avatar, tsa_precheck, password } = formData;
+  const { first_name, last_name, username, avatar, tsa_precheck, password } = formData;
+
 
   const destinationMarkers = user.trips.map((trip) => {
     const destination = destinations.find((dest) => dest.id === trip.destination_id);
@@ -86,17 +87,17 @@ function EditProfileForm() {
     formDataToSend.append("tsa_precheck", formData.tsa_precheck);
     formDataToSend.append("password", formData.password);
 
-    fetch(`/users/${id}`, {
+    fetch(`/users/${user.id}`, {
       method: "PATCH",
       body: formDataToSend,
     }).then((r) => {
       if (r.ok) {
         r.json().then((updatedUser) => {
           setUser(updatedUser)
-          setUsers(users.map((u) => (u.id === id ? updatedUser : u))
+          setUsers(users.map((u) => (u.id === user.id ? updatedUser : u))
           );
         })
-        navigate(`/profile/${id}`);
+        navigate(`/profile/${user.id}`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
