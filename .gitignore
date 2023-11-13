@@ -32,3 +32,5 @@
 
 # Ignore API key
 .env
+
+.fog

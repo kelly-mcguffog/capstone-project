@@ -65,6 +65,18 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   CarrierWave.configure do |config|
+    config.fog_credentials = {
+    provider:              'AWS',                        # required
+    use_iam_profile:       true,                         # optional, defaults to false
+    region:                'us-east-1',                  # optional, defaults to 'us-east-1'
+    # host:                  's3.example.com',             # optional, defaults to nil
+  }
+  config.fog_directory  = 'wanderlust-app'                                      # required
+  config.fog_public     = false                                                 # optional, defaults to true
+  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
+  # For an application which utilizes multiple servers but does not need caches persisted across requests,
+  # uncomment the line :file instead of the default :storage.  Otherwise, it will use AWS as the temp cache store.
+  # config.cache_storage = :file
     config.ignore_integrity_errors = false
     config.ignore_processing_errors = false
     config.ignore_download_errors = false
