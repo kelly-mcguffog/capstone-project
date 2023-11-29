@@ -2,7 +2,7 @@
 user1 = User.create({
     first_name: "Olivia",
     last_name: "Hammer",
-    avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo1.jpg")),
+    # avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo1.jpg")),
     username: "olivia.hammer",
     password: "westport123",
     password_confirmation: "westport123",
@@ -12,7 +12,7 @@ user1 = User.create({
 user2 = User.create({
     first_name: "Jake",
     last_name: "McGuffog",
-    avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo2.jpg")),
+    # avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo2.jpg")),
     username: "jake.mcguffog",
     password: "skis123",
     password_confirmation: "skis123",
@@ -22,7 +22,7 @@ user2 = User.create({
 user3 = User.create({
     first_name: "Ilyssa",
     last_name: "Rudman",
-    avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo3.jpg")),
+    # avatar: File.open(Rails.root.join("public/images/seed_photos/seed_photo3.jpg")),
     username: "ilyssa.rudman",
     password: "malibu123",
     password_confirmation: "malibu123",
