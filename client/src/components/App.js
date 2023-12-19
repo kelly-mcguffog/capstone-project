@@ -33,8 +33,8 @@ function App() {
   const match1 = useMatch("/trips");
   const match2 = useMatch("/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
-  const match4 = useMatch("/profile/:id");
-  const match5 = useMatch("/profile/:id/edit");
+  const match4 = useMatch("/profile");
+  const match5 = useMatch("/profile/edit");
   const customNavBar = match1 || match2 || match3 || match4 || match5;
 
 
@@ -187,10 +187,10 @@ function App() {
             />
             <Route path="/trips/:id/packing_list" element={<PackingListContainer />} />
             <Route
-              path="/profile/:id/edit"
+              path="/profile/edit"
               element={<EditProfileForm />}
             />
-            <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
           </>
       ) : (

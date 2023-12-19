@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import TripsListings from "./TripsListings";
 import TravelDetails from "./TravelDetails";
 import NavBar from "./NavBar";
+import LoadingScreen from "./LoadingScreen";
 
 
 function TripDetails({ onDeleteItineraryDate }) {
@@ -12,13 +13,15 @@ function TripDetails({ onDeleteItineraryDate }) {
     const { user } = useContext(UserContext);
 
     if (!user?.trips) {
-        return <div className="loading">Loading...</div>;
+        // return <div className="loading">Loading...</div>;
+        return <LoadingScreen/>
     }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));
 
     if (!trip) {
-        return <div className="loading">Loading...</div>;
+        // return <div className="loading">Loading...</div>;
+        return <LoadingScreen/>
     }
 
     const { destination_id } = trip;

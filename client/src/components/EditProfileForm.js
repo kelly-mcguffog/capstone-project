@@ -1,17 +1,18 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 import TripsListings from "./TripsListings";
 import NavBar from "./NavBar";
 import UserMap from "./UserMap";
 import { useLoadScript } from "@react-google-maps/api";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { AllUsersContext } from "../context/AllUsersContext";
+// import { AllUsersContext } from "../context/AllUsersContext";
+import LoadingScreen from "./LoadingScreen";
 
 function EditProfileForm() {
   const [errors, setErrors] = useState([])
   const { user, setUser } = useContext(UserContext);
-  const { users, setUsers } = useContext(AllUsersContext)
+  // const { users, setUsers } = useContext(AllUsersContext)
   const { destinations } = useContext(DestinationsContext);
   const navigate = useNavigate();
   const { isLoaded } = useLoadScript({
@@ -27,16 +28,17 @@ function EditProfileForm() {
     password: "",
   });
 
-  if (!isLoaded) return <div className="loading">Loading...</div>;
+  // if (!isLoaded) return <div className="loading">Loading...</div>;
 
+  if(!isLoaded || !destinations) return <LoadingScreen/>
 
   if (!user) {
     return null;
   }
 
-  if (!destinations) {
-    return <div className="loading">Loading...</div>;
-  }
+  // if (!destinations) {
+  //   return <div className="loading">Loading...</div>;
+  // }
 
   const { first_name, last_name, username, avatar, tsa_precheck, password } = formData;
 
@@ -94,10 +96,10 @@ function EditProfileForm() {
       if (r.ok) {
         r.json().then((updatedUser) => {
           setUser(updatedUser)
-          setUsers(users.map((u) => (u.id === user.id ? updatedUser : u))
-          );
+          // setUsers(users.map((u) => (u.id === user.id ? updatedUser : u))
+          // );
         })
-        navigate(`/profile/${user.id}`);
+        navigate(`/profile`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -115,7 +117,8 @@ function EditProfileForm() {
           {isLoaded ? (
             <UserMap destinationMarkers={destinationMarkers} />
           ) : (
-            <div className="loading">Loading...</div>
+            // <div className="loading">Loading...</div>
+            <LoadingScreen />
           )}
         </div>
         <form className="profile-form-container" onSubmit={handleSubmitEdit}>
@@ -227,7 +230,7 @@ function EditProfileForm() {
                   </span>
                 )}
               </div>
-              <div className="profile-form-input">
+              {/* <div className="profile-form-input">
                 <div className="input-text">
                   <h3 className="input-title">New Password</h3>
                 </div>
@@ -249,10 +252,28 @@ function EditProfileForm() {
                       : errors.password}
                   </span>
                 )}
-              </div>
-              <button className="form-button profile-btn" type="submit">
+              </div> */}
+              {/* <button className="form-button profile-btn" type="submit">
                 Update Profile
               </button>
+              <button className="page-btn main-btn" type="submit">
+                Cancel
+              </button> */}
+
+                    <div className="btn-container">
+                    <Link className="page-btn main-btn secondary-btn" to={'/profile'}>
+                            Cancel
+                        </Link>
+                      <button className="page-btn main-btn profile-btn" type="submit">
+                          Save
+                      </button>
+                    </div>
+              {/* <button className="form-button profile-btn" type="submit">
+                Cancel
+              </button> */}
+              {/* <Link className="page-btn main-btn" >
+                Cancel
+              </Link> */}
             </div>
           </div>
         </form>

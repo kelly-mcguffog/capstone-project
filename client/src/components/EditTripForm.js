@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import LoadingScreen from "./LoadingScreen";
 
 function EditTripForm() {
   const [errors, setErrors] = useState([]);
@@ -38,13 +39,15 @@ function EditTripForm() {
     }
   }, [findTrip]);
 
-  if (!findTrip) {
-    return <div className="loading">Loading...</div>;
-  }
+  // if (!findTrip) {
+  //   return <div className="loading">Loading...</div>;
+  // }
 
-  if (destinations === null) {
-    return <div className="loading">Loading...</div>;
-  }
+  // if (destinations === null) {
+  //   return <div className="loading">Loading...</div>;
+  // }
+
+  if(!findTrip || destinations === null) return <LoadingScreen/>
 
   const destination = destinations.find(
     (destination) => destination.id === parseInt(findTrip.destination_id)

@@ -7,6 +7,7 @@ import ErrorMessage from "./ErrorMessage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { parseISO } from "date-fns";
+import LoadingScreen from "./LoadingScreen";
 
 
 function EditItineraryForm() {
@@ -71,7 +72,8 @@ function EditItineraryForm() {
   const [formData, setFormData] = useState(initialFormData);
 
   if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !user) {
-    return <div className="loading">Loading...</div>;
+    // return <div className="loading">Loading...</div>;
+    return <LoadingScreen/>
   }
 
   const destination = destinations.find(

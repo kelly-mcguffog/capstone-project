@@ -5,6 +5,7 @@ import TripsListings from "./TripsListings";
 import PackingListForm from "./PackingListForm";
 import PackingList from "./PackingList";
 import NavBar from "./NavBar";
+import LoadingScreen from "./LoadingScreen";
 
 function PackingListContainer() {
 
@@ -12,7 +13,8 @@ function PackingListContainer() {
     const { id } = useParams();
 
     if (!user) {
-        return <div className="loading">Loading...</div>;
+        return <LoadingScreen/>
+        // return <div className="loading">Loading...</div>;
     }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));

@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import LoadingScreen from "./LoadingScreen";
 
 function AddActivityToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: activity_id } = useParams();
@@ -26,7 +27,8 @@ function AddActivityToItinerary({ onAddItinerary }) {
   });
 
   if (destinations === null) {
-    return <div className="loading">Loading...</div>;
+    // return <div className="loading">Loading...</div>;
+    return <LoadingScreen/>
   }
 
   const destination = destinations.find(

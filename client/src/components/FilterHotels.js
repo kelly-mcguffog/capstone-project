@@ -89,7 +89,7 @@ function FilterHotels({ setFilterPrice, setFilterRating, filterPrice, filterRati
                     </label>
                 </div>
             </div>
-            <button className="main-btn filter-btn" onClick={handleClearFilters}>Clear Filters</button>
+            <button className="page-btn main-btn filter-btn" onClick={handleClearFilters}>Clear Filters</button>
         </div>
     )
 }

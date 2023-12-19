@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import RestaurantsCard from "./RestaurantsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterRestaurants from "./FilterRestaurants";
+import LoadingScreen from "./LoadingScreen";
 
 function RestaurantsContainer({ search, setSearch, handleSearch }) {
 
@@ -14,7 +15,8 @@ function RestaurantsContainer({ search, setSearch, handleSearch }) {
   const [filterPrice, setFilterPrice] = useState("")
 
   if (destinations === null) {
-    return <div className="loading">Loading...</div>;
+    // return <div className="loading">Loading...</div>;
+    return <LoadingScreen/>
   }
 
   const destination = destinations.find(

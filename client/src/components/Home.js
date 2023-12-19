@@ -3,6 +3,7 @@ import Header from "./Header";
 import DestinationsContainer from "./DestinationsContainer";
 import DestinationsCard from "./DestinationsCard";
 import { DestinationsContext } from "../context/DestinationsContext";
+import LoadingScreen from "./LoadingScreen";
 
 function Home({ search, setSearch }) {
 
@@ -21,7 +22,8 @@ function Home({ search, setSearch }) {
   }, [search, destinations]);
 
   if (destinations === null) {
-    return <div className="loading">Loading...</div>;
+    // return <div className="loading">Loading...</div>;
+    return <LoadingScreen/>
   }
 
   const renderDestinations = destinations.map((destination) => (

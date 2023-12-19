@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import LoadingScreen from "./LoadingScreen";
 
 function NewTrip() {
 
@@ -27,7 +28,8 @@ function NewTrip() {
 
 
   if (destinations === null) {
-    return <div className="loading">Loading...</div>;
+    // return <div className="loading">Loading...</div>;
+    return <LoadingScreen/>
   }
 
   const destination = destinations.find(
@@ -83,7 +85,7 @@ function NewTrip() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((newTrip) => onAddTrip(newTrip));
-        navigate(`/profile/${user.id}`);
+        navigate(`/profile`);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }

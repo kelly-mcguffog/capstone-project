@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import UserMap from "./UserMap";
 import { useLoadScript } from "@react-google-maps/api";
 import { DestinationsContext } from "../context/DestinationsContext";
+import LoadingScreen from "./LoadingScreen";
 
 function Profile() {
     const { user } = useContext(UserContext);
@@ -14,15 +15,17 @@ function Profile() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
 
-    if (!isLoaded) return <div className="loading">Loading...</div>;
+    // if (!isLoaded) return <div className="loading">Loading...</div>;
+
+    if (!isLoaded || !destinations) return <LoadingScreen/>
 
     if (!user) {
         return null;
     }
 
-    if (!destinations) {
-        return <div className="loading">Loading...</div>;
-    }
+    // if (!destinations) {
+    //     return <div className="loading">Loading...</div>;
+    // }
 
     const { id, first_name, last_name, username, avatar, trips, tsa_precheck } = user;
     const decodedUrl = decodeURIComponent(avatar.url);
@@ -61,14 +64,14 @@ function Profile() {
                     <div className="details-info-destinations">
                         <div className="profile-info-details">
                             <h2>{first_name} {last_name}</h2>
-                            <Link to={`/profile/${id}/edit`}>
+                            <Link to={`/profile/edit`}>
                                 <i className="fa-solid fa-pen-to-square"></i>
                             </Link>
                         </div>
                         <div className="details-copy">
                             <p><strong>Username:</strong> {username}</p>
                             <p><strong>TSA Precheck:</strong> {tsa_precheck}</p>
-                            <small><em>social media follow feature coming soon</em></small>
+                            <small><em>social media feature coming soon</em></small>
                         </div>
                     </div>
                 </div>

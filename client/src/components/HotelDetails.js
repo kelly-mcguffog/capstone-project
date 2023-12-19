@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AllUsersContext } from "../context/AllUsersContext";
+// import { AllUsersContext } from "../context/AllUsersContext";
 import GridHeader from "./GridHeader";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
-import UsersCheckIn from "./UsersCheckIn";
+// import UsersCheckIn from "./UsersCheckIn";
+import LoadingScreen from "./LoadingScreen";
 
 function HotelDetails() {
 
     const [hotels, setHotels] = useState([])
-    const { users } = useContext(AllUsersContext);
+    // const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
 
     const { isLoaded } = useLoadScript({
@@ -24,24 +25,28 @@ function HotelDetails() {
 
     const hotel = hotels.find(hotel => hotel.id === parseInt(id))
 
-    if (!hotel) return <div className="loading">Loading...</div>;
+    // if (!hotel) return <div className="loading">Loading...</div>;
 
-    if (!isLoaded) return <div className="loading">Loading...</div>;
+    // if (!isLoaded) return <div className="loading">Loading...</div>;
 
-    if (!users) return <div className="loading">Loading...</div>;
+    // if (!users) return <div className="loading">Loading...</div>;
+
+    // if (!hotel || !isLoaded || !users) return <LoadingScreen/>
+
+    if (!hotel || !isLoaded) return <LoadingScreen/>
 
 
     const { name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3 } = hotel
 
-    const allUsers = users.flatMap((user) =>
-        user.trips.flatMap((trip) =>
-            trip.itinerary_days.flatMap((day) =>
-                day.combined_itinerary_times
-                    .filter((time) => time.hotel && time.hotel.id && time.hotel.id.toString() === id)
-                    .map(() => user)
-            )
-        )
-    );
+    // const allUsers = users.flatMap((user) =>
+    //     user.trips.flatMap((trip) =>
+    //         trip.itinerary_days.flatMap((day) =>
+    //             day.combined_itinerary_times
+    //                 .filter((time) => time.hotel && time.hotel.id && time.hotel.id.toString() === id)
+    //                 .map(() => user)
+    //         )
+    //     )
+    // );
 
 
     const getItineraryUrl = () => {
@@ -102,7 +107,7 @@ function HotelDetails() {
                     <hr className="line-details"></hr>
                     <div className="map-details">
                         <Map longitude={longitude} latitude={latitude} />
-                        <UsersCheckIn allUsers={allUsers} />
+                        {/* <UsersCheckIn allUsers={allUsers} /> */}
                         <div className="small-details">
                             <i className="fa-sharp fa-solid fa-location-dot"></i>
                             <p>{address}</p>

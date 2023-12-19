@@ -37,7 +37,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
             .then((response) => {
                 if (response.ok) {
                     onDeleteTrip(id)
-                    navigate(`/profile/${user.id}`);
+                    navigate(`/profile`);
                 } else {
                     response.json().then((err) => setErrors(err.errors));
                 }

@@ -329,26 +329,41 @@ form {
 .card-details{
   text-align: center;
 }
-.main-btn{
+.main-btn, button.profile-btn{
   color: white;
-  text-align: center;
+  /* text-align: center; */
   background-color: #0f0043;
-  padding: 10px 10px;
+  /* padding: 10px 10px; */
   border: none;
-  display: block;
+  /* display: block;
   margin: 20px auto;
   border-radius: 70px;
-  font-size: 12px;
+  font-size: 12px; */
 }
 .secondary-btn{
   border: 1px solid #0f0043;
   color:  #0f0043;
   background-color: white;
 }
+/* button.profile-btn{
+  background-color: #0f0043;
+  padding: 10px 10px;
+  color: white;
+} */
 .page-btn{
-  margin: 0;
+  /* margin: 0; */
   width: 100px;
   text-decoration: none;
+
+ 
+  text-align: center;
+
+  padding: 10px 10px;
+
+  display: block;
+  margin: 20px 0px;
+  border-radius: 70px;
+  font-size: 12px;
 }
 .btn-container{
   display: flex;
@@ -1283,6 +1298,9 @@ input[type="time"]{
     width: 100%;
     text-align: center;
     padding: 10px;
+    /* background-color: white;
+    border: 1px solid #0c0132;
+    color: #0c0132; */
   }
   #packing{
     margin: 10px 20px;
@@ -1511,6 +1529,9 @@ input[type="time"]{
     width: 100%;
     text-align: center;
     padding: 10px;
+    /* background-color: white;
+    border: 1px solid #0c0132;
+    color: #0c0132; */
   }
   .profile-container{
     margin: 50px;
@@ -1874,6 +1895,9 @@ input[type="time"]{
     width: 100%;
     text-align: center;
     padding: 10px;
+    /* background-color: white;
+    border: 1px solid #0c0132;
+    color: #0c0132; */
   }
   #packing{
     margin: 10px 20px;
@@ -2213,6 +2237,9 @@ input[type="time"]{
     width: 100%;
     text-align: center;
     padding: 10px;
+    /* background-color: white;
+    border: 1px solid #0c0132;
+    color: #0c0132; */
   }
   #packing{
     margin: 10px 20px;

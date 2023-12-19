@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import ActivitiesCard from "./ActivitiesCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterActivities from "./FilterActivities";
+import LoadingScreen from "./LoadingScreen";
 
 function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const { destination_id, id } = useParams();
@@ -13,7 +14,8 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const [filterPrice, setFilterPrice] = useState(0);
 
   if (destinations === null) {
-    return <div className="loading">Loading...</div>;
+    // return <div className="loading">Loading...</div>;
+    return <LoadingScreen/>
   }
 
 
