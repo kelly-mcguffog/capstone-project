@@ -22,31 +22,31 @@ import ActivityDetails from "./ActivityDetails";
 import EditProfileForm from "./EditProfileForm";
 import EditTripForm from "./EditTripForm";
 import EditItineraryForm from "./EditItineraryForm";
-import RestrictedAccess from "./RestrictedAccess";
+import LoadingScreen from "./LoadingScreen";
 
 function App() {
 
   const { user, setUser } = useContext(UserContext)
   const { setUsers } = useContext(AllUsersContext)
   const [search, setSearch] = useState("")
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const match1 = useMatch("/trips");
   const match2 = useMatch("/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
   const match4 = useMatch("/profile/:id");
   const match5 = useMatch("/profile/:id/edit");
   const customNavBar = match1 || match2 || match3 || match4 || match5;
-  const notRestricted1 = useMatch("/login");
-  const notRestricted2 = useMatch("/signup");
-  const notRestricted = notRestricted1 || notRestricted2
 
 
   useEffect(() => {
-    const loadingTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const checkAuthentication = async () => {
+      setTimeout(() => {
+        setUser(user);
+        setLoading(false); 
+      }, 2000);
+    };
 
-    return () => clearTimeout(loadingTimer);
+    checkAuthentication();
   }, []);
 
   const onAddItinerary = (newItinerary) => {
@@ -86,7 +86,6 @@ function App() {
   };
 
   const icCustomNavBar = !!customNavBar;
-  const isNotRestriced = !!notRestricted;
 
   const handleSearch = () => {
     setSearch("");
@@ -95,10 +94,12 @@ function App() {
   return (
     <main>
       {user && !icCustomNavBar && <NavBar />}
-      {!user && !isNotRestriced && !isLoading && <RestrictedAccess />}
-      {user ? (
+      {loading ? (
+        <LoadingScreen />
+      ) : (
         <Routes>
-          <>
+          {user ? (
+            <>
             <Route
               path="/destinations/:destination_id/trips/:trip_id/hotels/:id"
               element={<AddHotelToItinerary onAddItinerary={onAddItinerary} />}
@@ -190,19 +191,18 @@ function App() {
               element={<EditProfileForm />}
             />
             <Route path="/profile/:id" element={<Profile />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
           </>
-        </Routes>
-      ) :
-        <Routes>
+      ) : (
+        <>
+          <Route path="*" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-        </Routes>
-      }
-    </main>
-  );
-}
+        </>
+      )}
+</Routes>
+  )}
+  </main>
+)}
 
 export default App;
