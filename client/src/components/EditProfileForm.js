@@ -1,23 +1,23 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { useNavigate , Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import TripsListings from "./TripsListings";
 import NavBar from "./NavBar";
 import UserMap from "./UserMap";
 import { useLoadScript } from "@react-google-maps/api";
 import { DestinationsContext } from "../context/DestinationsContext";
-// import { AllUsersContext } from "../context/AllUsersContext";
 import LoadingScreen from "./LoadingScreen";
 
 function EditProfileForm() {
   const [errors, setErrors] = useState([])
   const { user, setUser } = useContext(UserContext);
-  // const { users, setUsers } = useContext(AllUsersContext)
   const { destinations } = useContext(DestinationsContext);
   const navigate = useNavigate();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
+  const [isUploading, setIsUploading] = useState(false);
+
 
   const [formData, setFormData] = useState({
     first_name: user.first_name,
@@ -28,19 +28,13 @@ function EditProfileForm() {
     password: "",
   });
 
-  // if (!isLoaded) return <div className="loading">Loading...</div>;
-
-  if(!isLoaded || !destinations) return <LoadingScreen/>
+  if (!isLoaded || !destinations) return <LoadingScreen />
 
   if (!user) {
     return null;
   }
 
-  // if (!destinations) {
-  //   return <div className="loading">Loading...</div>;
-  // }
-
-  const { first_name, last_name, username, avatar, tsa_precheck, password } = formData;
+  const { first_name, last_name, username, avatar, tsa_precheck } = formData;
 
 
   const destinationMarkers = user.trips.map((trip) => {
@@ -78,6 +72,8 @@ function EditProfileForm() {
 
   const handleSubmitEdit = (e) => {
     e.preventDefault();
+    setIsUploading(true);
+
 
     const formDataToSend = new FormData();
     if (formData.avatar.file) {
@@ -89,22 +85,28 @@ function EditProfileForm() {
     formDataToSend.append("tsa_precheck", formData.tsa_precheck);
     formDataToSend.append("password", formData.password);
 
-    fetch(`/users/${user.id}`, {
-      method: "PATCH",
-      body: formDataToSend,
-    }).then((r) => {
+  fetch(`/users/${user.id}`, {
+    method: "PATCH",
+    body: formDataToSend,
+  })
+    .then((r) => {
       if (r.ok) {
-        r.json().then((updatedUser) => {
-          setUser(updatedUser)
-          // setUsers(users.map((u) => (u.id === user.id ? updatedUser : u))
-          // );
-        })
-        navigate(`/profile`);
+        return r.json();
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        return r.json().then((err) => Promise.reject(err.errors));
       }
+    })
+    .then((updatedUser) => {
+      setUser(updatedUser);
+      navigate('/profile');
+    })
+    .catch((err) => {
+      setErrors(err);
+    })
+    .finally(() => {
+      setIsUploading(false);
     });
-  }
+};
 
   return (
     <div className="side-bar">
@@ -117,11 +119,11 @@ function EditProfileForm() {
           {isLoaded ? (
             <UserMap destinationMarkers={destinationMarkers} />
           ) : (
-            // <div className="loading">Loading...</div>
             <LoadingScreen />
           )}
         </div>
         <form className="profile-form-container" onSubmit={handleSubmitEdit}>
+        {isUploading && <LoadingScreen />}
           <div className="details-profile-container">
             <div className="photo-upload">
               <div className="details-img-wrapper">
@@ -230,50 +232,15 @@ function EditProfileForm() {
                   </span>
                 )}
               </div>
-              {/* <div className="profile-form-input">
-                <div className="input-text">
-                  <h3 className="input-title">New Password</h3>
-                </div>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  autoComplete="off"
-                  placeholder="Enter New Pasword"
-                  value={password}
-                  onChange={handleChangeInput}
-                  className={`login-form-input ${errors.password ? "input-error" : ""
-                    }`}
-                />
-                {errors.password && (
-                  <span className="error-message">
-                    {Array.isArray(errors.password)
-                      ? errors.password.join(", ")
-                      : errors.password}
-                  </span>
-                )}
-              </div> */}
-              {/* <button className="form-button profile-btn" type="submit">
-                Update Profile
-              </button>
-              <button className="page-btn main-btn" type="submit">
-                Cancel
-              </button> */}
 
-                    <div className="btn-container">
-                    <Link className="page-btn main-btn secondary-btn" to={'/profile'}>
-                            Cancel
-                        </Link>
-                      <button className="page-btn main-btn profile-btn" type="submit">
-                          Save
-                      </button>
-                    </div>
-              {/* <button className="form-button profile-btn" type="submit">
-                Cancel
-              </button> */}
-              {/* <Link className="page-btn main-btn" >
-                Cancel
-              </Link> */}
+              <div className="btn-container">
+                <Link className="page-btn main-btn secondary-btn" to={'/profile'}>
+                  Cancel
+                </Link>
+                <button className="page-btn main-btn profile-btn" type="submit">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </form>

@@ -22,7 +22,6 @@ function Home({ search, setSearch }) {
   }, [search, destinations]);
 
   if (destinations === null) {
-    // return <div className="loading">Loading...</div>;
     return <LoadingScreen/>
   }
 

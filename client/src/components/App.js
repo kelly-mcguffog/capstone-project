@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Routes, Route, useMatch } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { AllUsersContext } from "../context/AllUsersContext";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import NavBar from "./NavBar";
@@ -23,31 +22,35 @@ import EditProfileForm from "./EditProfileForm";
 import EditTripForm from "./EditTripForm";
 import EditItineraryForm from "./EditItineraryForm";
 import LoadingScreen from "./LoadingScreen";
+import Unauthorized from "./Unauthorized";
 
 function App() {
 
   const { user, setUser } = useContext(UserContext)
-  const { setUsers } = useContext(AllUsersContext)
   const [search, setSearch] = useState("")
   const [loading, setLoading] = useState(true);
   const match1 = useMatch("/trips");
   const match2 = useMatch("/trips/:id");
   const match3 = useMatch("/trips/:id/packing_list");
   const match4 = useMatch("/profile");
-  const match5 = useMatch("/profile/edit");
+  const match5 = useMatch("/edit");
   const customNavBar = match1 || match2 || match3 || match4 || match5;
-
-
+ 
   useEffect(() => {
-    const checkAuthentication = async () => {
-      setTimeout(() => {
-        setUser(user);
-        setLoading(false); 
-      }, 2000);
+    const loadData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        setLoading(false);
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
     };
+    loadData();
+  }, []); 
 
-    checkAuthentication();
-  }, []);
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   const onAddItinerary = (newItinerary) => {
     const { trip_id, date, combined_itinerary_times } = newItinerary;
@@ -82,7 +85,6 @@ function App() {
     };
 
     setUser(updatedUser);
-    setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
   };
 
   const icCustomNavBar = !!customNavBar;
@@ -94,12 +96,9 @@ function App() {
   return (
     <main>
       {user && !icCustomNavBar && <NavBar />}
-      {loading ? (
-        <LoadingScreen />
-      ) : (
-        <Routes>
-          {user ? (
-            <>
+      <Routes>
+        {user ? (
+          <>
             <Route
               path="/destinations/:destination_id/trips/:trip_id/hotels/:id"
               element={<AddHotelToItinerary onAddItinerary={onAddItinerary} />}
@@ -187,22 +186,22 @@ function App() {
             />
             <Route path="/trips/:id/packing_list" element={<PackingListContainer />} />
             <Route
-              path="/profile/edit"
+              path="/edit"
               element={<EditProfileForm />}
             />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/" element={<Home search={search} setSearch={setSearch} />} />
+            <Route default path="/" element={<Home search={search} setSearch={setSearch} />} />
           </>
-      ) : (
-        <>
-          <Route path="*" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-        </>
-      )}
-</Routes>
-  )}
-  </main>
-)}
+        ) : (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<Unauthorized />} />
+          </>
+        )}
+      </Routes>
+    </main>
+  )
+}
 
 export default App;

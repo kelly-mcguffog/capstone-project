@@ -14,7 +14,6 @@ function PackingListContainer() {
 
     if (!user) {
         return <LoadingScreen/>
-        // return <div className="loading">Loading...</div>;
     }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { AllUsersContext } from "../context/AllUsersContext";
 import ItineraryHotel from "./ItineraryHotel";
 import ItineraryRestaurant from "./ItineraryRestaurant";
 import ItineraryActivity from "./ItineraryActivity";
@@ -12,7 +11,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
   const [errors, setErrors] = useState("")
 
   const { user, setUser } = useContext(UserContext);
-  const { setUsers } = useContext(AllUsersContext);
 
   const itineraryTime = new Date(itinerary_time.time);
 
@@ -75,10 +73,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
                 return t;
               }),
             };
-
             setUser(updatedUser);
-            setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
-
           }
         } else {
           response.json().then((err) => setErrors(err.errors));
@@ -106,7 +101,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
           };
 
           setUser(updatedUser);
-          setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
         } else {
           response.json().then((err) => setErrors(err.errors));
         }
@@ -117,6 +111,7 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
     setIsShowing(isShowing => !isShowing)
   }
 
+  console.log(errors)
   return (
     <div className="itinerary-activity-listing">
       <div className="icon">

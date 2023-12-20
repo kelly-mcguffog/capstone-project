@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
@@ -8,7 +7,6 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
 
     const [errors, setErrors] = useState("")
     const { destinations } = useContext(DestinationsContext);
-    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const { id, outbound_flight, destination_id } = trip;

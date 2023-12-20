@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-// import { AllUsersContext } from "../context/AllUsersContext";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import GridHeader from "./GridHeader";
-// import UsersCheckIn from "./UsersCheckIn";
 import LoadingScreen from "./LoadingScreen";
 
 function RestaurantDetails() {
@@ -22,29 +20,10 @@ function RestaurantDetails() {
     }, [])
 
     const restaurant = restaurants.find(restaurant => restaurant.id === parseInt(id))
-    // const { users } = useContext(AllUsersContext);
-
-    // if (!restaurant) return <div className="loading">Loading...</div>;
-
-    // if (!isLoaded) return <div className="loading">Loading...</div>;
-
-    // if (!users) return <div className="loading">Loading...</div>;
-
-    // if (!restaurant || !isLoaded || !users) return <LoadingScreen/>
 
     if (!restaurant || !isLoaded) return <LoadingScreen/>
 
     const { name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3 } = restaurant
-
-    // const allUsers = users.flatMap((user) =>
-    //     user.trips.flatMap((trip) =>
-    //         trip.itinerary_days.flatMap((day) =>
-    //             day.combined_itinerary_times
-    //                 .filter((time) => time.restaurant && time.restaurant.id && time.restaurant.id.toString() === id)
-    //                 .map(() => user)
-    //         )
-    //     )
-    // );
 
     const getItineraryUrl = () => {
         if (trip_id !== undefined) {
@@ -95,7 +74,7 @@ function RestaurantDetails() {
                         <div>
                             <h5 className="star">{"★ ".repeat(rating)}</h5>
                             <p>{description}</p>
-                            <Link className="page-btn main-btn" to={getItineraryUrl()}>
+                            <Link className="page-btn main-btn itinerary-btn" to={getItineraryUrl()}>
                                 Add to Itinerary
                             </Link>
                         </div>
@@ -103,7 +82,6 @@ function RestaurantDetails() {
                     <hr className="line-details"></hr>
                     <div className="map-details">
                         <Map longitude={longitude} latitude={latitude} />
-                        {/* <UsersCheckIn allUsers={allUsers} /> */}
                         <div className="small-details">
                             <i className="fa-sharp fa-solid fa-location-dot"></i><p>{address}</p>
                         </div>

@@ -27,7 +27,6 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
   });
 
   if (destinations === null) {
-    // return <div className="loading">Loading...</div>;
     return <LoadingScreen/>
   }
 

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
-import { AllUsersContext } from "../context/AllUsersContext";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import DatePicker from "react-datepicker";
@@ -14,7 +13,6 @@ function EditItineraryForm() {
   const { trip_id, itinerary_day_id, id: itinerary_time_id } = useParams();
   const [formErrors, setFormErrors] = useState({ date: "", time: "" })
   const { user, setUser } = useContext(UserContext);
-  const { setUsers } = useContext(AllUsersContext);
   const { destinations } = useContext(DestinationsContext);
 
   const navigate = useNavigate();
@@ -72,7 +70,6 @@ function EditItineraryForm() {
   const [formData, setFormData] = useState(initialFormData);
 
   if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !user) {
-    // return <div className="loading">Loading...</div>;
     return <LoadingScreen/>
   }
 
@@ -148,7 +145,6 @@ function EditItineraryForm() {
     };
 
     setUser(updatedUser);
-    setUsers((prevUsers) => prevUsers.map((u) => (u.id === user.id ? updatedUser : u)));
   };
 
   function handleChange(event) {

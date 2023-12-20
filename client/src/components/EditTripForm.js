@@ -39,14 +39,6 @@ function EditTripForm() {
     }
   }, [findTrip]);
 
-  // if (!findTrip) {
-  //   return <div className="loading">Loading...</div>;
-  // }
-
-  // if (destinations === null) {
-  //   return <div className="loading">Loading...</div>;
-  // }
-
   if(!findTrip || destinations === null) return <LoadingScreen/>
 
   const destination = destinations.find(

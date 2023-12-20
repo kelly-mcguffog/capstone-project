@@ -15,19 +15,13 @@ function Profile() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
 
-    // if (!isLoaded) return <div className="loading">Loading...</div>;
-
     if (!isLoaded || !destinations) return <LoadingScreen/>
 
     if (!user) {
         return null;
     }
 
-    // if (!destinations) {
-    //     return <div className="loading">Loading...</div>;
-    // }
-
-    const { id, first_name, last_name, username, avatar, trips, tsa_precheck } = user;
+    const { first_name, last_name, username, avatar, trips, tsa_precheck } = user;
     const decodedUrl = decodeURIComponent(avatar.url);
 
 
@@ -64,7 +58,7 @@ function Profile() {
                     <div className="details-info-destinations">
                         <div className="profile-info-details">
                             <h2>{first_name} {last_name}</h2>
-                            <Link to={`/profile/edit`}>
+                            <Link to={`/edit`}>
                                 <i className="fa-solid fa-pen-to-square"></i>
                             </Link>
                         </div>

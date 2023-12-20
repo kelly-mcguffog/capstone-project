@@ -1,15 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-// import { AllUsersContext } from "../context/AllUsersContext";
 import LoadingScreen from "./LoadingScreen";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
-// import UsersCheckIn from "./UsersCheckIn";
 
 function ActivityDetails() {
 
     const [activities, setActivities] = useState([])
-    // const { users } = useContext(AllUsersContext);
     const { destination_id, trip_id, id } = useParams()
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -23,30 +20,10 @@ function ActivityDetails() {
 
     const activity = activities.find(activity => activity.id === parseInt(id))
 
-    // if (!activity) return <div className="loading">Loading...</div>;
-
-
-    // if (!isLoaded) return <div className="loading">Loading...</div>;
-
-
-    // if (!users) return <div className="loading">Loading...</div>;
-
-    // if (!activity || !isLoaded || !users) return <LoadingScreen/>
-
     if (!activity || !isLoaded) return <LoadingScreen/>
 
 
     const { photo, name, rating, description, price, longitude, latitude, address, duration, url } = activity
-
-    // const allUsers = users.flatMap((user) =>
-    //     user.trips.flatMap((trip) =>
-    //         trip.itinerary_days.flatMap((day) =>
-    //             day.combined_itinerary_times
-    //                 .filter((time) => time.activity && time.activity.id && time.activity.id.toString() === id)
-    //                 .map(() => user)
-    //         )
-    //     )
-    // );
 
     const getItineraryUrl = () => {
         if (trip_id !== undefined) {
@@ -98,7 +75,7 @@ function ActivityDetails() {
                         <div>
                             <p>{description}</p>
                             <h5>{price}</h5>
-                            <Link className="page-btn main-btn" to={getItineraryUrl()}>
+                            <Link className="page-btn main-btn itinerary-btn" to={getItineraryUrl()}>
                                 Add to Itinerary
                             </Link>
                         </div>
@@ -106,7 +83,6 @@ function ActivityDetails() {
                     <hr className="line-details"></hr>
                     <div className="map-details">
                         <Map longitude={longitude} latitude={latitude} />
-                        {/* <UsersCheckIn allUsers={allUsers} /> */}
                         <div className="small-details">
                             <i className="fa-sharp fa-solid fa-location-dot"></i>
                             <p>{address}</p>

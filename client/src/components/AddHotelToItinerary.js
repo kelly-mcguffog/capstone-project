@@ -7,7 +7,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LoadingScreen from "./LoadingScreen";
 
-
 function AddHotelToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: hotel_id } = useParams();
   const { user } = useContext(UserContext);
@@ -28,7 +27,6 @@ function AddHotelToItinerary({ onAddItinerary }) {
   });
 
   if (destinations === null) {
-    // return <div className="loading">Loading...</div>;
     return <LoadingScreen/>
   }
 

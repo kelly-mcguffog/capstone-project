@@ -14,7 +14,6 @@ function HotelsContainer({ search, setSearch, handleSearch }) {
   const [filterPrice, setFilterPrice] = useState("")
 
   if (destinations === null) {
-    // return <div className="loading">Loading...</div>;
     return <LoadingScreen/>
   }
 

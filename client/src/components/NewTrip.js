@@ -28,7 +28,6 @@ function NewTrip() {
 
 
   if (destinations === null) {
-    // return <div className="loading">Loading...</div>;
     return <LoadingScreen/>
   }
 
