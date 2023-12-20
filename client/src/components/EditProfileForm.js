@@ -97,15 +97,10 @@ function EditProfileForm() {
       }
     })
     .then((updatedUser) => {
+      setIsUploading(false);
       setUser(updatedUser);
       navigate('/profile');
     })
-    .catch((err) => {
-      setErrors(err);
-    })
-    .finally(() => {
-      setIsUploading(false);
-    });
 };
 
   return (

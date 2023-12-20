@@ -35,7 +35,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
             .then((response) => {
                 if (response.ok) {
                     onDeleteTrip(id)
-                    navigate(`/profile`);
+                    navigate('/profile');
                 } else {
                     response.json().then((err) => setErrors(err.errors));
                 }
@@ -50,6 +50,11 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                         {city}, {country}
                     </h3>
                     <h5 className="user-input">{formattedDate}</h5>
+                    {errors && (
+                        <div className="error-message">
+                            <span>{errors}</span>
+                        </div>
+                    )}
                 </div>
             </NavLink>
             {isShowing ?

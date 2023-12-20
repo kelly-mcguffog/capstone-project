@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-
 function Unauthorized() {
     const [isVisible, setIsVisible] = useState(true);
     const location = useLocation();
@@ -13,7 +12,7 @@ function Unauthorized() {
         setIsVisible(false);
     };
 
-    if (isLoginPage || isSignupPage) {
+    if (!isVisible || isLoginPage || isSignupPage) {
         return null;
     }
 
