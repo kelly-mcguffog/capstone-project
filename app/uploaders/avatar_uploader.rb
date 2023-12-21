@@ -16,7 +16,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-    "https://wanderlust-app.s3.amazonaws.com#{ActionController::Base.helpers.asset_path("fallback/default.png")}"
+    "https://wanderlust-app.s3.amazonaws.com#{ActionController::Base.helpers.asset_path("images/fallback/default.png")}"
 
     # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
