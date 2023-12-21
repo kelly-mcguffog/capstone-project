@@ -81,7 +81,7 @@ Rails.application.configure do
   #   # host:                  's3.example.com',             # optional, defaults to nil
   # }
   config.fog_directory  = 'wanderlust-app'                                      # required
-  config.fog_public     = false                                                 # optional, defaults to true
+  config.fog_public     = true                                                 # optional, defaults to true
   # config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
   config.fog_attributes = { cache_control: "public, max-age=3600" }
   # For an application which utilizes multiple servers but does not need caches persisted across requests,
