@@ -124,7 +124,7 @@ Rails.application.configure do
     use_iam_profile:       true,                         # optional, defaults to false
     region:                'us-east-1',                  # optional, defaults to 'us-east-1'
     # host:                  's3.example.com',             # optional, defaults to nil
-    endpoint:               'http://wanderlust-app.s3-accelerate.amazonaws.com',
+    # endpoint:               'http://wanderlust-app.s3-accelerate.amazonaws.com',
   }
   config.fog_directory  = 'wanderlust-app'                                      # required
   config.fog_public     = true                                                 # optional, defaults to true

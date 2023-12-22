@@ -67,11 +67,11 @@ Rails.application.configure do
   CarrierWave.configure do |config|
     config.fog_credentials = {
     provider:              'AWS',  
-    # aws_access_key_id:      ENV['AWS_ACCESS_KEY_ID'],
-    # aws_secret_access_key:  ENV['AWS_SECRET_ACCESS_KEY'],      
+    aws_access_key_id:      ENV['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key:  ENV['AWS_SECRET_ACCESS_KEY'],      
     use_iam_profile:       true,                       
     region:                'us-east-1', 
-    endpoint:              'http://wanderlust-app.s3-accelerate.amazonaws.com',   
+    # endpoint:              'http://wanderlust-app.s3-accelerate.amazonaws.com',   
   }
 
   config.fog_directory  = 'wanderlust-app'                                      # required
