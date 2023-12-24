@@ -45,6 +45,8 @@ header {
 }
 .navbar-header{
   width: 100%;
+  margin: 10px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,7 +71,8 @@ header {
   background-size: cover;
 }
 .navbar{
-  margin: 0px 30px;
+  margin: 10px;
+  font-size: 20px;
 }
 .fa-magnifying-glass, .fa-arrow-right, .fa-map, .fa-hotel, .fa-utensils, .fa-plus{
   padding: 15px;
@@ -83,13 +86,6 @@ header {
 .fa-plus{
   padding: 5px;
   cursor: pointer;
-}
-a.page-btn.main-btn.trip-btn{
-  margin: auto;
-  width: 100px;
-}
-a.page-btn.main-btn.itinerary-btn{
-  width: 100px;
 }
 .fa-bars, .fa-trash, .fa-pen-to-square{
   cursor: pointer;
@@ -132,14 +128,21 @@ button[type="submit"]{
 }
 header a,
 header button, .dropdown {
-  font-size: 15px;
+  font-size: 20px;
   display: inline-block;
-  margin: 10px;
-  padding: 10px;
   text-decoration: none;
   color: #0f0043;
   cursor: pointer;
   position: relative;
+}
+div.dropdown-content.visible a,
+div.dropdown-content button.logout, .delete-btn{
+    margin: 10px;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  color: #0f0043;
+  font-weight: 300;
 }
 a.link.active{
   border-bottom: 1px solid #0f0043;
@@ -194,12 +197,18 @@ form {
   align-items: center;
   justify-content: center;
 }
+.details-container{
+  margin: 0px 0px 0px 40px;
+}
+.map-details{
+  margin: 0px 40px 0px 0px;
+}
 .details-info{
   width: 65%;
   border: 1px solid rgb(210, 210, 210);
   padding: 20px;
   border-radius: 10px;
-  margin: 20px 0px;
+  /* margin: 20px 0px; */
 }
 .details-profile-container{
   display: flex;
@@ -339,7 +348,7 @@ form {
   background-color: white;
 }
 .page-btn{
-  width: 100%;
+  width: 100px;
   text-decoration: none;
   text-align: center;
   padding: 10px 10px;
@@ -347,6 +356,9 @@ form {
   margin: 20px 0px;
   border-radius: 70px;
   font-size: 12px;
+}
+.trip-btn{
+  margin: 0 auto;
 }
 .btn-container{
   display: flex;
@@ -381,13 +393,16 @@ h1{
   text-align: center;
 }
 h2{
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   margin: 0;
 }
 h3{
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
+}
+.details-name{
+  text-align: left;
 }
 .city{
   color: #0f0043;
@@ -408,7 +423,7 @@ p{
   color: #0f0043;
   background-color: transparent;
   border-radius: none;
-  font-size: 15px;
+  font-size: 20px;
   width: auto;
   text-transform: capitalize;
   letter-spacing: 0;
@@ -685,13 +700,13 @@ input:focus {
 }
 .trip-info{
   display: flex;
-  column-gap: 10px;
-  margin: 0px 10px;
-  padding: 0px 40px;
+  column-gap: 30px;
+  width: 90%;
+  margin: auto;
 }
 .itinerary-info{
-  margin: 10px;
-  padding: 10px 40px;
+  width: 90%;
+  margin: auto;
 }
 .trip-details-title, .trip-details-input{
   margin-bottom: 0;
@@ -705,7 +720,6 @@ input:focus {
 .time{
   text-align: left;
   margin: 5px 0;
-  font-weight: 300;
 }
 .itinerary-activity{
   text-align: left;
@@ -746,12 +760,12 @@ input[type="text"], input[type="search"], input[type="datetime-local"]{
 a.trip-links.active{
   color: #0f0043;
 }
-.links{
+/* .links{
   display: flex;
   justify-content: space-between;
   margin: 10px;
   padding: 10px 40px;
-}
+} */
 .text{
   margin: 10px;
 }
@@ -878,7 +892,7 @@ a.trip-links.active{
 }
 .trips-header{
   margin: 10px;
-  font-size: 22px;
+  font-size: 20px;
 }
 .search-results{
   display: flex;
@@ -896,8 +910,8 @@ a.trip-links.active{
   column-gap: 40px;
   align-items: center;
   background-color: white;
-  margin: 0px 60px;
-  padding: 60px;
+  width: 90%;
+  margin: auto;
 }
 .profile-container{
   margin: 50px;
@@ -917,23 +931,18 @@ a.trip-links.active{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0px;
+}
+.back-link-right{
+  justify-content: flex-end;
+  padding: 100px 0px 0px 0px;
 }
 .back-link-btn{
-  margin: 20px 55px;
   text-decoration: none;
   display: flex;
   align-items: center;
-}
-.back-link-btn-trip{
-  margin: 100px 55px auto auto;
-  justify-content: flex-end;
-}
-.back-link-btn-details{
-  margin: 20px 55px 20px 55px;
-  justify-content: flex-end;
-}
-.back-link-btn-form{
-  margin-left: 55px;
 }
 button.form-button{
   background-color: #0f0043;
@@ -1045,6 +1054,7 @@ button.form-button{
   text-align: center;
   color: rgb(210, 210, 210);
   font-size: 30px;
+  margin-top: 50px;
 }
 .pop-up-error{
   text-align: center;
@@ -1090,27 +1100,6 @@ input[type="time"]{
   .img-container{
     width: 130px;
     height: 130px;
-  }
-  .back-link{
-    padding: 20px 20px;
-  }
-  .back-link-btn,  .back-link-btn-details{
-    margin: 0px;
-  }
-  .back-link-btn-details{
-    margin-right: 45px;
-  }
-  .back-link-btn-trip{
-    margin: 80px 45px auto auto;
-  }
-  .back-btn-form{
-    margin: 0px 40px;
-  }
-  .back-link-form{
-    padding: 20px 40px;
-  }
-  .back-link-btn-form{
-    margin-left: 40px;
   }
   .header-text{
     padding: 85px 0px 0px 0px;
@@ -1165,9 +1154,6 @@ input[type="time"]{
     margin-bottom: 0;
     font-size: 12px;
   }
-  .navbar{
-    margin: 0px 10px;
-  }
   .details{
     display: block;
     grid-column-gap: 0px;
@@ -1190,9 +1176,6 @@ input[type="time"]{
     padding: 0;
     margin-top: 20px;
   }
-  h2{
-    font-size: 12px;
-  }
   label{
     font-size: 12px;
   }
@@ -1207,8 +1190,6 @@ input[type="time"]{
     height: 300px;
   }
   .details-wrapper{
-    margin: 0px 20px;
-    padding: 20px;
     grid-column-gap: 20px;
     column-gap: 20px;
   }
@@ -1234,13 +1215,6 @@ input[type="time"]{
   }
   .trip-details-title{
     font-size: 12px;
-  }
-  .links{
-    margin: 0;
-    padding: 10px 20px;
-  }
-  .time{
-    font-size: 18px;
   }
   .itinerary-info{
     padding: 10px 20px;
@@ -1308,29 +1282,11 @@ input[type="time"]{
     width: 100px;
     height: 100px;
   }
-  .back-link{
-    padding: 20px 20px;
-  }
-  .back-link-btn,  .back-link-btn-details{
-    margin: 0px;
-  }
-  .back-link-btn-details{
-    margin-right: 35px;
-  }
-  .back-link-btn-trip{
-    margin: 80px 35px auto auto;
-  }
-  .back-link-btn-form{
-    margin-left: 35px;
-  }
   .details-row-trips{
     margin: 20px auto;
   }
   .back-btn-form{
     margin: 0px 40px;
-  }
-  .back-link-form{
-    padding: 20px 40px;
   }
   .header-text{
     padding: 85px 0px 0px 0px;
@@ -1388,9 +1344,6 @@ input[type="time"]{
     margin-bottom: 0;
     font-size: 12px;
   }
-  .navbar{
-    margin: 0px 10px;
-  }
   .details{
     display: block;
     grid-column-gap: 0px;
@@ -1416,9 +1369,6 @@ input[type="time"]{
   .packing-form-wrapper{
     margin: 10px 20px;
   }
-  h2{
-    font-size: 12px;
-  }
   label{
     font-size: 12px;
   }
@@ -1433,8 +1383,6 @@ input[type="time"]{
     height: 300px;
   }
   .details-wrapper{
-    margin: 0px 20px;
-    padding: 20px;
     grid-column-gap: 20px;
     column-gap: 20px;
   }
@@ -1462,14 +1410,11 @@ input[type="time"]{
   }
   .details-info{
     width: auto;
-    margin: 10px 0px 0px 0px;
+    /* margin: 10px 0px 0px 0px; */
   }
   .links{
     margin: 0;
     padding: 10px 20px;
-  }
-  .time{
-    font-size: 18px;
   }
   .itinerary-info{
     padding: 10px 20px;
@@ -1550,23 +1495,8 @@ input[type="time"]{
   .header-text-trip-form{
     padding: 85px 0px 30px 0px;
   }
-  .back-link{
-    padding: 20px 20px;
-  }
-  .back-link-btn,  .back-link-btn-details{
-    margin: 0px;
-  }
-  .back-link-btn-details{
-    margin-right: 25px;
-  }
-  .back-link-form{
-    padding: 20px 40px;
-  }
   .back-btn-form{
     margin: 0px 25px;
-  }
-  .back-link-btn-form{
-    margin-left: 25px;
   }
   .header-text{
     padding: 95px 0px 0px 0px;
@@ -1613,7 +1543,7 @@ input[type="time"]{
     right: -10px;
   }
   .trips-header{
-    font-size: 15px;
+    font-size: 20px;
     display: inline-block;
     margin: 10px;
     padding: 10px;
@@ -1621,6 +1551,7 @@ input[type="time"]{
     color: #0f0043;
     cursor: pointer;
     position: relative;
+    font-weight: 300;
   }
   .trips-header-wrapper, .trip-listings{
     margin: 0;
@@ -1629,10 +1560,6 @@ input[type="time"]{
   .trips-header-wrapper{
     column-gap: 0;
     justify-content: flex-start;
-  }
-  .trips-header{
-    margin: 10px;
-    font-weight: 300;
   }
   .dropdown-content{
     position: relative;
@@ -1665,9 +1592,6 @@ input[type="time"]{
   .details-row{
     display: block;
     margin: 90px auto;
-  }
-  .back-link-btn-trip{
-    display: none;
   }
   #trip-form-wrapper{
     display: flex;
@@ -1754,9 +1678,6 @@ input[type="time"]{
     padding: 0;
     margin-top: 20px;
   }
-  h2{
-    font-size: 12px;
-  }
   label{
     font-size: 12px;
   }
@@ -1779,9 +1700,11 @@ input[type="time"]{
   }
   .details-wrapper{
     display: block;
-    margin: 0px 20px;
-    padding: 20px;
   }
+  .details-container, .map-details{
+  margin: 0px 40px;
+}
+
   .line-details{
     display: none;
   }
@@ -1818,8 +1741,8 @@ input[type="time"]{
     width: 100%;
   }
   .trip-info{
-    display: block;
-    padding: 0px 20px;
+    flex-direction: column;
+    row-gap: 20px;
   }
   .icons{
     padding: 20px 20px 0px 20px;
@@ -1829,14 +1752,7 @@ input[type="time"]{
   }
   .details-info{
     width: auto;
-    margin: 10px 0px 0px 0px;
-  }
-  .links{
-    margin: 0;
-    padding: 10px 20px;
-  }
-  .time{
-    font-size: 18px;
+    /* margin: 10px 0px 0px 0px; */
   }
   .itinerary-info{
     padding: 10px 20px;
@@ -1889,15 +1805,6 @@ input[type="time"]{
   #mobile{
     display: block;
   }
-  .back-link{
-    padding: 20px 20px;
-  }
-  .back-link-btn-trip{
-    display: none;
-  }
-  .back-link-btn,  .back-link-btn-details{
-    margin: 0px 20px;
-  }
   #mobile i{
     font-size: 24px;
     cursor: pointer;
@@ -1925,7 +1832,6 @@ input[type="time"]{
     right: -10px;
    }
    .trips-header{
-    font-size: 15px;
     display: inline-block;
     margin: 10px;
     padding: 10px;
@@ -1993,9 +1899,14 @@ input[type="time"]{
   .row{
     display: none;
   }
-  form{
+  /* form{
+    padding: 30px 30px;
+  } */
+
+  form {
     padding: 30px 30px;
   }
+
   .mobile{
     display: flex;
     column-gap: 15px;
@@ -2074,7 +1985,7 @@ input[type="time"]{
     margin-top: 20px;
   }
   h2{
-    font-size: 12px;
+    font-size: 15px;
   }
   label{
     font-size: 12px;
@@ -2113,8 +2024,6 @@ input[type="time"]{
   }
   .details-wrapper{
     display: block;
-    margin: 0px 20px;
-    padding: 20px;
   }
   .line-details{
     display: none;
@@ -2124,6 +2033,10 @@ input[type="time"]{
     height: 220px;
     margin-top: 20px;
   }
+  .details-container, .map-details{
+  margin: 0px 40px;
+}
+
   .header-img{
     height: 300px
   }
@@ -2152,8 +2065,8 @@ input[type="time"]{
     width: 100%;
   }
   .trip-info{
-    display: block;
-    padding: 0px 20px;
+    flex-direction: column;
+    row-gap: 20px;
   }
   .icons{
     padding: 20px 20px 0px 20px;
@@ -2163,14 +2076,7 @@ input[type="time"]{
   }
   .details-info{
     width: auto;
-    margin: 10px 0px 0px 0px;
-  }
-  .links{
-    margin: 0;
-    padding: 10px 20px;
-  }
-  .time{
-    font-size: 18px;
+    /* margin: 10px 0px 0px 0px; */
   }
   .itinerary-info{
     padding: 10px 20px;
@@ -2220,7 +2126,23 @@ input[type="time"]{
     width: 80%;
     padding: 70px 0px;
   }
-  #login-form{
+  #login-form, .signup-form{
     padding: 30px 30px;
+    background-color: transparent;
+  }
+  .login-form-input{
+    border-bottom: none;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-left: 10px;
+  }
+  a.link.login-link, .form-text, .photo-upload-text {
+    color: white;
+    text-shadow: 0 2px 3px rgba(0,0,0,.3);
+  }
+  ::-webkit-input-placeholder {
+    color: #0f0043;
+    padding-left: 10px;
   }
 }

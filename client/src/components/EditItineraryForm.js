@@ -393,7 +393,7 @@ function EditItineraryForm() {
           </form>
         </div>
         <div className="back-link">
-          <div className="back-link-btn back-link-btn-form">
+          <div className="back-link-btn">
             <Link className="link" to={`/trips/${trip_id}`}>
               <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
               <p className="text">

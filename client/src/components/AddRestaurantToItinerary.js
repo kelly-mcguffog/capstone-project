@@ -199,8 +199,8 @@ function AddRestaurantToItinerary({ onAddItinerary }) {
             </div>
           </form>
         </div>
-        <div className={trip_id ? "back-link back-link-form" : ""}>
-          <div className="back-link-btn back-link-btn-form">
+            <div className="back-link">
+            <div className="back-link-btn">
             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
             <Link className="link" to={getDetailsUrl()}>
               <p className="text">

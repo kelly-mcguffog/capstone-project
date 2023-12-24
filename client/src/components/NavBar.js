@@ -42,10 +42,10 @@ function NavBar() {
                 </Link>
                 <div id="nav-right" className={isMobile ? "navbar active" : "navbar inactive"}>
                     <div className="dropdown">
-                        <h3 onClick={handleDropdown} className="dropbtn">
+                        <h2 onClick={handleDropdown} className="dropbtn">
                             {user.first_name} {user.last_name}{" "}
                             <i className="fa-solid fa-caret-down"></i>
-                        </h3>
+                        </h2>
                         <div
                             className={
                                 isDropdown || isMobile ? "dropdown-content visible" : "dropdown-content hidden"

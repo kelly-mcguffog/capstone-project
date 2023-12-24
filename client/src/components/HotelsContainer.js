@@ -40,13 +40,15 @@ function HotelsContainer({ search, setSearch, handleSearch }) {
     <>
       <DestinationDetailsHeader destination={destination} search={search} setSearch={setSearch} />
       {id ?
-        <div className="back-link-btn back-link-btn-trip">
+        <div className="back-link back-link-right">
+        <div className="back-link-btn">
           <Link className="link" to={`/trips/${id}`}>
             <p className="text">
               Return to Trip
             </p>
           </Link>
           <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
+        </div>
         </div>
         : null}
       <div className={id ? "details-row details-row-trips" : "details-row"} >

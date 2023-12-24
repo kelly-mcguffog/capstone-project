@@ -125,7 +125,7 @@ function SignUp() {
               id="username"
               name="username"
               autoComplete="off"
-              placeholder="username"
+              placeholder="Username"
               value={formData.username}
               onChange={handleChange}
               className={`login-form-input ${errors.username ? "input-error" : ""
@@ -142,7 +142,7 @@ function SignUp() {
               type="password"
               id="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
               autoComplete="current-password"
@@ -160,7 +160,7 @@ function SignUp() {
               type="password"
               id="password_confirmation"
               name="password_confirmation"
-              placeholder="password confirmation"
+              placeholder="Password Confirmation"
               value={formData.password_confirmation}
               onChange={handleChange}
               autoComplete="current-password"

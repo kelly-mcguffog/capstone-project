@@ -48,7 +48,7 @@ function HotelDetails() {
             <GridHeader photo1={photo1} photo2={photo2} photo3={photo3} />
             <div className="background">
                 <div className="back-link">
-                    <div className={trip_id ? "back-link-btn" : "back-link-btn back-link-btn-details"}>
+                <div className="back-link-btn">
                         <Link className="link" to={getListingsUrl()}>
                             <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
                             <p className="text">
