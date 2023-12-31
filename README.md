@@ -54,8 +54,6 @@ $ npm start --prefix client
 <img src="./Demo/Capstone_Wanderlust_Demo-2.gif" width="245"/>
 <img src="./Demo/Capstone_Wanderlust_Demo-3.gif" width="245"/>
 <img src="./Demo/Capstone_Wanderlust_Demo-4.gif" width="245"/>
-</p>
-<p float="left">
 <img src="./Demo/Capstone_Wanderlust_Demo-5.gif" width="245"/>
 <img src="./Demo/Capstone_Wanderlust_Demo-6.gif" width="245"/>
 <img src="./Demo/Capstone_Wanderlust_Demo-7.gif" width="245"/>
