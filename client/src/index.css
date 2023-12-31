@@ -137,7 +137,7 @@ header button, .dropdown {
 }
 div.dropdown-content.visible a,
 div.dropdown-content button.logout, .delete-btn{
-    margin: 10px;
+  margin: 10px;
   padding: 10px;
   display: block;
   text-decoration: none;
@@ -989,7 +989,7 @@ button.form-button{
   display: block;
   color: firebrick;
   font-size: 12px;
-  margin: 5px 0px;
+  margin: 5px 20px;
 }
 .error-message-time{
   width: 150px;
