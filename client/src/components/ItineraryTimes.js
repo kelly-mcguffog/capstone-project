@@ -111,7 +111,6 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
     setIsShowing(isShowing => !isShowing)
   }
 
-  console.log(errors)
   return (
     <div className="itinerary-activity-listing">
       <div className="icon">
