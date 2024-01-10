@@ -45,11 +45,11 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
     return (
         <div className="trip-listings">
             <NavLink className="trip-links" to={`/trips/${id}`}>
-                <div className="trip">
-                    <h3 className="trip-destination-name">
+                <div>
+                    <h3>
                         {city}, {country}
                     </h3>
-                    <h5 className="user-input">{formattedDate}</h5>
+                    <h5>{formattedDate}</h5>
                     {errors && (
                         <div className="error-message">
                             <span>{errors}</span>
@@ -58,7 +58,7 @@ function TripID({ trip, onDeleteTrip, isShowing }) {
                 </div>
             </NavLink>
             {isShowing ?
-                <div className="trip-icon">
+                <div className="trip-menu"> 
                     <Link to={`/trips/${trip.id}/edit`}><i className="fa-solid fa-pen-to-square"></i></Link>
                     <i onClick={handleDeleteTrip} className="fa-solid fa-trash"></i>
                 </div>

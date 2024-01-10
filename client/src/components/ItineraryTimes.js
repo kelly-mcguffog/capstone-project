@@ -112,23 +112,31 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
   }
 
   return (
-    <div className="itinerary-activity-listing">
+    <div className="details itinerary-cards">
       <div className="icon">
-        {itinerary_time.activity ? <i className="fa-solid fa-map"></i> : null}
-        {itinerary_time.hotel ? <i className="fa-solid fa-hotel"></i> : null}
-        {itinerary_time.restaurant ? <i className="fa-solid fa-utensils"></i> : null}
+        {itinerary_time.activity ?
+          <div className="circle-container">
+            <i className="fa-solid fa-map"></i>
+          </div> : null}
+        {itinerary_time.hotel ?
+          <div className="circle-container">
+            <i className="fa-solid fa-hotel"></i>
+          </div> : null}
+        {itinerary_time.restaurant ?
+          <div className="circle-container">
+            <i className="fa-solid fa-utensils"></i> </div> : null}
       </div>
       {itinerary_time.hotel && (
-        <div className="itinerary-container">
-          <div className="time-menu">
-            <h3 className="time">{formattedTime}</h3>
+        <div className="itinerary-details-info details-info">
+          <div className="info-details">
+            <h3>{formattedTime}</h3>
 
             <div className="dropdown">
-              <h2 className="dropbtn"><i onClick={handleDropdown} className="fa-solid fa-bars"></i></h2>
+              <i onClick={handleDropdown} className="fa-solid fa-bars"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
-                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}>Edit</Link>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><h3 className="nav-link">Edit</h3></Link>
                 <hr></hr>
-                <h2 onClick={() => deleteItineraryTime("hotel")} className="delete-btn">Delete</h2>
+                <button onClick={() => deleteItineraryTime("hotel")} className="nav-link"><h3 className="nav-link navlink-button">Delete</h3></button>
               </div>
             </div>
           </div>
@@ -136,15 +144,15 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
         </div>
       )}
       {itinerary_time.restaurant && (
-        <div className="itinerary-container">
-          <div className="time-menu">
-            <h3 className="time">{formattedTime}</h3>
+        <div className="itinerary-details-info details-info">
+          <div className="info-details">
+            <h3>{formattedTime}</h3>
             <div className="dropdown">
-            <h2 className="dropbtn"><i onClick={handleDropdown} className="fa-solid fa-bars"></i></h2>
+              <i onClick={handleDropdown} className="fa-solid fa-bars"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
-                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}>Edit</Link>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><h3 className="nav-link">Edit</h3></Link>
                 <hr></hr>
-                <h2 onClick={() => deleteItineraryTime("restaurant")} className="delete-btn">Delete</h2>
+                <button onClick={() => deleteItineraryTime("restaurant")} className="nav-link"><h3 className="nav-link navlink-button">Delete</h3></button>
               </div>
             </div>
           </div>
@@ -152,17 +160,17 @@ function ItineraryTimes({ trip, itinerary_day, itinerary_time }) {
         </div>
       )}
       {itinerary_time.activity && (
-        <div className="itinerary-container">
-          <div className="time-menu">
+        <div className="itinerary-details-info details-info">
+          <div className="info-details">
             <div>
-              <h3 className="time">{formattedTime}</h3>
+              <h3>{formattedTime}</h3>
             </div>
             <div className="dropdown">
-            <h2 className="dropbtn"><i onClick={handleDropdown} className="fa-solid fa-bars"></i></h2>
+              <i onClick={handleDropdown} className="fa-solid fa-bars"></i>
               <div className={isShowing ? "dropdown-content visible" : "dropdown-content hidden"}>
-                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}>Edit</Link>
+                <Link to={`/trips/${trip.id}/itinerary_days/${itinerary_day.id}/itinerary_times/${itinerary_time.id}/edit`}><h3 className="nav-link">Edit</h3></Link>
                 <hr></hr>
-                <h2 onClick={() => deleteItineraryTime("activity")} className="delete-btn">Delete</h2>
+                <button onClick={() => deleteItineraryTime("activity")} className="nav-link"><h3 className="nav-link navlink-button">Delete</h3></button>
               </div>
             </div>
           </div>

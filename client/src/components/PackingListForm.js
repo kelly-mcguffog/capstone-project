@@ -45,14 +45,12 @@ function PackingListForm({ onAddPackingListItem }) {
     }
 
     return (
-        <div className="packing-form-wrapper">
-            <form className="packing-form-container" onSubmit={handleSubmit}>
-                <h1 className="packing-list-header-text">Packing to-do list</h1>
-                <div className="packing-form">
-                    <div className="label packing-label">
-                        <div className="input-text">
-                            <h3 className="input-title">Item</h3>
-                        </div>
+        <div className="details">
+            <form className="packing-list-form" onSubmit={handleSubmit}>
+                <h1 id="packing-header">Packing to-do list</h1>
+                <div className="trip-form">
+                    <div>
+                        <h3>Item</h3>
                         <input
                             type="text"
                             name="item"
@@ -71,10 +69,8 @@ function PackingListForm({ onAddPackingListItem }) {
                             </span>
                         )}
                     </div>
-                    <div className="label packing-label">
-                        <div className="input-text">
-                            <h3 className="input-title">Quantity</h3>
-                        </div>
+                    <div>
+                        <h3>Quantity</h3>
                         <input
                             type="text"
                             name="quantity"
@@ -93,7 +89,7 @@ function PackingListForm({ onAddPackingListItem }) {
                             </span>
                         )}
                     </div>
-                    <button type="submit">
+                    <button className="submit-arrow" type="submit">
                         <i className="fa-solid fa-plus"></i>
                     </button>
                 </div>

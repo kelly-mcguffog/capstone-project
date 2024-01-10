@@ -61,14 +61,14 @@ function SignUp() {
 
   return (
     <div className="container">
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <h1 className="form-text head">Wanderlust</h1>
-        <h3 className="form-text subhead">Enter your details to create an account.</h3>
-        <div className="login-form">
+      <div className="form-wrapper">
+        <form className="form" onSubmit={handleSubmit}>
+          <h1>Wanderlust</h1>
+          <h3>Enter your details to create an account.</h3>
+          {/* <div className="login-form"> */}
           <div className="credentials">
             <input
               type="text"
-              id="first_name"
               name="first_name"
               autoComplete="off"
               placeholder="First Name"
@@ -86,7 +86,6 @@ function SignUp() {
             )}
             <input
               type="text"
-              id="last_name"
               name="last_name"
               placeholder="Last Name"
               autoComplete="off"
@@ -104,7 +103,6 @@ function SignUp() {
             )}
             <input
               type="text"
-              id="tsa_precheck"
               name="tsa_precheck"
               placeholder="TSA Precheck Number"
               autoComplete="off"
@@ -122,7 +120,6 @@ function SignUp() {
             )}
             <input
               type="text"
-              id="username"
               name="username"
               autoComplete="off"
               placeholder="Username"
@@ -140,7 +137,6 @@ function SignUp() {
             )}
             <input
               type="password"
-              id="password"
               name="password"
               placeholder="Password"
               value={formData.password}
@@ -158,7 +154,6 @@ function SignUp() {
             )}
             <input
               type="password"
-              id="password_confirmation"
               name="password_confirmation"
               placeholder="Password Confirmation"
               value={formData.password_confirmation}
@@ -174,29 +169,26 @@ function SignUp() {
                   : errors.password_confirmation}
               </span>
             )}
-            <div className="photo-upload">
-              <label className="photo-upload-text" htmlFor="photo">Upload Photo:</label>
-              <input
-                type="file"
-                id="photo"
-                name="avatar"
-                accept="image/*"
-                onChange={handleChange}
-              />
-            </div>
+            <input
+              type="file"
+              id="photo"
+              name="avatar"
+              accept="image/*"
+              onChange={handleChange}
+            />
           </div>
-        </div>
-        <button className="form-button" type="submit">
-          Sign Up
-        </button>
-        <h5 className="form-text">
-          Already a member?
-          <br />
-          <Link className="link login-link" to="/login">
-            Login to your account.
-          </Link>
-        </h5>
-      </form>
+          <button className="form-button" type="submit">
+            Sign Up
+          </button>
+          <h5 className="form-text">
+            Already a member?
+            <br />
+            <Link className="link login-link" to="/login">
+              Login to your account.
+            </Link>
+          </h5>
+        </form>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import TripsContainer from "./TripsContainer";
 
 
-function TripsListings() {
+function TripsListings({isMobile}) {
 
     const { user } = useContext(UserContext)
     const { trips } = user
@@ -19,9 +19,9 @@ function TripsListings() {
     }
 
     return (
-        <div className="listings">
-            <div className="trips-header-wrapper">
-                <h1 className="trips-header">My Trips</h1>
+        <>
+            <div className={isMobile ? "navbar-header navbar-header-mobile" : "navbar-header"}>
+                <h3 className={isMobile ? "nav-link" : ""}>My Trips</h3>
                 <i onClick={handleShowIcons} className="fa-solid fa-bars dropbtn"></i>
                 <i onClick={handleShowTrips} className={isShowingTrips ? "fa-solid fa-caret-up mobile-drop" : "fa-solid fa-caret-down mobile-drop"}></i>
             </div>
@@ -31,7 +31,7 @@ function TripsListings() {
             {isShowingTrips ?
                 <TripsContainer trips={trips} isShowing={isShowing} />
                 : null}
-        </div>
+        </>
     )
 }
 

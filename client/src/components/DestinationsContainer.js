@@ -34,11 +34,11 @@ function DestinationsContainer({ renderDestinations, destinations }) {
         <div className="arrow-button" onClick={advancePosition}><i className="fa-sharp fa-solid fa-circle-chevron-right"></i></div>
       </div>
       <div className="mobile">
-        <div className="arrow-button mobile-arrow-button" onClick={mobileRetreatPosition}><i className="fa-sharp fa-solid fa-circle-chevron-left"></i></div>
-        <div className="spotlight mobile-spotlight">
+        <div className="arrow-button" onClick={mobileRetreatPosition}><i className="fa-sharp fa-solid fa-circle-chevron-left"></i></div>
+        <div className="spotlight">
           {renderDestinations.slice(position, position + 2)}
         </div>
-        <div className="arrow-button mobile-arrow-button" onClick={mobileAdvancePosition}><i className="fa-sharp fa-solid fa-circle-chevron-right"></i></div>
+        <div className="arrow-button" onClick={mobileAdvancePosition}><i className="fa-sharp fa-solid fa-circle-chevron-right"></i></div>
       </div>
     </>
   );

@@ -42,27 +42,27 @@ function NavBar() {
                 </Link>
                 <div id="nav-right" className={isMobile ? "navbar active" : "navbar inactive"}>
                     <div className="dropdown">
-                        <h2 onClick={handleDropdown} className="dropbtn">
+                        <h3 onClick={handleDropdown} className="dropbtn">
                             {user.first_name} {user.last_name}{" "}
                             <i className="fa-solid fa-caret-down"></i>
-                        </h2>
+                        </h3>
                         <div
                             className={
-                                isDropdown || isMobile ? "dropdown-content visible" : "dropdown-content hidden"
+                                isDropdown || isMobile ? "nav-dropdown-content visible" : "navdropdown-content hidden"
                             }
                         >
                             <Link onClick={handleMenuItemClick} to={`/profile`}>
-                                Profile
+                                <h3 className="nav-link">Profile</h3>
                             </Link>
-                            <hr></hr>
+                            <hr className="mobile-nav-line"></hr>
                             {isMobile ?
                                 <>
-                                    <TripsListings />
-                                    <hr></hr>
+                                    <TripsListings isMobile={isMobile}/>
+                                    <hr className="mobile-nav-line"></hr>
                                 </>
                                 : null}
-                            <button className="logout" onClick={handleLogoutClick}>
-                                Logout
+                            <button className="nav-link navlink-button" onClick={handleLogoutClick}>
+                                <h3 className="nav-link">Logout</h3>
                             </button>
                         </div>
                     </div>

@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LoadingScreen from "./LoadingScreen";
+import ReturnToDetails from "./ReturnToDetails";
+import ReturnToTrip from "./ReturnToTrip";
 
 function AddActivityToItinerary({ onAddItinerary }) {
   const { trip_id, destination_id, id: activity_id } = useParams();
@@ -27,7 +29,7 @@ function AddActivityToItinerary({ onAddItinerary }) {
   });
 
   if (destinations === null) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
 
   const destination = destinations.find(
@@ -115,26 +117,20 @@ function AddActivityToItinerary({ onAddItinerary }) {
     setErrors("")
   }
 
-  const getDetailsUrl = () => {
-    if (trip_id !== undefined) {
-      return `/destinations/${destination_id}/trips/${trip_id}/activities/${activity_id}/details`;
-    } else {
-      return `/destinations/${destination_id}/activities/${activity_id}/details`;
-    }
-  };
-
   return (
-    <div
-      className="header-img"
-      style={{ backgroundImage: `url(${destination.photo})` }}
-    >
-      <div className="header-text">
-        <h1 className="title">Plan Your Trip</h1>
-        <div className="results itinerary-form">
-          <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            <div className="label form-label">
-              <div className="input-text">
-                <h3 className="input-title">Itinerary Day Date</h3>
+    <div className="page-header">
+      <div className="cropped-img-container">
+        <img className="cropped-img" src={destination.photo} alt={destination.city}></img>
+      </div>
+      <div className="header">
+        <div className="header-text">
+          <h1 className="header-copy">Plan Your Trip</h1>
+        </div>
+        <div className="results">
+          <form className="trip-form" onSubmit={handleSubmit}>
+            <div>
+              <div>
+                <h3>Itinerary Day Date</h3>
                 <DatePicker
                   selected={formData.date}
                   onChange={(date) => handleChange({ target: { name: "date", value: date } })}
@@ -146,9 +142,9 @@ function AddActivityToItinerary({ onAddItinerary }) {
                 {formErrors.date && <span className="error-message">{formErrors.date}</span>}
               </div>
             </div>
-            <div className="label form-label">
-              <div className="input-text">
-                <h3 className="input-title">Activity Itinerary Time</h3>
+            <div>
+              <div>
+                <h3>Activity Itinerary Time</h3>
                 <input
                   type="time"
                   name="time"
@@ -158,18 +154,12 @@ function AddActivityToItinerary({ onAddItinerary }) {
                     }`}
                 />
                 {formErrors.time && <span className="error-message">{formErrors.time}</span>}
-                <ErrorMessage deleteError={deleteError} errors={errors} />
-                {errors["activity_itinerary_times.time"] && (
-                  <span className="error-message error-message-time">
-                    {errors["activity_itinerary_times.time"]}
-                  </span>
-                )}
               </div>
             </div>
             {trip_id === undefined && (
-              <div className="label form-label">
-                <div className="input-text">
-                  <h3 className="input-title">Select a Trip</h3>
+              <div>
+                <div>
+                  <h3>Select a Trip</h3>
                   <select
                     name="trip_id"
                     value={formData.trip_id}
@@ -193,33 +183,18 @@ function AddActivityToItinerary({ onAddItinerary }) {
               </div>
             )}
             <div className="form-button">
-              <button type="submit">
-                <i className="fa-solid fa-arrow-right"></i>
+              <button className="submit-arrow" type="submit">
+                <i className="fa-sharp fa-solid fa-circle-chevron-right form-arrow"></i>
               </button>
             </div>
           </form>
         </div>
         <div className="back-link">
-          <div className="back-link-btn">
-            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-            <Link className="link" to={getDetailsUrl()}>
-              <p className="text">
-                Return to Activity
-              </p>
-            </Link>
-          </div>
-          {trip_id && (
-            <div className="back-link-btn">
-              <Link className="link" to={`/trips/${trip_id}`}>
-                <p className="text">
-                  Return to Trip
-                </p>
-                <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
-              </Link>
-            </div>
-          )}
+          <ReturnToDetails activity_id={activity_id} />
+          <ReturnToTrip />
         </div>
       </div>
+      <ErrorMessage deleteError={deleteError} errors={errors} />
     </div>
   );
 }

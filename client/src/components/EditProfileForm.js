@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate, Link } from "react-router-dom";
-import TripsListings from "./TripsListings";
+import TripsSideBar from "./TripsSideBar";
 import NavBar from "./NavBar";
 import UserMap from "./UserMap";
 import { useLoadScript } from "@react-google-maps/api";
@@ -85,156 +85,145 @@ function EditProfileForm() {
     formDataToSend.append("tsa_precheck", formData.tsa_precheck);
     formDataToSend.append("password", formData.password);
 
-  fetch(`/users/${user.id}`, {
-    method: "PATCH",
-    body: formDataToSend,
-  })
-    .then((r) => {
-      if (r.ok) {
-        return r.json();
-      } else {
-        return r.json().then((err) => Promise.reject(err.errors));
-      }
+    fetch(`/users/${user.id}`, {
+      method: "PATCH",
+      body: formDataToSend,
     })
-    .then((updatedUser) => {
-      setIsUploading(false);
-      setUser(updatedUser);
-      navigate('/profile');
-    })
-};
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        } else {
+          return r.json().then((err) => Promise.reject(err.errors));
+        }
+      })
+      .then((updatedUser) => {
+        setIsUploading(false);
+        setUser(updatedUser);
+        navigate('/profile');
+      })
+  };
 
   return (
     <div className="side-bar">
-      <div className="my-trips">
-        <TripsListings />
-      </div>
-      <div className="trips welcome-header">
-        <NavBar />
+      <TripsSideBar />
+      <div className="profile-wrapper">
+        <div className="desktop-nav">
+          <NavBar />
+        </div>
         <div className="map-wrapper">
           {isLoaded ? (
             <UserMap destinationMarkers={destinationMarkers} />
           ) : (
-            <LoadingScreen />
+            <div className="loading">Loading...</div>
           )}
         </div>
-        <form className="profile-form-container" onSubmit={handleSubmitEdit}>
-        {isUploading && <LoadingScreen />}
-          <div className="details-profile-container">
-            <div className="photo-upload">
-              <div className="details-img-wrapper">
-                <div className="details-img-container">
-                  <img className="details-img" alt={username} src={avatar.url}></img>
-                </div>
-              </div>
+        <form className="trips" onSubmit={handleSubmitEdit}>
+          {isUploading && <LoadingScreen />}
+          <div className="details profile-details">
+            <div className="details-img-container">
+              <img className="cropped-img" alt={username} src={avatar.url}></img>
               <input
                 type="file"
-                id="photo"
                 name="avatar"
                 accept="image/*"
                 onChange={handleChangeInput}
               />
             </div>
-            <div className="credentials profile-credentials">
-              <div className="profile-form-input">
-                <div className="input-text">
-                  <h3 className="input-title">First Name</h3>
+            <div className="details-info">
+              <div className="details-copy profile-form-details-copy">
+                <div>
+                  <h3>First Name</h3>
+                  <input
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    autoComplete="off"
+                    placeholder="First Name"
+                    value={first_name}
+                    onChange={handleChangeInput}
+                    className={`login-form-input ${errors.first_name ? "input-error" : ""
+                      }`}
+                  />
+                  {errors.first_name && (
+                    <span className="error-message">
+                      {Array.isArray(errors.first_name)
+                        ? errors.first_name.join(", ")
+                        : errors.first_name}
+                    </span>
+                  )}
                 </div>
-                <input
-                  type="text"
-                  id="first_name"
-                  name="first_name"
-                  autoComplete="off"
-                  placeholder="First Name"
-                  value={first_name}
-                  onChange={handleChangeInput}
-                  className={`login-form-input ${errors.first_name ? "input-error" : ""
-                    }`}
-                />
-                {errors.first_name && (
-                  <span className="error-message">
-                    {Array.isArray(errors.first_name)
-                      ? errors.first_name.join(", ")
-                      : errors.first_name}
-                  </span>
-                )}
-              </div>
-              <div className="profile-form-input">
-                <div className="input-text">
-                  <h3 className="input-title">Last Name</h3>
+                <div>
+                  <h3>Last Name</h3>
+                  <input
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="Last Name"
+                    autoComplete="off"
+                    value={last_name}
+                    onChange={handleChangeInput}
+                    className={`login-form-input ${errors.last_name ? "input-error" : ""
+                      }`}
+                  />
+                  {errors.last_name && (
+                    <span className="error-message">
+                      {Array.isArray(errors.last_name)
+                        ? errors.last_name.join(", ")
+                        : errors.last_name}
+                    </span>
+                  )}
                 </div>
-                <input
-                  type="text"
-                  id="last_name"
-                  name="last_name"
-                  placeholder="Last Name"
-                  autoComplete="off"
-                  value={last_name}
-                  onChange={handleChangeInput}
-                  className={`login-form-input ${errors.last_name ? "input-error" : ""
-                    }`}
-                />
-                {errors.last_name && (
-                  <span className="error-message">
-                    {Array.isArray(errors.last_name)
-                      ? errors.last_name.join(", ")
-                      : errors.last_name}
-                  </span>
-                )}
-              </div>
-              <div className="profile-form-input">
-                <div className="input-text">
-                  <h3 className="input-title">TSA Precheck Number</h3>
+                <div>
+                  <h3>TSA Precheck Number</h3>
+                  <input
+                    type="text"
+                    id="tsa_precheck"
+                    name="tsa_precheck"
+                    placeholder="TSA Precheck Number"
+                    autoComplete="off"
+                    value={tsa_precheck}
+                    onChange={handleChangeInput}
+                    className={`login-form-input ${errors.tsa_precheck ? "input-error" : ""
+                      }`}
+                  />
+                  {errors.tsa_precheck && (
+                    <span className="error-message">
+                      {Array.isArray(errors.tsa_precheck)
+                        ? errors.tsa_precheck.join(", ")
+                        : errors.tsa_precheck}
+                    </span>
+                  )}
                 </div>
-                <input
-                  type="text"
-                  id="tsa_precheck"
-                  name="tsa_precheck"
-                  placeholder="TSA Precheck Number"
-                  autoComplete="off"
-                  value={tsa_precheck}
-                  onChange={handleChangeInput}
-                  className={`login-form-input ${errors.tsa_precheck ? "input-error" : ""
-                    }`}
-                />
-                {errors.tsa_precheck && (
-                  <span className="error-message">
-                    {Array.isArray(errors.tsa_precheck)
-                      ? errors.tsa_precheck.join(", ")
-                      : errors.tsa_precheck}
-                  </span>
-                )}
-              </div>
-              <div className="profile-form-input">
-                <div className="input-text">
-                  <h3 className="input-title">Username</h3>
+                <div>
+                  <h3>Username</h3>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    autoComplete="off"
+                    placeholder="Username"
+                    value={username}
+                    onChange={handleChangeInput}
+                    className={`login-form-input ${errors.username ? "input-error" : ""
+                      }`}
+                  />
+                  {errors.username && (
+                    <span className="error-message">
+                      {Array.isArray(errors.username)
+                        ? errors.username.join(", ")
+                        : errors.username}
+                    </span>
+                  )}
                 </div>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  autoComplete="off"
-                  placeholder="Username"
-                  value={username}
-                  onChange={handleChangeInput}
-                  className={`login-form-input ${errors.username ? "input-error" : ""
-                    }`}
-                />
-                {errors.username && (
-                  <span className="error-message">
-                    {Array.isArray(errors.username)
-                      ? errors.username.join(", ")
-                      : errors.username}
-                  </span>
-                )}
-              </div>
 
-              <div className="btn-container">
-                <Link className="page-btn main-btn secondary-btn" to={'/profile'}>
-                  Cancel
-                </Link>
-                <button className="page-btn main-btn profile-btn" type="submit">
-                  Save
-                </button>
+                <div className="btn-container">
+                  <Link className="btn secondary-btn" to={'/profile'}>
+                    Cancel
+                  </Link>
+                  <button className="btn primary-btn" type="submit">
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           </div>

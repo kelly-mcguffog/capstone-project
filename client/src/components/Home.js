@@ -22,7 +22,7 @@ function Home({ search, setSearch }) {
   }, [search, destinations]);
 
   if (destinations === null) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
 
   const renderDestinations = destinations.map((destination) => (
@@ -30,7 +30,7 @@ function Home({ search, setSearch }) {
   ));
 
   return (
-    <div className="header">
+    <div className="wrapper">
       <Header search={search} setSearch={setSearch} searchDestinations={searchDestinations} />
       <DestinationsContainer
         renderDestinations={renderDestinations}

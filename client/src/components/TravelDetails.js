@@ -42,17 +42,17 @@ function TravelDetails({ trip }) {
                 </div>
             </div>
             <div className="trip-info">
-                <div className="details-info">
+                <div className="details details-info">
                     <h2>Outbound</h2>
-                    <h3 className="trip-details-title">{formattedOutboundeDate} at {formattedOutboundTime}</h3>
-                    <h3 className="trip-details-title">Flight Number: {outbound_flight_number}</h3>
-                    <h3 className="trip-details-title">Confirmation Number: {confirmation_number}</h3>
+                    <h3>{formattedOutboundeDate} at {formattedOutboundTime}</h3>
+                    <h3>Flight Number: {outbound_flight_number}</h3>
+                    <h3>Confirmation Number: {confirmation_number}</h3>
                 </div>
-                <div className="details-info">
+                <div className="details details-info">
                     <h2>Return</h2>
-                    <h3 className="trip-details-title">{formattedReturnDate} at {formattedReturnTime}</h3>
-                    <h3 className="trip-details-title">Flight Number: {return_flight_number}</h3>
-                    <h3 className="trip-details-title">Confirmation Number: {confirmation_number}</h3>
+                    <h3>{formattedReturnDate} at {formattedReturnTime}</h3>
+                    <h3>Flight Number: {return_flight_number}</h3>
+                    <h3>Confirmation Number: {confirmation_number}</h3>
                 </div>
             </div>
         </>

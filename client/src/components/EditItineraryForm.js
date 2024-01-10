@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
 import { UserContext } from "../context/UserContext";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { parseISO } from "date-fns";
 import LoadingScreen from "./LoadingScreen";
+import ReturnToTrip from "./ReturnToTrip";
 
 
 function EditItineraryForm() {
@@ -70,7 +71,7 @@ function EditItineraryForm() {
   const [formData, setFormData] = useState(initialFormData);
 
   if (!findTrip || !findItineraryDay || !findItineraryTime || !destinations || !user) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
 
   const destination = destinations.find(
@@ -296,17 +297,19 @@ function EditItineraryForm() {
   }
 
   return (
-    <div
-      className="header-img"
-      style={{ backgroundImage: `url(${destination.photo})` }}
-    >
+    <div className="page-header">
+    <div className="cropped-img-container">
+      <img className="cropped-img" src={destination.photo} alt={destination.city}></img>
+    </div>
+    <div className="header">
       <div className="header-text">
-        <h1 className="title">Plan Your Trip</h1>
-        <div className="results itinerary-form">
-          <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            <div className="label form-label">
-              <div className="input-text">
-                <h3 className="input-title">Itinerary Day Date</h3>
+        <h1 className="header-copy">Plan Your Trip</h1>
+      </div>
+      <div className="results">
+        <form className="trip-form" onSubmit={handleSubmit}>
+          <div>
+            <div>
+                <h3>Itinerary Day Date</h3>
                 <DatePicker
                   selected={formData.date}
                   placeholderText="MM/DD/YYYY"
@@ -320,9 +323,9 @@ function EditItineraryForm() {
             </div>
 
             {findItineraryTime.restaurant && (
-              <div className="label form-label">
-                <div className="input-text">
-                  <h3 className="input-title">Restaurant Itinerary Time</h3>
+              <div>
+                <div>
+                  <h3>Restaurant Itinerary Time</h3>
                   <input
                     type="time"
                     name="time"
@@ -342,9 +345,9 @@ function EditItineraryForm() {
               </div>
             )}
             {findItineraryTime.hotel && (
-              <div className="label form-label">
-                <div className="input-text">
-                  <h3 className="input-title">Hotel Itinerary Time</h3>
+              <div>
+                <div>
+                  <h3>Hotel Itinerary Time</h3>
                   <input
                     type="time"
                     name="time"
@@ -364,9 +367,9 @@ function EditItineraryForm() {
               </div>
             )}
             {findItineraryTime.activity && (
-              <div className="label form-label">
-                <div className="input-text">
-                  <h3 className="input-title">Activity Itinerary Time</h3>
+              <div>
+                <div>
+                  <h3>Activity Itinerary Time</h3>
                   <input
                     type="time"
                     name="time"
@@ -386,21 +389,14 @@ function EditItineraryForm() {
               </div>
             )}
             <div className="form-button">
-              <button type="submit">
-                <i className="fa-solid fa-arrow-right"></i>
+              <button className="submit-arrow" type="submit">
+              <i className="fa-sharp fa-solid fa-circle-chevron-right form-arrow"></i>
               </button>
             </div>
           </form>
         </div>
-        <div className="back-link">
-          <div className="back-link-btn">
-            <Link className="link" to={`/trips/${trip_id}`}>
-              <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-              <p className="text">
-                Return to Trip
-              </p>
-            </Link>
-          </div>
+        <div className="back-link trip-back-link">
+        <ReturnToTrip />
         </div>
       </div>
     </div>

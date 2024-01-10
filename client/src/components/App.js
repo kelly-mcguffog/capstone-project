@@ -35,7 +35,7 @@ function App() {
   const match4 = useMatch("/profile");
   const match5 = useMatch("/edit");
   const customNavBar = match1 || match2 || match3 || match4 || match5;
- 
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -46,7 +46,7 @@ function App() {
       }
     };
     loadData();
-  }, []); 
+  }, []);
 
   if (loading) {
     return <LoadingScreen />;

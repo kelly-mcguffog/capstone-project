@@ -35,24 +35,26 @@ function PackingListItem({ packingListItem, onUpdatePackingItem, onDeletePacking
     }
 
     return (
-        <div className="packing-list">
-            <div className="list">
-                <h3 className="packing-item">{item}</h3>
+        <div className="packing results">
+            <div>
+                <h3>{item}</h3>
                 <small>qty. {quantity}</small>
             </div>
-            <div className="packing-icons">
-                <label className="round-checkbox">
-                    <input
-                        type="checkbox"
-                        checked={packed}
-                        onChange={handleCheckboxChange}
-                    />
-                    <span className="checkmark"></span>
-                </label>
+            <div className="packing-menu">
+                <div>
+                    <label className="round-checkbox">
+                        <input
+                            type="checkbox"
+                            checked={packed}
+                            onChange={handleCheckboxChange}
+                        />
+                        <span className="checkmark"></span>
+                    </label>
+                </div>
                 <div className="dropdown">
                     <i onClick={handleDropdown} className="fa-solid fa-bars dropbtn"></i>
                     <div className={isDropdown ? "dropdown-content visible" : "dropdown-content hidden"}>
-                        <p onClick={deleteItem} className="drop-text">Delete</p>
+                        <p onClick={deleteItem} className="drop-text nav-link">Delete</p>
                     </div>
                 </div>
             </div>

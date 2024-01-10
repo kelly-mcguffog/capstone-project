@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { DestinationsContext } from "../context/DestinationsContext";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ActivitiesCard from "./ActivitiesCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
 import FilterActivities from "./FilterActivities";
 import LoadingScreen from "./LoadingScreen";
+import ReturnToTrip from "./ReturnToTrip";
 
 function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const { destination_id, id } = useParams();
@@ -14,7 +15,7 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const [filterPrice, setFilterPrice] = useState(0);
 
   if (destinations === null) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
 
   const destination = destinations.find(
@@ -58,18 +59,7 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
   return (
     <>
       <DestinationDetailsHeader destination={destination} search={search} setSearch={setSearch} />
-      {id ?
-        <div className="back-link back-link-right">
-        <div className="back-link-btn">
-          <Link className="link" to={`/trips/${id}`}>
-            <p className="text">
-              Return to Trip
-            </p>
-            <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
-          </Link>
-        </div>
-        </div>
-        : null}
+      <ReturnToTrip />
       <div className={id ? "details-row details-row-trips" : "details-row"} >
         <FilterActivities filterPrice={filterPrice} setFilterPrice={setFilterPrice} setFilterDuration={setFilterDuration} filterDuration={filterDuration} setFilterRating={setFilterRating} filterRating={filterRating} />
         <div className="cards">

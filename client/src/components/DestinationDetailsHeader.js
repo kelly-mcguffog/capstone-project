@@ -16,13 +16,22 @@ function DestinationDetailsHeader({ destination, search, setSearch }) {
     };
 
     return (
-        <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
-            <div className="header-copy">
-                <h1 className="title">Welcome to {city}</h1>
-                {!id ? <Link className="page-btn main-btn trip-btn" to={`/destinations/${destination_id}/trips`}>
-                    Add a Trip
-                </Link> : null}
-                <div className={id ? "results destination-results-trip" : "results destination-results"}>
+
+
+        <div className="page-header">
+            <div className="cropped-img-container">
+                <img className="cropped-img" src={photo} alt={city}></img>
+            </div>
+
+
+            <div className="header">
+                <div className="header-text">
+                    <h1 className="header-copy">Welcome to {city}</h1>
+                    {!id ? <Link className="btn primary-btn" to={`/destinations/${destination_id}/trips`}>
+                        Add a Trip
+                    </Link> : null}
+                </div>
+                <div className={id ? "results" : "results destination-results"}>
                     <div className="nav">
                         <NavLink className="link" to={getUrlFormat("hotels")}>
                             Hotels

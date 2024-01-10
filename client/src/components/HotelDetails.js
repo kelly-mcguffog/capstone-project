@@ -4,6 +4,8 @@ import GridHeader from "./GridHeader";
 import Map from "./Map";
 import { useLoadScript } from "@react-google-maps/api";
 import LoadingScreen from "./LoadingScreen";
+import ReturnToListings from "./ReturnToListings";
+import ReturnToTrip from "./ReturnToTrip";
 
 function HotelDetails() {
 
@@ -22,7 +24,7 @@ function HotelDetails() {
 
     const hotel = hotels.find(hotel => hotel.id === parseInt(id))
 
-    if (!hotel || !isLoaded) return <LoadingScreen/>
+    if (!hotel || !isLoaded) return <LoadingScreen />
 
 
     const { name, average_price, rating, description, address, longitude, latitude, phone_number, url, photo1, photo2, photo3 } = hotel
@@ -35,67 +37,47 @@ function HotelDetails() {
         }
     };
 
-    const getListingsUrl = () => {
-        if (trip_id !== undefined) {
-            return `/destinations/${destination_id}/trips/${trip_id}/hotels`;
-        } else {
-            return `/destinations/${destination_id}/hotels`;
-        }
-    };
-
     return (
         <>
             <GridHeader photo1={photo1} photo2={photo2} photo3={photo3} />
             <div className="background">
-                <div className="back-link">
-                <div className="back-link-btn">
-                        <Link className="link" to={getListingsUrl()}>
-                            <i className="fa-sharp fa-solid fa-circle-chevron-left nav-arrow"></i>
-                            <p className="text">
-                                Return to Listings
-                            </p>
-                        </Link>
-                    </div>
-
-                    {trip_id ?
-                        <div className="back-link-btn">
-                            <Link className="link" to={`/trips/${trip_id}`}>
-                                <p className="text">
-                                    Return to Trip
-                                </p>
-                            </Link>
-                            <i className="fa-sharp fa-solid fa-circle-chevron-right nav-arrow"></i>
-                        </div>
-                        : null}
+                <div className="details-back-link">
+                    <ReturnToListings hotel_id={id} />
+                    <ReturnToTrip />
                 </div>
+                {/* <DetailsBackArrows hotel_id={id} /> */}
                 <div className="details-wrapper">
                     <div className="details-container">
-                        <div className="info-details">
-                            <h1 className="details-name">{name}</h1>
-                            <h5 className="price details-price">{"$".repeat(average_price)}</h5>
-                        </div>
-                        <div>
-                            <h5 className="star">{"★ ".repeat(rating)}</h5>
-                            <p>{description}</p>
-                            <Link className="page-btn main-btn itinerary-btn" to={getItineraryUrl()}>
+                        <div className="details-info">
+                            <div className="details-copy">
+                                <div className="info-details">
+                                    <h2>{name}</h2>
+                                    <h5>{"$".repeat(average_price)}</h5>
+                                </div>
+                                <h5>{"★ ".repeat(rating)}</h5>
+                                <p>{description}</p>
+                            </div>
+                            <Link className="btn primary-btn" to={getItineraryUrl()}>
                                 Add to Itinerary
                             </Link>
                         </div>
-                    </div>
-                    <hr className="line-details"></hr>
-                    <div className="map-details">
-                        <Map longitude={longitude} latitude={latitude} />
-                        <div className="small-details">
-                            <i className="fa-sharp fa-solid fa-location-dot"></i>
-                            <p>{address}</p>
-                        </div>
-                        <div className="small-details">
-                            <i className="fa-solid fa-phone"></i>
-                            <p>+{phone_number}</p>
-                        </div>
-                        <div className="small-details">
-                            <i className="fa-solid fa-up-right-from-square"></i>
-                            <a className="link" href={`${url}`} rel="noreferrer" target="_blank"><p>Visit Website</p></a>
+                        <hr className="line-details"></hr>
+                        <div className="map-details">
+                            <Map longitude={longitude} latitude={latitude} />
+                            <div className="map-info">
+                                <div className="small-details">
+                                    <i className="fa-sharp fa-solid fa-location-dot"></i>
+                                    <p>{address}</p>
+                                </div>
+                                <div className="small-details">
+                                    <i className="fa-solid fa-phone"></i>
+                                    <p>+{phone_number}</p>
+                                </div>
+                                <div className="small-details">
+                                    <i className="fa-solid fa-up-right-from-square"></i>
+                                    <a className="link" href={`${url}`} rel="noreferrer" target="_blank"><p>Visit Website</p></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

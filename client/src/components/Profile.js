@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
-import TripsListings from "./TripsListings";
 import NavBar from "./NavBar";
 import UserMap from "./UserMap";
 import { useLoadScript } from "@react-google-maps/api";
 import { DestinationsContext } from "../context/DestinationsContext";
 import LoadingScreen from "./LoadingScreen";
+import TripsSideBar from "./TripsSideBar";
 
 function Profile() {
     const { user } = useContext(UserContext);
@@ -15,7 +15,7 @@ function Profile() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     })
 
-    if (!isLoaded || !destinations) return <LoadingScreen/>
+    if (!isLoaded || !destinations) return <LoadingScreen />
 
     if (!user) {
         return null;
@@ -32,13 +32,8 @@ function Profile() {
 
     return (
         <div className="side-bar">
-            <div className="mobile-nav">
-                <NavBar />
-            </div>
-            <div className="my-trips">
-                <TripsListings />
-            </div>
-            <div className="trips welcome-header">
+            <TripsSideBar />
+            <div className="profile-wrapper">
                 <div className="desktop-nav">
                     <NavBar />
                 </div>
@@ -49,23 +44,23 @@ function Profile() {
                         <div className="loading">Loading...</div>
                     )}
                 </div>
-                <div className="details profile-container">
-                    <div className="details-img-wrapper">
+                <div className="trips">
+                    <div className="details profile-details">
                         <div className="details-img-container">
-                            <img className="details-img" alt={username} src={decodedUrl}></img>
+                            <img alt={username} className="cropped-img" src={decodedUrl}></img>
                         </div>
-                    </div>
-                    <div className="details-info-destinations">
-                        <div className="profile-info-details">
-                            <h2>{first_name} {last_name}</h2>
-                            <Link to={`/edit`}>
-                                <i className="fa-solid fa-pen-to-square"></i>
-                            </Link>
-                        </div>
-                        <div className="details-copy">
-                            <p><strong>Username:</strong> {username}</p>
-                            <p><strong>TSA Precheck:</strong> {tsa_precheck}</p>
-                            <small><em>social media feature coming soon</em></small>
+                        <div className="details-info">
+                            <div className="details-copy">
+                                <div className="info-details">
+                                    <h3>{first_name} {last_name}</h3>
+                                    <Link to={`/edit`}>
+                                        <i className="fa-solid fa-pen-to-square"></i>
+                                    </Link>
+                                </div>
+                                <p><strong>Username:</strong> {username}</p>
+                                <p><strong>TSA Precheck:</strong> {tsa_precheck}</p>
+                                <small><em>social media feature coming soon</em></small>
+                            </div>
                         </div>
                     </div>
                 </div>

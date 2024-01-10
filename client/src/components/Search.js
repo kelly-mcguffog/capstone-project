@@ -12,7 +12,9 @@ function Search({ search, setSearch, searchDestinations }) {
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search..."
                 />
-                <i className="fa-solid fa-magnifying-glass"></i>
+                <div className="circle-container">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </div>
             </div>
             {searchDestinations && searchDestinations.length > 0 && (
                 <div>

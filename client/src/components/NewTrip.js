@@ -28,7 +28,7 @@ function NewTrip() {
 
 
   if (destinations === null) {
-    return <LoadingScreen/>
+    return <LoadingScreen />
   }
 
   const destination = destinations.find(
@@ -44,10 +44,10 @@ function NewTrip() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }))
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
 
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -92,16 +92,19 @@ function NewTrip() {
   }
 
   return (
-    <div className="header-img" style={{ backgroundImage: `url(${photo})` }}>
-      <div className="header-text-trip-form">
-        <h1 className="title">Plan Your Trip to {city}</h1>
-        <div className="results trip-form">
-          <form id="trip-form-wrapper" onSubmit={handleSubmit}>
-            <div id="trip-form" className="form-info">
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">From</h3>
-                </div>
+    <div className="page-header">
+      <div className="cropped-img-container">
+        <img className="cropped-img" src={photo} alt={city}></img>
+      </div>
+      <div className="header new-trip-form-wrapper">
+        <div className="header-text">
+          <h1 className="header-copy">Plan Your Trip</h1>
+        </div>
+        <div className="results">
+          <form className="new-trip-form-container" onSubmit={handleSubmit}>
+            <div className="new-trip-form-grid">
+              <div>
+                <h3>From</h3>
                 <input
                   type="text"
                   name="origin_airport"
@@ -120,10 +123,8 @@ function NewTrip() {
                   </span>
                 )}
               </div>
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">To</h3>
-                </div>
+              <div>
+                <h3>To</h3>
                 <input
                   type="text"
                   name="destination_airport"
@@ -142,10 +143,8 @@ function NewTrip() {
                   </span>
                 )}
               </div>
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">Outbound Flight</h3>
-                </div>
+              <div>
+                <h3>Outbound Flight</h3>
                 <DatePicker
                   selected={formData.outbound_flight}
                   onChange={(date) => handleChange({ target: { name: "outbound_flight", value: date } })}
@@ -164,10 +163,8 @@ function NewTrip() {
                 )}
               </div>
 
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">Return Flight</h3>
-                </div>
+              <div>
+                <h3>Return Flight</h3>
                 <DatePicker
                   selected={formData.return_flight}
                   onChange={(date) => handleChange({ target: { name: "return_flight", value: date } })}
@@ -185,10 +182,8 @@ function NewTrip() {
                   </span>
                 )}
               </div>
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">Outbound Flight Number</h3>
-                </div>
+              <div>
+                <h3>Outbound Flight Number</h3>
                 <input
                   type="text"
                   name="outbound_flight_number"
@@ -207,10 +202,8 @@ function NewTrip() {
                   </span>
                 )}
               </div>
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">Return Flight Number</h3>
-                </div>
+              <div>
+                <h3>Return Flight Number</h3>
                 <input
                   type="text"
                   name="return_flight_number"
@@ -229,10 +222,8 @@ function NewTrip() {
                   </span>
                 )}
               </div>
-              <div className="label">
-                <div className="input-text">
-                  <h3 className="input-title">Confirmation Number</h3>
-                </div>
+              <div>
+                <h3>Confirmation Number</h3>
                 <input
                   type="text"
                   name="confirmation_number"
@@ -253,7 +244,9 @@ function NewTrip() {
               </div>
             </div>
             <div className="form-button">
-              <button type="submit"><i className="fa-solid fa-arrow-right"></i></button>
+              <button className="submit-arrow" type="submit">
+              <i className="fa-sharp fa-solid fa-circle-chevron-right form-arrow"></i>
+              </button>
             </div>
           </form>
         </div>

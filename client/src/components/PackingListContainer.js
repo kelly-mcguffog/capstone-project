@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
-import TripsListings from "./TripsListings";
 import PackingListForm from "./PackingListForm";
 import PackingList from "./PackingList";
 import NavBar from "./NavBar";
 import LoadingScreen from "./LoadingScreen";
+import TripsSideBar from "./TripsSideBar";
 
 function PackingListContainer() {
 
@@ -13,7 +13,7 @@ function PackingListContainer() {
     const { id } = useParams();
 
     if (!user) {
-        return <LoadingScreen/>
+        return <LoadingScreen />
     }
 
     const trip = user.trips.find((trip) => trip.id === parseInt(id));
@@ -31,22 +31,19 @@ function PackingListContainer() {
         });
         setUser({ ...user, trips: userTrips });
     };
-    
+
 
     return (
         <div className="side-bar">
-            <div className="mobile-nav">
-                <NavBar />
-            </div>
-            <div className="my-trips">
-                <TripsListings />
-            </div>
-            <div className="trips welcome-header">
+            <TripsSideBar />
+            <div className="trips-wrapper">
                 <div className="desktop-nav">
                     <NavBar />
                 </div>
-                <PackingListForm onAddPackingListItem={onAddPackingListItem} />
-                <PackingList trip={trip} />
+                <div className="trips">
+                    <PackingListForm onAddPackingListItem={onAddPackingListItem} />
+                    <PackingList trip={trip} />
+                </div>
             </div>
         </div>
     );

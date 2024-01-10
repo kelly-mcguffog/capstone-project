@@ -42,7 +42,7 @@ function PackingList({ trip }) {
     };
 
     return (
-        <div id="packing">
+        <div className="packing-details">
             {packingListItems.map((packingListItem) => {
                 return (
                     <PackingListItem

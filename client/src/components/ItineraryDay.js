@@ -26,7 +26,7 @@ function ItineraryDay({ itinerary_day, trip, onDeleteItineraryDate }) {
 
   return (
     <div className="itinerary-info">
-      <h2 className="time">{formattedDate}</h2>
+      <h2>{formattedDate}</h2>
       {combined_itinerary_times &&
         combined_itinerary_times.map((itineraryTime) => (
           <ItineraryTimes

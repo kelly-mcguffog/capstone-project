@@ -6,13 +6,13 @@ function DestinationsCard({ destination }) {
     const { id, city, photo } = destination
 
     return (
-        <div className="card-details">
-            <Link className="link city" to={`/destinations/${id}/hotels`}>
+        <div>
+            <Link className="card-details" to={`/destinations/${id}/hotels`}>
                 <div className="img-container">
-                    <img className="img" alt={city} src={photo} />
+                    <img className="cropped-img" alt={city} src={photo} />
                 </div>
                 <div>
-                    <h3 className="city">{city}</h3>
+                    <h4>{city}</h4>
                 </div>
             </Link>
         </div>
