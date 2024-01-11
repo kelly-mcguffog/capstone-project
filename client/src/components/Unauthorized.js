@@ -17,18 +17,20 @@ function Unauthorized() {
     }
 
     return (
-        <>
-            <div className="error-popup restricted">
-                <div className="error-icon error-icon-restriced circle-container">
-                    <i className="fa-solid fa-exclamation"></i>
+        <div className="error-popup restricted-access-popup">
+            <div className="error-icon circle-container">
+                <i className="fa-solid fa-exclamation"></i>
+            </div>
+            <div className="error-text-wrapper">
+                <div className="error-text-container">
+                    <h2 className="error-text">401 – Unauthorized</h2>
+                    <p className="error-message pop-up-error">
+                        This page is restricted. You must be logged in to access it.
+                    </p>
                 </div>
-                <h2 className="error-text">401 – Unauthorized</h2>
-                <span className="error-message pop-up-error">
-                    This page is restricted. You must be logged in to access it.
-                </span>
                 <Link to="/login" onClick={handleSignInClick} className="btn primary-btn error-btn">Sign In</Link>
             </div>
-        </>
+        </div>
     );
 }
 

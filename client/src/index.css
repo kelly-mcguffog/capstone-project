@@ -103,7 +103,7 @@ input{
 .form-wrapper{
   background-color: white;
   border-radius: 15px;
-  width: 40%;
+  width: auto;
   margin: auto;
 }
 button.form-button{
@@ -125,14 +125,6 @@ button.form-button{
   flex-direction: column;
   row-gap: 20px;
   width: 100%;
-}
-.filter-icons{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  padding: 20px 0px;
 }
 .icon, .itinerary-details-info{
   padding: 50px;
@@ -224,6 +216,7 @@ label{
 }
 .filter-mobile{
   display: none;
+  margin: 20px 0px;
 }
 .details-wrapper{
   background-color: white;
@@ -813,6 +806,10 @@ a.trip-links.active{
   align-items: center;
   row-gap: 30px;
 }
+.restricted-access-popup{
+  top:50%;
+  padding: 20px;
+}
 .restricted{
   top: 50%;
 }
@@ -821,6 +818,7 @@ a.trip-links.active{
 }
 .error-text{
   color: firebrick;
+  text-align: center;
 }
 .error-btn{
   border: 1px solid firebrick;
@@ -1217,7 +1215,7 @@ a.trip-links.active{
     display: block;
   }
   .mobile-btn{
-    display: none;
+    width: 60%;
   }
   .nav-dropdown-content{
     position: relative;
@@ -1230,19 +1228,23 @@ a.trip-links.active{
     align-items: flex-start;
   }
   .filter-menu{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    position: fixed;
+    top: 85px;
+    left: -300px;
+    width: 250px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+    padding: 40px 0 0 30px;
+    z-index: 1;
+    transition: 0.3s ease-in-out;
+  }
+  .filter-menu.active{
+    left: 0;
   }
   .filter-content-visible{
     width: 100%;
     padding: 30px 0px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    background-color: white;
-    box-shadow: 0px 6px 10px rgba(0,0,0,0.1);
   }
   i.fa-solid.fa-filter-circle-xmark.filter-content-visible{
     padding: 0px;
@@ -1252,10 +1254,6 @@ a.trip-links.active{
   }
   .my-trips{
     display: none;
-  }
-  #bar, .filter-icon{
-    margin: 10px;
-    padding: 10px;
   }
   .mobile-drop{
     display: flex;
@@ -1447,6 +1445,10 @@ a.trip-links.active{
     z-index: 1;
     transition: 0.3s ease-in-out;
   }
+
+
+
+
   .filter-content-hidden{
     display: none;
   }
@@ -1454,7 +1456,7 @@ a.trip-links.active{
     display: block;
   }
   .mobile-btn{
-    display: none;
+    width: 60%;
   }
   .nav-dropdown-content{
     position: relative;
@@ -1478,8 +1480,6 @@ a.trip-links.active{
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
-    background-color: white;
-    box-shadow: 0px 6px 10px rgba(0,0,0,0.1);
   }
   i.fa-solid.fa-filter-circle-xmark.filter-content-visible{
     padding: 0px;
@@ -1489,10 +1489,6 @@ a.trip-links.active{
   }
   .my-trips{
     display: none;
-  }
-  #bar, .filter-icon{
-    margin: 10px;
-    padding: 10px;
   }
   .mobile-drop{
     display: flex;
