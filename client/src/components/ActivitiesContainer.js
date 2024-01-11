@@ -3,14 +3,13 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { useParams } from "react-router-dom";
 import ActivitiesCard from "./ActivitiesCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
-import FilterActivities from "./FilterActivities";
 import LoadingScreen from "./LoadingScreen";
 import ReturnToTrip from "./ReturnToTrip";
+import Filter from "./Filter";
 
 function ActivitiesContainer({ search, setSearch, handleSearch }) {
   const { destination_id, id } = useParams();
   const { destinations } = useContext(DestinationsContext);
-  const [filterRating, setFilterRating] = useState(false);
   const [filterDuration, setFilterDuration] = useState(false);
   const [filterPrice, setFilterPrice] = useState(0);
 
@@ -28,6 +27,7 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
 
   const { activities } = destination
 
+
   const extractNumericValue = (priceString) => {
     if (typeof priceString === "string") {
       const matches = priceString.match(/\d+(\.\d+)?/g);
@@ -40,7 +40,6 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
 
   let filterActivities = activities.filter(activity => {
     const nameMatch = activity.name.toLowerCase().includes(search.toLowerCase());
-    const ratingMatch = filterRating ? activity.rating.toString() === filterRating : true;
     const durationMatch =
       filterDuration === "Up to 1 hour"
         ? activity.duration.toLowerCase().includes("minutes") || activity.duration === "1 hour"
@@ -53,15 +52,17 @@ function ActivitiesContainer({ search, setSearch, handleSearch }) {
               : true;
     const activityPrice = extractNumericValue(activity.price);
     const priceMatch = filterPrice ? activityPrice > filterPrice : true;
-    return nameMatch && ratingMatch && durationMatch && priceMatch;
+    return nameMatch && durationMatch && priceMatch;
   });
+
+
 
   return (
     <>
       <DestinationDetailsHeader destination={destination} search={search} setSearch={setSearch} />
       <ReturnToTrip />
       <div className={id ? "details-row details-row-trips" : "details-row"} >
-        <FilterActivities filterPrice={filterPrice} setFilterPrice={setFilterPrice} setFilterDuration={setFilterDuration} filterDuration={filterDuration} setFilterRating={setFilterRating} filterRating={filterRating} />
+        <Filter type="activities" filterPrice={filterPrice} setFilterPrice={setFilterPrice} setFilterDuration={setFilterDuration} filterDuration={filterDuration} />
         <div className="cards">
           {filterActivities.map(activity => <ActivitiesCard key={activity.id} trip_id={id} handleSearch={handleSearch} activity={activity} />)}
         </div>

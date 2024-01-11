@@ -3,7 +3,7 @@ import { DestinationsContext } from "../context/DestinationsContext";
 import { useParams } from "react-router-dom";
 import HotelsCard from "./HotelsCard";
 import DestinationDetailsHeader from "./DestinationDetailsHeader";
-import FilterHotels from "./FilterHotels";
+import Filter from "./Filter";
 import LoadingScreen from "./LoadingScreen";
 import ReturnToTrip from "./ReturnToTrip";
 
@@ -42,7 +42,7 @@ function HotelsContainer({ search, setSearch, handleSearch }) {
       <DestinationDetailsHeader destination={destination} search={search} setSearch={setSearch} />
       <ReturnToTrip />
       <div className={id ? "details-row details-row-trips" : "details-row"} >
-        <FilterHotels setFilterRating={setFilterRating} filterRating={filterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
+        <Filter type="hotels" setFilterRating={setFilterRating} filterRating={filterRating} filterPrice={filterPrice} setFilterPrice={setFilterPrice} />
         <div className="cards">
           {filterHotels.map(hotel => <HotelsCard key={hotel.id} trip_id={id} hotel={hotel} handleSearch={handleSearch} />)}
         </div>
