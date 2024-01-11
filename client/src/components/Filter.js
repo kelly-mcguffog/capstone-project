@@ -26,11 +26,17 @@ function Filter({ type, setFilterPrice, setFilterRating, setFilterDuration, setF
     };
 
     const handleClearFilters = () => {
-        setFilterRating(false);
-        setFilterDuration(false);
+        if (type === "restaurants") {
+            setFilterCuisine(false);
+            setFilterRating(false);
+        } else if (type !== "activities") {
+            setFilterRating(false);
+        } else {
+            setFilterDuration(false);
+        }
         setFilterPrice(0);
-        setFilterCuisine(false);
     };
+
 
     const handleMobile = () => {
         setIsMobile((isMobile) => !isMobile);
@@ -48,8 +54,7 @@ function Filter({ type, setFilterPrice, setFilterRating, setFilterDuration, setF
                 <div className={isMobile ? "filter filter-content-visible" : "filter filter-content-hidden"}>
                     <div>
                         <h3>Price</h3>
-                        <input type="range" min="0" max="500" step="10" onChange={handleFilterPriceChange} value={filterPrice} />
-                        <span>${filterPrice || 0}</span>
+                        <input type="range" min={type === "activities" ? "0" : "1"} max={type === "activities" ? "500" : "5"} step={type === "activities" ? "10" : ""} onChange={handleFilterPriceChange} value={filterPrice} />
                     </div>
                     {type !== "activities" && (
                         <div>

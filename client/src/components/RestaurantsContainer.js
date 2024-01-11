@@ -33,7 +33,8 @@ function RestaurantsContainer({ search, setSearch, handleSearch }) {
     const nameMatch = restaurant.name.toLowerCase().includes(search.toLowerCase());
     const priceMatch = filterPrice ? restaurant.average_price === filterPrice : true;
     const ratingMatch = filterRating ? restaurant.rating.toString() === filterRating : true;
-    const cuisineMatch = filterCuisine ? restaurant.cuisine.toString() === filterCuisine : true;
+    const cuisineMatch = filterCuisine ? restaurant.cuisine === filterCuisine : true;
+
 
     return nameMatch && priceMatch && ratingMatch && cuisineMatch;
   });
