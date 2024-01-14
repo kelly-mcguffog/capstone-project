@@ -1,32 +1,31 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 
-function ReturnToDetails({ activity_id, hotel_id, restaurant_id }) {
+function ReturnToDetails({ id, formType}) {
   const { trip_id, destination_id } = useParams();
 
-
   const getDetailsUrl = () => {
-    if (trip_id !== undefined && activity_id !== undefined && hotel_id === undefined && restaurant_id === undefined) {
-      return `/destinations/${destination_id}/trips/${trip_id}/activities/${activity_id}/details`;
-    } else if (trip_id === undefined && activity_id !== undefined && hotel_id === undefined && restaurant_id === undefined) {
-      return `/destinations/${destination_id}/activities/${activity_id}/details`;
-    } else if (trip_id !== undefined && restaurant_id !== undefined && hotel_id === undefined && activity_id === undefined) {
-      return `/destinations/${destination_id}/trips/${trip_id}/restaurants/${restaurant_id}/details`;
-    } else if (trip_id === undefined && restaurant_id !== undefined && hotel_id === undefined && activity_id === undefined) {
-      return `/destinations/${destination_id}/restaurants/${restaurant_id}/details`;
-    } else if (trip_id !== undefined && hotel_id !== undefined && restaurant_id === undefined && activity_id === undefined) {
-      return `/destinations/${destination_id}/trips/${trip_id}/hotels/${hotel_id}/details`;
-    } else if (trip_id === undefined && hotel_id !== undefined && restaurant_id === undefined && activity_id === undefined) {
-      return `/destinations/${destination_id}/hotels/${hotel_id}/details`;
+    if (trip_id !== undefined && formType === "activity") {
+      return `/destinations/${destination_id}/trips/${trip_id}/activities/${id}/details`;
+    } else if (trip_id === undefined && formType === "activity") {
+      return `/destinations/${destination_id}/activities/${id}/details`;
+    } else if (trip_id !== undefined && formType === "restaurant") {
+      return `/destinations/${destination_id}/trips/${trip_id}/restaurants/${id}/details`;
+    } else if (trip_id === undefined && formType === "restaurant") {
+      return `/destinations/${destination_id}/restaurants/${id}/details`;
+    } else if (trip_id !== undefined && formType === "hotel") {
+      return `/destinations/${destination_id}/trips/${trip_id}/hotels/${id}/details`;
+    } else if (trip_id === undefined && formType === "hotel") {
+      return `/destinations/${destination_id}/hotels/${id}/details`;
     }
   };
 
   const backArrowText = () => {
-    if (activity_id) {
+    if (formType === "activity") {
       return "Return to Activity"
-    } else if (restaurant_id) {
+    } else if (formType === "restaurant") {
       return "Return to Restaurant"
-    } else if (hotel_id) {
+    } else if (formType === "hotel") {
       return "Return to Hotel"
     }
   }
