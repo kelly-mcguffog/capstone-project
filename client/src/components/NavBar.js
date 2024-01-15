@@ -67,7 +67,7 @@ function NavBar() {
                         </div>
                     </div>
                 </div>
-                <div id="mobile" onClick={handleMobile}>
+                <div className="mobile-icon" onClick={handleMobile}>
                     <i id="bar" className={isMobile ? "fa-solid fa-times" : "fa-solid fa-bars"}></i>
                 </div>
             </div>

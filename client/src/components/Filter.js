@@ -48,7 +48,7 @@ function Filter({ type, setFilterPrice, setFilterRating, setFilterDuration, setF
                 <i className="fa-solid fa-filter"></i>
             </div>
             <div className={isMobile ? "filter-menu active" : "filter-menu inactive"}>
-                <div className="filter-mobile" onClick={handleMobile}>
+                <div className="mobile-icon" onClick={handleMobile}>
                     <i className="fa-solid fa-times"></i>
                 </div>
                 <div className={isMobile ? "filter filter-content-visible" : "filter filter-content-hidden"}>

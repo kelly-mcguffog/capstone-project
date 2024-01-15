@@ -439,8 +439,12 @@ header {
   align-items: center;
   background-color: rgb(255, 255, 255, 0.5);
 }
-#mobile, .mobile, .mobile-drop, .mobile-dropdown, .mobile-nav{
+.mobile-icon, .mobile, .mobile-drop, .mobile-dropdown, .mobile-nav{
   display: none;
+}
+.mobile-icon i{
+  font-size: 24px;
+  cursor: pointer;
 }
 .nav-line{
   width: 100%;
@@ -1205,13 +1209,13 @@ a.trip-links.active{
   .profile-wrapper, .trips-wrapper{
     margin: 0px;
   }
-  #mobile{
+  .mobile-icon{
     display: block;
   }
-  #mobile i{
+  /* .mobile-icon i{
     font-size: 24px;
     cursor: pointer;
-  }
+  } */
   #nav-right.active{
    right: 0px;
   }
@@ -1241,7 +1245,7 @@ a.trip-links.active{
     background-color: transparent;
     box-shadow: none;
     top: 0;
-    padding: 30px;
+    padding: 0px 30px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1268,7 +1272,7 @@ a.trip-links.active{
   i.fa-solid.fa-filter-circle-xmark.filter-content-visible{
     padding: 0px;
   }
-  .dropbtn, .my-trips, .desktop-trips, .desktop-na{
+  .dropbtn, .my-trips, .desktop-trips, .desktop-nav{
     display: none;
   }
   .mobile-drop{
@@ -1424,13 +1428,13 @@ a.trip-links.active{
   .profile-wrapper, .trips-wrapper{
     margin: 0;
   }
-  #mobile{
+  .mobile-icon{
     display: block;
   }
-  #mobile i{
+  /* #mobile i{
     font-size: 24px;
     cursor: pointer;
-  }
+  } */
   #nav-right.active{
    right: 0px;
   }
@@ -1446,6 +1450,11 @@ a.trip-links.active{
     z-index: 1;
     transition: 0.3s ease-in-out;
   }
+
+  .dropbtn, .my-trips, .desktop-trips, .desktop-nav{
+    display: none;
+  }
+
   .mobile-btn{
     width: 60%;
   }
