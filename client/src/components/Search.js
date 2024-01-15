@@ -1,5 +1,5 @@
 import React from "react";
-import SearchResults from "./SearchResults"
+import SearchResults from "./SearchResults";
 
 function Search({ search, setSearch, searchDestinations }) {
 
@@ -12,12 +12,12 @@ function Search({ search, setSearch, searchDestinations }) {
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search..."
                 />
-                <div className="circle-container">
+                <div id="search-icon" className="circle-container">
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
             {searchDestinations && searchDestinations.length > 0 && (
-                <div>
+                <div id="search-listing">
                     {searchDestinations.map((result) => (
                         <SearchResults key={result.id} setSearch={setSearch} result={result} />
                     ))}

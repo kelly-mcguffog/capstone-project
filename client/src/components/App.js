@@ -151,7 +151,10 @@ function App() {
               path="/destinations/:destination_id/restaurants"
               element={<RestaurantsContainer handleSearch={handleSearch} search={search} setSearch={setSearch} />}
             />
-            <Route path="/destinations/:id/trips" element={<NewTrip />} />
+            <Route
+              path="/destinations/:id/trips"
+              element={<NewTrip />}
+            />
             <Route
               path="/destinations/:destination_id/trips/:trip_id/hotels/:id/details"
               element={<HotelDetails />}
@@ -184,13 +187,23 @@ function App() {
               path="/trips/:id"
               element={<TripDetails />}
             />
-            <Route path="/trips/:id/packing_list" element={<PackingListContainer />} />
+            <Route
+              path="/trips/:id/packing_list"
+              element={<PackingListContainer />}
+            />
             <Route
               path="/edit"
               element={<EditProfileForm />}
             />
-            <Route path="/profile" element={<Profile />} />
-            <Route default path="/" element={<Home search={search} setSearch={setSearch} />} />
+            <Route
+              path="/profile"
+              element={<Profile />}
+            />
+            <Route
+              default
+              path="/"
+              element={<Home search={search} setSearch={setSearch} />}
+            />
           </>
         ) : (
           <>

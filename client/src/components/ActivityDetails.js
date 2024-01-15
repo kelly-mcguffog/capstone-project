@@ -4,8 +4,8 @@ import Details from "./Details";
 import LoadingScreen from "./LoadingScreen";
 
 function ActivityDetails() {
-  const [activities, setActivities] = useState([]);
-  const { id } = useParams()
+    const [activities, setActivities] = useState([]);
+    const { id } = useParams()
 
     useEffect(() => {
         fetch(`/activities`)
@@ -17,7 +17,7 @@ function ActivityDetails() {
 
     if (!activity) return <LoadingScreen />
 
-  return <Details type="activity" details={activity} />;
+    return <Details type="activity" details={activity} />;
 }
 
 export default ActivityDetails;

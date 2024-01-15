@@ -54,11 +54,11 @@ function NavBar() {
                             <Link onClick={handleMenuItemClick} to={`/profile`}>
                                 <h3 className="nav-link">Profile</h3>
                             </Link>
-                            <hr className="mobile-nav-line"></hr>
+                            <hr className="nav-line"></hr>
                             {isMobile ?
                                 <>
                                     <TripsListings isMobile={isMobile}/>
-                                    <hr className="mobile-nav-line"></hr>
+                                    <hr className="nav-line"></hr>
                                 </>
                                 : null}
                             <button className="nav-link navlink-button" onClick={handleLogoutClick}>
