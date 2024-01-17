@@ -299,14 +299,14 @@ function EditItineraryForm() {
   return (
     <div className="page-header">
     <div className="cropped-img-container">
-      <img className="cropped-img" src={destination.photo} alt={destination.city}></img>
+      <img className="cropped-img img-header" src={destination.photo} alt={destination.city}></img>
     </div>
-    <div className="header">
+    <div className="header valid-trip-itinerary-form-header">
       <div className="header-text">
         <h1 className="header-copy">Plan Your Trip</h1>
       </div>
-      <div className="results">
-        <form className="trip-form" onSubmit={handleSubmit}>
+      <div className="form-results results">
+        <form className="trip-form valid-trip-itinerary-form" onSubmit={handleSubmit}>
           <div>
             <div>
                 <h3>Itinerary Day Date</h3>

@@ -48,7 +48,7 @@ function PackingListForm({ onAddPackingListItem }) {
         <div className="details">
             <form className="packing-list-form" onSubmit={handleSubmit}>
                 <h1 id="packing-header">Packing to-do list</h1>
-                <div className="trip-form">
+                <div className="trip-form packing-form">
                     <div>
                         <h3>Item</h3>
                         <input

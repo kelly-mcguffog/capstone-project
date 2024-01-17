@@ -119,14 +119,14 @@ function AddToItineraryForm({ formType, onAddItinerary }) {
     return (
         <div className="page-header">
             <div className="cropped-img-container">
-                <img className="cropped-img" src={destination.photo} alt={destination.city}></img>
+                <img className="cropped-img img-header" src={destination.photo} alt={destination.city}></img>
             </div>
-            <div className="header">
+            <div className={trip_id ? "header valid-trip-itinerary-form-header" : "header itinerary-form-header"}>
                 <div className="header-text">
                     <h1 className="header-copy">Plan Your Trip</h1>
                 </div>
-                <div className="results">
-                    <form className="trip-form" onSubmit={handleSubmit}>
+                <div className="form-results results">
+                    <form className={trip_id ? "trip-form valid-trip-itinerary-form" : "trip-form itinerary-trip-form"} onSubmit={handleSubmit}>
                         <div>
                             <div>
                                 <h3>Itinerary Day Date</h3>

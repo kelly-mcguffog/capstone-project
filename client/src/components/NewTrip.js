@@ -94,13 +94,13 @@ function NewTrip() {
   return (
     <div className="page-header">
       <div className="cropped-img-container">
-        <img className="cropped-img" src={photo} alt={city}></img>
+        <img className="cropped-img img-header" src={photo} alt={city}></img>
       </div>
       <div className="header new-trip-form-wrapper">
         <div className="header-text">
           <h1 className="header-copy">Plan Your Trip</h1>
         </div>
-        <div className="results">
+        <div className="form-results results">
           <form className="new-trip-form-container" onSubmit={handleSubmit}>
             <div className="new-trip-form-grid">
               <div>

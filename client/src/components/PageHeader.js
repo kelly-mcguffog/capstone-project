@@ -15,10 +15,10 @@ function PageHeader({ title, subtitle, imageSrc, search, setSearch, searchDestin
 
     return (
         <div className="page-header">
-            <div className="cropped-img-container">
+            <div className={subtitle ? "subtitle-header cropped-img-container" : "cropped-img-container"}>
                 <img className="cropped-img img-header" src={imageSrc} alt={title}></img>
             </div>
-            <div className="header">
+            <div id={subtitle ? "subtitle-header" : ""} className={navLinks && id ? "header" : "header details-nav-header"}>
                 <div className="header-text">
                     <h1 className="header-copy">{title}</h1>
                     {subtitle && <h3 className="header-copy">{subtitle}</h3>}
